@@ -1,0 +1,61 @@
+*umber-calm.txt*  A warm, low-glare dark palette with measured contrast
+                                                                  *umber-calm*
+
+==============================================================================
+CONTENTS                                                  *umber-calm-contents*
+
+  1. Usage ............................................. |umber-calm-usage|
+  2. Options ......................................... |umber-calm-options|
+  3. Colors and roles ................................. |umber-calm-colors|
+  4. Integrations ................................ |umber-calm-integrations|
+
+==============================================================================
+1. USAGE                                                     *umber-calm-usage*
+
+  lazy.nvim: >lua
+    { "ChristianOrrala/umber-calm", lazy = false, priority = 1000,
+      config = function() vim.cmd.colorscheme("umber-calm") end }
+<
+  Call `require("umber-calm").setup({...})` before or after the colorscheme;
+  calling it after re-applies the scheme. Requires Neovim 0.10 or newer.
+
+==============================================================================
+2. OPTIONS                                                 *umber-calm-options*
+
+  transparent      (false)  Do not paint the Normal background.
+  terminal_colors  (true)   Set vim.g.terminal_color_0..15; false clears them.
+  dim_inactive     (false)  Use the chrome color for inactive windows.
+  styles           Per-role attributes: comments ({ italic = true }),
+                   keywords, functions, variables, parameters ({}).
+                   Example: styles = { comments = { italic = false } }.
+  integrations     telescope, gitsigns, which_key, lualine, blink, cmp,
+                   lazy, indent_blankline (all true).
+  on_colors(colors)
+                   Edit the raw colors (bg, text, blue, ...) before roles
+                   and tints are resolved: changing `blue` changes every
+                   group, tint and lualine color that uses it.
+  on_highlights(hl, resolved)
+                   Edit the final highlight table.
+
+  Precedence: defaults < setup() options < on_colors < on_highlights.
+
+==============================================================================
+3. COLORS AND ROLES                                         *umber-calm-colors*
+
+  `require("umber-calm").resolved()` returns the palette in hex:
+  `colors`, `ansi` (1..16), `syntax`, `ui`, `diag`, `term` and `tinted`
+  (search, diff and diagnostic backgrounds).
+
+  Keywords gold, functions teal-slate, types sea-green, strings olive,
+  constants mauve, operators tan, comments muted. Red only marks errors and
+  deletions; amber only marks where you are (cursor, focus).
+
+==============================================================================
+4. INTEGRATIONS                                       *umber-calm-integrations*
+
+  lualine: set `theme = "umber-calm"` in lualine's options. The active mode
+  segment uses the focus color in every mode (the mode name tells the modes
+  apart); the other sections stay neutral. The theme follows on_colors. With
+  `integrations.lualine = false` it falls back to lualine's "auto" theme.
+
+ vim:tw=78:ts=8:ft=help:norl:

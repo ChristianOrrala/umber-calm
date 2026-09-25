@@ -1,0 +1,20 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+[global]
+    frame_color = "{{ ui.border_strong }}"
+    separator_color = frame
+    highlight = "{{ blue }}"
+
+[urgency_low]
+    background = "{{ ui.surface }}"
+    foreground = "{{ ui.text_secondary }}"
+    frame_color = "{{ ui.border_strong }}"
+
+[urgency_normal]
+    background = "{{ ui.surface }}"
+    foreground = "{{ ui.text }}"
+    frame_color = "{{ blue }}"
+
+[urgency_critical]
+    background = "{{ ui.surface }}"
+    foreground = "{{ ui.text }}"
+    frame_color = "{{ diag.error }}"

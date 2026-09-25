@@ -1,0 +1,13 @@
+<!-- Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License. -->
+<idea-plugin>
+  <id>dev.umbercalm.theme</id>
+  <name>Umber Calm</name>
+  <version>{{ meta.release }}</version>
+  <vendor url="{{ meta.homepage }}">The Umber Calm contributors</vendor>
+  <description>A warm, low-glare dark palette with measured contrast.</description>
+  <idea-version since-build="243"/>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <themeProvider id="umber-calm" path="/UmberCalm.theme.json"/>
+  </extensions>
+</idea-plugin>

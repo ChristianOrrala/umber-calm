@@ -1,0 +1,67 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with: { python-version: "3.11" }
+      - run: python tools/build.py
+      - name: generated files and documentation are committed and current
+        run: |
+          status="$(git status --porcelain)"
+          if [ -n "$status" ]; then echo "$status"; echo "run tools/build.py and commit"; exit 1; fi
+      - run: python tools/check.py
+      - run: python -m unittest discover -s tests -t . -v
+  neovim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7 # v1.6.1
+        with: { neovim: true, version: v0.10.4 }
+      - run: nvim --headless --clean -l tests/nvim/run.lua
+  gate:
+    needs: [test, neovim]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with: { python-version: "3.11" }
+      - run: python tools/release_gate.py --tag "$GITHUB_REF_NAME"
+  build:
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with: { python-version: "3.11" }
+      - run: python tools/package.py --out build-dist
+      - name: artifacts are identical to the committed checksums
+        run: diff build-dist/SHA256SUMS dist/SHA256SUMS
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with: { name: release-artifacts, path: build-dist/, if-no-files-found: error }
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with: { name: release-artifacts, path: build-dist }
+      - name: create the release with the checked artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "$GITHUB_REF_NAME" build-dist/*
+          --repo "$GITHUB_REPOSITORY" --verify-tag
+          --title "Umber Calm $GITHUB_REF_NAME"
+          --notes "Changes are listed in CHANGELOG.md. Verify downloads with SHA256SUMS."

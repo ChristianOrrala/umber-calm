@@ -1,0 +1,39 @@
+{
+  "name": "Umber Calm",
+  "author": "The Umber Calm contributors",
+  "globals": {
+    "background": "#201F1D",
+    "foreground": "#D6C9B6",
+    "caret": "#EDA97C",
+    "line_highlight": "#2A2826",
+    "selection": "#3C3A36",
+    "selection_foreground": "#D6C9B6",
+    "selection_border": "#3C3A36",
+    "gutter": "#201F1D",
+    "gutter_foreground": "#938A7B",
+    "find_highlight": "#DCC07D",
+    "find_highlight_foreground": "#201F1D",
+    "invisibles": "#3C3A36",
+    "guide": "#3C3A36",
+    "active_guide": "#5A554E"
+  },
+  "rules": [
+    { "scope": "comment, punctuation.definition.comment", "foreground": "#938A7B", "font_style": "italic" },
+    { "scope": "keyword, storage.type, storage.modifier", "foreground": "#DCC07D" },
+    { "scope": "keyword.operator, punctuation", "foreground": "#C2A98C" },
+    { "scope": "meta.preprocessor, meta.annotation", "foreground": "#DCC07D" },
+    { "scope": "string", "foreground": "#A7B56E" },
+    { "scope": "constant.character.escape, string.regexp", "foreground": "#C9A0C0" },
+    { "scope": "constant.numeric, constant.language, constant.other", "foreground": "#C9A0C0" },
+    { "scope": "variable.language, support.variable.builtin", "foreground": "#C9A0C0" },
+    { "scope": "entity.name.function, support.function, variable.function", "foreground": "#88B0B4" },
+    { "scope": "entity.name.tag", "foreground": "#88B0B4" },
+    { "scope": "entity.other.attribute-name", "foreground": "#88C0AE" },
+    { "scope": "entity.name.type, entity.name.class, support.type, support.class", "foreground": "#88C0AE" },
+    { "scope": "entity.name.namespace", "foreground": "#88C0AE" },
+    { "scope": "variable, variable.parameter", "foreground": "#D6C9B6" },
+    { "scope": "markup.heading", "foreground": "#DCC07D", "font_style": "bold" },
+    { "scope": "markup.underline.link", "foreground": "#88B0B4", "font_style": "underline" },
+    { "scope": "markup.raw", "foreground": "#A7B56E" }
+  ]
+}

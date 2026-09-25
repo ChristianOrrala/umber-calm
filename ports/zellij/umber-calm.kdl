@@ -1,0 +1,136 @@
+// Umber Calm 0.1.0 — generated from templates/zellij/umber-calm.kdl.tmpl. Do not edit. MIT License.
+// Zellij component theme format (written for Zellij 0.45.1): every UI component is set explicitly.
+themes {
+    umber-calm {
+        // Status bar text and key hints (panels are ui.surface).
+        text_unselected {
+            base "#D6C9B6"
+            background "#2A2826"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        text_selected {
+            base "#D6C9B6"
+            background "#3C3A36"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        // The active tab and the current mode: focus (docs/style-guide.md), dark text on it.
+        ribbon_selected {
+            base "#201F1D"
+            background "#EDA97C"
+            emphasis_0 "#1A1917"
+            emphasis_1 "#1A1917"
+            emphasis_2 "#1A1917"
+            emphasis_3 "#1A1917"
+        }
+        // Inactive tabs and modes.
+        ribbon_unselected {
+            base "#D6C9B6"
+            background "#3C3A36"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        table_title {
+            base "#DCC07D"
+            background "#2A2826"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        table_cell_selected {
+            base "#D6C9B6"
+            background "#3C3A36"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        table_cell_unselected {
+            base "#D6C9B6"
+            background "#2A2826"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        list_selected {
+            base "#D6C9B6"
+            background "#3C3A36"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        list_unselected {
+            base "#D6C9B6"
+            background "#2A2826"
+            emphasis_0 "#DCC07D"
+            emphasis_1 "#88C0AE"
+            emphasis_2 "#A7B56E"
+            emphasis_3 "#C9A0C0"
+        }
+        // The focused pane frame is focus; other frames stay muted.
+        frame_selected {
+            base "#EDA97C"
+            background "#201F1D"
+            emphasis_0 "#EDA97C"
+            emphasis_1 "#D6C9B6"
+            emphasis_2 "#938A7B"
+            emphasis_3 "#938A7B"
+        }
+        frame_unselected {
+            base "#938A7B"
+            background "#201F1D"
+            emphasis_0 "#938A7B"
+            emphasis_1 "#D6C9B6"
+            emphasis_2 "#938A7B"
+            emphasis_3 "#938A7B"
+        }
+        // The focused pane frame while a mode other than the base mode is active: still the current location.
+        frame_highlight {
+            base "#EDA97C"
+            background "#201F1D"
+            emphasis_0 "#EDA97C"
+            emphasis_1 "#EDA97C"
+            emphasis_2 "#EDA97C"
+            emphasis_3 "#EDA97C"
+        }
+        exit_code_success {
+            base "#A7B56E"
+            background "#201F1D"
+            emphasis_0 "#A7B56E"
+            emphasis_1 "#D6C9B6"
+            emphasis_2 "#938A7B"
+            emphasis_3 "#938A7B"
+        }
+        exit_code_error {
+            base "#E08374"
+            background "#201F1D"
+            emphasis_0 "#E08374"
+            emphasis_1 "#D6C9B6"
+            emphasis_2 "#938A7B"
+            emphasis_3 "#938A7B"
+        }
+        // Other users' cursors in a shared session: accents, never focus or red.
+        multiplayer_user_colors {
+            player_1 "#88B0B4"
+            player_2 "#A7B56E"
+            player_3 "#DCC07D"
+            player_4 "#C9A0C0"
+            player_5 "#88C0AE"
+            player_6 "#9DC2C5"
+            player_7 "#B9C684"
+            player_8 "#E8CE92"
+            player_9 "#D7B4CF"
+            player_10 "#9CCEBC"
+        }
+    }
+}

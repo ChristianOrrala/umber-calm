@@ -1,0 +1,23 @@
+{
+  "name": "Umber Calm",
+  "background": "#201F1D",
+  "foreground": "#D6C9B6",
+  "cursorColor": "#EDA97C",
+  "selectionBackground": "#3C3A36",
+  "black": "#2A2826",
+  "red": "#E08374",
+  "green": "#A7B56E",
+  "yellow": "#DCC07D",
+  "blue": "#88B0B4",
+  "purple": "#C9A0C0",
+  "cyan": "#88C0AE",
+  "white": "#D6C9B6",
+  "brightBlack": "#6E6961",
+  "brightRed": "#EC9A8C",
+  "brightGreen": "#B9C684",
+  "brightYellow": "#E8CE92",
+  "brightBlue": "#9DC2C5",
+  "brightPurple": "#D7B4CF",
+  "brightCyan": "#9CCEBC",
+  "brightWhite": "#EDE3D2"
+}

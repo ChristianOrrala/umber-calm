@@ -1,0 +1,17 @@
+{
+  "name": "umber-calm",
+  "displayName": "Umber Calm",
+  "description": "A warm, low-glare dark palette with measured contrast.",
+  "version": "0.1.0",
+  "publisher": "umber-calm",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/ChristianOrrala/umber-calm" },
+  "engines": { "vscode": "^1.95.0" },
+  "categories": ["Themes"],
+  "keywords": ["theme", "dark", "warm", "low glare"],
+  "contributes": {
+    "themes": [
+      { "label": "Umber Calm", "uiTheme": "vs-dark", "path": "./themes/umber-calm-color-theme.json" }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+/* Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License. */
+* {
+    bg: {{ ui.bg }};
+    surface: {{ ui.surface }};
+    selection: {{ ui.selection_bg }};
+    border: {{ ui.border_strong }};
+    text: {{ ui.text }};
+    muted: {{ ui.text_secondary }};
+    focus: {{ ui.focus }};
+    background-color: transparent;
+    text-color: @text;
+}
+window { background-color: @bg; border: 2px; border-color: @border; padding: 12px; }
+inputbar { children: [prompt, entry]; spacing: 8px; }
+prompt { text-color: @focus; }
+entry { text-color: @text; placeholder-color: @muted; }
+listview { lines: 10; scrollbar: false; }
+element { padding: 4px 8px; }
+element selected { background-color: @selection; text-color: @text; }
+element-text { text-color: inherit; }

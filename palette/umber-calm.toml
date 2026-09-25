@@ -1,0 +1,106 @@
+# Umber Calm — source of truth. Every port is generated from this file.
+
+[meta]
+name = "Umber Calm"
+slug = "umber-calm"
+palette_version = "0.1.0"
+release = "0.1.0"
+schema_version = 1
+license = "MIT"
+author = "The Umber Calm contributors"
+homepage = "https://github.com/ChristianOrrala/umber-calm"
+
+[colors]
+bg          = "#201F1D"
+bg_dim      = "#1A1917"
+surface     = "#2A2826"
+overlay     = "#3C3A36"
+inactive    = "#5A554E"
+dim_text    = "#6E6961"
+muted       = "#938A7B"
+subtle      = "#C2A98C"
+text        = "#D6C9B6"
+text_bright = "#EDE3D2"
+red         = "#E08374"
+orange      = "#EDA97C"
+yellow      = "#DCC07D"
+green       = "#A7B56E"
+cyan        = "#88C0AE"
+blue        = "#88B0B4"
+purple      = "#C9A0C0"
+
+[ansi]
+black          = "surface"
+red            = "red"
+green          = "green"
+yellow         = "yellow"
+blue           = "blue"
+magenta        = "purple"
+cyan           = "cyan"
+white          = "text"
+bright_black   = "dim_text"
+bright_red     = "#EC9A8C"
+bright_green   = "#B9C684"
+bright_yellow  = "#E8CE92"
+bright_blue    = "#9DC2C5"
+bright_magenta = "#D7B4CF"
+bright_cyan    = "#9CCEBC"
+bright_white   = "text_bright"
+
+[tints]
+diag   = 0.12
+diff   = 0.22
+search = 0.18
+
+[roles.syntax]
+keyword   = "yellow"
+preproc   = "yellow"
+function  = "blue"
+tag       = "blue"
+type      = "cyan"
+namespace = "cyan"
+attribute = "cyan"
+string    = "green"
+escape    = "purple"
+constant  = "purple"
+builtin   = "purple"
+variable  = "text"
+operator  = "subtle"
+comment   = "muted"
+heading   = "yellow"
+link      = "blue"
+code      = "green"
+
+[roles.ui]
+bg                 = "bg"
+surface            = "surface"
+chrome             = "bg_dim"
+selection_bg       = "overlay"
+selection_fg       = "text"
+border_strong      = "overlay"
+border             = "inactive"
+text               = "text"
+text_secondary     = "muted"
+line_number        = "muted"
+line_number_active = "text"
+text_dim           = "dim_text"
+focus              = "orange"
+
+[roles.diag]
+error       = "red"
+warning     = "yellow"
+info        = "blue"
+hint        = "cyan"
+ok          = "green"
+diff_add    = "green"
+diff_delete = "red"
+diff_change = "blue"
+search      = "yellow"
+
+[roles.term]
+background   = "bg"
+foreground   = "text"
+cursor       = "orange"
+cursor_text  = "bg"
+selection_bg = "overlay"
+selection_fg = "text"

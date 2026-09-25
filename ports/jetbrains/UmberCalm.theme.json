@@ -1,0 +1,25 @@
+{
+  "name": "Umber Calm",
+  "dark": true,
+  "author": "The Umber Calm contributors",
+  "editorScheme": "/UmberCalm.xml",
+  "ui": {
+    "*": {
+      "background": "#2A2826",
+      "foreground": "#D6C9B6",
+      "infoForeground": "#938A7B",
+      "selectionBackground": "#3C3A36",
+      "selectionForeground": "#D6C9B6",
+      "selectionInactiveBackground": "#3C3A36",
+      "borderColor": "#3C3A36",
+      "separatorColor": "#3C3A36",
+      "focusColor": "#EDA97C",
+      "disabledForeground": "#6E6961"
+    },
+    "EditorTabs": { "underlinedTabBackground": "#201F1D", "underlineColor": "#EDA97C", "background": "#1A1917" },
+    "ToolWindow": { "background": "#2A2826" },
+    "StatusBar": { "background": "#2A2826" },
+    "Button": { "default.startBackground": "#88B0B4", "default.endBackground": "#88B0B4", "default.foreground": "#201F1D" },
+    "Link": { "activeForeground": "#88B0B4" }
+  }
+}

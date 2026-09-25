@@ -1,0 +1,24 @@
+! Umber Calm 0.1.0 — generated from templates/xresources/umber-calm.Xresources.tmpl. Do not edit. MIT License.
+! st reads these resources only when built with the xresources patch (https://st.suckless.org/patches/xresources/).
+*.foreground: #D6C9B6
+*.background: #201F1D
+*.cursorColor: #EDA97C
+*.highlightColor: #3C3A36
+*.highlightTextColor: #D6C9B6
+XTerm*highlightColorMode: true
+*.color0: #2A2826
+*.color1: #E08374
+*.color2: #A7B56E
+*.color3: #DCC07D
+*.color4: #88B0B4
+*.color5: #C9A0C0
+*.color6: #88C0AE
+*.color7: #D6C9B6
+*.color8: #6E6961
+*.color9: #EC9A8C
+*.color10: #B9C684
+*.color11: #E8CE92
+*.color12: #9DC2C5
+*.color13: #D7B4CF
+*.color14: #9CCEBC
+*.color15: #EDE3D2

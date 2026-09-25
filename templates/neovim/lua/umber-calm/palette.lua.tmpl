@@ -1,0 +1,43 @@
+-- Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+-- Raw colors, role and ANSI slot names, tints in per mille. palette_resolve.lua turns them into hex.
+return {
+  colors = {
+    bg = "{{ bg }}", bg_dim = "{{ bg_dim }}", surface = "{{ surface }}", overlay = "{{ overlay }}",
+    inactive = "{{ inactive }}", dim_text = "{{ dim_text }}", muted = "{{ muted }}", subtle = "{{ subtle }}",
+    text = "{{ text }}", text_bright = "{{ text_bright }}", red = "{{ red }}", orange = "{{ orange }}",
+    yellow = "{{ yellow }}", green = "{{ green }}", cyan = "{{ cyan }}", blue = "{{ blue }}", purple = "{{ purple }}",
+  },
+  ansi = {
+    "{{ ansi.black | colorname }}", "{{ ansi.red | colorname }}", "{{ ansi.green | colorname }}", "{{ ansi.yellow | colorname }}",
+    "{{ ansi.blue | colorname }}", "{{ ansi.magenta | colorname }}", "{{ ansi.cyan | colorname }}", "{{ ansi.white | colorname }}",
+    "{{ ansi.bright_black | colorname }}", "{{ ansi.bright_red | colorname }}", "{{ ansi.bright_green | colorname }}", "{{ ansi.bright_yellow | colorname }}",
+    "{{ ansi.bright_blue | colorname }}", "{{ ansi.bright_magenta | colorname }}", "{{ ansi.bright_cyan | colorname }}", "{{ ansi.bright_white | colorname }}",
+  },
+  roles = {
+    syntax = {
+      keyword = "{{ syntax.keyword | colorname }}", preproc = "{{ syntax.preproc | colorname }}", ["function"] = "{{ syntax.function | colorname }}",
+      tag = "{{ syntax.tag | colorname }}", type = "{{ syntax.type | colorname }}", namespace = "{{ syntax.namespace | colorname }}",
+      attribute = "{{ syntax.attribute | colorname }}", string = "{{ syntax.string | colorname }}", escape = "{{ syntax.escape | colorname }}",
+      constant = "{{ syntax.constant | colorname }}", builtin = "{{ syntax.builtin | colorname }}", variable = "{{ syntax.variable | colorname }}",
+      operator = "{{ syntax.operator | colorname }}", comment = "{{ syntax.comment | colorname }}", heading = "{{ syntax.heading | colorname }}",
+      link = "{{ syntax.link | colorname }}", code = "{{ syntax.code | colorname }}",
+    },
+    ui = {
+      bg = "{{ ui.bg | colorname }}", surface = "{{ ui.surface | colorname }}", chrome = "{{ ui.chrome | colorname }}",
+      selection_bg = "{{ ui.selection_bg | colorname }}", selection_fg = "{{ ui.selection_fg | colorname }}",
+      border_strong = "{{ ui.border_strong | colorname }}", border = "{{ ui.border | colorname }}", text = "{{ ui.text | colorname }}",
+      text_secondary = "{{ ui.text_secondary | colorname }}", line_number = "{{ ui.line_number | colorname }}",
+      line_number_active = "{{ ui.line_number_active | colorname }}", text_dim = "{{ ui.text_dim | colorname }}", focus = "{{ ui.focus | colorname }}",
+    },
+    diag = {
+      error = "{{ diag.error | colorname }}", warning = "{{ diag.warning | colorname }}", info = "{{ diag.info | colorname }}", hint = "{{ diag.hint | colorname }}",
+      ok = "{{ diag.ok | colorname }}", diff_add = "{{ diag.diff_add | colorname }}", diff_delete = "{{ diag.diff_delete | colorname }}",
+      diff_change = "{{ diag.diff_change | colorname }}", search = "{{ diag.search | colorname }}",
+    },
+    term = {
+      background = "{{ term.background | colorname }}", foreground = "{{ term.foreground | colorname }}", cursor = "{{ term.cursor | colorname }}",
+      cursor_text = "{{ term.cursor_text | colorname }}", selection_bg = "{{ term.selection_bg | colorname }}", selection_fg = "{{ term.selection_fg | colorname }}",
+    },
+  },
+  tints = { diag = {{ tint.diag | permille }}, diff = {{ tint.diff | permille }}, search = {{ tint.search | permille }} },
+}

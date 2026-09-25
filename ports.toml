@@ -1,0 +1,759 @@
+# Port registry. Tiers are derived; never set them by hand (see CONTRIBUTING.md).
+
+[[port]]
+id = "json"
+name = "JSON palette"
+category = "data"
+phase = 1
+output_root = "ports/json"
+docs = "internal"
+format_confirmed = true
+target_version = "schema 1"
+install = "Read ports/json/umber-calm.json from your tooling."
+uninstall = "Stop reading the file."
+checklist = ["parses as JSON", "contains every metadata key, color, ANSI slot, role and tint"]
+syntax_exempt = "exports the syntax roles as data; the palette loader already rejects red and orange in [roles.syntax]"
+
+[[port]]
+id = "wezterm"
+name = "WezTerm"
+category = "terminal"
+phase = 1
+output_root = "ports/wezterm"
+docs = "https://wezterm.org/config/appearance.html"
+format_confirmed = true
+target_version = "20240203"
+install = "Copy umber-calm.toml to ~/.config/wezterm/colors/ and set `config.color_scheme = 'Umber Calm'` in wezterm.lua."
+uninstall = "Remove the color_scheme line and the file."
+checklist = ["background and text", "16 ANSI colors (run a color test script)", "selection", "cursor and cursor text", "tab bar: active tab amber, inactive muted"]
+
+[[port]]
+id = "tmux"
+name = "tmux"
+category = "multiplexer"
+phase = 1
+output_root = "ports/tmux"
+docs = "https://github.com/tmux/tmux/wiki"
+format_confirmed = true
+target_version = "3.4"
+install = "Copy umber-calm.tmux to ~/.config/tmux/ and add `source-file ~/.config/tmux/umber-calm.tmux` to tmux.conf, then `tmux source-file ~/.config/tmux/tmux.conf`."
+uninstall = "Remove the source-file line and the file."
+checklist = ["status bar", "current window amber", "pane borders (active amber)", "copy-mode selection and search matches", "messages"]
+
+[[port]]
+id = "zellij"
+name = "Zellij"
+category = "multiplexer"
+phase = 1
+output_root = "ports/zellij"
+docs = "https://zellij.dev/documentation/themes.html"
+format_confirmed = true
+target_version = "0.45.1"
+install = "Uses Zellij's component theme format (written for Zellij 0.45.1; older releases that only read the legacy 11-color palette are not supported). Copy umber-calm.kdl to ~/.config/zellij/themes/ and set `theme \"umber-calm\"` in config.kdl."
+uninstall = "Remove the theme line and the file."
+checklist = ["status bar and tab bar: active tab and current mode are orange (focus), inactive ones neutral", "focused pane frame is orange; other pane frames are muted", "focused frame stays orange in other modes (resize, scroll, locked)", "session manager and plugin lists/tables readable", "search highlights"]
+
+[[port]]
+id = "starship"
+name = "Starship"
+category = "shell"
+phase = 1
+output_root = "ports/starship"
+docs = "https://starship.rs/advanced-config/"
+format_confirmed = true
+target_version = "1.20"
+install = "Copy the [palettes.umber_calm] table into ~/.config/starship.toml and add `palette = \"umber_calm\"` at the top level. Use the palette names (text, muted, blue, …) in your module styles."
+uninstall = "Remove the palette line and the table."
+checklist = ["prompt segments render in palette colors", "error symbol uses red", "no raw hex in your styles is needed"]
+
+[[port]]
+id = "claude-code"
+name = "Claude Code"
+category = "ai"
+phase = 1
+output_root = "ports/claude-code"
+docs = "https://code.claude.com/docs/en/terminal-config"
+format_confirmed = true
+target_version = "2.1.282"
+install = "Copy umber-calm.json to ~/.claude/themes/ and select it with /theme (custom:umber-calm). It builds on the dark-ansi base, so use it together with an Umber Calm terminal port."
+uninstall = "Pick another theme with /theme and delete the file."
+checklist = ["message backgrounds", "composerSidebarBackground visibly applied: the diff side panel is the surface color, not gray", "diff +/− counts readable (green/red)", "no gray bands on added rows"]
+
+[[port]]
+id = "vscode"
+name = "VS Code"
+category = "editor"
+phase = 1
+output_root = "ports/vscode"
+docs = "https://code.visualstudio.com/api/extension-guides/color-theme"
+format_confirmed = true
+target_version = "1.95"
+min_version = "1.95.0"
+install = "Download umber-calm-<version>.vsix from the latest release and run `code --install-extension umber-calm-<version>.vsix`, then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T."
+uninstall = "Uninstall the Umber Calm extension from the Extensions view."
+checklist = ["editor background, text, current line", "syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted", "selection, word highlights and find matches (current match solid gold with dark text)", "cursor amber", "tabs: active tab has an amber top border", "sidebar, status bar, panel", "diff editor", "integrated terminal ANSI colors"]
+syntax_check = { file = "themes/umber-calm-color-theme.json", format = "vscode" }
+
+[[port]]
+id = "neovim"
+name = "Neovim"
+category = "editor"
+phase = 1
+output_root = "."
+docs = "https://neovim.io/doc/user/syntax.html#highlight-groups"
+format_confirmed = true
+target_version = "0.10"
+inputs = ["lua/umber-calm/**/*.lua", "lua/lualine/themes/umber-calm.lua", "colors/umber-calm.lua", "colors/umber-calm.vim", "doc/umber-calm.txt"]
+syntax_exempt = "roles resolve at runtime; tests/nvim/run.lua checks that every emitted syntax group exists and is never red or orange"
+install = "lazy.nvim: `{ \"ChristianOrrala/umber-calm\", lazy = false, priority = 1000, config = function() vim.cmd.colorscheme(\"umber-calm\") end }`. Optional: `require(\"umber-calm\").setup({ ... })` before the colorscheme call (see :help umber-calm)."
+uninstall = "Remove the plugin spec and choose another colorscheme."
+checklist = ["Normal, CursorLine, Visual (text stays readable), Search/CurSearch", "Treesitter: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted italic", "diagnostics with tinted virtual text", "telescope, gitsigns, which-key, blink.cmp/nvim-cmp, lazy UI, indent-blankline", "lualine theme: the mode segment is orange (focus) in every mode", ":terminal colors", ":help umber-calm opens"]
+
+[[port]]
+id = "vim"
+name = "Vim"
+category = "editor"
+phase = 1
+output_root = "."
+docs = "https://vimhelp.org/syntax.txt.html#highlight-groups"
+format_confirmed = true
+target_version = "9.1"
+inputs = ["colors/umber-calm.vim"]
+install = "Copy colors/umber-calm.vim to ~/.vim/colors/ and add `set termguicolors` and `colorscheme umber-calm` to your vimrc."
+uninstall = "Remove the colorscheme line and the file."
+checklist = ["background and text", "syntax roles", "cursor line and selection (text stays readable)", "search and current match", "status line"]
+syntax_check = { file = "colors/umber-calm.vim", format = "vim" }
+
+[[port]]
+id = "alacritty"
+name = "Alacritty"
+category = "terminal"
+phase = 1
+output_root = "ports/alacritty"
+docs = "https://alacritty.org/config-alacritty.html"
+format_confirmed = true
+target_version = "0.14"
+install = "Copy umber-calm.toml to ~/.config/alacritty/themes/ and add `import = [\"~/.config/alacritty/themes/umber-calm.toml\"]` under [general] in alacritty.toml."
+uninstall = "Remove the import and the file."
+checklist = ["background and text", "16 ANSI colors", "selection", "cursor", "search matches", "vi-mode cursor"]
+
+[[port]]
+id = "kitty"
+name = "Kitty"
+category = "terminal"
+phase = 1
+output_root = "ports/kitty"
+docs = "https://sw.kovidgoyal.net/kitty/kittens/themes/"
+format_confirmed = true
+target_version = "0.39"
+install = "Copy umber-calm.conf to ~/.config/kitty/themes/ and add `include themes/umber-calm.conf` to kitty.conf."
+uninstall = "Remove the include line and the file."
+checklist = ["background and text", "16 ANSI colors", "selection", "cursor", "tab bar", "window borders"]
+syntax_exempt = "uses only syntax.link, for URL highlighting; a terminal has no syntax mappings"
+
+[[port]]
+id = "ghostty"
+name = "Ghostty"
+category = "terminal"
+phase = 1
+output_root = "ports/ghostty"
+docs = "https://ghostty.org/docs/features/theme"
+format_confirmed = true
+target_version = "1.1"
+install = "Copy the file `umber-calm` to ~/.config/ghostty/themes/ and set `theme = umber-calm` in the Ghostty config."
+uninstall = "Remove the theme line and the file."
+checklist = ["background and text", "16 ANSI colors", "selection", "cursor"]
+
+[[port]]
+id = "iterm2"
+name = "iTerm2"
+category = "terminal"
+phase = 1
+output_root = "ports/iterm2"
+docs = "https://iterm2.com/documentation-preferences-profiles-colors.html"
+format_confirmed = true
+target_version = "3.5"
+install = "Open Settings → Profiles → Colors → Color Presets → Import, choose `Umber Calm.itermcolors`, then select Umber Calm from Color Presets."
+uninstall = "Choose another preset; delete Umber Calm from Color Presets → Delete Preset."
+checklist = ["background and text", "16 ANSI colors", "selection", "cursor and cursor text", "links"]
+syntax_exempt = "uses only syntax.link, for the link color; a terminal has no syntax mappings"
+
+[[port]]
+id = "windows-terminal"
+name = "Windows Terminal"
+category = "terminal"
+phase = 1
+output_root = "ports/windows-terminal"
+docs = "https://learn.microsoft.com/windows/terminal/customize-settings/color-schemes"
+format_confirmed = true
+target_version = "1.21"
+install = "Open settings.json, add the object from umber-calm.json to the `schemes` array, and set `\"colorScheme\": \"Umber Calm\"` in a profile (or in profiles.defaults)."
+uninstall = "Remove the colorScheme setting and the scheme object."
+checklist = ["background and text", "16 ANSI colors", "selection", "cursor"]
+
+[[port]]
+id = "xresources"
+name = "Xresources (xterm, urxvt; st with the xresources patch)"
+category = "terminal"
+phase = 1
+output_root = "ports/xresources"
+docs = "https://invisible-island.net/xterm/manpage/xterm.html"
+format_confirmed = true
+target_version = "X11"
+install = "Append umber-calm.Xresources to ~/.Xresources (or #include it) and run `xrdb -merge ~/.Xresources`; open a new terminal window. st reads these resources only when built with the xresources patch (https://st.suckless.org/patches/xresources/)."
+uninstall = "Remove the lines or the #include and run xrdb again."
+checklist = ["background and text", "16 ANSI colors", "cursor", "selection background and selected text"]
+
+[[port]]
+id = "fzf"
+name = "fzf"
+category = "cli"
+phase = 1
+output_root = "ports/fzf"
+docs = "https://junegunn.github.io/fzf/color-themes/"
+format_confirmed = true
+target_version = "0.56"
+install = "bash/zsh: `source /path/to/umber-calm.sh` in your shell rc. fish: `source /path/to/umber-calm.fish` in config.fish."
+uninstall = "Remove the source line."
+checklist = ["list text and background", "current line (bg+)", "match highlights", "prompt and pointer amber", "border"]
+
+[[port]]
+id = "helix"
+name = "Helix"
+category = "editor"
+phase = 2
+output_root = "ports/helix"
+docs = "https://docs.helix-editor.com/themes.html"
+format_confirmed = true
+target_version = "25.01"
+install = "Copy umber-calm.toml to ~/.config/helix/themes/ and set `theme = \"umber-calm\"` in config.toml (or run :theme umber-calm)."
+uninstall = "Change the theme and delete the file."
+checklist = ["editor background, text, cursor line", "syntax roles", "selection keeps readable text", "status line", "diagnostics"]
+syntax_check = { file = "umber-calm.toml", format = "helix" }
+
+[[port]]
+id = "zed"
+name = "Zed"
+category = "editor"
+phase = 2
+output_root = "ports/zed"
+docs = "https://zed.dev/docs/extensions/themes"
+format_confirmed = true
+target_version = "0.170"
+install = "Copy themes/umber-calm.json to ~/.config/zed/themes/ and select Umber Calm with the theme selector (cmd-k cmd-t). The folder is also a Zed extension for publishing."
+uninstall = "Pick another theme and delete the file."
+checklist = ["editor background and text", "syntax roles", "selection and cursor", "panels and tabs", "terminal ANSI colors"]
+syntax_check = { file = "themes/umber-calm.json", format = "zed" }
+
+[[port]]
+id = "jetbrains"
+name = "JetBrains IDEs"
+category = "editor"
+phase = 2
+output_root = "ports/jetbrains"
+docs = "https://plugins.jetbrains.com/docs/intellij/theme-structure.html"
+format_confirmed = true
+target_version = "2024.3"
+min_version = "2024.3"
+install = "Download umber-calm-jetbrains-<version>.jar from the release, then Settings → Plugins → ⚙ → Install Plugin from Disk…, restart, and choose Umber Calm under Appearance."
+uninstall = "Settings → Plugins → Umber Calm → Uninstall."
+checklist = ["UI background and text", "editor background, caret, selection", "syntax roles in Java, Kotlin, Python and Markdown (no Darcula colors left)", "JavaScript: note any token still in a Darcula color (known limitation; map it in the next release)", "tool windows and tabs", "inlay hints"]
+syntax_check = { file = "UmberCalm.xml", format = "jetbrains" }
+
+[[port]]
+id = "sublime"
+name = "Sublime Text"
+category = "editor"
+phase = 2
+output_root = "ports/sublime"
+docs = "https://www.sublimetext.com/docs/color_schemes.html"
+format_confirmed = true
+target_version = "4192"
+install = "Copy `Umber Calm.sublime-color-scheme` into Packages/User (Preferences → Browse Packages…) and select it in Preferences → Select Color Scheme."
+uninstall = "Select another color scheme and delete the file."
+checklist = ["background, text, caret", "selection and find highlights", "syntax roles", "gutter"]
+syntax_check = { file = "Umber Calm.sublime-color-scheme", format = "sublime" }
+
+[[port]]
+id = "fish"
+name = "fish"
+category = "shell"
+phase = 2
+output_root = "ports/fish"
+docs = "https://fishshell.com/docs/current/cmds/fish_config.html"
+format_confirmed = true
+target_version = "3.7"
+install = "Copy `Umber Calm.theme` to ~/.config/fish/themes/ and run `fish_config theme save \"Umber Calm\"`."
+uninstall = "Run `fish_config theme save \"fish default\"` and delete the file."
+checklist = ["commands, parameters, quotes", "errors in red", "autosuggestions readable (muted)", "pager selection"]
+syntax_check = { file = "Umber Calm.theme", format = "fish" }
+
+[[port]]
+id = "bat"
+name = "bat"
+category = "cli"
+phase = 2
+output_root = "ports/bat"
+docs = "https://github.com/sharkdp/bat#adding-new-themes"
+format_confirmed = true
+target_version = "0.24"
+install = "Copy `Umber Calm.tmTheme` to \"$(bat --config-dir)/themes\", run `bat cache --build`, then `export BAT_THEME=\"Umber Calm\"`."
+uninstall = "Unset BAT_THEME, delete the file, run `bat cache --build`."
+checklist = ["background and text", "syntax roles", "line highlight", "gutter"]
+syntax_check = { file = "Umber Calm.tmTheme", format = "tmtheme" }
+
+[[port]]
+id = "delta"
+name = "delta"
+category = "cli"
+phase = 2
+output_root = "ports/delta"
+docs = "https://dandavison.github.io/delta/custom-themes.html"
+format_confirmed = true
+target_version = "0.18"
+install = "Install the bat port first. Add `[include] path = /path/to/umber-calm.gitconfig` to ~/.gitconfig and set `[delta] features = umber-calm`."
+uninstall = "Remove the include and the features line."
+checklist = ["added/removed lines use the light 12% tint", "changed words use the 22% tint", "comments stay readable on both", "line numbers", "file and hunk headers"]
+inputs = ["ports/bat/Umber Calm.tmTheme"]  # delta renders code through the bat theme (install the bat port first)
+
+[[port]]
+id = "lazygit"
+name = "lazygit"
+category = "cli"
+phase = 2
+output_root = "ports/lazygit"
+docs = "https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md"
+format_confirmed = true
+target_version = "0.44"
+install = "Merge the `gui.theme` block from umber-calm.yml into your lazygit config.yml (`lazygit --print-config-dir` shows where it is)."
+uninstall = "Remove the gui.theme block."
+checklist = ["active border uses the focus color", "selected line", "cherry-picked commits", "unstaged changes"]
+
+[[port]]
+id = "btop"
+name = "btop"
+category = "cli"
+phase = 2
+output_root = "ports/btop"
+docs = "https://github.com/aristocratos/btop#themes"
+format_confirmed = true
+target_version = "1.4"
+install = "Copy umber-calm.theme to ~/.config/btop/themes/ and select it in the btop options menu (or set color_theme = \"umber-calm\" in btop.conf)."
+uninstall = "Pick another theme and delete the file."
+checklist = ["background and text", "box borders", "graphs and meters", "selected process"]
+
+[[port]]
+id = "eza"
+name = "eza"
+category = "cli"
+phase = 2
+output_root = "ports/eza"
+docs = "https://github.com/eza-community/eza-themes"
+format_confirmed = true
+target_version = "0.19.2"
+install = "Copy theme.yml to ~/.config/eza/ (or $EZA_CONFIG_DIR). Unset EZA_COLORS and LS_COLORS in the shell where you test, because they override theme.yml."
+uninstall = "Delete theme.yml."
+checklist = ["directories, symlinks, executables", "permissions", "sizes and dates", "git status column"]
+
+[[port]]
+id = "dircolors"
+name = "dircolors (ls)"
+category = "cli"
+phase = 2
+output_root = "ports/dircolors"
+docs = "https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html"
+format_confirmed = true
+target_version = "coreutils 9"
+install = "Add `eval \"$(dircolors /path/to/umber-calm.dircolors)\"` to your shell rc. It uses the terminal's 16 ANSI colors, so pair it with an Umber Calm terminal port."
+uninstall = "Remove the eval line."
+checklist = ["directories", "symlinks and broken links", "executables", "archives, images, media"]
+
+[[port]]
+id = "yazi"
+name = "yazi"
+category = "cli"
+phase = 2
+output_root = "ports/yazi"
+docs = "https://yazi-rs.github.io/docs/flavors/overview/"
+format_confirmed = true
+target_version = "25.5.28"
+install = "Requires yazi 25.5.28 or newer. Copy the `umber-calm.yazi` folder to ~/.config/yazi/flavors/ and add `[flavor] dark = \"umber-calm\"` to ~/.config/yazi/theme.toml."
+uninstall = "Remove the flavor line and the folder."
+checklist = ["current directory", "hovered entry", "mode badges", "file type colors", "markers", "code preview uses tmtheme.xml"]
+syntax_check = { file = "umber-calm.yazi/tmtheme.xml", format = "tmtheme" }
+
+[[port]]
+id = "gnome-terminal"
+name = "GNOME Terminal"
+category = "terminal"
+phase = 2
+output_root = "ports/gnome-terminal"
+docs = "https://help.gnome.org/users/gnome-terminal/stable/app-colors.html.en"
+format_confirmed = true
+target_version = "3.54"
+install = "Run `bash install.sh` (needs dconf and python3). It creates the profile \"Umber Calm\" under its own fixed UUID; profiles it did not create are never changed, even one with the same name. Re-running updates it."
+uninstall = "Run `bash install.sh --remove`. If Umber Calm is your default profile, the first remaining profile becomes the default; if it is your only profile, create another one first."
+checklist = ["new profile exists and is selectable", "background, text, 16 ANSI colors", "cursor and selection", "re-running does not duplicate the profile", "--remove deletes only this profile"]
+
+[[port]]
+id = "ptyxis"
+name = "Ptyxis"
+category = "terminal"
+phase = 2
+output_root = "ports/ptyxis"
+docs = "https://gitlab.gnome.org/chergert/ptyxis"
+format_confirmed = false
+candidate_reason = "The value syntax of .palette files could not be confirmed from official documentation."
+target_version = "47"
+install = "Copy umber-calm.palette to ~/.local/share/org.gnome.Ptyxis/palettes/ and pick Umber Calm in Preferences. The file sets the cursor color; no selection key is known, so selection follows Ptyxis's default."
+uninstall = "Pick another palette and delete the file."
+checklist = ["palette appears in Preferences", "background, text, 16 ANSI colors", "cursor color", "selection readable (inherited)"]
+
+[[port]]
+id = "konsole"
+name = "Konsole"
+category = "terminal"
+phase = 2
+output_root = "ports/konsole"
+docs = "https://docs.kde.org/trunk_kf6/en/konsole/konsole/"
+format_confirmed = true
+target_version = "24.08"
+install = "Copy `Umber Calm.colorscheme` to ~/.local/share/konsole/ and choose it in Settings → Edit Current Profile → Appearance. Konsole color schemes have no cursor or selection keys: both are inherited from the profile (set the profile's custom cursor color to the palette's orange if you want the Umber Calm cursor)."
+uninstall = "Choose another color scheme and delete the file."
+checklist = ["background and text", "16 ANSI colors (normal and intense)", "cursor and selection readable (inherited from the profile)"]
+
+[[port]]
+id = "xfce4-terminal"
+name = "Xfce Terminal"
+category = "terminal"
+phase = 2
+output_root = "ports/xfce4-terminal"
+docs = "https://docs.xfce.org/apps/xfce4-terminal/preferences"
+format_confirmed = true
+target_version = "1.1"
+install = "Copy umber-calm.theme to ~/.local/share/xfce4/terminal/colorschemes/ and select it in Preferences → Colors → Presets."
+uninstall = "Choose another preset and delete the file."
+checklist = ["background and text", "16 ANSI colors", "cursor", "selection"]
+
+[[port]]
+id = "foot"
+name = "foot"
+category = "terminal"
+phase = 2
+output_root = "ports/foot"
+docs = "https://man.archlinux.org/man/foot.ini.5.en"
+format_confirmed = true
+target_version = "1.26.0"
+install = "Requires foot 1.26.0 or newer: the theme uses the [colors-dark] section, which foot added in 1.26.0 (older releases reject it). Copy umber-calm.ini to ~/.config/foot/ and add `include=~/.config/foot/umber-calm.ini` under [main] in foot.ini."
+uninstall = "Remove the include line and the file."
+checklist = ["passes `foot --check-config` on the target version", "background and text", "16 ANSI colors", "cursor", "selection", "URLs"]
+
+[[port]]
+id = "termux"
+name = "Termux"
+category = "terminal"
+phase = 2
+output_root = "ports/termux"
+docs = "https://github.com/termux/termux-app"
+format_confirmed = true
+target_version = "0.118"
+install = "Copy colors.properties to ~/.termux/colors.properties and run `termux-reload-settings`."
+uninstall = "Delete ~/.termux/colors.properties and run `termux-reload-settings`."
+checklist = ["background and text", "16 ANSI colors", "cursor"]
+
+[[port]]
+id = "dunst"
+name = "dunst"
+category = "desktop"
+phase = 3
+output_root = "ports/dunst"
+docs = "https://dunst-project.org/documentation/"
+format_confirmed = true
+target_version = "1.11"
+install = "Merge the sections of umber-calm.dunstrc into ~/.config/dunst/dunstrc and run `dunstctl reload`."
+uninstall = "Remove the merged keys and reload."
+checklist = ["low, normal and critical notifications", "frame colors", "progress bar"]
+
+[[port]]
+id = "waybar"
+name = "Waybar"
+category = "desktop"
+phase = 3
+output_root = "ports/waybar"
+docs = "https://github.com/Alexays/Waybar/wiki/Styling"
+format_confirmed = true
+target_version = "0.11"
+install = "Copy umber-calm.css next to your style.css, add `@import \"umber-calm.css\";` at the top, and use the variables (@bg, @surface, @text, @muted, @focus, @red…) in your rules."
+uninstall = "Remove the import and the file."
+checklist = ["bar background", "module text", "focused workspace uses @focus", "warning/critical states"]
+
+[[port]]
+id = "i3"
+name = "i3"
+category = "desktop"
+phase = 3
+output_root = "ports/i3"
+docs = "https://i3wm.org/docs/userguide.html"
+format_confirmed = true
+target_version = "4.23"
+install = "Paste the client.* lines from umber-calm.i3 into ~/.config/i3/config (or `include` the file) and run `i3-msg reload`."
+uninstall = "Remove the lines and reload."
+checklist = ["focused window border uses the focus color", "unfocused and inactive windows", "urgent window"]
+
+[[port]]
+id = "sway"
+name = "sway"
+category = "desktop"
+phase = 3
+output_root = "ports/sway"
+docs = "https://man.archlinux.org/man/sway.5.en"
+format_confirmed = true
+target_version = "1.10"
+install = "Add `include /path/to/umber-calm.sway` to ~/.config/sway/config and run `swaymsg reload`."
+uninstall = "Remove the include and reload."
+checklist = ["focused window border uses the focus color", "unfocused and inactive windows", "urgent window"]
+
+[[port]]
+id = "rofi"
+name = "rofi"
+category = "desktop"
+phase = 3
+output_root = "ports/rofi"
+docs = "https://davatorium.github.io/rofi/1.7.1/rofi-theme.5/"
+format_confirmed = true
+target_version = "1.7"
+install = "Copy umber-calm.rasi to ~/.config/rofi/ and add `@theme \"umber-calm\"` to config.rasi."
+uninstall = "Remove the @theme line and the file."
+checklist = ["window and input", "list entries", "selected entry", "prompt uses the focus color"]
+
+[[port]]
+id = "fuzzel"
+name = "fuzzel"
+category = "desktop"
+phase = 3
+output_root = "ports/fuzzel"
+docs = "https://man.archlinux.org/man/fuzzel.ini.5.en"
+format_confirmed = true
+target_version = "1.11"
+install = "Merge the [colors] section of umber-calm.ini into ~/.config/fuzzel/fuzzel.ini."
+uninstall = "Remove the [colors] keys."
+checklist = ["background and text", "match highlights", "selection", "border"]
+
+[[port]]
+id = "gtk"
+name = "GTK 3/4 + libadwaita"
+category = "desktop"
+phase = 3
+output_root = "ports/gtk"
+docs = "https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/"
+format_confirmed = true
+target_version = "libadwaita 1.6"
+install = "Copy gtk.css to ~/.config/gtk-4.0/gtk.css (and ~/.config/gtk-3.0/gtk.css), then restart GTK apps. Partial by nature: it only overrides libadwaita's named colors."
+uninstall = "Delete the gtk.css files (or remove the @define-color lines)."
+checklist = ["window and view backgrounds", "header bars", "sidebars and cards", "accent and destructive colors"]
+
+[[port]]
+id = "kde"
+name = "KDE Plasma"
+category = "desktop"
+phase = 3
+output_root = "ports/kde"
+docs = "https://develop.kde.org/docs/plasma/theme/theme-colors/"
+format_confirmed = true
+target_version = "6.2"
+install = "Copy UmberCalm.colors to ~/.local/share/color-schemes/ and run `plasma-apply-colorscheme UmberCalm` (or pick it in System Settings → Colors)."
+uninstall = "Pick another color scheme and delete the file."
+checklist = ["windows and views", "buttons", "selection", "tooltips", "focus decoration uses the focus color"]
+
+[[port]]
+id = "qt5ct"
+name = "qt5ct / qt6ct"
+category = "desktop"
+phase = 3
+output_root = "ports/qt5ct"
+docs = "https://github.com/trialuser02/qt6ct"
+format_confirmed = false
+candidate_reason = "The QPalette role order could not be confirmed from official documentation."
+target_version = "qt6ct 0.9"
+install = "Copy umber-calm.conf to ~/.config/qt5ct/colors/ and ~/.config/qt6ct/colors/, set QT_QPA_PLATFORMTHEME=qt5ct (or qt6ct), and pick the scheme in the qt5ct/qt6ct app."
+uninstall = "Pick another scheme and delete the file."
+checklist = ["window and base backgrounds", "text", "highlight and highlighted text", "disabled text"]
+
+[[port]]
+id = "zathura"
+name = "zathura"
+category = "desktop"
+phase = 3
+output_root = "ports/zathura"
+docs = "https://pwmt.org/projects/zathura/documentation/"
+format_confirmed = true
+target_version = "0.5"
+install = "Add `include umber-calm.zathurarc` to ~/.config/zathura/zathurarc after copying the file next to it."
+uninstall = "Remove the include and the file."
+checklist = ["background, status bar, input bar", "search highlights (18% tint) and active match", "recolor mode (Ctrl+R)"]
+
+[[port]]
+id = "base24"
+name = "Tinted Theming (base24)"
+category = "scheme"
+phase = 3
+output_root = "ports/base24"
+docs = "https://github.com/tinted-theming/schemes"
+format_confirmed = true
+target_version = "base24 0.2"
+install = "Use umber-calm.yaml with a Tinted Theming manager (for example tinty) or builder. Apps themed this way follow base16/base24 semantics, not Umber Calm's role map."
+uninstall = "Switch the manager to another scheme."
+checklist = ["scheme validates with the builder", "rendered terminal template looks right"]
+
+[[port]]
+id = "slack"
+name = "Slack"
+category = "app"
+phase = 4
+output_root = "ports/slack"
+docs = "https://slack.com/help/articles/205166337-Change-your-Slack-theme"
+format_confirmed = true
+target_version = "4.41"
+install = "In Slack: Preferences → Appearance → Custom theme → Import theme, then paste the line from umber-calm.txt (a legacy 8-color theme string). Slack only themes the sidebar and may merge some of the eight slots."
+uninstall = "Pick another theme."
+checklist = ["import accepted", "sidebar background", "active and hovered items", "mention badge", "presence dot", "which of the 8 slots Slack applied"]
+
+[[port]]
+id = "discord"
+name = "Discord"
+category = "app"
+phase = 4
+output_root = "ports/discord"
+docs = "https://github.com/Vendicated/Vencord"
+format_confirmed = false
+candidate_reason = "Not yet pinned to exact Vencord and Discord client versions."
+target_version = "unpinned: needs the exact Vencord version or commit and the Discord Stable build it was tested on"
+install = "With Vencord installed, copy umber-calm.theme.css into Vencord's themes folder and enable it. Tested target: Vencord only; BetterDiscord uses the same file but is untested (report results with its exact version)."
+uninstall = "Disable the theme and delete the file."
+risk = "requires a client mod (Vencord/BetterDiscord); client modifications are against Discord's Terms of Service"
+checklist = ["chat background and text", "sidebars", "links", "hover and selected states"]
+
+[[port]]
+id = "obsidian"
+name = "Obsidian"
+category = "app"
+phase = 4
+output_root = "ports/obsidian"
+docs = "https://docs.obsidian.md/Themes/App+themes/Submit+your+theme"
+format_confirmed = true
+target_version = "1.7"
+min_version = "1.7.0"
+install = "Create the folder `.obsidian/themes/Umber Calm/` in your vault, copy manifest.json and theme.css into it, then choose Umber Calm in Settings → Appearance → Themes."
+uninstall = "Choose another theme and delete the folder."
+checklist = ["editor background and text", "sidebars", "links and accent", "code blocks", "selection"]
+syntax_check = { file = "theme.css", format = "obsidian" }
+
+[[port]]
+id = "firefox"
+name = "Firefox"
+category = "web"
+phase = 4
+output_root = "ports/firefox"
+docs = "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme"
+format_confirmed = true
+target_version = "133"
+install = "Until the theme is signed on addons.mozilla.org: open about:debugging → This Firefox → Load Temporary Add-on… and pick manifest.json (it lasts until restart)."
+uninstall = "Remove it in about:addons (or restart for the temporary add-on)."
+checklist = ["tab strip and selected tab (focus-color line)", "toolbar and URL field", "popups and sidebar", "new tab page"]
+
+[[port]]
+id = "vivaldi"
+name = "Vivaldi"
+category = "web"
+phase = 4
+output_root = "ports/vivaldi"
+docs = "https://help.vivaldi.com/desktop/appearance-customization/shareable-vivaldi-themes/"
+format_confirmed = false
+candidate_reason = "The value format of Vivaldi theme files could not be confirmed."
+target_version = "7.0"
+install = "Zip settings.json and import it in Settings → Themes → Open theme."
+uninstall = "Remove the theme in Settings → Themes."
+checklist = ["theme imports", "background, foreground, accent", "highlight"]
+
+[[port]]
+id = "vimium"
+name = "Vimium"
+category = "web"
+phase = 4
+output_root = "ports/vimium"
+docs = "https://github.com/philc/vimium"
+format_confirmed = false
+candidate_reason = "The selectors follow community usage, not official documentation."
+target_version = "2.1"
+install = "Vimium options → Advanced options → CSS for Vimium UI: paste umber-calm.css."
+uninstall = "Clear the custom CSS."
+checklist = ["link hints readable", "Vomnibar background and text", "selected Vomnibar entry"]
+
+[[port]]
+id = "spotify"
+name = "Spotify (Spicetify)"
+category = "app"
+phase = 4
+output_root = "ports/spotify"
+docs = "https://spicetify.app/docs/development/themes"
+format_confirmed = false
+candidate_reason = "Not yet pinned to exact Spicetify and Spotify client versions."
+target_version = "unpinned: needs the exact Spicetify version and the Spotify client version it was tested on"
+install = "Add the [UmberCalm] section of color.ini to your Spicetify theme's color.ini, then `spicetify config color_scheme UmberCalm && spicetify apply`."
+uninstall = "Switch color_scheme back and run `spicetify apply` (or `spicetify restore`)."
+risk = "requires Spicetify, an unofficial Spotify client modification"
+checklist = ["main and sidebar backgrounds", "text and subtext", "buttons", "selected row"]
+
+[[port]]
+id = "tailwind"
+name = "Tailwind CSS v4"
+category = "web"
+phase = 4
+output_root = "ports/tailwind"
+docs = "https://tailwindcss.com/docs/theme"
+format_confirmed = true
+target_version = "4.0"
+install = "Import umber-calm.css after `@import \"tailwindcss\";` in your main CSS file; utilities like `bg-umber-bg` and `text-umber-text` become available."
+uninstall = "Remove the import."
+checklist = ["utilities generated", "colors match the palette"]
+
+[[port]]
+id = "css"
+name = "CSS variables"
+category = "web"
+phase = 4
+output_root = "ports/css"
+docs = "internal"
+format_confirmed = true
+target_version = "CSS"
+install = "Link or import umber-calm.css and use `var(--umber-bg)`, `var(--umber-text)`, and the other variables."
+uninstall = "Remove the stylesheet."
+checklist = ["variables resolve", "colors match the palette"]
+
+[[port]]
+id = "aider"
+name = "aider"
+category = "ai"
+phase = 4
+output_root = "ports/aider"
+docs = "https://aider.chat/docs/config/aider_conf.html"
+format_confirmed = true
+target_version = "0.70"
+install = "Merge the keys of aider.conf.yml into ~/.aider.conf.yml (or .aider.conf.yml at the repository root)."
+uninstall = "Remove the keys."
+checklist = ["user input color", "assistant output", "errors and warnings", "completion menu"]
+
+[[port]]
+id = "opencode"
+name = "opencode"
+category = "ai"
+phase = 4
+output_root = "ports/opencode"
+docs = "https://opencode.ai/docs/themes/"
+format_confirmed = false
+candidate_reason = "The value format of opencode theme files could not be confirmed."
+target_version = "0.3"
+install = "Copy umber-calm.json to ~/.config/opencode/themes/ and select it with the theme picker."
+uninstall = "Pick another theme and delete the file."
+checklist = ["theme loads", "background and text", "diff colors", "syntax colors"]
+syntax_check = { file = "umber-calm.json", format = "opencode" }

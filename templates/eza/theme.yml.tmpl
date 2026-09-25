@@ -1,0 +1,62 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+filekinds:
+  normal: { foreground: "{{ ui.text }}" }
+  directory: { foreground: "{{ blue }}", is_bold: true }
+  symlink: { foreground: "{{ cyan }}" }
+  pipe: { foreground: "{{ purple }}" }
+  block_device: { foreground: "{{ yellow }}" }
+  char_device: { foreground: "{{ yellow }}" }
+  socket: { foreground: "{{ purple }}" }
+  special: { foreground: "{{ purple }}" }
+  executable: { foreground: "{{ green }}", is_bold: true }
+  mount_point: { foreground: "{{ blue }}", is_underline: true }
+perms:
+  user_read: { foreground: "{{ ui.text }}" }
+  user_write: { foreground: "{{ yellow }}" }
+  user_execute_file: { foreground: "{{ green }}" }
+  user_execute_other: { foreground: "{{ green }}" }
+  group_read: { foreground: "{{ ui.text_secondary }}" }
+  group_write: { foreground: "{{ ui.text_secondary }}" }
+  group_execute: { foreground: "{{ ui.text_secondary }}" }
+  other_read: { foreground: "{{ ui.text_secondary }}" }
+  other_write: { foreground: "{{ ui.text_secondary }}" }
+  other_execute: { foreground: "{{ ui.text_secondary }}" }
+  special_user_file: { foreground: "{{ purple }}" }
+  special_other: { foreground: "{{ purple }}" }
+  attribute: { foreground: "{{ ui.text_secondary }}" }
+size:
+  number_byte: { foreground: "{{ ui.text }}" }
+  number_kilo: { foreground: "{{ ui.text }}" }
+  number_mega: { foreground: "{{ ui.text }}" }
+  number_giga: { foreground: "{{ yellow }}" }
+  number_huge: { foreground: "{{ yellow }}" }
+  unit_byte: { foreground: "{{ ui.text_secondary }}" }
+  unit_kilo: { foreground: "{{ ui.text_secondary }}" }
+  unit_mega: { foreground: "{{ ui.text_secondary }}" }
+  unit_giga: { foreground: "{{ ui.text_secondary }}" }
+  unit_huge: { foreground: "{{ ui.text_secondary }}" }
+users:
+  user_you: { foreground: "{{ ui.text }}" }
+  user_root: { foreground: "{{ yellow }}" }
+  user_other: { foreground: "{{ ui.text_secondary }}" }
+  group_yours: { foreground: "{{ ui.text_secondary }}" }
+  group_other: { foreground: "{{ ui.text_dim }}" }
+  group_root: { foreground: "{{ yellow }}" }
+links:
+  normal: { foreground: "{{ ui.text }}" }
+  multi_link_file: { foreground: "{{ purple }}" }
+git:
+  new: { foreground: "{{ diag.diff_add }}" }
+  modified: { foreground: "{{ diag.diff_change }}" }
+  deleted: { foreground: "{{ diag.diff_delete }}" }
+  renamed: { foreground: "{{ cyan }}" }
+  typechange: { foreground: "{{ purple }}" }
+  ignored: { foreground: "{{ ui.text_dim }}" }
+  conflicted: { foreground: "{{ diag.warning }}" }
+punctuation: { foreground: "{{ ui.text_dim }}" }
+date: { foreground: "{{ ui.text_secondary }}" }
+inode: { foreground: "{{ ui.text_secondary }}" }
+blocks: { foreground: "{{ ui.text_secondary }}" }
+header: { foreground: "{{ ui.text }}", is_underline: true }
+symlink_path: { foreground: "{{ cyan }}" }
+broken_symlink: { foreground: "{{ diag.error }}" }

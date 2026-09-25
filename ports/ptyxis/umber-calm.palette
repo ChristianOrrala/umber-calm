@@ -1,0 +1,24 @@
+# Umber Calm 0.1.0 — generated from templates/ptyxis/umber-calm.palette.tmpl. Do not edit. MIT License.
+[Palette]
+Name=Umber Calm
+
+[Dark]
+Foreground=#D6C9B6
+Background=#201F1D
+Cursor=#EDA97C
+Color0=#2A2826
+Color1=#E08374
+Color2=#A7B56E
+Color3=#DCC07D
+Color4=#88B0B4
+Color5=#C9A0C0
+Color6=#88C0AE
+Color7=#D6C9B6
+Color8=#6E6961
+Color9=#EC9A8C
+Color10=#B9C684
+Color11=#E8CE92
+Color12=#9DC2C5
+Color13=#D7B4CF
+Color14=#9CCEBC
+Color15=#EDE3D2

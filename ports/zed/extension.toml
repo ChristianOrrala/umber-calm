@@ -1,0 +1,8 @@
+# Umber Calm 0.1.0 — generated from templates/zed/extension.toml.tmpl. Do not edit. MIT License.
+id = "umber-calm"
+name = "Umber Calm"
+version = "0.1.0"
+schema_version = 1
+authors = ["The Umber Calm contributors"]
+description = "A warm, low-glare dark palette with measured contrast."
+repository = "https://github.com/ChristianOrrala/umber-calm"

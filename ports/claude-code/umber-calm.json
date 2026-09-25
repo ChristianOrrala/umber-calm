@@ -1,0 +1,11 @@
+{
+  "name": "Umber Calm",
+  "base": "dark-ansi",
+  "overrides": {
+    "userMessageBackground": "#201F1D",
+    "userMessageBackgroundHover": "#2A2826",
+    "bashMessageBackgroundColor": "#201F1D",
+    "memoryBackgroundColor": "#201F1D",
+    "composerSidebarBackground": "#2A2826"
+  }
+}

@@ -1,0 +1,136 @@
+// Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+// Zellij component theme format (written for Zellij 0.45.1): every UI component is set explicitly.
+themes {
+    umber-calm {
+        // Status bar text and key hints (panels are ui.surface).
+        text_unselected {
+            base "{{ ui.text }}"
+            background "{{ ui.surface }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        text_selected {
+            base "{{ ui.text }}"
+            background "{{ ui.selection_bg }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        // The active tab and the current mode: focus (docs/style-guide.md), dark text on it.
+        ribbon_selected {
+            base "{{ ui.bg }}"
+            background "{{ ui.focus }}"
+            emphasis_0 "{{ ui.chrome }}"
+            emphasis_1 "{{ ui.chrome }}"
+            emphasis_2 "{{ ui.chrome }}"
+            emphasis_3 "{{ ui.chrome }}"
+        }
+        // Inactive tabs and modes.
+        ribbon_unselected {
+            base "{{ ui.text }}"
+            background "{{ ui.border_strong }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        table_title {
+            base "{{ diag.warning }}"
+            background "{{ ui.surface }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        table_cell_selected {
+            base "{{ ui.text }}"
+            background "{{ ui.selection_bg }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        table_cell_unselected {
+            base "{{ ui.text }}"
+            background "{{ ui.surface }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        list_selected {
+            base "{{ ui.text }}"
+            background "{{ ui.selection_bg }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        list_unselected {
+            base "{{ ui.text }}"
+            background "{{ ui.surface }}"
+            emphasis_0 "{{ diag.warning }}"
+            emphasis_1 "{{ ansi.cyan }}"
+            emphasis_2 "{{ ansi.green }}"
+            emphasis_3 "{{ ansi.magenta }}"
+        }
+        // The focused pane frame is focus; other frames stay muted.
+        frame_selected {
+            base "{{ ui.focus }}"
+            background "{{ ui.bg }}"
+            emphasis_0 "{{ ui.focus }}"
+            emphasis_1 "{{ ui.text }}"
+            emphasis_2 "{{ ui.text_secondary }}"
+            emphasis_3 "{{ ui.text_secondary }}"
+        }
+        frame_unselected {
+            base "{{ ui.text_secondary }}"
+            background "{{ ui.bg }}"
+            emphasis_0 "{{ ui.text_secondary }}"
+            emphasis_1 "{{ ui.text }}"
+            emphasis_2 "{{ ui.text_secondary }}"
+            emphasis_3 "{{ ui.text_secondary }}"
+        }
+        // The focused pane frame while a mode other than the base mode is active: still the current location.
+        frame_highlight {
+            base "{{ ui.focus }}"
+            background "{{ ui.bg }}"
+            emphasis_0 "{{ ui.focus }}"
+            emphasis_1 "{{ ui.focus }}"
+            emphasis_2 "{{ ui.focus }}"
+            emphasis_3 "{{ ui.focus }}"
+        }
+        exit_code_success {
+            base "{{ diag.ok }}"
+            background "{{ ui.bg }}"
+            emphasis_0 "{{ diag.ok }}"
+            emphasis_1 "{{ ui.text }}"
+            emphasis_2 "{{ ui.text_secondary }}"
+            emphasis_3 "{{ ui.text_secondary }}"
+        }
+        exit_code_error {
+            base "{{ diag.error }}"
+            background "{{ ui.bg }}"
+            emphasis_0 "{{ diag.error }}"
+            emphasis_1 "{{ ui.text }}"
+            emphasis_2 "{{ ui.text_secondary }}"
+            emphasis_3 "{{ ui.text_secondary }}"
+        }
+        // Other users' cursors in a shared session: accents, never focus or red.
+        multiplayer_user_colors {
+            player_1 "{{ ansi.blue }}"
+            player_2 "{{ ansi.green }}"
+            player_3 "{{ ansi.yellow }}"
+            player_4 "{{ ansi.magenta }}"
+            player_5 "{{ ansi.cyan }}"
+            player_6 "{{ ansi.bright_blue }}"
+            player_7 "{{ ansi.bright_green }}"
+            player_8 "{{ ansi.bright_yellow }}"
+            player_9 "{{ ansi.bright_magenta }}"
+            player_10 "{{ ansi.bright_cyan }}"
+        }
+    }
+}

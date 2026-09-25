@@ -1,0 +1,28 @@
+# name: 'Umber Calm'
+# preferred_background: 201F1D
+# Umber Calm 0.1.0 — generated from templates/fish/Umber Calm.theme.tmpl. Do not edit. MIT License.
+fish_color_normal D6C9B6
+fish_color_command 88B0B4
+fish_color_keyword DCC07D
+fish_color_quote A7B56E
+fish_color_redirection C2A98C
+fish_color_end C2A98C
+fish_color_error E08374
+fish_color_param D6C9B6
+fish_color_option 88C0AE
+fish_color_comment 938A7B
+fish_color_operator C2A98C
+fish_color_escape C9A0C0
+fish_color_autosuggestion 938A7B
+fish_color_cwd 88B0B4
+fish_color_user A7B56E
+fish_color_host D6C9B6
+fish_color_valid_path --underline
+fish_color_cancel 938A7B
+fish_color_selection --background=3C3A36
+fish_color_search_match --background=423C2E
+fish_pager_color_progress 938A7B
+fish_pager_color_prefix DCC07D
+fish_pager_color_completion D6C9B6
+fish_pager_color_description 938A7B
+fish_pager_color_selected_background --background=3C3A36

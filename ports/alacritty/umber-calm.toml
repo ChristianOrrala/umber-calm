@@ -1,0 +1,58 @@
+# Umber Calm 0.1.0 — generated from templates/alacritty/umber-calm.toml.tmpl. Do not edit. MIT License.
+[colors.primary]
+background = "#201F1D"
+foreground = "#D6C9B6"
+dim_foreground = "#938A7B"
+bright_foreground = "#EDE3D2"
+
+[colors.cursor]
+text = "#201F1D"
+cursor = "#EDA97C"
+
+[colors.vi_mode_cursor]
+text = "#201F1D"
+cursor = "#EDA97C"
+
+[colors.selection]
+text = "#D6C9B6"
+background = "#3C3A36"
+
+[colors.search.matches]
+foreground = "#D6C9B6"
+background = "#423C2E"
+
+[colors.search.focused_match]
+foreground = "#201F1D"
+background = "#DCC07D"
+
+[colors.footer_bar]
+foreground = "#D6C9B6"
+background = "#2A2826"
+
+[colors.hints.start]
+foreground = "#201F1D"
+background = "#DCC07D"
+
+[colors.hints.end]
+foreground = "#201F1D"
+background = "#938A7B"
+
+[colors.normal]
+black = "#2A2826"
+red = "#E08374"
+green = "#A7B56E"
+yellow = "#DCC07D"
+blue = "#88B0B4"
+magenta = "#C9A0C0"
+cyan = "#88C0AE"
+white = "#D6C9B6"
+
+[colors.bright]
+black = "#6E6961"
+red = "#EC9A8C"
+green = "#B9C684"
+yellow = "#E8CE92"
+blue = "#9DC2C5"
+magenta = "#D7B4CF"
+cyan = "#9CCEBC"
+white = "#EDE3D2"

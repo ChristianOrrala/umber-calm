@@ -1,0 +1,16 @@
+# Umber Calm 0.1.0 — generated from templates/starship/umber-calm.toml.tmpl. Do not edit. MIT License.
+# Add `palette = "umber_calm"` at the top level of ~/.config/starship.toml.
+[palettes.umber_calm]
+text = "#D6C9B6"
+muted = "#938A7B"
+dim = "#6E6961"
+subtle = "#C2A98C"
+surface = "#2A2826"
+overlay = "#3C3A36"
+red = "#E08374"
+orange = "#EDA97C"
+yellow = "#DCC07D"
+green = "#A7B56E"
+cyan = "#88C0AE"
+blue = "#88B0B4"
+purple = "#C9A0C0"

@@ -1,0 +1,19 @@
+{
+  "name": "Umber Calm",
+  "version": 1,
+  "engineVersion": 1,
+  "colorBg": "#201F1D",
+  "colorFg": "#D6C9B6",
+  "colorAccentBg": "#2A2826",
+  "colorHighlightBg": "#88B0B4",
+  "colorWindowBg": "#1A1917",
+  "accentFromPage": false,
+  "accentOnWindow": false,
+  "alpha": 1,
+  "blur": 0,
+  "contrast": 0,
+  "radius": 4,
+  "simpleScrollbar": true,
+  "transparencyTabBar": false,
+  "transparencyTabs": false
+}

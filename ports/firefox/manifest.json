@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Umber Calm",
+  "version": "0.1.0",
+  "description": "A warm, low-glare dark palette with measured contrast.",
+  "browser_specific_settings": { "gecko": { "id": "{8f2b0c1e-6a5d-4b7e-9c3a-2d1e0f4a5b6c}" } },
+  "theme": {
+    "colors": {
+      "frame": "#1A1917",
+      "tab_background_text": "#D6C9B6",
+      "tab_selected": "#201F1D",
+      "tab_text": "#D6C9B6",
+      "tab_line": "#EDA97C",
+      "toolbar": "#2A2826",
+      "toolbar_text": "#D6C9B6",
+      "toolbar_field": "#201F1D",
+      "toolbar_field_text": "#D6C9B6",
+      "toolbar_field_border": "#6E6961",
+      "toolbar_field_focus": "#201F1D",
+      "toolbar_field_border_focus": "#EDA97C",
+      "popup": "#2A2826",
+      "popup_text": "#D6C9B6",
+      "popup_border": "#3C3A36",
+      "popup_highlight": "#3C3A36",
+      "popup_highlight_text": "#D6C9B6",
+      "sidebar": "#2A2826",
+      "sidebar_text": "#D6C9B6",
+      "sidebar_border": "#3C3A36",
+      "icons": "#938A7B",
+      "ntp_background": "#201F1D",
+      "ntp_text": "#D6C9B6"
+    }
+  }
+}

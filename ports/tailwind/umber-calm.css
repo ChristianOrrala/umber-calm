@@ -1,0 +1,20 @@
+/* Umber Calm 0.1.0 — generated from templates/tailwind/umber-calm.css.tmpl. Do not edit. MIT License. */
+@theme {
+  --color-umber-bg: #201F1D;
+  --color-umber-bg-dim: #1A1917;
+  --color-umber-surface: #2A2826;
+  --color-umber-overlay: #3C3A36;
+  --color-umber-inactive: #5A554E;
+  --color-umber-dim-text: #6E6961;
+  --color-umber-muted: #938A7B;
+  --color-umber-subtle: #C2A98C;
+  --color-umber-text: #D6C9B6;
+  --color-umber-text-bright: #EDE3D2;
+  --color-umber-red: #E08374;
+  --color-umber-orange: #EDA97C;
+  --color-umber-yellow: #DCC07D;
+  --color-umber-green: #A7B56E;
+  --color-umber-cyan: #88C0AE;
+  --color-umber-blue: #88B0B4;
+  --color-umber-purple: #C9A0C0;
+}

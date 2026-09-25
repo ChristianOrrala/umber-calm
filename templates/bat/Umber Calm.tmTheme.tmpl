@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License. -->
+<plist version="1.0">
+<dict>
+<key>name</key><string>Umber Calm</string>
+<key>settings</key>
+<array>
+<dict><key>settings</key><dict><key>background</key><string>{{ ui.bg }}</string><key>foreground</key><string>{{ ui.text }}</string><key>caret</key><string>{{ term.cursor }}</string><key>lineHighlight</key><string>{{ ui.surface }}</string><key>selection</key><string>{{ ui.selection_bg }}</string><key>gutter</key><string>{{ ui.bg }}</string><key>gutterForeground</key><string>{{ ui.line_number }}</string></dict></dict>
+<dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.comment }}</string><key>fontStyle</key><string>italic</string></dict></dict>
+<dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.keyword }}</string></dict></dict>
+<dict><key>scope</key><string>keyword.operator, punctuation</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.operator }}</string></dict></dict>
+<dict><key>scope</key><string>meta.preprocessor, meta.annotation</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.preproc }}</string></dict></dict>
+<dict><key>scope</key><string>string</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.string }}</string></dict></dict>
+<dict><key>scope</key><string>constant.character.escape, string.regexp</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.escape }}</string></dict></dict>
+<dict><key>scope</key><string>constant.numeric, constant.language, constant.other</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.constant }}</string></dict></dict>
+<dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.function }}</string></dict></dict>
+<dict><key>scope</key><string>entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.tag }}</string></dict></dict>
+<dict><key>scope</key><string>entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.attribute }}</string></dict></dict>
+<dict><key>scope</key><string>entity.name.type, entity.name.class, support.type, support.class</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.type }}</string></dict></dict>
+<dict><key>scope</key><string>variable, variable.parameter</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.variable }}</string></dict></dict>
+<dict><key>scope</key><string>markup.heading</string><key>settings</key><dict><key>foreground</key><string>{{ syntax.heading }}</string><key>fontStyle</key><string>bold</string></dict></dict>
+<dict><key>scope</key><string>markup.inserted</string><key>settings</key><dict><key>foreground</key><string>{{ diag.diff_add }}</string></dict></dict>
+<dict><key>scope</key><string>markup.deleted</string><key>settings</key><dict><key>foreground</key><string>{{ diag.diff_delete }}</string></dict></dict>
+<dict><key>scope</key><string>markup.changed</string><key>settings</key><dict><key>foreground</key><string>{{ diag.diff_change }}</string></dict></dict>
+</array>
+</dict>
+</plist>

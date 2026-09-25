@@ -1,0 +1,39 @@
+{
+  "name": "Umber Calm",
+  "author": "The Umber Calm contributors",
+  "globals": {
+    "background": "{{ ui.bg }}",
+    "foreground": "{{ ui.text }}",
+    "caret": "{{ term.cursor }}",
+    "line_highlight": "{{ ui.surface }}",
+    "selection": "{{ ui.selection_bg }}",
+    "selection_foreground": "{{ ui.selection_fg }}",
+    "selection_border": "{{ ui.selection_bg }}",
+    "gutter": "{{ ui.bg }}",
+    "gutter_foreground": "{{ ui.line_number }}",
+    "find_highlight": "{{ diag.search }}",
+    "find_highlight_foreground": "{{ ui.bg }}",
+    "invisibles": "{{ ui.border_strong }}",
+    "guide": "{{ ui.border_strong }}",
+    "active_guide": "{{ ui.border }}"
+  },
+  "rules": [
+    { "scope": "comment, punctuation.definition.comment", "foreground": "{{ syntax.comment }}", "font_style": "italic" },
+    { "scope": "keyword, storage.type, storage.modifier", "foreground": "{{ syntax.keyword }}" },
+    { "scope": "keyword.operator, punctuation", "foreground": "{{ syntax.operator }}" },
+    { "scope": "meta.preprocessor, meta.annotation", "foreground": "{{ syntax.preproc }}" },
+    { "scope": "string", "foreground": "{{ syntax.string }}" },
+    { "scope": "constant.character.escape, string.regexp", "foreground": "{{ syntax.escape }}" },
+    { "scope": "constant.numeric, constant.language, constant.other", "foreground": "{{ syntax.constant }}" },
+    { "scope": "variable.language, support.variable.builtin", "foreground": "{{ syntax.builtin }}" },
+    { "scope": "entity.name.function, support.function, variable.function", "foreground": "{{ syntax.function }}" },
+    { "scope": "entity.name.tag", "foreground": "{{ syntax.tag }}" },
+    { "scope": "entity.other.attribute-name", "foreground": "{{ syntax.attribute }}" },
+    { "scope": "entity.name.type, entity.name.class, support.type, support.class", "foreground": "{{ syntax.type }}" },
+    { "scope": "entity.name.namespace", "foreground": "{{ syntax.namespace }}" },
+    { "scope": "variable, variable.parameter", "foreground": "{{ syntax.variable }}" },
+    { "scope": "markup.heading", "foreground": "{{ syntax.heading }}", "font_style": "bold" },
+    { "scope": "markup.underline.link", "foreground": "{{ syntax.link }}", "font_style": "underline" },
+    { "scope": "markup.raw", "foreground": "{{ syntax.code }}" }
+  ]
+}

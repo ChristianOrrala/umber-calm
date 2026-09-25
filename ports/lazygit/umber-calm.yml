@@ -1,0 +1,15 @@
+# Umber Calm 0.1.0 — generated from templates/lazygit/umber-calm.yml.tmpl. Do not edit. MIT License.
+gui:
+  theme:
+    activeBorderColor: ["#EDA97C", bold]
+    inactiveBorderColor: ["#5A554E"]
+    searchingActiveBorderColor: ["#DCC07D", bold]
+    optionsTextColor: ["#88B0B4"]
+    selectedLineBgColor: ["#3C3A36"]
+    inactiveViewSelectedLineBgColor: ["#2A2826"]
+    cherryPickedCommitFgColor: ["#201F1D"]
+    cherryPickedCommitBgColor: ["#88C0AE"]
+    markedBaseCommitFgColor: ["#201F1D"]
+    markedBaseCommitBgColor: ["#DCC07D"]
+    unstagedChangesColor: ["#E08374"]
+    defaultFgColor: ["#D6C9B6"]

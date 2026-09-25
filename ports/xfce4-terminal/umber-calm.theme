@@ -1,0 +1,13 @@
+# Umber Calm 0.1.0 — generated from templates/xfce4-terminal/umber-calm.theme.tmpl. Do not edit. MIT License.
+[Scheme]
+Name=Umber Calm
+ColorForeground=#D6C9B6
+ColorBackground=#201F1D
+ColorCursor=#EDA97C
+ColorCursorForeground=#201F1D
+ColorCursorUseDefault=FALSE
+ColorSelection=#3C3A36
+ColorSelectionUseDefault=FALSE
+ColorBold=#D6C9B6
+ColorBoldUseDefault=FALSE
+ColorPalette=#2A2826;#E08374;#A7B56E;#DCC07D;#88B0B4;#C9A0C0;#88C0AE;#D6C9B6;#6E6961;#EC9A8C;#B9C684;#E8CE92;#9DC2C5;#D7B4CF;#9CCEBC;#EDE3D2

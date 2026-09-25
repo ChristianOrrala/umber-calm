@@ -1,0 +1,31 @@
+{
+  "files": [
+    {"name": "sample.tsx", "lines": [
+      {"spans": [["comment", "// Umber Calm sample: every syntax role in one screen."]]},
+      {"spans": [["keyword", "import"], [null, " "], ["operator", "*"], [null, " "], ["keyword", "as"], [null, " "], ["namespace", "fs"], [null, " "], ["keyword", "from"], [null, " "], ["string", "\"node:fs/promises\""], ["operator", ";"]]},
+      {"spans": []},
+      {"spans": [["comment", "/** A palette entry. @param name color name */"]]},
+      {"spans": [["keyword", "interface"], [null, " "], ["type", "Swatch"], [null, " "], ["operator", "{"], [null, " "], ["variable", "name"], ["operator", ":"], [null, " "], ["type", "string"], ["operator", ";"], [null, " "], ["variable", "hex"], ["operator", ":"], [null, " "], ["type", "string"], [null, " "], ["operator", "}"]]},
+      {"spans": [["keyword", "enum"], [null, " "], ["type", "Tier"], [null, " "], ["operator", "{"], [null, " "], ["constant", "Supported"], [null, " "], ["operator", "="], [null, " "], ["string", "\"supported\""], ["operator", ","], [null, " "], ["constant", "Experimental"], [null, " "], ["operator", "="], [null, " "], ["string", "\"experimental\""], [null, " "], ["operator", "}"]]},
+      {"spans": [["keyword", "const"], [null, " "], ["constant", "MAX_RATIO"], [null, " "], ["operator", "="], [null, " "], ["constant", "21"], ["operator", ";"]], "diagnostic": {"severity": "info", "text": "inferred type: 21"}},
+      {"spans": [["keyword", "const"], [null, " "], ["variable", "pattern", "search_current"], [null, " "], ["operator", "="], [null, " "], ["escape", "/^#[0-9A-F]{6}$/i"], ["operator", ";"]], "diagnostic": {"severity": "warning", "text": "the i flag is redundant"}},
+      {"spans": []},
+      {"spans": [["preproc", "@sealed"]]},
+      {"spans": [["keyword", "export"], [null, " "], ["keyword", "class"], [null, " "], ["type", "Palette"], [null, " "], ["operator", "{"]]},
+      {"spans": [[null, "  "], ["function", "constructor"], ["operator", "("], ["keyword", "private"], [null, " "], ["keyword", "readonly"], [null, " "], ["variable", "path"], ["operator", ":"], [null, " "], ["type", "string"], ["operator", ")"], [null, " "], ["operator", "{}"]], "state": "diff_add"},
+      {"spans": [[null, "  "], ["keyword", "async"], [null, " "], ["function", "load"], ["operator", "("], ["variable", "strict", "selection"], [null, " ", "selection"], ["operator", "=", "selection"], [null, " ", "selection"], ["constant", "true", "selection"], ["operator", "):"], [null, " "], ["type", "Promise"], ["operator", "<"], ["type", "Swatch"], ["operator", "[]>"], [null, " "], ["operator", "{"]], "diagnostic": {"severity": "hint", "text": "parameter can be readonly"}},
+      {"spans": [[null, "    "], ["keyword", "const"], [null, " "], ["variable", "raw"], [null, " "], ["operator", "="], [null, " "], ["keyword", "await"], [null, " "], ["namespace", "fs"], ["operator", "."], ["function", "readFile"], ["operator", "("], ["builtin", "this"], ["operator", "."], ["variable", "path"], ["operator", ","], [null, " "], ["string", "\"utf8\""], ["operator", ");"]], "state": "diff_change"},
+      {"spans": [[null, "    "], ["keyword", "if"], [null, " "], ["operator", "(!"], ["variable", "pattern", "search"], ["operator", "."], ["function", "test"], ["operator", "("], ["variable", "raw"], ["operator", "))"], [null, " "], ["keyword", "throw"], [null, " "], ["keyword", "new"], [null, " "], ["type", "Error"], ["operator", "("], ["string", "`bad hex"], ["escape", "\\n"], ["string", "`"], ["operator", ");"]], "diagnostic": {"severity": "error", "text": "expected 1 argument, got 2"}},
+      {"spans": [[null, "    "], ["comment", "// legacy: return [];"]], "state": "diff_delete"},
+      {"spans": [[null, "    "], ["keyword", "return"], [null, " "], ["variable", "raw"], ["operator", "."], ["function", "split"], ["operator", "("], ["string", "\""], ["escape", "\\n"], ["string", "\""], ["operator", ")."], ["function", "map"], ["operator", "(("], ["variable", "name"], ["operator", ") => ({"], [null, " "], ["variable", "name"], ["operator", ","], [null, " "], ["variable", "hex"], ["operator", ":"], [null, " "], ["variable", "name"], ["operator", "."], ["function", "trim"], ["operator", "() }));"]]},
+      {"spans": [[null, "  "], ["operator", "}"]]},
+      {"spans": [["operator", "}"]]},
+      {"spans": []},
+      {"spans": [["keyword", "export"], [null, " "], ["keyword", "const"], [null, " "], ["variable", "view"], [null, " "], ["operator", "= <"], ["tag", "Swatch"], [null, " "], ["attribute", "name"], ["operator", "="], ["string", "\"bg\""], [null, " "], ["attribute", "hex"], ["operator", "={"], ["type", "Palette"], ["operator", "."], ["variable", "name"], ["operator", "} />;"]]}
+    ]},
+    {"name": "sample.md", "lines": [
+      {"spans": [["heading", "# Umber Calm"]]},
+      {"spans": [[null, "A "], ["link", "[palette](https://github.com/ChristianOrrala/umber-calm)"], [null, " with "], ["code", "`measured`"], [null, " contrast."]]}
+    ]}
+  ]
+}

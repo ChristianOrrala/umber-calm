@@ -1,0 +1,32 @@
+name: Verification report
+description: Report that a port works (or not) in the real app
+labels: [verification]
+body:
+  - type: input
+    id: port
+    attributes: { label: Port id, placeholder: kitty }
+    validations: { required: true }
+  - type: input
+    id: digest
+    attributes:
+      label: Full port digest
+      description: "Run `python3 tools/build.py digest <port>` on the checkout you tested and paste the first line (sha256:…)."
+    validations: { required: true }
+  - type: input
+    id: app_version
+    attributes: { label: App version }
+    validations: { required: true }
+  - type: dropdown
+    id: os
+    attributes: { label: Operating system, options: [macOS, Windows, Linux, Android, iOS, web] }
+    validations: { required: true }
+  - type: input
+    id: os_version
+    attributes: { label: OS version (digits and dots only), placeholder: "15.1" }
+  - type: textarea
+    id: checklist
+    attributes: { label: Checklist results, description: Go through the port's checklist item by item. }
+    validations: { required: true }
+  - type: textarea
+    id: screenshot
+    attributes: { label: Screenshot, description: Show the sample fixture only. No real hostnames, usernames, paths or window titles. }

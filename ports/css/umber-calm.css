@@ -1,0 +1,26 @@
+/* Umber Calm 0.1.0 — generated from templates/css/umber-calm.css.tmpl. Do not edit. MIT License. */
+:root {
+  --umber-bg: #201F1D;
+  --umber-bg-dim: #1A1917;
+  --umber-surface: #2A2826;
+  --umber-overlay: #3C3A36;
+  --umber-inactive: #5A554E;
+  --umber-dim-text: #6E6961;
+  --umber-muted: #938A7B;
+  --umber-subtle: #C2A98C;
+  --umber-text: #D6C9B6;
+  --umber-text-bright: #EDE3D2;
+  --umber-red: #E08374;
+  --umber-orange: #EDA97C;
+  --umber-yellow: #DCC07D;
+  --umber-green: #A7B56E;
+  --umber-cyan: #88C0AE;
+  --umber-blue: #88B0B4;
+  --umber-purple: #C9A0C0;
+  --umber-focus: #EDA97C;
+  --umber-selection: #3C3A36;
+  --umber-error: #E08374;
+  --umber-warning: #DCC07D;
+  --umber-info: #88B0B4;
+  --umber-success: #A7B56E;
+}

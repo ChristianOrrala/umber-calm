@@ -1,0 +1,27 @@
+/* Umber Calm 0.1.0 — generated from templates/obsidian/theme.css.tmpl. Do not edit. MIT License. */
+.theme-dark {
+  --background-primary: #201F1D;
+  --background-primary-alt: #2A2826;
+  --background-secondary: #2A2826;
+  --background-secondary-alt: #1A1917;
+  --background-modifier-border: #3C3A36;
+  --text-normal: #D6C9B6;
+  --text-muted: #938A7B;
+  --text-faint: #6E6961;
+  --text-accent: #88B0B4;
+  --text-accent-hover: #9DC2C5;
+  --interactive-accent: #88B0B4;
+  --interactive-accent-hover: #9DC2C5;
+  --text-selection: #3C3A36;
+  --text-highlight-bg: #DCC07D2E;
+  --code-normal: #D6C9B6;
+  --code-comment: #938A7B;
+  --code-keyword: #DCC07D;
+  --code-function: #88B0B4;
+  --code-string: #A7B56E;
+  --code-value: #C9A0C0;
+  --code-property: #D6C9B6;
+  --code-tag: #88B0B4;
+  --code-operator: #C2A98C;
+  --code-punctuation: #C2A98C;
+}

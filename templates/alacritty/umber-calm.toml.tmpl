@@ -1,0 +1,58 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+[colors.primary]
+background = "{{ term.background }}"
+foreground = "{{ term.foreground }}"
+dim_foreground = "{{ ui.text_secondary }}"
+bright_foreground = "{{ text_bright }}"
+
+[colors.cursor]
+text = "{{ term.cursor_text }}"
+cursor = "{{ term.cursor }}"
+
+[colors.vi_mode_cursor]
+text = "{{ term.cursor_text }}"
+cursor = "{{ term.cursor }}"
+
+[colors.selection]
+text = "{{ term.selection_fg }}"
+background = "{{ term.selection_bg }}"
+
+[colors.search.matches]
+foreground = "{{ ui.text }}"
+background = "{{ diag.search | blend(bg, tint.search) }}"
+
+[colors.search.focused_match]
+foreground = "{{ ui.bg }}"
+background = "{{ diag.search }}"
+
+[colors.footer_bar]
+foreground = "{{ ui.text }}"
+background = "{{ ui.surface }}"
+
+[colors.hints.start]
+foreground = "{{ ui.bg }}"
+background = "{{ diag.search }}"
+
+[colors.hints.end]
+foreground = "{{ ui.bg }}"
+background = "{{ ui.text_secondary }}"
+
+[colors.normal]
+black = "{{ ansi.black }}"
+red = "{{ ansi.red }}"
+green = "{{ ansi.green }}"
+yellow = "{{ ansi.yellow }}"
+blue = "{{ ansi.blue }}"
+magenta = "{{ ansi.magenta }}"
+cyan = "{{ ansi.cyan }}"
+white = "{{ ansi.white }}"
+
+[colors.bright]
+black = "{{ ansi.bright_black }}"
+red = "{{ ansi.bright_red }}"
+green = "{{ ansi.bright_green }}"
+yellow = "{{ ansi.bright_yellow }}"
+blue = "{{ ansi.bright_blue }}"
+magenta = "{{ ansi.bright_magenta }}"
+cyan = "{{ ansi.bright_cyan }}"
+white = "{{ ansi.bright_white }}"

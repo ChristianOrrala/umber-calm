@@ -1,0 +1,41 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+[colors]
+foreground = "{{ term.foreground }}"
+background = "{{ term.background }}"
+cursor_bg = "{{ term.cursor }}"
+cursor_fg = "{{ term.cursor_text }}"
+cursor_border = "{{ term.cursor }}"
+selection_bg = "{{ term.selection_bg }}"
+selection_fg = "{{ term.selection_fg }}"
+scrollbar_thumb = "{{ ui.border }}"
+split = "{{ ui.border }}"
+compose_cursor = "{{ diag.warning }}"
+ansi = ["{{ ansi.black }}", "{{ ansi.red }}", "{{ ansi.green }}", "{{ ansi.yellow }}", "{{ ansi.blue }}", "{{ ansi.magenta }}", "{{ ansi.cyan }}", "{{ ansi.white }}"]
+brights = ["{{ ansi.bright_black }}", "{{ ansi.bright_red }}", "{{ ansi.bright_green }}", "{{ ansi.bright_yellow }}", "{{ ansi.bright_blue }}", "{{ ansi.bright_magenta }}", "{{ ansi.bright_cyan }}", "{{ ansi.bright_white }}"]
+
+[colors.tab_bar]
+background = "{{ ui.chrome }}"
+
+[colors.tab_bar.active_tab]
+bg_color = "{{ ui.surface }}"
+fg_color = "{{ ui.focus }}"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "{{ ui.chrome }}"
+fg_color = "{{ ui.text_secondary }}"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "{{ ui.surface }}"
+fg_color = "{{ ui.text }}"
+
+[colors.tab_bar.new_tab]
+bg_color = "{{ ui.chrome }}"
+fg_color = "{{ ui.text_secondary }}"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "{{ ui.surface }}"
+fg_color = "{{ ui.text }}"
+
+[metadata]
+name = "Umber Calm"
+origin_url = "{{ meta.homepage }}"

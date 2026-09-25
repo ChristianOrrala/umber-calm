@@ -1,0 +1,30 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+[mgr]
+cwd = { fg = "{{ blue }}" }
+hovered = { fg = "{{ ui.text }}", bg = "{{ ui.selection_bg }}" }
+preview_hovered = { underline = true }
+find_keyword = { fg = "{{ diag.search }}", bold = true }
+find_position = { fg = "{{ purple }}" }
+marker_copied = { fg = "{{ green }}", bg = "{{ green }}" }
+marker_cut = { fg = "{{ red }}", bg = "{{ red }}" }
+marker_marked = { fg = "{{ cyan }}", bg = "{{ cyan }}" }
+marker_selected = { fg = "{{ blue }}", bg = "{{ blue }}" }
+border_style = { fg = "{{ ui.border }}" }
+
+[mode]
+normal_main = { fg = "{{ ui.bg }}", bg = "{{ blue }}", bold = true }
+normal_alt = { fg = "{{ blue }}", bg = "{{ ui.surface }}" }
+select_main = { fg = "{{ ui.bg }}", bg = "{{ purple }}", bold = true }
+select_alt = { fg = "{{ purple }}", bg = "{{ ui.surface }}" }
+unset_main = { fg = "{{ ui.bg }}", bg = "{{ cyan }}", bold = true }
+unset_alt = { fg = "{{ cyan }}", bg = "{{ ui.surface }}" }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "{{ cyan }}" },
+  { mime = "{audio,video}/*", fg = "{{ yellow }}" },
+  { mime = "application/{zip,gzip,x-tar,x-7z-compressed,x-rar,x-xz,zstd}", fg = "{{ purple }}" },
+  { mime = "application/pdf", fg = "{{ green }}" },
+  { name = "*/", fg = "{{ blue }}" },
+  { name = "*", fg = "{{ ui.text }}" },
+]

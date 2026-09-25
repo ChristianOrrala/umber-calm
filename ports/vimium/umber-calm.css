@@ -1,0 +1,10 @@
+/* Umber Calm 0.1.0 — generated from templates/vimium/umber-calm.css.tmpl. Do not edit. MIT License. */
+div > .vimiumHintMarker { background: #DCC07D; border: 1px solid #3C3A36; box-shadow: none; }
+div > .vimiumHintMarker span { color: #201F1D; text-shadow: none; }
+#vomnibar { background: #2A2826; border: 1px solid #3C3A36; }
+#vomnibar input { background: #201F1D; color: #D6C9B6; border: 1px solid #6E6961; }
+#vomnibar ul, #vomnibar li { background: #2A2826; color: #D6C9B6; border-color: #3C3A36; }
+#vomnibar li.vomnibarSelected { background: #3C3A36; }
+#vomnibar .vomnibarSource { color: #938A7B; }
+#vomnibar .vomnibarUrl { color: #88B0B4; }
+#vomnibar .vomnibarMatch { color: #DCC07D; font-weight: bold; }

@@ -1,0 +1,103 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+# Scopes reference role aliases (syntax_*, ui_*, diag_*, term_*) defined in [palette], so a role change in the
+# palette file reaches this port exactly as it reaches every other port.
+"attribute" = "syntax_attribute"
+"keyword" = "syntax_keyword"
+"keyword.directive" = "syntax_preproc"
+"namespace" = "syntax_namespace"
+"punctuation" = "syntax_operator"
+"operator" = "syntax_operator"
+"special" = "syntax_builtin"
+"variable" = "syntax_variable"
+"variable.builtin" = "syntax_builtin"
+"variable.parameter" = "syntax_variable"
+"variable.other.member" = "syntax_variable"
+"type" = "syntax_type"
+"type.builtin" = "syntax_type"
+"constructor" = "syntax_type"
+"function" = "syntax_function"
+"function.macro" = "syntax_preproc"
+"tag" = "syntax_tag"
+"comment" = { fg = "syntax_comment", modifiers = ["italic"] }
+"constant" = "syntax_constant"
+"constant.character.escape" = "syntax_escape"
+"string" = "syntax_string"
+"string.regexp" = "syntax_escape"
+"label" = "syntax_keyword"
+"markup.heading" = { fg = "syntax_heading", modifiers = ["bold"] }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "syntax_link", underline = { style = "line" } }
+"markup.link.text" = "syntax_link"
+"markup.raw" = "syntax_code"
+"diff.plus" = "diag_diff_add"
+"diff.minus" = "diag_diff_delete"
+"diff.delta" = "diag_diff_change"
+"ui.background" = { bg = "ui_bg" }
+"ui.text" = "ui_text"
+"ui.cursor" = { fg = "term_cursor_text", bg = "term_cursor" }
+"ui.cursor.primary" = { fg = "term_cursor_text", bg = "term_cursor" }
+"ui.cursor.match" = { bg = "ui_selection_bg" }
+"ui.selection" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.selection.primary" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.cursorline.primary" = { bg = "ui_surface" }
+"ui.linenr" = "ui_line_number"
+"ui.linenr.selected" = "ui_line_number_active"
+"ui.statusline" = { fg = "ui_text", bg = "ui_surface" }
+"ui.statusline.inactive" = { fg = "ui_text_secondary", bg = "ui_chrome" }
+"ui.popup" = { bg = "ui_surface" }
+"ui.window" = "ui_border"
+"ui.help" = { fg = "ui_text", bg = "ui_surface" }
+"ui.menu" = { fg = "ui_text", bg = "ui_surface" }
+"ui.menu.selected" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.virtual.whitespace" = "ui_border_strong"
+"ui.virtual.indent-guide" = "ui_border_strong"
+"ui.virtual.inlay-hint" = "ui_text_secondary"
+"ui.virtual.ruler" = { bg = "ui_surface" }
+"warning" = "diag_warning"
+"error" = "diag_error"
+"info" = "diag_info"
+"hint" = "diag_hint"
+"diagnostic.error" = { underline = { color = "diag_error", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "diag_warning", style = "curl" } }
+"diagnostic.info" = { underline = { color = "diag_info", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "diag_hint", style = "curl" } }
+
+[palette]
+syntax_keyword = "{{ syntax.keyword }}"
+syntax_preproc = "{{ syntax.preproc }}"
+syntax_function = "{{ syntax.function }}"
+syntax_tag = "{{ syntax.tag }}"
+syntax_type = "{{ syntax.type }}"
+syntax_namespace = "{{ syntax.namespace }}"
+syntax_attribute = "{{ syntax.attribute }}"
+syntax_string = "{{ syntax.string }}"
+syntax_escape = "{{ syntax.escape }}"
+syntax_constant = "{{ syntax.constant }}"
+syntax_builtin = "{{ syntax.builtin }}"
+syntax_variable = "{{ syntax.variable }}"
+syntax_operator = "{{ syntax.operator }}"
+syntax_comment = "{{ syntax.comment }}"
+syntax_heading = "{{ syntax.heading }}"
+syntax_link = "{{ syntax.link }}"
+syntax_code = "{{ syntax.code }}"
+ui_bg = "{{ ui.bg }}"
+ui_surface = "{{ ui.surface }}"
+ui_chrome = "{{ ui.chrome }}"
+ui_selection_bg = "{{ ui.selection_bg }}"
+ui_selection_fg = "{{ ui.selection_fg }}"
+ui_border_strong = "{{ ui.border_strong }}"
+ui_border = "{{ ui.border }}"
+ui_text = "{{ ui.text }}"
+ui_text_secondary = "{{ ui.text_secondary }}"
+ui_line_number = "{{ ui.line_number }}"
+ui_line_number_active = "{{ ui.line_number_active }}"
+diag_error = "{{ diag.error }}"
+diag_warning = "{{ diag.warning }}"
+diag_info = "{{ diag.info }}"
+diag_hint = "{{ diag.hint }}"
+diag_diff_add = "{{ diag.diff_add }}"
+diag_diff_delete = "{{ diag.diff_delete }}"
+diag_diff_change = "{{ diag.diff_change }}"
+term_cursor = "{{ term.cursor }}"
+term_cursor_text = "{{ term.cursor_text }}"

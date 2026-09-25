@@ -1,0 +1,100 @@
+" Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+" Neovim finds this file before colors/umber-calm.lua: hand over to the Lua plugin.
+if has('nvim')
+  lua require('umber-calm').load()
+  finish
+endif
+" 'background' first: :hi clear restores the defaults of the current background.
+set background=dark
+hi clear
+if exists("syntax_on") | syntax reset | endif
+let g:colors_name = "umber-calm"
+" Core UI: every group whose Vim default is light, red or outside the palette is set in full.
+hi Normal guifg={{ ui.text }} guibg={{ ui.bg }} gui=NONE ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.bg | ansi256 }} cterm=NONE
+hi CursorLine guifg=NONE guibg={{ ui.surface }} gui=NONE ctermfg=NONE ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi CursorColumn guifg=NONE guibg={{ ui.surface }} gui=NONE ctermfg=NONE ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi ColorColumn guifg=NONE guibg={{ ui.surface }} gui=NONE ctermfg=NONE ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi CursorLineNr guifg={{ ui.line_number_active }} guibg=NONE gui=bold ctermfg={{ ui.line_number_active | ansi256 }} ctermbg=NONE cterm=bold
+hi LineNr guifg={{ ui.line_number }} guibg=NONE gui=NONE ctermfg={{ ui.line_number | ansi256 }} ctermbg=NONE cterm=NONE
+hi SignColumn guifg={{ ui.text_secondary }} guibg={{ ui.bg }} gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg={{ ui.bg | ansi256 }} cterm=NONE
+hi FoldColumn guifg={{ ui.text_dim }} guibg={{ ui.bg }} gui=NONE ctermfg={{ ui.text_dim | ansi256 }} ctermbg={{ ui.bg | ansi256 }} cterm=NONE
+hi Folded guifg={{ ui.text_secondary }} guibg={{ ui.surface }} gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi Visual guifg={{ ui.selection_fg }} guibg={{ ui.selection_bg }} gui=NONE ctermfg={{ ui.selection_fg | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=NONE
+hi Search guifg={{ ui.text }} guibg={{ diag.search | blend(bg, tint.search) }} gui=NONE ctermfg={{ ui.text | ansi256 }} ctermbg={{ diag.search | blend(bg, tint.search) | ansi256 }} cterm=NONE
+hi IncSearch guifg={{ ui.bg }} guibg={{ diag.search }} gui=NONE ctermfg={{ ui.bg | ansi256 }} ctermbg={{ diag.search | ansi256 }} cterm=NONE
+hi QuickFixLine guifg=NONE guibg={{ ui.selection_bg }} gui=NONE ctermfg=NONE ctermbg={{ ui.selection_bg | ansi256 }} cterm=NONE
+hi MatchParen guifg={{ ui.text }} guibg={{ ui.selection_bg }} gui=bold ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=bold
+hi Cursor guifg={{ term.cursor_text }} guibg={{ term.cursor }} gui=NONE ctermfg={{ term.cursor_text | ansi256 }} ctermbg={{ term.cursor | ansi256 }} cterm=NONE
+hi StatusLine guifg={{ ui.text }} guibg={{ ui.surface }} gui=NONE ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi StatusLineNC guifg={{ ui.text_secondary }} guibg={{ ui.chrome }} gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg={{ ui.chrome | ansi256 }} cterm=NONE
+hi VertSplit guifg={{ ui.border }} guibg={{ ui.bg }} gui=NONE ctermfg={{ ui.border | ansi256 }} ctermbg={{ ui.bg | ansi256 }} cterm=NONE
+hi TabLine guifg={{ ui.text_secondary }} guibg={{ ui.chrome }} gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg={{ ui.chrome | ansi256 }} cterm=NONE
+hi TabLineFill guifg=NONE guibg={{ ui.chrome }} gui=NONE ctermfg=NONE ctermbg={{ ui.chrome | ansi256 }} cterm=NONE
+hi TabLineSel guifg={{ ui.text }} guibg={{ ui.bg }} gui=bold ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.bg | ansi256 }} cterm=bold
+hi WildMenu guifg={{ ui.selection_fg }} guibg={{ ui.selection_bg }} gui=bold ctermfg={{ ui.selection_fg | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=bold
+hi Pmenu guifg={{ ui.text }} guibg={{ ui.surface }} gui=NONE ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi PmenuSel guifg={{ ui.selection_fg }} guibg={{ ui.selection_bg }} gui=NONE ctermfg={{ ui.selection_fg | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=NONE
+hi PmenuSbar guifg=NONE guibg={{ ui.surface }} gui=NONE ctermfg=NONE ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi PmenuThumb guifg=NONE guibg={{ ui.border }} gui=NONE ctermfg=NONE ctermbg={{ ui.border | ansi256 }} cterm=NONE
+hi ToolbarLine guifg=NONE guibg={{ ui.surface }} gui=NONE ctermfg=NONE ctermbg={{ ui.surface | ansi256 }} cterm=NONE
+hi ToolbarButton guifg={{ ui.text }} guibg={{ ui.selection_bg }} gui=bold ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=bold
+hi NonText guifg={{ ui.border }} guibg=NONE gui=NONE ctermfg={{ ui.border | ansi256 }} ctermbg=NONE cterm=NONE
+hi SpecialKey guifg={{ ui.border }} guibg=NONE gui=NONE ctermfg={{ ui.border | ansi256 }} ctermbg=NONE cterm=NONE
+hi Conceal guifg={{ ui.text_secondary }} guibg=NONE gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg=NONE cterm=NONE
+hi Directory guifg={{ syntax.function }} guibg=NONE gui=NONE ctermfg={{ syntax.function | ansi256 }} ctermbg=NONE cterm=NONE
+hi Title guifg={{ syntax.heading }} guibg=NONE gui=bold ctermfg={{ syntax.heading | ansi256 }} ctermbg=NONE cterm=bold
+hi ErrorMsg guifg={{ diag.error }} guibg=NONE gui=NONE ctermfg={{ diag.error | ansi256 }} ctermbg=NONE cterm=NONE
+hi WarningMsg guifg={{ diag.warning }} guibg=NONE gui=NONE ctermfg={{ diag.warning | ansi256 }} ctermbg=NONE cterm=NONE
+hi Question guifg={{ syntax.function }} guibg=NONE gui=NONE ctermfg={{ syntax.function | ansi256 }} ctermbg=NONE cterm=NONE
+hi MoreMsg guifg={{ syntax.string }} guibg=NONE gui=NONE ctermfg={{ syntax.string | ansi256 }} ctermbg=NONE cterm=NONE
+hi ModeMsg guifg={{ ui.text }} guibg=NONE gui=bold ctermfg={{ ui.text | ansi256 }} ctermbg=NONE cterm=bold
+hi DiffAdd guifg=NONE guibg={{ diag.diff_add | blend(bg, tint.diff) }} gui=NONE ctermfg=NONE ctermbg={{ diag.diff_add | blend(bg, tint.diff) | ansi256 }} cterm=NONE
+hi DiffChange guifg=NONE guibg={{ diag.diff_change | blend(bg, tint.diff) }} gui=NONE ctermfg=NONE ctermbg={{ diag.diff_change | blend(bg, tint.diff) | ansi256 }} cterm=NONE
+hi DiffDelete guifg={{ ui.text_secondary }} guibg={{ diag.diff_delete | blend(bg, tint.diff) }} gui=NONE ctermfg={{ ui.text_secondary | ansi256 }} ctermbg={{ diag.diff_delete | blend(bg, tint.diff) | ansi256 }} cterm=NONE
+hi DiffText guifg={{ ui.text }} guibg={{ ui.selection_bg }} gui=bold ctermfg={{ ui.text | ansi256 }} ctermbg={{ ui.selection_bg | ansi256 }} cterm=bold
+hi Added guifg={{ diag.diff_add }} guibg=NONE gui=NONE ctermfg={{ diag.diff_add | ansi256 }} ctermbg=NONE cterm=NONE
+hi Changed guifg={{ diag.diff_change }} guibg=NONE gui=NONE ctermfg={{ diag.diff_change | ansi256 }} ctermbg=NONE cterm=NONE
+hi Removed guifg={{ diag.diff_delete }} guibg=NONE gui=NONE ctermfg={{ diag.diff_delete | ansi256 }} ctermbg=NONE cterm=NONE
+hi! link VisualNOS Visual
+hi! link CurSearch IncSearch
+hi! link lCursor Cursor
+hi! link CursorIM Cursor
+hi! link StatusLineTerm StatusLine
+hi! link StatusLineTermNC StatusLineNC
+hi SpellBad guifg=NONE guibg=NONE guisp={{ diag.error }} gui=undercurl ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellCap guifg=NONE guibg=NONE guisp={{ diag.warning }} gui=undercurl ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellLocal guifg=NONE guibg=NONE guisp={{ diag.info }} gui=undercurl ctermfg=NONE ctermbg=NONE cterm=underline
+hi SpellRare guifg=NONE guibg=NONE guisp={{ diag.hint }} gui=undercurl ctermfg=NONE ctermbg=NONE cterm=underline
+hi Comment guifg={{ syntax.comment }} ctermfg={{ syntax.comment | ansi256 }} gui=italic cterm=italic
+hi Constant guifg={{ syntax.constant }} ctermfg={{ syntax.constant | ansi256 }}
+hi String guifg={{ syntax.string }} ctermfg={{ syntax.string | ansi256 }}
+hi Identifier guifg={{ syntax.variable }} ctermfg={{ syntax.variable | ansi256 }} gui=NONE cterm=NONE
+hi Function guifg={{ syntax.function }} ctermfg={{ syntax.function | ansi256 }}
+hi Statement guifg={{ syntax.keyword }} ctermfg={{ syntax.keyword | ansi256 }} gui=NONE cterm=NONE
+hi Operator guifg={{ syntax.operator }} ctermfg={{ syntax.operator | ansi256 }}
+hi PreProc guifg={{ syntax.preproc }} ctermfg={{ syntax.preproc | ansi256 }}
+hi Type guifg={{ syntax.type }} ctermfg={{ syntax.type | ansi256 }} gui=NONE cterm=NONE
+hi Special guifg={{ syntax.escape }} ctermfg={{ syntax.escape | ansi256 }}
+hi Tag guifg={{ syntax.tag }} ctermfg={{ syntax.tag | ansi256 }}
+hi Delimiter guifg={{ syntax.operator }} ctermfg={{ syntax.operator | ansi256 }}
+hi Title guifg={{ syntax.heading }} ctermfg={{ syntax.heading | ansi256 }} gui=bold cterm=bold
+hi Directory guifg={{ syntax.function }} ctermfg={{ syntax.function | ansi256 }}
+hi Error guifg={{ diag.error }} guibg=NONE ctermfg={{ diag.error | ansi256 }} ctermbg=NONE
+hi Todo guifg={{ ui.bg }} guibg={{ diag.warning }} ctermfg={{ ui.bg | ansi256 }} ctermbg={{ diag.warning | ansi256 }} gui=bold cterm=bold
+hi Underlined guifg={{ syntax.link }} ctermfg={{ syntax.link | ansi256 }} gui=underline cterm=underline
+hi link Character String
+hi link Number Constant
+hi link Boolean Constant
+hi link Float Constant
+hi link Conditional Statement
+hi link Repeat Statement
+hi link Label Statement
+hi link Keyword Statement
+hi link Exception Statement
+hi link Include PreProc
+hi link Define PreProc
+hi link Macro PreProc
+hi link StorageClass Statement
+hi link Structure Type
+hi link Typedef Type
+hi link SpecialChar Special

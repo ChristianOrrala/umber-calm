@@ -1,0 +1,16 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+[delta "umber-calm"]
+    dark = true
+    syntax-theme = Umber Calm
+    minus-style = syntax "{{ diag.diff_delete | blend(bg, tint.diag) }}"
+    minus-emph-style = syntax "{{ diag.diff_delete | blend(bg, tint.diff) }}"
+    plus-style = syntax "{{ diag.diff_add | blend(bg, tint.diag) }}"
+    plus-emph-style = syntax "{{ diag.diff_add | blend(bg, tint.diff) }}"
+    line-numbers-minus-style = "{{ diag.diff_delete }}"
+    line-numbers-plus-style = "{{ diag.diff_add }}"
+    line-numbers-zero-style = "{{ ui.line_number }}"
+    line-numbers-left-style = "{{ ui.border }}"
+    line-numbers-right-style = "{{ ui.border }}"
+    file-style = "{{ ui.text }}" bold
+    hunk-header-style = file line-number syntax
+    hunk-header-decoration-style = "{{ ui.border_strong }}" box

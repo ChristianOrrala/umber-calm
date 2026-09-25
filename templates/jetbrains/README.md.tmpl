@@ -1,0 +1,8 @@
+# JetBrains IDEs — Umber Calm
+
+## Known limitations
+
+The editor scheme sets every `DefaultLanguageHighlighterColors` key and every language key that Darcula colors explicitly for Java, Kotlin, Python and Markdown (IntelliJ Platform 2024.3; `tests/fixtures/jetbrains-darcula-language-keys.txt`). These language keys still inherit Darcula's colors:
+
+- **JavaScript and TypeScript:** their keys come from the bundled, closed-source JavaScript plugin, whose Darcula colors are not published. The verification checklist checks JavaScript by eye; a key found in a Darcula color is added to the scheme and to the fixture.
+- **Every other language plugin** (for example Go, Rust, SQL, YAML, shell scripts, Groovy): keys that its own Darcula file colors explicitly keep those colors.

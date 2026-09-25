@@ -1,0 +1,30 @@
+# Umber Calm 0.1.0 — generated from templates/yazi/umber-calm.yazi/flavor.toml.tmpl. Do not edit. MIT License.
+[mgr]
+cwd = { fg = "#88B0B4" }
+hovered = { fg = "#D6C9B6", bg = "#3C3A36" }
+preview_hovered = { underline = true }
+find_keyword = { fg = "#DCC07D", bold = true }
+find_position = { fg = "#C9A0C0" }
+marker_copied = { fg = "#A7B56E", bg = "#A7B56E" }
+marker_cut = { fg = "#E08374", bg = "#E08374" }
+marker_marked = { fg = "#88C0AE", bg = "#88C0AE" }
+marker_selected = { fg = "#88B0B4", bg = "#88B0B4" }
+border_style = { fg = "#5A554E" }
+
+[mode]
+normal_main = { fg = "#201F1D", bg = "#88B0B4", bold = true }
+normal_alt = { fg = "#88B0B4", bg = "#2A2826" }
+select_main = { fg = "#201F1D", bg = "#C9A0C0", bold = true }
+select_alt = { fg = "#C9A0C0", bg = "#2A2826" }
+unset_main = { fg = "#201F1D", bg = "#88C0AE", bold = true }
+unset_alt = { fg = "#88C0AE", bg = "#2A2826" }
+
+[filetype]
+rules = [
+  { mime = "image/*", fg = "#88C0AE" },
+  { mime = "{audio,video}/*", fg = "#DCC07D" },
+  { mime = "application/{zip,gzip,x-tar,x-7z-compressed,x-rar,x-xz,zstd}", fg = "#C9A0C0" },
+  { mime = "application/pdf", fg = "#A7B56E" },
+  { name = "*/", fg = "#88B0B4" },
+  { name = "*", fg = "#D6C9B6" },
+]

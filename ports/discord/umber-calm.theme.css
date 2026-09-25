@@ -1,0 +1,26 @@
+/**
+ * @name Umber Calm
+ * @author The Umber Calm contributors
+ * @version 0.1.0
+ * @description A warm, low-glare dark palette with measured contrast. Requires a client mod, which Discord's Terms of Service prohibit.
+ * @source https://github.com/ChristianOrrala/umber-calm
+ */
+.theme-dark, .visual-refresh.theme-dark {
+  --background-primary: #201F1D;
+  --background-secondary: #2A2826;
+  --background-secondary-alt: #2A2826;
+  --background-tertiary: #1A1917;
+  --background-floating: #2A2826;
+  --background-modifier-hover: #3C3A3666;
+  --background-modifier-selected: #3C3A36;
+  --text-normal: #D6C9B6;
+  --text-muted: #938A7B;
+  --header-primary: #EDE3D2;
+  --header-secondary: #938A7B;
+  --interactive-normal: #938A7B;
+  --interactive-hover: #D6C9B6;
+  --interactive-active: #EDE3D2;
+  --text-link: #88B0B4;
+  --brand-experiment: #88B0B4;
+  --channeltextarea-background: #2A2826;
+}

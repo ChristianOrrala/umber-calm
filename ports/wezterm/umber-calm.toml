@@ -1,0 +1,41 @@
+# Umber Calm 0.1.0 — generated from templates/wezterm/umber-calm.toml.tmpl. Do not edit. MIT License.
+[colors]
+foreground = "#D6C9B6"
+background = "#201F1D"
+cursor_bg = "#EDA97C"
+cursor_fg = "#201F1D"
+cursor_border = "#EDA97C"
+selection_bg = "#3C3A36"
+selection_fg = "#D6C9B6"
+scrollbar_thumb = "#5A554E"
+split = "#5A554E"
+compose_cursor = "#DCC07D"
+ansi = ["#2A2826", "#E08374", "#A7B56E", "#DCC07D", "#88B0B4", "#C9A0C0", "#88C0AE", "#D6C9B6"]
+brights = ["#6E6961", "#EC9A8C", "#B9C684", "#E8CE92", "#9DC2C5", "#D7B4CF", "#9CCEBC", "#EDE3D2"]
+
+[colors.tab_bar]
+background = "#1A1917"
+
+[colors.tab_bar.active_tab]
+bg_color = "#2A2826"
+fg_color = "#EDA97C"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#1A1917"
+fg_color = "#938A7B"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#2A2826"
+fg_color = "#D6C9B6"
+
+[colors.tab_bar.new_tab]
+bg_color = "#1A1917"
+fg_color = "#938A7B"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#2A2826"
+fg_color = "#D6C9B6"
+
+[metadata]
+name = "Umber Calm"
+origin_url = "https://github.com/ChristianOrrala/umber-calm"

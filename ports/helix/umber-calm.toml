@@ -1,0 +1,103 @@
+# Umber Calm 0.1.0 — generated from templates/helix/umber-calm.toml.tmpl. Do not edit. MIT License.
+# Scopes reference role aliases (syntax_*, ui_*, diag_*, term_*) defined in [palette], so a role change in the
+# palette file reaches this port exactly as it reaches every other port.
+"attribute" = "syntax_attribute"
+"keyword" = "syntax_keyword"
+"keyword.directive" = "syntax_preproc"
+"namespace" = "syntax_namespace"
+"punctuation" = "syntax_operator"
+"operator" = "syntax_operator"
+"special" = "syntax_builtin"
+"variable" = "syntax_variable"
+"variable.builtin" = "syntax_builtin"
+"variable.parameter" = "syntax_variable"
+"variable.other.member" = "syntax_variable"
+"type" = "syntax_type"
+"type.builtin" = "syntax_type"
+"constructor" = "syntax_type"
+"function" = "syntax_function"
+"function.macro" = "syntax_preproc"
+"tag" = "syntax_tag"
+"comment" = { fg = "syntax_comment", modifiers = ["italic"] }
+"constant" = "syntax_constant"
+"constant.character.escape" = "syntax_escape"
+"string" = "syntax_string"
+"string.regexp" = "syntax_escape"
+"label" = "syntax_keyword"
+"markup.heading" = { fg = "syntax_heading", modifiers = ["bold"] }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "syntax_link", underline = { style = "line" } }
+"markup.link.text" = "syntax_link"
+"markup.raw" = "syntax_code"
+"diff.plus" = "diag_diff_add"
+"diff.minus" = "diag_diff_delete"
+"diff.delta" = "diag_diff_change"
+"ui.background" = { bg = "ui_bg" }
+"ui.text" = "ui_text"
+"ui.cursor" = { fg = "term_cursor_text", bg = "term_cursor" }
+"ui.cursor.primary" = { fg = "term_cursor_text", bg = "term_cursor" }
+"ui.cursor.match" = { bg = "ui_selection_bg" }
+"ui.selection" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.selection.primary" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.cursorline.primary" = { bg = "ui_surface" }
+"ui.linenr" = "ui_line_number"
+"ui.linenr.selected" = "ui_line_number_active"
+"ui.statusline" = { fg = "ui_text", bg = "ui_surface" }
+"ui.statusline.inactive" = { fg = "ui_text_secondary", bg = "ui_chrome" }
+"ui.popup" = { bg = "ui_surface" }
+"ui.window" = "ui_border"
+"ui.help" = { fg = "ui_text", bg = "ui_surface" }
+"ui.menu" = { fg = "ui_text", bg = "ui_surface" }
+"ui.menu.selected" = { fg = "ui_selection_fg", bg = "ui_selection_bg" }
+"ui.virtual.whitespace" = "ui_border_strong"
+"ui.virtual.indent-guide" = "ui_border_strong"
+"ui.virtual.inlay-hint" = "ui_text_secondary"
+"ui.virtual.ruler" = { bg = "ui_surface" }
+"warning" = "diag_warning"
+"error" = "diag_error"
+"info" = "diag_info"
+"hint" = "diag_hint"
+"diagnostic.error" = { underline = { color = "diag_error", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "diag_warning", style = "curl" } }
+"diagnostic.info" = { underline = { color = "diag_info", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "diag_hint", style = "curl" } }
+
+[palette]
+syntax_keyword = "#DCC07D"
+syntax_preproc = "#DCC07D"
+syntax_function = "#88B0B4"
+syntax_tag = "#88B0B4"
+syntax_type = "#88C0AE"
+syntax_namespace = "#88C0AE"
+syntax_attribute = "#88C0AE"
+syntax_string = "#A7B56E"
+syntax_escape = "#C9A0C0"
+syntax_constant = "#C9A0C0"
+syntax_builtin = "#C9A0C0"
+syntax_variable = "#D6C9B6"
+syntax_operator = "#C2A98C"
+syntax_comment = "#938A7B"
+syntax_heading = "#DCC07D"
+syntax_link = "#88B0B4"
+syntax_code = "#A7B56E"
+ui_bg = "#201F1D"
+ui_surface = "#2A2826"
+ui_chrome = "#1A1917"
+ui_selection_bg = "#3C3A36"
+ui_selection_fg = "#D6C9B6"
+ui_border_strong = "#3C3A36"
+ui_border = "#5A554E"
+ui_text = "#D6C9B6"
+ui_text_secondary = "#938A7B"
+ui_line_number = "#938A7B"
+ui_line_number_active = "#D6C9B6"
+diag_error = "#E08374"
+diag_warning = "#DCC07D"
+diag_info = "#88B0B4"
+diag_hint = "#88C0AE"
+diag_diff_add = "#A7B56E"
+diag_diff_delete = "#E08374"
+diag_diff_change = "#88B0B4"
+term_cursor = "#EDA97C"
+term_cursor_text = "#201F1D"

@@ -1,0 +1,28 @@
+# name: 'Umber Calm'
+# preferred_background: {{ bg | nohash }}
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+fish_color_normal {{ syntax.variable | nohash }}
+fish_color_command {{ syntax.function | nohash }}
+fish_color_keyword {{ syntax.keyword | nohash }}
+fish_color_quote {{ syntax.string | nohash }}
+fish_color_redirection {{ syntax.operator | nohash }}
+fish_color_end {{ syntax.operator | nohash }}
+fish_color_error {{ diag.error | nohash }}
+fish_color_param {{ syntax.variable | nohash }}
+fish_color_option {{ syntax.attribute | nohash }}
+fish_color_comment {{ syntax.comment | nohash }}
+fish_color_operator {{ syntax.operator | nohash }}
+fish_color_escape {{ syntax.escape | nohash }}
+fish_color_autosuggestion {{ ui.text_secondary | nohash }}
+fish_color_cwd {{ blue | nohash }}
+fish_color_user {{ green | nohash }}
+fish_color_host {{ ui.text | nohash }}
+fish_color_valid_path --underline
+fish_color_cancel {{ ui.text_secondary | nohash }}
+fish_color_selection --background={{ ui.selection_bg | nohash }}
+fish_color_search_match --background={{ diag.search | blend(bg, tint.search) | nohash }}
+fish_pager_color_progress {{ ui.text_secondary | nohash }}
+fish_pager_color_prefix {{ diag.search | nohash }}
+fish_pager_color_completion {{ ui.text | nohash }}
+fish_pager_color_description {{ ui.text_secondary | nohash }}
+fish_pager_color_selected_background --background={{ ui.selection_bg | nohash }}

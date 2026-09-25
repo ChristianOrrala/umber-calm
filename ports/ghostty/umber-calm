@@ -1,0 +1,23 @@
+# Umber Calm 0.1.0 — generated from templates/ghostty/umber-calm.tmpl. Do not edit. MIT License.
+background = #201F1D
+foreground = #D6C9B6
+cursor-color = #EDA97C
+cursor-text = #201F1D
+selection-background = #3C3A36
+selection-foreground = #D6C9B6
+palette = 0=#2A2826
+palette = 1=#E08374
+palette = 2=#A7B56E
+palette = 3=#DCC07D
+palette = 4=#88B0B4
+palette = 5=#C9A0C0
+palette = 6=#88C0AE
+palette = 7=#D6C9B6
+palette = 8=#6E6961
+palette = 9=#EC9A8C
+palette = 10=#B9C684
+palette = 11=#E8CE92
+palette = 12=#9DC2C5
+palette = 13=#D7B4CF
+palette = 14=#9CCEBC
+palette = 15=#EDE3D2

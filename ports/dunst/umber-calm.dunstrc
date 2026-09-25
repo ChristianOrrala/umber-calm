@@ -1,0 +1,20 @@
+# Umber Calm 0.1.0 — generated from templates/dunst/umber-calm.dunstrc.tmpl. Do not edit. MIT License.
+[global]
+    frame_color = "#3C3A36"
+    separator_color = frame
+    highlight = "#88B0B4"
+
+[urgency_low]
+    background = "#2A2826"
+    foreground = "#938A7B"
+    frame_color = "#3C3A36"
+
+[urgency_normal]
+    background = "#2A2826"
+    foreground = "#D6C9B6"
+    frame_color = "#88B0B4"
+
+[urgency_critical]
+    background = "#2A2826"
+    foreground = "#D6C9B6"
+    frame_color = "#E08374"

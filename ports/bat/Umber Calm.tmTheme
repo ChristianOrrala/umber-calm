@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Umber Calm 0.1.0 — generated from templates/bat/Umber Calm.tmTheme.tmpl. Do not edit. MIT License. -->
+<plist version="1.0">
+<dict>
+<key>name</key><string>Umber Calm</string>
+<key>settings</key>
+<array>
+<dict><key>settings</key><dict><key>background</key><string>#201F1D</string><key>foreground</key><string>#D6C9B6</string><key>caret</key><string>#EDA97C</string><key>lineHighlight</key><string>#2A2826</string><key>selection</key><string>#3C3A36</string><key>gutter</key><string>#201F1D</string><key>gutterForeground</key><string>#938A7B</string></dict></dict>
+<dict><key>scope</key><string>comment, punctuation.definition.comment</string><key>settings</key><dict><key>foreground</key><string>#938A7B</string><key>fontStyle</key><string>italic</string></dict></dict>
+<dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#DCC07D</string></dict></dict>
+<dict><key>scope</key><string>keyword.operator, punctuation</string><key>settings</key><dict><key>foreground</key><string>#C2A98C</string></dict></dict>
+<dict><key>scope</key><string>meta.preprocessor, meta.annotation</string><key>settings</key><dict><key>foreground</key><string>#DCC07D</string></dict></dict>
+<dict><key>scope</key><string>string</string><key>settings</key><dict><key>foreground</key><string>#A7B56E</string></dict></dict>
+<dict><key>scope</key><string>constant.character.escape, string.regexp</string><key>settings</key><dict><key>foreground</key><string>#C9A0C0</string></dict></dict>
+<dict><key>scope</key><string>constant.numeric, constant.language, constant.other</string><key>settings</key><dict><key>foreground</key><string>#C9A0C0</string></dict></dict>
+<dict><key>scope</key><string>entity.name.function, support.function, variable.function</string><key>settings</key><dict><key>foreground</key><string>#88B0B4</string></dict></dict>
+<dict><key>scope</key><string>entity.name.tag</string><key>settings</key><dict><key>foreground</key><string>#88B0B4</string></dict></dict>
+<dict><key>scope</key><string>entity.other.attribute-name</string><key>settings</key><dict><key>foreground</key><string>#88C0AE</string></dict></dict>
+<dict><key>scope</key><string>entity.name.type, entity.name.class, support.type, support.class</string><key>settings</key><dict><key>foreground</key><string>#88C0AE</string></dict></dict>
+<dict><key>scope</key><string>variable, variable.parameter</string><key>settings</key><dict><key>foreground</key><string>#D6C9B6</string></dict></dict>
+<dict><key>scope</key><string>markup.heading</string><key>settings</key><dict><key>foreground</key><string>#DCC07D</string><key>fontStyle</key><string>bold</string></dict></dict>
+<dict><key>scope</key><string>markup.inserted</string><key>settings</key><dict><key>foreground</key><string>#A7B56E</string></dict></dict>
+<dict><key>scope</key><string>markup.deleted</string><key>settings</key><dict><key>foreground</key><string>#E08374</string></dict></dict>
+<dict><key>scope</key><string>markup.changed</string><key>settings</key><dict><key>foreground</key><string>#88B0B4</string></dict></dict>
+</array>
+</dict>
+</plist>

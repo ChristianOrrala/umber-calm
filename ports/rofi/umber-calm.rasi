@@ -1,0 +1,20 @@
+/* Umber Calm 0.1.0 — generated from templates/rofi/umber-calm.rasi.tmpl. Do not edit. MIT License. */
+* {
+    bg: #201F1D;
+    surface: #2A2826;
+    selection: #3C3A36;
+    border: #3C3A36;
+    text: #D6C9B6;
+    muted: #938A7B;
+    focus: #EDA97C;
+    background-color: transparent;
+    text-color: @text;
+}
+window { background-color: @bg; border: 2px; border-color: @border; padding: 12px; }
+inputbar { children: [prompt, entry]; spacing: 8px; }
+prompt { text-color: @focus; }
+entry { text-color: @text; placeholder-color: @muted; }
+listview { lines: 10; scrollbar: false; }
+element { padding: 4px 8px; }
+element selected { background-color: @selection; text-color: @text; }
+element-text { text-color: inherit; }

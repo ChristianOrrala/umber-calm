@@ -1,0 +1,16 @@
+# Umber Calm 0.1.0 — generated from templates/delta/umber-calm.gitconfig.tmpl. Do not edit. MIT License.
+[delta "umber-calm"]
+    dark = true
+    syntax-theme = Umber Calm
+    minus-style = syntax "#372B27"
+    minus-emph-style = syntax "#4A3530"
+    plus-style = syntax "#303127"
+    plus-emph-style = syntax "#3E402F"
+    line-numbers-minus-style = "#E08374"
+    line-numbers-plus-style = "#A7B56E"
+    line-numbers-zero-style = "#938A7B"
+    line-numbers-left-style = "#5A554E"
+    line-numbers-right-style = "#5A554E"
+    file-style = "#D6C9B6" bold
+    hunk-header-style = file line-number syntax
+    hunk-header-decoration-style = "#3C3A36" box

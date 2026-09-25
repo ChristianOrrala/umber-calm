@@ -1,0 +1,62 @@
+# Umber Calm 0.1.0 — generated from templates/eza/theme.yml.tmpl. Do not edit. MIT License.
+filekinds:
+  normal: { foreground: "#D6C9B6" }
+  directory: { foreground: "#88B0B4", is_bold: true }
+  symlink: { foreground: "#88C0AE" }
+  pipe: { foreground: "#C9A0C0" }
+  block_device: { foreground: "#DCC07D" }
+  char_device: { foreground: "#DCC07D" }
+  socket: { foreground: "#C9A0C0" }
+  special: { foreground: "#C9A0C0" }
+  executable: { foreground: "#A7B56E", is_bold: true }
+  mount_point: { foreground: "#88B0B4", is_underline: true }
+perms:
+  user_read: { foreground: "#D6C9B6" }
+  user_write: { foreground: "#DCC07D" }
+  user_execute_file: { foreground: "#A7B56E" }
+  user_execute_other: { foreground: "#A7B56E" }
+  group_read: { foreground: "#938A7B" }
+  group_write: { foreground: "#938A7B" }
+  group_execute: { foreground: "#938A7B" }
+  other_read: { foreground: "#938A7B" }
+  other_write: { foreground: "#938A7B" }
+  other_execute: { foreground: "#938A7B" }
+  special_user_file: { foreground: "#C9A0C0" }
+  special_other: { foreground: "#C9A0C0" }
+  attribute: { foreground: "#938A7B" }
+size:
+  number_byte: { foreground: "#D6C9B6" }
+  number_kilo: { foreground: "#D6C9B6" }
+  number_mega: { foreground: "#D6C9B6" }
+  number_giga: { foreground: "#DCC07D" }
+  number_huge: { foreground: "#DCC07D" }
+  unit_byte: { foreground: "#938A7B" }
+  unit_kilo: { foreground: "#938A7B" }
+  unit_mega: { foreground: "#938A7B" }
+  unit_giga: { foreground: "#938A7B" }
+  unit_huge: { foreground: "#938A7B" }
+users:
+  user_you: { foreground: "#D6C9B6" }
+  user_root: { foreground: "#DCC07D" }
+  user_other: { foreground: "#938A7B" }
+  group_yours: { foreground: "#938A7B" }
+  group_other: { foreground: "#6E6961" }
+  group_root: { foreground: "#DCC07D" }
+links:
+  normal: { foreground: "#D6C9B6" }
+  multi_link_file: { foreground: "#C9A0C0" }
+git:
+  new: { foreground: "#A7B56E" }
+  modified: { foreground: "#88B0B4" }
+  deleted: { foreground: "#E08374" }
+  renamed: { foreground: "#88C0AE" }
+  typechange: { foreground: "#C9A0C0" }
+  ignored: { foreground: "#6E6961" }
+  conflicted: { foreground: "#DCC07D" }
+punctuation: { foreground: "#6E6961" }
+date: { foreground: "#938A7B" }
+inode: { foreground: "#938A7B" }
+blocks: { foreground: "#938A7B" }
+header: { foreground: "#D6C9B6", is_underline: true }
+symlink_path: { foreground: "#88C0AE" }
+broken_symlink: { foreground: "#E08374" }
