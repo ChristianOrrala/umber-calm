@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 (2026-09-29)
 
 - Foundation: palette source of truth, generator with safe writes, checks (formats, readability, wording, repository hygiene), digest-bound verification tiers, release gate, JSON export.
 - Tier changes: Neovim, VS Code, WezTerm, tmux, Starship, Zellij and Claude Code go from experimental to supported, each verified in the real app on macOS 26.6.2.
