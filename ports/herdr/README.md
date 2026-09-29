@@ -2,11 +2,11 @@
 
 > ⚠️ **Warning:** herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations.
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 0.9.1 · Format documentation: https://herdr.dev/docs/configuration/
 
-Verified on: —
+Verified on: 0.9.1 · macOS 26.6.2 (2026-09-29)
 
 ## Install
 
@@ -33,6 +33,8 @@ Print it yourself with `python3 tools/build.py digest herdr`. It covers these fi
 
 - `ports/herdr/umber-calm.toml`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-29 | ✅ verified | 0.9.1 | macOS | 26.6.2 |  |  | `b10fed21b5e9` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

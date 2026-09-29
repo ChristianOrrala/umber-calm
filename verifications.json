@@ -11,6 +11,18 @@
       "status": "verified"
     }
   ],
+  "herdr": [
+    {
+      "app_version": "0.9.1",
+      "date": "2026-09-29",
+      "digest": "sha256:b10fed21b5e9730fda3037d0210abe411e7ea05bcac08efb511f6618baee3bdc",
+      "evidence": "",
+      "note": "",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
   "neovim": [
     {
       "app_version": "0.12.5",
