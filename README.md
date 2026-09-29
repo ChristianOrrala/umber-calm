@@ -1,10 +1,60 @@
+<div align="center">
+
 # Umber Calm
 
 A warm, low-glare dark palette with measured contrast.
 
-[Install](#install) · [Palette](#palette) · [Ports](#ports) · [Design](#design) · [Contributing](#contributing)
+[Palette](#palette) · [Install](#install) · [Ports](#ports) · [Design](#design)
 
-> Early development. Ports are generated from each app's documented format; the tier next to every download says how far each one has been tested.
+<img alt="License: MIT" src="docs/badges/license.svg"> <img alt="Latest release" src="docs/badges/release.svg"> <img alt="Number of ports" src="docs/badges/ports.svg"> <img alt="Main text contrast on the background" src="docs/badges/contrast.svg">
+
+<br><br>
+
+<img src="docs/renders/normal.svg" width="760" alt="Sample TypeScript in Umber Calm: gold keywords, teal-slate functions, olive strings and mauve constants on a warm near-black background, with a selection, search matches, diff lines and diagnostics">
+
+</div>
+
+<table>
+<tr>
+<td align="center"><img src="docs/renders/grayscale.svg" width="200" alt="The sample code in grayscale"><br><sub>Grayscale</sub></td>
+<td align="center"><img src="docs/renders/deuteranopia.svg" width="200" alt="The sample code as seen with deuteranopia"><br><sub>Deuteranopia</sub></td>
+<td align="center"><img src="docs/renders/protanopia.svg" width="200" alt="The sample code as seen with protanopia"><br><sub>Protanopia</sub></td>
+<td align="center"><img src="docs/renders/tritanopia.svg" width="200" alt="The sample code as seen with tritanopia"><br><sub>Tritanopia</sub></td>
+</tr>
+</table>
+
+<sub>The same code in grayscale and under three types of color-vision deficiency (Machado, Oliveira &amp; Fernandes, 2009). Details in [docs/color-vision.md](docs/color-vision.md).</sub>
+
+## Why it looks like this
+
+- Warm near-black background (never pure black) and warm off-white text (never pure white).
+- Main text at 10:1; accents between 6:1 and 9:1; every measured pair is enforced in CI.
+- Categories are separated by hue while lightness stays in a narrow band.
+- Red only means errors; amber only marks where you are.
+
+## Palette
+
+<!-- palette:begin -->
+|  | Name | Hex | Contrast on `bg` | Used for |
+|---|---|---|---|---|
+| <img src="docs/swatches/bg.svg" width="20" height="20" alt="bg #201F1D"> | `bg` | `#201F1D` | — | Background |
+| <img src="docs/swatches/bg_dim.svg" width="20" height="20" alt="bg_dim #1A1917"> | `bg_dim` | `#1A1917` | 1.1:1 | Chrome |
+| <img src="docs/swatches/surface.svg" width="20" height="20" alt="surface #2A2826"> | `surface` | `#2A2826` | 1.1:1 | Panels |
+| <img src="docs/swatches/overlay.svg" width="20" height="20" alt="overlay #3C3A36"> | `overlay` | `#3C3A36` | 1.5:1 | Selection, strong borders |
+| <img src="docs/swatches/inactive.svg" width="20" height="20" alt="inactive #5A554E"> | `inactive` | `#5A554E` | 2.2:1 | Borders |
+| <img src="docs/swatches/dim_text.svg" width="20" height="20" alt="dim_text #6E6961"> | `dim_text` | `#6E6961` | 3.0:1 | Dim text |
+| <img src="docs/swatches/muted.svg" width="20" height="20" alt="muted #938A7B"> | `muted` | `#938A7B` | 4.8:1 | Comments, secondary text, line numbers |
+| <img src="docs/swatches/subtle.svg" width="20" height="20" alt="subtle #C2A98C"> | `subtle` | `#C2A98C` | 7.3:1 | Operators |
+| <img src="docs/swatches/text.svg" width="20" height="20" alt="text #D6C9B6"> | `text` | `#D6C9B6` | 10.1:1 | Variables, body text, current line number |
+| <img src="docs/swatches/text_bright.svg" width="20" height="20" alt="text_bright #EDE3D2"> | `text_bright` | `#EDE3D2` | 13.0:1 | ANSI bright white |
+| <img src="docs/swatches/red.svg" width="20" height="20" alt="red #E08374"> | `red` | `#E08374` | 6.0:1 | Errors, deleted lines |
+| <img src="docs/swatches/orange.svg" width="20" height="20" alt="orange #EDA97C"> | `orange` | `#EDA97C` | 8.3:1 | Focus, cursor |
+| <img src="docs/swatches/yellow.svg" width="20" height="20" alt="yellow #DCC07D"> | `yellow` | `#DCC07D` | 9.3:1 | Keywords, preprocessor, headings, warnings, search |
+| <img src="docs/swatches/green.svg" width="20" height="20" alt="green #A7B56E"> | `green` | `#A7B56E` | 7.4:1 | Strings, inline code, success, added lines |
+| <img src="docs/swatches/cyan.svg" width="20" height="20" alt="cyan #88C0AE"> | `cyan` | `#88C0AE` | 8.0:1 | Types, namespaces, attributes, hints |
+| <img src="docs/swatches/blue.svg" width="20" height="20" alt="blue #88B0B4"> | `blue` | `#88B0B4` | 7.0:1 | Functions, tags, links, info, changed lines |
+| <img src="docs/swatches/purple.svg" width="20" height="20" alt="purple #C9A0C0"> | `purple` | `#C9A0C0` | 7.3:1 | Escapes, constants, built-ins |
+<!-- palette:end -->
 
 ## Install
 
@@ -20,103 +70,98 @@ A warm, low-glare dark palette with measured contrast.
 
 **Everything else:** find your app in [Ports](#ports). Each port's README has install and uninstall steps, the version it was tested with, and its verification history.
 
-## Properties
-
-- Warm near-black background (never pure black) and warm off-white text (never pure white).
-- Main text at 10:1; accents between 6:1 and 9:1; every measured pair is enforced in CI.
-- Categories are separated by hue while lightness stays in a narrow band.
-- Red only means errors; amber only marks where you are.
-
-## Palette
-
-<!-- palette:begin -->
-| Name | Hex | Contrast on `bg` |
-|---|---|---|
-| `bg` | `#201F1D` | — |
-| `bg_dim` | `#1A1917` | 1.1:1 |
-| `surface` | `#2A2826` | 1.1:1 |
-| `overlay` | `#3C3A36` | 1.5:1 |
-| `inactive` | `#5A554E` | 2.2:1 |
-| `dim_text` | `#6E6961` | 3.0:1 |
-| `muted` | `#938A7B` | 4.8:1 |
-| `subtle` | `#C2A98C` | 7.3:1 |
-| `text` | `#D6C9B6` | 10.1:1 |
-| `text_bright` | `#EDE3D2` | 13.0:1 |
-| `red` | `#E08374` | 6.0:1 |
-| `orange` | `#EDA97C` | 8.3:1 |
-| `yellow` | `#DCC07D` | 9.3:1 |
-| `green` | `#A7B56E` | 7.4:1 |
-| `cyan` | `#88C0AE` | 8.0:1 |
-| `blue` | `#88B0B4` | 7.0:1 |
-| `purple` | `#C9A0C0` | 7.3:1 |
-<!-- palette:end -->
-
 ## Ports
 
+Umber Calm is in early development. Every port is generated from the app's documented format and every tier is downloadable; the tier says how far each one has been tested.
+
 <!-- ports:begin -->
-| App | Category | Tier | Download | Target version | Verified on | Notes |
-|---|---|---|---|---|---|---|
-| Alacritty | terminal | 🧪 experimental | [ports/alacritty/](ports/alacritty/) | 0.14 | — |  |
-| foot | terminal | 🧪 experimental | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
-| Ghostty | terminal | 🧪 experimental | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
-| GNOME Terminal | terminal | 🧪 experimental | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
-| iTerm2 | terminal | 🧪 experimental | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
-| Kitty | terminal | 🧪 experimental | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
-| Konsole | terminal | 🧪 experimental | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
-| Ptyxis | terminal | 🟡 candidate | [ports/ptyxis/](ports/ptyxis/) | 47 | — | 🟡 The value syntax of .palette files could not be confirmed from official documentation. |
-| Termux | terminal | 🧪 experimental | [ports/termux/](ports/termux/) | 0.118 | — |  |
-| WezTerm | terminal | ✅ supported | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
-| Windows Terminal | terminal | 🧪 experimental | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
-| Xfce Terminal | terminal | 🧪 experimental | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
-| Xresources (xterm, urxvt; st with the xresources patch) | terminal | 🧪 experimental | [ports/xresources/](ports/xresources/) | X11 | — |  |
-| tmux | multiplexer | ✅ supported | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
-| Zellij | multiplexer | ✅ supported | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
-| fish | shell | 🧪 experimental | [ports/fish/](ports/fish/) | 3.7 | — |  |
-| Starship | shell | ✅ supported | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
-| bat | cli | 🧪 experimental | [ports/bat/](ports/bat/) | 0.24 | — |  |
-| btop | cli | 🧪 experimental | [ports/btop/](ports/btop/) | 1.4 | — |  |
-| delta | cli | 🧪 experimental | [ports/delta/](ports/delta/) | 0.18 | — |  |
-| dircolors (ls) | cli | 🧪 experimental | [ports/dircolors/](ports/dircolors/) | coreutils 9 | — |  |
-| eza | cli | 🧪 experimental | [ports/eza/](ports/eza/) | 0.19.2 | — |  |
-| fzf | cli | 🧪 experimental | [ports/fzf/](ports/fzf/) | 0.56 | — |  |
-| lazygit | cli | 🧪 experimental | [ports/lazygit/](ports/lazygit/) | 0.44 | — |  |
-| yazi | cli | 🧪 experimental | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
-| Helix | editor | 🧪 experimental | [ports/helix/](ports/helix/) | 25.01 | — |  |
-| JetBrains IDEs | editor | 🧪 experimental | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
-| Neovim | editor | ✅ supported | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
-| Sublime Text | editor | 🧪 experimental | [ports/sublime/](ports/sublime/) | 4192 | — |  |
-| Vim | editor | 🧪 experimental | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
-| VS Code | editor | ✅ supported | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
-| Zed | editor | 🧪 experimental | [ports/zed/](ports/zed/) | 0.170 | — |  |
-| dunst | desktop | 🧪 experimental | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
-| fuzzel | desktop | 🧪 experimental | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
-| GTK 3/4 + libadwaita | desktop | 🧪 experimental | [ports/gtk/](ports/gtk/) | libadwaita 1.6 | — |  |
-| i3 | desktop | 🧪 experimental | [ports/i3/](ports/i3/) | 4.23 | — |  |
-| KDE Plasma | desktop | 🧪 experimental | [ports/kde/](ports/kde/) | 6.2 | — |  |
-| qt5ct / qt6ct | desktop | 🟡 candidate | [ports/qt5ct/](ports/qt5ct/) | qt6ct 0.9 | — | 🟡 The QPalette role order could not be confirmed from official documentation. |
-| rofi | desktop | 🧪 experimental | [ports/rofi/](ports/rofi/) | 1.7 | — |  |
-| sway | desktop | 🧪 experimental | [ports/sway/](ports/sway/) | 1.10 | — |  |
-| Waybar | desktop | 🧪 experimental | [ports/waybar/](ports/waybar/) | 0.11 | — |  |
-| zathura | desktop | 🧪 experimental | [ports/zathura/](ports/zathura/) | 0.5 | — |  |
-| Discord | app | 🟡 candidate | [ports/discord/](ports/discord/) | unpinned: needs the exact Vencord version or commit and the Discord Stable build it was tested on | — | 🟡 Not yet pinned to exact Vencord and Discord client versions. · ⚠️ requires a client mod (Vencord/BetterDiscord); client modifications are against Discord's Terms of Service |
-| Obsidian | app | 🧪 experimental | [ports/obsidian/](ports/obsidian/) | 1.7 (min 1.7.0) | — |  |
-| Slack | app | 🧪 experimental | [ports/slack/](ports/slack/) | 4.41 | — |  |
-| Spotify (Spicetify) | app | 🟡 candidate | [ports/spotify/](ports/spotify/) | unpinned: needs the exact Spicetify version and the Spotify client version it was tested on | — | 🟡 Not yet pinned to exact Spicetify and Spotify client versions. · ⚠️ requires Spicetify, an unofficial Spotify client modification |
-| CSS variables | web | 🧪 experimental | [ports/css/](ports/css/) | CSS | — |  |
-| Firefox | web | 🧪 experimental | [ports/firefox/](ports/firefox/) | 133 | — |  |
-| Tailwind CSS v4 | web | 🧪 experimental | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
-| Vimium | web | 🟡 candidate | [ports/vimium/](ports/vimium/) | 2.1 | — | 🟡 The selectors follow community usage, not official documentation. |
-| Vivaldi | web | 🟡 candidate | [ports/vivaldi/](ports/vivaldi/) | 7.0 | — | 🟡 The value format of Vivaldi theme files could not be confirmed. |
-| aider | ai | 🧪 experimental | [ports/aider/](ports/aider/) | 0.70 | — |  |
-| Claude Code | ai | ✅ supported | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
-| opencode | ai | 🟡 candidate | [ports/opencode/](ports/opencode/) | 0.3 | — | 🟡 The value format of opencode theme files could not be confirmed. |
-| Tinted Theming (base24) | scheme | 🧪 experimental | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
-| JSON palette | data | 🧪 experimental | [ports/json/](ports/json/) | schema 1 | — |  |
+<details open>
+<summary><b>✅ supported (7)</b>: tested in the real app, on the exact files</summary>
+
+| App | Category | Download | Target version | Verified on | Notes |
+|---|---|---|---|---|---|
+| WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
+| tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
+| Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
+| Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
+| Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
+| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
+| Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
+
+</details>
+
+<details>
+<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
+
+| App | Category | Download | Target version | Verified on | Notes |
+|---|---|---|---|---|---|
+| Alacritty | terminal | [ports/alacritty/](ports/alacritty/) | 0.14 | — |  |
+| foot | terminal | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
+| Ghostty | terminal | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
+| GNOME Terminal | terminal | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
+| iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
+| Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
+| Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
+| Termux | terminal | [ports/termux/](ports/termux/) | 0.118 | — |  |
+| Windows Terminal | terminal | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
+| Xfce Terminal | terminal | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
+| Xresources (xterm, urxvt; st with the xresources patch) | terminal | [ports/xresources/](ports/xresources/) | X11 | — |  |
+| fish | shell | [ports/fish/](ports/fish/) | 3.7 | — |  |
+| bat | cli | [ports/bat/](ports/bat/) | 0.24 | — |  |
+| btop | cli | [ports/btop/](ports/btop/) | 1.4 | — |  |
+| delta | cli | [ports/delta/](ports/delta/) | 0.18 | — |  |
+| dircolors (ls) | cli | [ports/dircolors/](ports/dircolors/) | coreutils 9 | — |  |
+| eza | cli | [ports/eza/](ports/eza/) | 0.19.2 | — |  |
+| fzf | cli | [ports/fzf/](ports/fzf/) | 0.56 | — |  |
+| lazygit | cli | [ports/lazygit/](ports/lazygit/) | 0.44 | — |  |
+| yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
+| Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
+| JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
+| Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
+| Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
+| Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
+| dunst | desktop | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
+| fuzzel | desktop | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
+| GTK 3/4 + libadwaita | desktop | [ports/gtk/](ports/gtk/) | libadwaita 1.6 | — |  |
+| i3 | desktop | [ports/i3/](ports/i3/) | 4.23 | — |  |
+| KDE Plasma | desktop | [ports/kde/](ports/kde/) | 6.2 | — |  |
+| rofi | desktop | [ports/rofi/](ports/rofi/) | 1.7 | — |  |
+| sway | desktop | [ports/sway/](ports/sway/) | 1.10 | — |  |
+| Waybar | desktop | [ports/waybar/](ports/waybar/) | 0.11 | — |  |
+| zathura | desktop | [ports/zathura/](ports/zathura/) | 0.5 | — |  |
+| Obsidian | app | [ports/obsidian/](ports/obsidian/) | 1.7 (min 1.7.0) | — |  |
+| Slack | app | [ports/slack/](ports/slack/) | 4.41 | — |  |
+| CSS variables | web | [ports/css/](ports/css/) | CSS | — |  |
+| Firefox | web | [ports/firefox/](ports/firefox/) | 133 | — |  |
+| Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
+| aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
+| Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
+| JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
+
+</details>
+
+<details>
+<summary><b>🟡 candidate (7)</b>: format not confirmed</summary>
+
+| App | Category | Download | Target version | Verified on | Notes |
+|---|---|---|---|---|---|
+| Ptyxis | terminal | [ports/ptyxis/](ports/ptyxis/) | 47 | — | 🟡 The value syntax of .palette files could not be confirmed from official documentation. |
+| qt5ct / qt6ct | desktop | [ports/qt5ct/](ports/qt5ct/) | qt6ct 0.9 | — | 🟡 The QPalette role order could not be confirmed from official documentation. |
+| Discord | app | [ports/discord/](ports/discord/) | unpinned: needs the exact Vencord version or commit and the Discord Stable build it was tested on | — | 🟡 Not yet pinned to exact Vencord and Discord client versions. · ⚠️ requires a client mod (Vencord/BetterDiscord); client modifications are against Discord's Terms of Service |
+| Spotify (Spicetify) | app | [ports/spotify/](ports/spotify/) | unpinned: needs the exact Spicetify version and the Spotify client version it was tested on | — | 🟡 Not yet pinned to exact Spicetify and Spotify client versions. · ⚠️ requires Spicetify, an unofficial Spotify client modification |
+| Vimium | web | [ports/vimium/](ports/vimium/) | 2.1 | — | 🟡 The selectors follow community usage, not official documentation. |
+| Vivaldi | web | [ports/vivaldi/](ports/vivaldi/) | 7.0 | — | 🟡 The value format of Vivaldi theme files could not be confirmed. |
+| opencode | ai | [ports/opencode/](ports/opencode/) | 0.3 | — | 🟡 The value format of opencode theme files could not be confirmed. |
+
+</details>
 <!-- ports:end -->
 
 ## Verification
 
-Tiers: ✅ supported (tested in the real app, on the exact files) · 🧪 experimental (format confirmed, not yet tested) · 🟡 candidate (format not confirmed) · ⚠️ needs-fix. Every tier is downloadable.
+A tier is supported only while its last real-app test covers the exact files you download: changing any of them sends the port back to its untested tier. Each port's README keeps its full history.
+
+<details>
+<summary>Verification records for every port</summary>
 
 <!-- verification:begin -->
 | App | Tier | Last verified | App version | OS | Digest | Evidence |
@@ -178,6 +223,8 @@ Tiers: ✅ supported (tested in the real app, on the exact files) · 🧪 experi
 | Zed | 🧪 experimental | — |  |  | `8489d64267b9` |  |
 | Zellij | ✅ supported | 2026-09-28 | 0.45.1 | macOS 26.6.2 | `8ad27fb2e46e` |  |
 <!-- verification:end -->
+
+</details>
 
 ## Design
 

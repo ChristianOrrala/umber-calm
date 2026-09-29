@@ -10,6 +10,7 @@ CHAR_W = 8.4
 LINE_H = 20
 PAD = 16
 FONT_SIZE = 14
+CORNER = 10  # rounded background, so the render reads as a card on GitHub's light and dark pages
 LINE_STATES = ("diff_add", "diff_delete", "diff_change")
 SPAN_STATES = ("selection", "search", "search_current")
 SEVERITIES = ("error", "warning", "info", "hint")
@@ -63,7 +64,7 @@ def render(fixture: dict, pal, transform: Callable[[str], str] = lambda hx: hx) 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{_num(width)}" height="{_num(height)}" '
            f'viewBox="0 0 {_num(width)} {_num(height)}" font-family="ui-monospace, Menlo, Consolas, monospace" '
            f'font-size="{FONT_SIZE}">',
-           f'<rect width="{_num(width)}" height="{_num(height)}" fill="{c.ref("ui.bg")}"/>']
+           f'<rect width="{_num(width)}" height="{_num(height)}" rx="{CORNER}" fill="{c.ref("ui.bg")}"/>']
     for i, (kind, line) in enumerate(rows):
         top = PAD + LINE_H * i
         base = top + LINE_H - 6

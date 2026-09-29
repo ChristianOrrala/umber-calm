@@ -1,7 +1,7 @@
 import os, unittest
 from pathlib import Path
 from tests.helpers import load_real_palette, tempdir
-from umber import outputs, readme, registry
+from umber import outputs, palette, readme, registry
 
 P = load_real_palette()
 
@@ -50,7 +50,8 @@ class OutputsTest(unittest.TestCase):
             with self.assertRaises(outputs.BuildError, msg=bad):
                 outputs.validate_rel(bad)
         for good in ("ports/demo/a.conf", "colors/umber-calm.vim", "lua/umber-calm/palette.lua",
-                     "docs/color-vision.md", "docs/renders/normal.svg"):
+                     "docs/color-vision.md", "docs/renders/normal.svg", "docs/swatches/bg.svg",
+                     "docs/badges/license.svg"):
             outputs.validate_rel(good)
 
     def test_write_is_idempotent_and_cleans_orphans(self):
@@ -126,7 +127,6 @@ class ReadmeTest(unittest.TestCase):
     def test_tables(self):
         p = port(risk="client mod", min_version="0.9")
         info = {"demo": registry.TierInfo("experimental", None, False)}
-        self.assertIn("| `bg` | `#201F1D` | — |", readme.palette_table(P))
         table = readme.ports_table([p], info)
         self.assertIn("🧪 experimental", table)
         self.assertIn("⚠️ client mod", table)
@@ -150,18 +150,19 @@ class ReadmeTest(unittest.TestCase):
                 "fix": registry.TierInfo("needs-fix", broken, False),
                 "neovim": registry.TierInfo("supported", verified, False)}
         table = readme.ports_table([cand, fix, root], info)
-        header = table.splitlines()[0]
+        header = next(line for line in table.splitlines() if line.startswith("| App |"))
         self.assertIn("Target version", header)
         self.assertIn("Verified on", header)
         self.assertNotIn("Tested version", header)
-        rows = {line.split(" | ")[0][2:]: line for line in table.splitlines()[2:]}
+        body = [line for line in table.splitlines() if line.startswith("| ") and not line.startswith("| App |")]
+        rows = {line.split(" | ")[0][2:]: line for line in body}
         self.assertIn("🟡 value syntax \\| unconfirmed", rows["Cand"])
         self.assertIn("⚠️ needs-fix: tab bar \\| unreadable", rows["Fix"])
         self.assertIn("⚠️ client mod", rows["Fix"])
         self.assertIn("0.11.2 · macOS 15", rows["Neovim"])
         self.assertIn("[ports/neovim/](ports/neovim/README.md)", rows["Neovim"])
         self.assertNotIn("[./](./)", table)
-        for row in table.splitlines()[2:]:
+        for row in body:
             self.assertEqual(row.replace("\\|", "").count("|"), header.count("|"), row)
 
     def test_table_cells_escape_pipes_and_newlines(self):
@@ -171,10 +172,51 @@ class ReadmeTest(unittest.TestCase):
         live, old = port("live"), port("old", archived_reason="app discontinued", archived_since="0.3.0")
         info = {pid: registry.TierInfo("experimental", None, False) for pid in ("live", "old")}
         table = readme.ports_table([live, old], info)
-        main, _, archived = table.partition("**Archived**")
+        main, _, archived = table.partition("📦 archived (1)")
         self.assertIn("| Live |", main)
         self.assertNotIn("| Old |", main)
         self.assertIn("📦 archived — app discontinued", archived)
+        self.assertIn("<details>\n<summary><b>📦 archived (1)", table)
+
+    def test_ports_are_grouped_by_tier_with_only_supported_open(self):
+        ids = ("sup", "exp", "cand", "exp2")
+        ports = [port(pid) for pid in ids]
+        verified = {"status": "verified", "date": "2026-10-02", "app_version": "1.0", "os": "macOS", "os_version": "15",
+                    "digest": "sha256:" + "a" * 64, "note": "", "evidence": ""}
+        info = {"sup": registry.TierInfo("supported", verified, False), "exp": registry.TierInfo("experimental", None, False),
+                "cand": registry.TierInfo("candidate", None, False), "exp2": registry.TierInfo("experimental", None, False)}
+        table = readme.ports_table(ports, info)
+        self.assertIn("<details open>\n<summary><b>✅ supported (1)</b>", table)
+        self.assertIn("<details>\n<summary><b>🧪 experimental (2)</b>", table)
+        self.assertIn("<details>\n<summary><b>🟡 candidate (1)</b>", table)
+        self.assertNotIn("needs-fix (", table)  # empty tiers are left out
+        order = [table.index(label) for label in ("✅ supported (", "🧪 experimental (", "🟡 candidate (")]
+        self.assertEqual(order, sorted(order))
+        self.assertIn("</summary>\n\n| App |", table)  # blank line so GitHub renders the table inside <details>
+        self.assertEqual(table.count("<details"), table.count("</details>"))
+        supported = table[table.index("✅ supported"):table.index("🧪 experimental")]
+        self.assertIn("1.0 · macOS 15", supported)
+        self.assertNotIn("| Exp |", supported)
+
+    def test_palette_table_has_swatches_and_derived_uses(self):
+        table = readme.palette_table(P)
+        header, _, *rows = table.splitlines()
+        self.assertEqual(header, "|  | Name | Hex | Contrast on `bg` | Used for |")
+        by_name = {line.split("`")[1]: line for line in rows}
+        self.assertEqual(list(by_name), list(P.colors))
+        self.assertIn('<img src="docs/swatches/bg.svg" width="20" height="20" alt="bg #201F1D">', by_name["bg"])
+        self.assertIn("| `#201F1D` | — | Background |", by_name["bg"])
+        self.assertIn("Keywords", by_name["yellow"])
+        self.assertIn("search", by_name["yellow"])
+        self.assertIn("Errors, deleted lines", by_name["red"])
+        self.assertIn("Focus, cursor", by_name["orange"])
+        self.assertIn("ANSI bright white", by_name["text_bright"])
+
+    def test_every_palette_role_has_a_label_decision(self):
+        """A new role must be given a README label (or None to leave it out) before it can ship."""
+        for contract, roles in palette.REQUIRED_ROLES.items():
+            for role in roles:
+                self.assertIn((contract, role), readme.ROLE_LABELS, f"{contract}.{role}")
 
 if __name__ == "__main__":
     unittest.main()

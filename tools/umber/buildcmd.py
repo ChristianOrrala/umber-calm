@@ -20,7 +20,7 @@ def _plan(root: Path):
     ports = registry.load_ports(safepath.inside(root, "ports.toml"))
     planned = outputs.plan(root, pal, ports)
     intros = portreadme.split_intros(planned, ports)
-    planned.update(docsgen.plan(root, pal))
+    planned.update(docsgen.plan(root, pal, ports))
     return pal, ports, planned, intros
 
 

@@ -10,7 +10,7 @@ from .registry import Port
 from .template import render
 
 ALLOWED_ROOTS = ("ports/", "colors/umber-calm.vim", "lua/umber-calm/palette.lua",
-                 "docs/color-vision.md", "docs/renders/")
+                 "docs/color-vision.md", "docs/renders/", "docs/swatches/", "docs/badges/")
 MANIFEST = ".generated-manifest"
 WINDOWS_INVALID = re.compile(r'[\x00-\x1f\x7f<>:"|?*]')  # control characters, Windows-invalid, stream colons
 OWNER_RE = re.compile(r"(?:readme:)?[a-z0-9][a-z0-9-]*")

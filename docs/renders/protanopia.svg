@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="762.8" height="552.0" viewBox="0 0 762.8 552.0" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">
-<rect width="762.8" height="552.0" fill="#201F1D"/>
+<rect width="762.8" height="552.0" rx="10" fill="#201F1D"/>
 <text x="16.0" y="30.0" fill="#8E8A7A">sample.tsx</text>
 <text y="50.0" xml:space="preserve"><tspan x="16.0" fill="#8E8A7A">// Umber Calm sample: every syntax role in one screen.</tspan></text>
 <text y="70.0" xml:space="preserve"><tspan x="16.0" fill="#CFBE78">import</tspan><tspan x="66.4" fill="#CFC9B5"> </tspan><tspan x="74.8" fill="#B2AA8A">*</tspan><tspan x="83.2" fill="#CFC9B5"> </tspan><tspan x="91.6" fill="#CFBE78">as</tspan><tspan x="108.4" fill="#CFC9B5"> </tspan><tspan x="116.8" fill="#BCB9AD">fs</tspan><tspan x="133.6" fill="#CFC9B5"> </tspan><tspan x="142.0" fill="#CFBE78">from</tspan><tspan x="175.6" fill="#CFC9B5"> </tspan><tspan x="184.0" fill="#BEAE69">"node:fs/promises"</tspan><tspan x="335.2" fill="#B2AA8A">;</tspan></text>
