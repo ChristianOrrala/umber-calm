@@ -1,5 +1,5 @@
 """check.py runs the structural validators (spec §8.1 item 3) on every generated file."""
-import fnmatch, unittest
+import fnmatch, os, unittest
 from pathlib import Path
 from tests.helpers import REPO, tempdir
 from umber import checks, outputs, structure
@@ -87,6 +87,8 @@ class StructureTest(unittest.TestCase):
                                                            if any(fnmatch.fnmatchcase(rel, p) for rel in BAD)},
                          {"ports/zed/themes/*.json", "ports/yazi/umber-calm.yazi/flavor.toml", "ports/jetbrains/UmberCalm.xml"})
         for rel, text in BAD.items():
+            if rel.endswith(".sh") and os.name == "nt":
+                continue  # `bash -n` is skipped on Windows by design (structure._bash); macOS and Linux check it
             found = structure.problems(REPO, rel, text) or checks._format_problems_text(rel, text)
             self.assertTrue(found, rel)
             self.assertTrue(all(p.startswith((f"structure: {rel}: ", f"format: {rel} ")) for p in found), found)

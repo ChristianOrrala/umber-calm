@@ -90,7 +90,7 @@ class ReleaseGateTest(unittest.TestCase):
         with tempdir() as d:
             root = self.released(d)
             (root / "ports/demo/old.conf").write_text("from an earlier build\n", encoding="utf-8")
-            with open(root / ".generated-manifest", "a", encoding="utf-8") as f:
+            with open(root / ".generated-manifest", "a", encoding="utf-8", newline="") as f:
                 f.write("demo\tports/demo/old.conf\n")
             self.assert_stale(root, "ports/demo/old.conf")
             found = "\n".join(release.gate(root, tag(root), launch=("demo",)))

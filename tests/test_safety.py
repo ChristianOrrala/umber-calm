@@ -120,7 +120,7 @@ class SymlinkedComponentTest(unittest.TestCase):
             (root / ".git/config").write_text("[core]\n", encoding="utf-8")
             (root / "ports").mkdir()
             (root / "ports/demo").symlink_to("../.git/info", target_is_directory=True)  # the re-review repro
-            (root / outputs.MANIFEST).write_text("demo\tports/demo/config\n", encoding="utf-8")
+            (root / outputs.MANIFEST).write_text("demo\tports/demo/config\n", encoding="utf-8", newline="")
             git_before = snapshot(root / ".git")
             with self.assertRaisesRegex((outputs.BuildError, safepath.UnsafePathError), "symlink"):
                 buildcmd.build(root)
@@ -198,7 +198,7 @@ class PreflightTest(unittest.TestCase):
             with self.assertRaisesRegex(outputs.BuildError, "is a directory"):
                 outputs.preflight(root, {"ports/demo/x": "demo"})
             (root / "ports/demo/f").write_text("", encoding="utf-8")
-            (root / outputs.MANIFEST).write_text("demo\tports/demo/f\n", encoding="utf-8")
+            (root / outputs.MANIFEST).write_text("demo\tports/demo/f\n", encoding="utf-8", newline="")
             with self.assertRaisesRegex(outputs.BuildError, "not a directory"):
                 outputs.preflight(root, {"ports/demo/f/inner": "demo"})
 
@@ -214,12 +214,12 @@ class PreflightTest(unittest.TestCase):
                            ("\tports/demo/a\n", 1), ("demo\t\n", 1), ("demo\tports/demo/a\textra\n", 1),
                            ("Bad Owner\tports/demo/a\n", 1), ("demo\tports/demo/a\ndemo\tports/demo/a\n", 2)):
             with self.subTest(text=text), tempdir() as d:
-                (Path(d) / outputs.MANIFEST).write_text(text, encoding="utf-8")
+                (Path(d) / outputs.MANIFEST).write_text(text, encoding="utf-8", newline="")
                 with self.assertRaisesRegex(outputs.BuildError, rf"\.generated-manifest:{line}:"):
                     outputs.read_manifest(Path(d))
         with tempdir() as d:
             (Path(d) / outputs.MANIFEST).write_text("demo\tports/demo/a\nreadme:demo\tports/demo/README.md\n"
-                                                    "docs\tdocs/color-vision.md\n", encoding="utf-8")
+                                                    "docs\tdocs/color-vision.md\n", encoding="utf-8", newline="")
             self.assertEqual(len(outputs.read_manifest(Path(d))), 3)
 
 

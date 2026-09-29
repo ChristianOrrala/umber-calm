@@ -77,7 +77,7 @@ class OutputsTest(unittest.TestCase):
     def test_manifest_outside_roots_refused(self):
         with tempdir() as d:
             root = Path(d); tpl(root, "demo", "a.tmpl", "1\n")
-            (root / outputs.MANIFEST).write_text("demo\t../../victim\n", encoding="utf-8")
+            (root / outputs.MANIFEST).write_text("demo\t../../victim\n", encoding="utf-8", newline="")
             with self.assertRaisesRegex(outputs.BuildError, "refusing to delete"):
                 outputs.write(root, outputs.plan(root, P, [port()]))
             self.assertFalse((root / "ports/demo/a").exists())
