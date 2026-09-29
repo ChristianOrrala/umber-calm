@@ -10,27 +10,57 @@ A warm, low-glare dark palette with measured contrast.
 
 <br><br>
 
-<img src="docs/renders/normal.svg" width="760" alt="Sample TypeScript in Umber Calm: gold keywords, teal-slate functions, olive strings and mauve constants on a warm near-black background, with a selection, search matches, diff lines and diagnostics">
+<img src="docs/renders/session-claude.svg" width="760" alt="A calm Claude Code session in Umber Calm: a short conversation on a warm near-black background, a diff panel with one line removed and two added, and a statusline where only the active mode is amber">
 
 </div>
 
-<table>
-<tr>
-<td align="center"><img src="docs/renders/grayscale.svg" width="200" alt="The sample code in grayscale"><br><sub>Grayscale</sub></td>
-<td align="center"><img src="docs/renders/deuteranopia.svg" width="200" alt="The sample code as seen with deuteranopia"><br><sub>Deuteranopia</sub></td>
-<td align="center"><img src="docs/renders/protanopia.svg" width="200" alt="The sample code as seen with protanopia"><br><sub>Protanopia</sub></td>
-<td align="center"><img src="docs/renders/tritanopia.svg" width="200" alt="The sample code as seen with tritanopia"><br><sub>Tritanopia</sub></td>
-</tr>
-</table>
+## Why it exists
+
+I made Umber Calm for my own eyes. I spend long days in terminals and editors, mostly on OLED screens. Most dark themes I tried felt loud to me there: bright white text on pure black, saturated blues, accents all competing for attention. So I started tuning my own.
+
+On an OLED, pure black means the pixels switch off completely, so every bright letter sits on nothing at all. Umber Calm keeps the background a warm near-black and the text a warm off-white. The screen stays gently lit, and the contrast stays high without turning harsh.
+
+I also wanted it to be less distracting. Color only shows up where it tells me something: a keyword, an error, or the one warm amber that marks where I am. Nothing is there just to decorate.
+
+It began as a few colors in my dotfiles. I used them every day for months, on different machines and at different hours. Whenever something got in the way, I changed it. When I wasn't sure a color worked, I measured it instead of guessing.
+
+What's left is the palette I want to look at all day. I'm sharing it in case it feels that way to you too. If it doesn't, the right palette is simply the one that's comfortable for you.
+
+<hr>
+
+<div align="center">
+<details>
+<summary><b>See everything at once</b><br><sub>an editor, a terminal, every syntax role and state, and color-vision renders</sub></summary>
+
+<br>
+
+<img src="docs/renders/session-editor.svg" width="760" alt="An editor session: brew.py with line numbers, one amber cursor, a small saved notification and a statusline">
+
+<br><br>
+
+<img src="docs/renders/session-terminal.svg" width="760" alt="A terminal session: a prompt, a command and its output, a small timer notification and a status bar">
+
+<br><br>
+
+<img src="docs/renders/normal.svg" width="760" alt="Sample TypeScript in Umber Calm: gold keywords, teal-slate functions, olive strings and mauve constants on a warm near-black background, with a selection, search matches, diff lines and diagnostics">
+
+<br><br>
+
+<img src="docs/renders/color-vision.svg" width="760" alt="The same sample code four times: in grayscale, and as seen with deuteranopia, protanopia and tritanopia">
 
 <sub>The same code in grayscale and under three types of color-vision deficiency (Machado, Oliveira &amp; Fernandes, 2009). Details in [docs/color-vision.md](docs/color-vision.md).</sub>
+
+</details>
+</div>
+
+<hr>
 
 ## Why it looks like this
 
 - Warm near-black background (never pure black) and warm off-white text (never pure white).
-- Main text at 10:1; accents between 6:1 and 9:1; every measured pair is enforced in CI.
+- Main text at 10:1; accents between 6:1 and 9.3:1; every measured pair is enforced in CI.
 - Categories are separated by hue while lightness stays in a narrow band.
-- Red only means errors; amber only marks where you are.
+- Red only means errors and deletions; amber only marks where you are.
 
 ## Palette
 
@@ -227,8 +257,6 @@ A tier is supported only while its last real-app test covers the exact files you
 </details>
 
 ## Design
-
-I made Umber Calm for my own eyes. I spend long days in terminals and editors and wanted something that felt calmer to look at, so I tuned it over months of daily use. If it feels comfortable to you too, use it.
 
 The background is a warm near-black rather than pure black, and text is a warm off-white rather than pure white, chosen to avoid the harsh edges of maximum contrast. Accents sit in a narrow lightness band so no category shouts over the others. No study of this palette exists; the numbers above are measurements, not promises.
 

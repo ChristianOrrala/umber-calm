@@ -4,10 +4,14 @@ docs	docs/badges/license.svg
 docs	docs/badges/ports.svg
 docs	docs/badges/release.svg
 docs	docs/color-vision.md
+docs	docs/renders/color-vision.svg
 docs	docs/renders/deuteranopia.svg
 docs	docs/renders/grayscale.svg
 docs	docs/renders/normal.svg
 docs	docs/renders/protanopia.svg
+docs	docs/renders/session-claude.svg
+docs	docs/renders/session-editor.svg
+docs	docs/renders/session-terminal.svg
 docs	docs/renders/tritanopia.svg
 docs	docs/swatches/bg.svg
 docs	docs/swatches/bg_dim.svg

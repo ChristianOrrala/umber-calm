@@ -1,7 +1,7 @@
 import json, re, unittest
 import xml.etree.ElementTree as ET
 from tests.helpers import REPO, load_real_palette
-from umber import buildcmd, color, cvd, docsgen, outputs, registry, render_svg
+from umber import buildcmd, color, cvd, docsgen, outputs, registry, render_svg, sessions
 
 P = load_real_palette()
 FIXTURE = json.loads((REPO / docsgen.FIXTURE).read_text(encoding="utf-8"))
@@ -46,12 +46,71 @@ class RenderTest(unittest.TestCase):
         buildcmd.build(REPO)
         manifest = outputs.read_manifest(REPO)
         rels = ["docs/color-vision.md", *[f"docs/renders/{k}.svg" for k in docsgen.VARIANTS],
+                *[f"docs/renders/session-{n}.svg" for n in sessions.NAMES], "docs/renders/color-vision.svg",
                 *[f"docs/swatches/{name}.svg" for name in P.colors], *[f"docs/badges/{b}.svg" for b in docsgen.BADGES]]
         for rel in rels:
             self.assertEqual(manifest.get(rel), "docs", rel)
         self.assertEqual(buildcmd.build(REPO), [])
 
 SVG = "{http://www.w3.org/2000/svg}"
+
+class SessionsTest(unittest.TestCase):
+    """The README's calm sessions keep the palette's contracts: amber only where you are, red only a deletion."""
+    def setUp(self):
+        self.svgs = {name: ET.fromstring(sessions.render(name, P)) for name in sessions.NAMES}
+
+    def fills(self, root):
+        """Every painted color: fills and strokes, so a decorative outline cannot slip past the contracts."""
+        return [(el, el.get(attr)) for el in root.iter() for attr in ("fill", "stroke") if el.get(attr)]
+
+    def label(self, el):
+        return "".join(el.itertext()) if el.tag in (f"{SVG}text", f"{SVG}tspan") else el.tag.rsplit("}", 1)[1]
+
+    def test_every_color_is_a_palette_color(self):
+        allowed = set(P.colors.values()) | set(P.ansi.values())
+        for name, root in self.svgs.items():
+            for el, fill in self.fills(root):
+                self.assertIn(fill, allowed, f"{name}: {self.label(el)}")
+
+    def test_amber_marks_only_the_focused_elements(self):
+        focus = P.resolve("ui.focus")
+        expected = {"claude": ["rect", "rect"],                    # cursor, active mode chip
+                    "editor": ["rect", "rect", "rect"],            # active tab, cursor, mode segment
+                    "terminal": ["rect", "1:brew*"]}               # cursor, current window
+        for name, root in self.svgs.items():
+            found = sorted(self.label(el) for el, fill in self.fills(root) if fill == focus)
+            self.assertEqual(found, sorted(expected[name]), name)
+
+    def test_red_only_marks_the_deletion(self):
+        reds = {P.colors["red"], P.ansi["bright_red"]}
+        for name in ("editor", "terminal"):
+            self.assertFalse([f for _, f in self.fills(self.svgs[name]) if f in reds], name)
+        red_text = [self.label(el) for el, fill in self.fills(self.svgs["claude"]) if fill in reds]
+        self.assertEqual(sorted(red_text), sorted(["-1", "-1", "-1", " 5", " -"]))
+
+    def test_every_drawn_pair_is_readable(self):
+        """Measures the pairs each render actually draws (recorded while drawing), not a hand-kept list."""
+        for name in sessions.NAMES:
+            texts, marks = sessions.drawn_pairs(name, P)
+            self.assertTrue(texts, name)
+            for fg, bg in texts:
+                ratio = color.contrast(P.resolve(fg), P.resolve(bg))
+                self.assertGreaterEqual(ratio, sessions.minimum(fg, bg), f"{name}: {fg} on {bg} is {ratio:.2f}:1")
+            for fg, bg in marks:  # non-text marks that carry meaning (WCAG 1.4.11)
+                self.assertGreaterEqual(color.contrast(P.resolve(fg), P.resolve(bg)), 3.0, f"{name}: {fg} on {bg}")
+
+    def test_pair_minimums_follow_the_documented_exception(self):
+        self.assertEqual(sessions.minimum("ui.text", "ui.surface"), 4.5)
+        self.assertEqual(sessions.minimum("ui.text_secondary", "ui.bg"), 4.5)
+        self.assertEqual(sessions.minimum("ui.text_secondary", "ui.surface"), 4.0)
+
+    def test_sessions_are_deterministic_and_self_contained(self):
+        for name in sessions.NAMES:
+            text = sessions.render(name, P)
+            self.assertEqual(text, sessions.render(name, P), name)
+            for banned in ("href", "<style", "<script", "foreignObject", "@import", "url(http"):
+                self.assertNotIn(banned, text, name)
+
 GITHUB_PAGES = {"light": "#FFFFFF", "dark": "#0D1117"}  # the README's two possible page backgrounds
 
 class DocAssetsTest(unittest.TestCase):
@@ -97,14 +156,26 @@ class DocAssetsTest(unittest.TestCase):
                 self.assertIn(fill, (P.colors["surface"], P.colors["overlay"]), badge)
                 self.assertGreaterEqual(color.contrast(P.colors["text"], fill), 4.5, badge)
 
+    def test_color_vision_strip_matches_the_readme_width(self):
+        root = self.svg("docs/renders/color-vision.svg")
+        self.assertEqual(float(root.get("width")), docsgen.STRIP_WIDTH)
+        nested = root.findall(f"{SVG}svg")
+        self.assertEqual(len(nested), len(docsgen.STRIP))
+        right_edge = max(float(n.get("x")) + float(n.get("width")) for n in nested)
+        self.assertAlmostEqual(right_edge, docsgen.STRIP_WIDTH, delta=0.2)
+        labels = [t.text for t in root.findall(f"{SVG}text")]
+        self.assertEqual(labels, [k.capitalize() for k in docsgen.STRIP])
+        self.assertGreaterEqual(color.contrast(P.colors["text"], P.colors["bg"]), 4.5)
+
     def test_doc_assets_are_deterministic_and_self_contained(self):
         again = docsgen.plan(REPO, P, self.ports)
         for rel, (_, data) in self.docs.items():
             self.assertEqual(again[rel][1], data, rel)
             if rel.endswith(".svg"):
                 text = data.decode("utf-8")
-                for banned in ("href", "<style", "<script", "foreignObject", "@import", "url("):
+                for banned in ("href", "<style", "<script", "foreignObject", "@import", "url(http"):
                     self.assertNotIn(banned, text, rel)
+                self.assertEqual(set(re.findall(r"url\(([^)]*)\)", text)) - {"#card"}, set(), rel)  # local refs only
 
 if __name__ == "__main__":
     unittest.main()

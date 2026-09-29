@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760.0" height="196.0" viewBox="0 0 760.0 196.0" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">
+<clipPath id="card"><rect width="760.0" height="196.0" rx="12"/></clipPath>
+<g clip-path="url(#card)">
+<rect x="0.0" y="0.0" width="760.0" height="196.0" fill="#201F1D"/>
+<text y="38.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6" font-weight="600">~/tea</tspan><tspan x="58.0" fill="#938A7B"> on </tspan><tspan x="91.6" fill="#C9A0C0">main</tspan></text>
+<text y="58.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan><tspan x="32.8" fill="#D6C9B6">python brew.py</tspan></text>
+<text y="78.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6">2 cups of genmaicha, ready</tspan></text>
+<text y="118.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6" font-weight="600">~/tea</tspan><tspan x="58.0" fill="#938A7B"> on </tspan><tspan x="91.6" fill="#C9A0C0">main</tspan><tspan x="125.2" fill="#938A7B"> took 4m0s</tspan></text>
+<text y="138.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan></text>
+<rect x="32.8" y="126.0" width="8.4" height="16.0" fill="#EDA97C"/>
+<rect x="532.0" y="14.0" width="214.0" height="30.0" rx="7" stroke="#3C3A36" fill="#2A2826"/>
+<circle cx="547.0" cy="29.0" r="3.5" fill="#88B0B4"/>
+<text y="34.0" font-size="12.5" xml:space="preserve"><tspan x="559.0" fill="#D6C9B6">Timer done: 4 min</tspan></text>
+<text y="34.0" font-size="12" xml:space="preserve"><tspan x="712.4" fill="#938A7B">now</tspan></text>
+<rect x="0.0" y="170.0" width="760.0" height="26.0" fill="#2A2826"/>
+<text y="188.0" font-size="13" xml:space="preserve"><tspan x="12.0" fill="#D6C9B6">[tea] </tspan><tspan x="58.8" fill="#D6C9B6"> </tspan><tspan x="66.6" fill="#EDA97C" font-weight="600">1:brew*</tspan><tspan x="121.2" fill="#D6C9B6">  </tspan><tspan x="136.8" fill="#938A7B">2:notes</tspan></text>
+<text y="188.0" font-size="13" xml:space="preserve"><tspan x="709.0" fill="#938A7B">16:20</tspan></text>
+</g>
+</svg>

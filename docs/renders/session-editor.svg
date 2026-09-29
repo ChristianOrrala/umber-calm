@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760.0" height="312.0" viewBox="0 0 760.0 312.0" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">
+<clipPath id="card"><rect width="760.0" height="312.0" rx="12"/></clipPath>
+<g clip-path="url(#card)">
+<rect x="0.0" y="0.0" width="760.0" height="312.0" fill="#201F1D"/>
+<rect x="0.0" y="0.0" width="760.0" height="34.0" fill="#1A1917"/>
+<rect x="0.0" y="0.0" width="132.0" height="34.0" fill="#201F1D"/>
+<rect x="0.0" y="0.0" width="132.0" height="2.0" fill="#EDA97C"/>
+<text y="22.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6">brew.py</tspan></text>
+<text y="22.0" xml:space="preserve"><tspan x="148.0" fill="#938A7B">notes.md</tspan></text>
+<rect x="0.0" y="248.0" width="760.0" height="20.0" fill="#2A2826"/>
+<text y="62.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">1</tspan></text>
+<text y="62.0" xml:space="preserve"><tspan x="49.6" fill="#938A7B"># A slow afternoon: steep, wait, pour.</tspan></text>
+<text y="82.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">2</tspan></text>
+<text y="82.0" xml:space="preserve"><tspan x="49.6" fill="#DCC07D">from</tspan><tspan x="83.2" fill="#D6C9B6"> </tspan><tspan x="91.6" fill="#88C0AE">time</tspan><tspan x="125.2" fill="#D6C9B6"> </tspan><tspan x="133.6" fill="#DCC07D">import</tspan><tspan x="184.0" fill="#D6C9B6"> </tspan><tspan x="192.4" fill="#88B0B4">sleep</tspan></text>
+<text y="102.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">3</tspan></text>
+<text y="122.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">4</tspan></text>
+<text y="122.0" xml:space="preserve"><tspan x="49.6" fill="#C9A0C0">STEEP_MINUTES</tspan><tspan x="158.8" fill="#D6C9B6"> </tspan><tspan x="167.2" fill="#C2A98C">=</tspan><tspan x="175.6" fill="#D6C9B6"> </tspan><tspan x="184.0" fill="#C9A0C0">4</tspan></text>
+<text y="142.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">5</tspan></text>
+<text y="162.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">6</tspan></text>
+<text y="162.0" xml:space="preserve"><tspan x="49.6" fill="#DCC07D">def</tspan><tspan x="74.8" fill="#D6C9B6"> </tspan><tspan x="83.2" fill="#88B0B4">brew</tspan><tspan x="116.8" fill="#C2A98C">(</tspan><tspan x="125.2" fill="#D6C9B6">tea</tspan><tspan x="150.4" fill="#C2A98C">:</tspan><tspan x="158.8" fill="#D6C9B6"> </tspan><tspan x="167.2" fill="#88C0AE">str</tspan><tspan x="192.4" fill="#C2A98C">,</tspan><tspan x="200.8" fill="#D6C9B6"> </tspan><tspan x="209.2" fill="#D6C9B6">cups</tspan><tspan x="242.8" fill="#C2A98C">:</tspan><tspan x="251.2" fill="#D6C9B6"> </tspan><tspan x="259.6" fill="#88C0AE">int</tspan><tspan x="284.8" fill="#D6C9B6"> </tspan><tspan x="293.2" fill="#C2A98C">=</tspan><tspan x="301.6" fill="#D6C9B6"> </tspan><tspan x="310.0" fill="#C9A0C0">1</tspan><tspan x="318.4" fill="#C2A98C">)</tspan><tspan x="326.8" fill="#D6C9B6"> </tspan><tspan x="335.2" fill="#C2A98C">-&gt;</tspan><tspan x="352.0" fill="#D6C9B6"> </tspan><tspan x="360.4" fill="#88C0AE">str</tspan><tspan x="385.6" fill="#C2A98C">:</tspan></text>
+<text y="182.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">7</tspan></text>
+<text y="182.0" xml:space="preserve"><tspan x="49.6" fill="#D6C9B6">    </tspan><tspan x="83.2" fill="#A7B56E">"""Steep the leaves, then pour."""</tspan></text>
+<text y="202.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">8</tspan></text>
+<text y="202.0" xml:space="preserve"><tspan x="49.6" fill="#D6C9B6">    </tspan><tspan x="83.2" fill="#88B0B4">sleep</tspan><tspan x="125.2" fill="#C2A98C">(</tspan><tspan x="133.6" fill="#C9A0C0">STEEP_MINUTES</tspan><tspan x="242.8" fill="#D6C9B6"> </tspan><tspan x="251.2" fill="#C2A98C">*</tspan><tspan x="259.6" fill="#D6C9B6"> </tspan><tspan x="268.0" fill="#C9A0C0">60</tspan><tspan x="284.8" fill="#C2A98C">)</tspan></text>
+<text y="222.0" xml:space="preserve"><tspan x="29.2" fill="#938A7B">9</tspan></text>
+<text y="222.0" xml:space="preserve"><tspan x="49.6" fill="#D6C9B6">    </tspan><tspan x="83.2" fill="#DCC07D">return</tspan><tspan x="133.6" fill="#D6C9B6"> </tspan><tspan x="142.0" fill="#A7B56E">f"</tspan><tspan x="158.8" fill="#C9A0C0">{</tspan><tspan x="167.2" fill="#D6C9B6">cups</tspan><tspan x="200.8" fill="#C9A0C0">}</tspan><tspan x="209.2" fill="#A7B56E"> cups of </tspan><tspan x="284.8" fill="#C9A0C0">{</tspan><tspan x="293.2" fill="#D6C9B6">tea</tspan><tspan x="318.4" fill="#C9A0C0">}</tspan><tspan x="326.8" fill="#A7B56E">, ready"</tspan></text>
+<text y="242.0" xml:space="preserve"><tspan x="20.8" fill="#938A7B">10</tspan></text>
+<text y="262.0" xml:space="preserve"><tspan x="20.8" fill="#D6C9B6">11</tspan></text>
+<text y="262.0" xml:space="preserve"><tspan x="49.6" fill="#C9A0C0">print</tspan><tspan x="91.6" fill="#C2A98C">(</tspan><tspan x="100.0" fill="#88B0B4">brew</tspan><tspan x="133.6" fill="#C2A98C">(</tspan><tspan x="142.0" fill="#A7B56E">"genmaicha"</tspan><tspan x="234.4" fill="#C2A98C">,</tspan><tspan x="242.8" fill="#D6C9B6"> </tspan><tspan x="251.2" fill="#D6C9B6">cups</tspan><tspan x="284.8" fill="#C2A98C">=</tspan><tspan x="293.2" fill="#C9A0C0">2</tspan><tspan x="301.6" fill="#C2A98C">))</tspan></text>
+<rect x="318.4" y="250.0" width="8.4" height="16.0" fill="#EDA97C"/>
+<rect x="550.0" y="46.0" width="196.0" height="30.0" rx="7" stroke="#3C3A36" fill="#2A2826"/>
+<circle cx="565.0" cy="61.0" r="3.5" fill="#88B0B4"/>
+<text y="66.0" font-size="12.5" xml:space="preserve"><tspan x="577.0" fill="#D6C9B6">Saved brew.py</tspan></text>
+<text y="66.0" font-size="12" xml:space="preserve"><tspan x="712.4" fill="#938A7B">now</tspan></text>
+<rect x="0.0" y="286.0" width="760.0" height="26.0" fill="#2A2826"/>
+<rect x="0.0" y="286.0" width="66.8" height="26.0" fill="#EDA97C"/>
+<text y="304.0" font-size="13" xml:space="preserve"><tspan x="10.0" fill="#201F1D" font-weight="600">NORMAL</tspan></text>
+<text y="304.0" font-size="13" xml:space="preserve"><tspan x="80.8" fill="#938A7B">main</tspan><tspan x="112.0" fill="#D6C9B6">   brew.py</tspan></text>
+<text y="304.0" font-size="13" xml:space="preserve"><tspan x="574.4" fill="#938A7B">python   utf-8   11:34</tspan></text>
+</g>
+</svg>

@@ -217,6 +217,16 @@ class ReadmeTest(unittest.TestCase):
         for contract, roles in palette.REQUIRED_ROLES.items():
             for role in roles:
                 self.assertIn((contract, role), readme.ROLE_LABELS, f"{contract}.{role}")
+        for contract, roles in P.roles.items():  # optional roles the palette file adds count too
+            for role in roles:
+                self.assertIn((contract, role), readme.ROLE_LABELS, f"{contract}.{role}")
+
+    def test_an_unlabeled_role_fails_with_a_clear_error(self):
+        import dataclasses
+        roles = {**P.roles, "ui": {**P.roles["ui"], "tab_active": "orange"}}
+        extra = dataclasses.replace(P, roles=roles)
+        with self.assertRaisesRegex(readme.ReadmeError, r"\[roles\.ui\] tab_active has no README label"):
+            readme.palette_table(extra)
 
 if __name__ == "__main__":
     unittest.main()

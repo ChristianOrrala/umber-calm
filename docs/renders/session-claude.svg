@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760.0" height="552.0" viewBox="0 0 760.0 552.0" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<clipPath id="card"><rect width="760.0" height="552.0" rx="12"/></clipPath>
+<g clip-path="url(#card)">
+<rect x="0.0" y="0.0" width="760.0" height="552.0" fill="#201F1D"/>
+<rect x="360.0" y="0.0" width="400.0" height="444.0" fill="#2A2826"/>
+<text y="32.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan><tspan x="31.6" fill="#D6C9B6">read the steep time from settings</tspan></text>
+<text y="64.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6">● I'll read it from the settings file</tspan></text>
+<text y="82.0" xml:space="preserve"><tspan x="31.6" fill="#D6C9B6">and keep 4 minutes as the default.</tspan></text>
+<text y="114.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">● </tspan><tspan x="31.6" fill="#D6C9B6" font-weight="600">Update</tspan><tspan x="78.4" fill="#938A7B">(</tspan><tspan x="86.2" fill="#88B0B4">brew.py</tspan><tspan x="140.8" fill="#938A7B">)</tspan></text>
+<text y="132.0" xml:space="preserve"><tspan x="31.6" fill="#938A7B">⎿ Added 2 lines, removed 1 line</tspan></text>
+<rect x="16.0" y="460.0" width="728.0" height="1.0" fill="#3C3A36"/>
+<text y="486.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯</tspan></text>
+<rect x="31.6" y="472.0" width="7.8" height="18.0" fill="#EDA97C"/>
+<rect x="16.0" y="500.0" width="728.0" height="1.0" fill="#3C3A36"/>
+<rect x="16.0" y="516.0" width="106.0" height="20.0" rx="5" fill="#EDA97C"/>
+<text y="530.5" font-size="12.5" xml:space="preserve"><tspan x="24.0" fill="#201F1D" font-weight="600">accept edits</tspan></text>
+<text y="530.5" font-size="12.5" xml:space="preserve"><tspan x="136.0" fill="#C9A0C0">main</tspan><tspan x="166.0" fill="#938A7B">  ·  </tspan><tspan x="203.5" fill="#D6C9B6">brew.py</tspan><tspan x="256.0" fill="#938A7B">  ·  </tspan><tspan x="293.5" fill="#B9C684">+2</tspan><tspan x="308.5" fill="#938A7B"> </tspan><tspan x="316.0" fill="#EC9A8C">-1</tspan></text>
+<text y="530.5" font-size="12.5" xml:space="preserve"><tspan x="706.5" fill="#938A7B">16:20</tspan></text>
+<text y="30.0" xml:space="preserve"><tspan x="378.0" fill="#D6C9B6" font-weight="600">1 file changed</tspan><tspan x="487.2" fill="#D6C9B6"> </tspan><tspan x="495.0" fill="#B9C684">+2</tspan><tspan x="510.6" fill="#D6C9B6"> </tspan><tspan x="518.4" fill="#EC9A8C">-1</tspan></text>
+<text y="56.0" xml:space="preserve"><tspan x="378.0" fill="#D6C9B6">brew.py</tspan></text>
+<text y="56.0" xml:space="preserve"><tspan x="703.0" fill="#B9C684">+2</tspan><tspan x="718.6" fill="#D6C9B6"> </tspan><tspan x="726.4" fill="#EC9A8C">-1</tspan></text>
+<rect x="378.0" y="68.0" width="364.0" height="1.0" fill="#3C3A36"/>
+<text y="90.0" xml:space="preserve"><tspan x="378.0" fill="#D6C9B6" font-weight="600">brew.py</tspan></text>
+<rect x="378.0" y="100.0" width="364.0" height="1.0" fill="#3C3A36"/>
+<text y="122.0" xml:space="preserve"><tspan x="378.0" fill="#938A7B"> 2</tspan><tspan x="393.6" fill="#938A7B">  </tspan></text>
+<text y="122.0" xml:space="preserve"><tspan x="417.0" fill="#DCC07D">from</tspan><tspan x="448.2" fill="#D6C9B6"> </tspan><tspan x="456.0" fill="#88C0AE">time</tspan><tspan x="487.2" fill="#D6C9B6"> </tspan><tspan x="495.0" fill="#DCC07D">import</tspan><tspan x="541.8" fill="#D6C9B6"> </tspan><tspan x="549.6" fill="#88B0B4">sleep</tspan></text>
+<text y="142.0" xml:space="preserve"><tspan x="378.0" fill="#B9C684"> 3</tspan><tspan x="393.6" fill="#B9C684"> +</tspan></text>
+<text y="142.0" xml:space="preserve"><tspan x="417.0" fill="#DCC07D">from</tspan><tspan x="448.2" fill="#D6C9B6"> </tspan><tspan x="456.0" fill="#88C0AE">settings</tspan><tspan x="518.4" fill="#D6C9B6"> </tspan><tspan x="526.2" fill="#DCC07D">import</tspan><tspan x="573.0" fill="#D6C9B6"> </tspan><tspan x="580.8" fill="#88B0B4">get</tspan></text>
+<text y="162.0" xml:space="preserve"><tspan x="378.0" fill="#938A7B"> 4</tspan><tspan x="393.6" fill="#938A7B">  </tspan></text>
+<text y="182.0" xml:space="preserve"><tspan x="378.0" fill="#EC9A8C"> 5</tspan><tspan x="393.6" fill="#EC9A8C"> -</tspan></text>
+<text y="182.0" xml:space="preserve"><tspan x="417.0" fill="#938A7B">STEEP_MINUTES = 4</tspan></text>
+<text y="202.0" xml:space="preserve"><tspan x="378.0" fill="#B9C684"> 5</tspan><tspan x="393.6" fill="#B9C684"> +</tspan></text>
+<text y="202.0" xml:space="preserve"><tspan x="417.0" fill="#C9A0C0">STEEP_MINUTES</tspan><tspan x="518.4" fill="#D6C9B6"> </tspan><tspan x="526.2" fill="#C2A98C">=</tspan><tspan x="534.0" fill="#D6C9B6"> </tspan><tspan x="541.8" fill="#88B0B4">get</tspan><tspan x="565.2" fill="#C2A98C">(</tspan><tspan x="573.0" fill="#A7B56E">"steep"</tspan><tspan x="627.6" fill="#C2A98C">,</tspan><tspan x="635.4" fill="#D6C9B6"> </tspan><tspan x="643.2" fill="#C9A0C0">4</tspan><tspan x="651.0" fill="#C2A98C">)</tspan></text>
+</g>
+</svg>

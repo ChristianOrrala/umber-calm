@@ -52,6 +52,9 @@ def used_for(pal: Palette, name: str) -> str:
     labels: list[str] = []
     for contract in CONTRACTS:
         for role, target in pal.roles[contract].items():
+            if (contract, role) not in ROLE_LABELS:
+                raise ReadmeError(f"[roles.{contract}] {role} has no README label: add it to readme.ROLE_LABELS "
+                                  f"(or map it to None to leave it out of the palette table)")
             label = ROLE_LABELS[(contract, role)]
             if target == name and label and label not in labels:
                 labels.append(label)
