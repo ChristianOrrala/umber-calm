@@ -77,6 +77,37 @@ class LaunchTerminalPorts(unittest.TestCase):
                          "focus marks where the user is, never decoration")
         self.assertEqual(port("zellij").target_version, "0.45.1")
 
+    def test_herdr(self):
+        """herdr 0.9.1: every [theme.custom] token set; orange only on accent; the text ladder measured on its rows."""
+        data = tomllib.loads(out("ports/herdr/umber-calm.toml"))
+        self.assertEqual(set(data), {"theme"})
+        self.assertEqual(data["theme"]["name"], "terminal")
+        custom = data["theme"]["custom"]
+        known = pf.keys_in((REPO / "tests/fixtures/herdr-0.9.1-theme-keys.txt").read_text(encoding="utf-8"))
+        self.assertEqual(set(custom), known)
+        for value in custom.values():
+            self.assertRegex(value, f"^{HEX}$")
+        focus = P.resolve("ui.focus")
+        self.assertEqual({k for k, v in custom.items() if v == focus}, {"accent"},
+                         "focus marks where the user is, never decoration (peach is not focus)")
+        self.assertEqual({k for k, v in custom.items() if v == P.resolve("diag.error")}, {"red"})
+        rows = ("panel_bg", "sidebar_bg", "active_row_bg")
+        for bg in rows + ("selection_bg",):
+            self.assertGreaterEqual(color.contrast(custom["text"], custom[bg]), 4.5, f"text on {bg}")
+        for fg in ("subtext0", "mauve", "green"):  # labels, the branch name and the ahead count are text on every row
+            for bg in rows:
+                self.assertGreaterEqual(color.contrast(custom[fg], custom[bg]), 4.5, f"{fg} on {bg}")
+        for fg in ("yellow", "red", "blue", "teal"):  # agent-state marks: text on panels, marks (3:1) on the active row
+            for bg in rows[:2]:
+                self.assertGreaterEqual(color.contrast(custom[fg], custom[bg]), 4.5, f"{fg} on {bg}")
+            self.assertGreaterEqual(color.contrast(custom[fg], custom["active_row_bg"]), 3.0, f"{fg} mark on active_row_bg")
+        for fg in ("overlay0", "overlay1"):
+            for bg in ("panel_bg", "sidebar_bg"):
+                self.assertGreaterEqual(color.contrast(custom[fg], custom[bg]), 4.0, f"{fg} on {bg} (E1)")
+            self.assertGreaterEqual(color.contrast(custom[fg], custom["surface0"]), 3.0, f"{fg} on surface0 (dim tier)")
+        self.assertNotEqual(custom["active_row_bg"], custom["selection_bg"], "navigate cursor distinct from the active row")
+        self.assertEqual(port("herdr").target_version, "0.9.1")
+
     def test_starship(self):
         data = tomllib.loads(out("ports/starship/umber-calm.toml"))
         pal = data["palettes"]["umber_calm"]

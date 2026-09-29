@@ -54,6 +54,20 @@ uninstall = "Remove the theme line and the file."
 checklist = ["status bar and tab bar: active tab and current mode are orange (focus), inactive ones neutral", "focused pane frame is orange; other pane frames are muted", "focused frame stays orange in other modes (resize, scroll, locked)", "session manager and plugin lists/tables readable", "search highlights"]
 
 [[port]]
+id = "herdr"
+name = "herdr"
+category = "multiplexer"
+phase = 2
+output_root = "ports/herdr"
+docs = "https://herdr.dev/docs/configuration/"
+format_confirmed = true
+target_version = "0.9.1"
+install = "herdr has no includes: paste the contents of umber-calm.toml into ~/.config/herdr/config.toml, replacing any [theme] and [theme.custom] tables, then run `herdr server reload-config`."
+uninstall = "Remove the pasted [theme] and [theme.custom] tables and reload the config."
+risk = "herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations."
+checklist = ["panes on bg, sidebar a step lighter", "focused pane border and active popup are orange (focus); nothing else is", "active space and agent row readable, navigate cursor row distinct from it", "agent states: working yellow, done green, blocked red, unseen blue or cyan", "secondary labels (workspace numbers, headers, inactive tabs) readable", "worktree and settings overlays readable"]
+
+[[port]]
 id = "starship"
 name = "Starship"
 category = "shell"

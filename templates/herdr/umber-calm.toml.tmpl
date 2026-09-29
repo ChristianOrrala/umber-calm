@@ -1,0 +1,31 @@
+# Umber Calm {{ meta.palette_version }} — generated from {{ meta.template }}. Do not edit. MIT License.
+# herdr 0.9.1 theme: every [theme.custom] token is set, so the base theme never shows through.
+# herdr has no includes: paste this block into ~/.config/herdr/config.toml in place of your [theme] tables.
+[theme]
+name = "terminal"
+
+[theme.custom]
+# Surfaces: panes on bg, the sidebar a step up, the active row and navigate cursor two and three steps up.
+panel_bg      = "{{ ui.bg }}"
+sidebar_bg    = "{{ ui.surface }}"
+surface_dim   = "{{ ui.surface }}"
+surface0      = "{{ ui.selection_bg }}"
+surface1      = "{{ ui.border }}"
+active_row_bg = "{{ ui.selection_bg }}"
+selection_bg  = "{{ ui.border }}"
+# Text, brightest to dimmest (herdr paints subtext0 and overlay0/1 as text).
+text          = "{{ ui.text }}"
+subtext0      = "{{ subtle }}"
+overlay1      = "{{ ui.text_secondary }}"
+overlay0      = "{{ ui.text_secondary }}"
+# Focus: focused pane border, active popup and selected item (docs/style-guide.md).
+accent        = "{{ ui.focus }}"
+# Agent states: working yellow, done green, blocked or needs attention red, unseen blue and cyan.
+mauve         = "{{ ansi.magenta }}"
+green         = "{{ diag.ok }}"
+yellow        = "{{ diag.warning }}"
+red           = "{{ diag.error }}"
+blue          = "{{ diag.info }}"
+teal          = "{{ diag.hint }}"
+# Interrupted / warning states (unused by herdr 0.9.1); never orange, which only marks focus.
+peach         = "{{ diag.warning }}"

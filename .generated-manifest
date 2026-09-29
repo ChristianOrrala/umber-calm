@@ -74,6 +74,8 @@ readme:gtk	ports/gtk/README.md
 gtk	ports/gtk/gtk.css
 readme:helix	ports/helix/README.md
 helix	ports/helix/umber-calm.toml
+readme:herdr	ports/herdr/README.md
+herdr	ports/herdr/umber-calm.toml
 readme:i3	ports/i3/README.md
 i3	ports/i3/umber-calm.i3
 readme:iterm2	ports/iterm2/README.md

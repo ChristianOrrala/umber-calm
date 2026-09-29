@@ -219,6 +219,20 @@ def _yazi(root: Path, text: str) -> list[str]:
     return [f"unknown yazi 25.5.28 theme key {k!r}" for k in sorted(ours - known)]
 
 
+def _herdr(root: Path, text: str) -> list[str]:
+    """herdr 0.9.1 (src/config/theme.rs, CustomThemeColors): [theme] plus every [theme.custom] token, in hex."""
+    known = _fixture(root, "herdr-0.9.1-theme-keys.txt")
+    data = tomllib.loads(text)
+    theme = data.get("theme", {})
+    custom = theme.get("custom", {})
+    problems = [f"unexpected top-level table {k!r} (the port only sets [theme])" for k in sorted(set(data) - {"theme"})]
+    problems += [f"unknown herdr 0.9.1 theme token {k!r}" for k in sorted(set(custom) - known)]
+    problems += [f"herdr theme token {k!r} is not set (the base theme would show through)" for k in sorted(known - set(custom))]
+    problems += [f"theme.custom.{k} = {v!r} is not #RRGGBB" for k, v in sorted(custom.items())
+                 if not (isinstance(v, str) and re.fullmatch(HEX, v))]
+    return problems
+
+
 def _jetbrains(root: Path, text: str) -> list[str]:
     attributes = ET.fromstring(text).find("attributes")
     mapped = {o.get("name") for o in ([] if attributes is None else attributes)}
@@ -327,6 +341,7 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/base24/*.yaml", (_base24,)),
     ("ports/zed/themes/*.json", (_zed,)),
     ("ports/yazi/umber-calm.yazi/flavor.toml", (_yazi,)),
+    ("ports/herdr/umber-calm.toml", (_herdr,)),
     ("ports/jetbrains/UmberCalm.xml", (_jetbrains,)),
     ("ports/firefox/manifest.json", (_firefox,)),
     ("ports/vscode/themes/*.json", (_vscode_theme,)),

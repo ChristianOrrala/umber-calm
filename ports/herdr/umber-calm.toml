@@ -1,0 +1,31 @@
+# Umber Calm 0.1.0 — generated from templates/herdr/umber-calm.toml.tmpl. Do not edit. MIT License.
+# herdr 0.9.1 theme: every [theme.custom] token is set, so the base theme never shows through.
+# herdr has no includes: paste this block into ~/.config/herdr/config.toml in place of your [theme] tables.
+[theme]
+name = "terminal"
+
+[theme.custom]
+# Surfaces: panes on bg, the sidebar a step up, the active row and navigate cursor two and three steps up.
+panel_bg      = "#201F1D"
+sidebar_bg    = "#2A2826"
+surface_dim   = "#2A2826"
+surface0      = "#3C3A36"
+surface1      = "#5A554E"
+active_row_bg = "#3C3A36"
+selection_bg  = "#5A554E"
+# Text, brightest to dimmest (herdr paints subtext0 and overlay0/1 as text).
+text          = "#D6C9B6"
+subtext0      = "#C2A98C"
+overlay1      = "#938A7B"
+overlay0      = "#938A7B"
+# Focus: focused pane border, active popup and selected item (docs/style-guide.md).
+accent        = "#EDA97C"
+# Agent states: working yellow, done green, blocked or needs attention red, unseen blue and cyan.
+mauve         = "#C9A0C0"
+green         = "#A7B56E"
+yellow        = "#DCC07D"
+red           = "#E08374"
+blue          = "#88B0B4"
+teal          = "#88C0AE"
+# Interrupted / warning states (unused by herdr 0.9.1); never orange, which only marks focus.
+peach         = "#DCC07D"
