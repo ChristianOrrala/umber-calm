@@ -1,5 +1,7 @@
 # Contributing
 
+I maintain Umber Calm in my spare time. Verified ports come first, and a verification report from a real app is the most helpful thing you can send. Requests are welcome, but there's no promise of a timeline.
+
 ## Build and check
 
     python3 tools/build.py        # render every port and refresh README sections

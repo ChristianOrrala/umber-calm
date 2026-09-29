@@ -264,7 +264,9 @@ More in [docs/design.md](docs/design.md), including renderings of the same code 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Verification reports from real apps are the most useful contribution.
+I maintain Umber Calm in my spare time. Verified ports come first, and a verification report from a real app is the most helpful thing you can send. Requests are welcome, but there's no promise of a timeline.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to build, check and verify a port.
 
 ## License
 
