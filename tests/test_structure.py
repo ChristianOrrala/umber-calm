@@ -5,7 +5,7 @@ from tests.helpers import REPO, tempdir
 from umber import checks, outputs, structure
 
 BAD = {
-    "ports/tmux/umber-calm.tmux": 'set -g status-style "fg=#D6C9B6"\nset-option -g bogus 1\n',
+    "ports/tmux/umber-calm.tmux": 'set -g status-style "fg=#d6c9b6"\nset-option -g bogus 1\n',
     "ports/zellij/umber-calm.kdl": 'themes {\n    umber-calm {\n        fg "#D6C9B6"\n    }\n',
     "ports/foot/umber-calm.ini": "[colors-dark]\nregular0=201F1D\nregular0=201F1D\n",
     "ports/konsole/Umber Calm.colorscheme": "[General]\nName=x\n",

@@ -42,13 +42,21 @@ class LaunchTerminalPorts(unittest.TestCase):
 
     def test_tmux(self):
         text = out("ports/tmux/umber-calm.tmux")
-        self.assertIn(f'set -g pane-active-border-style "fg={P.colors["orange"]}"', text)
-        self.assertIn(f'set -g pane-border-style "fg={P.colors["inactive"]}"', text)
-        self.assertIn(f'set -g clock-mode-colour "{P.colors["text"]}"', text)
-        self.assertNotIn(f'set -g clock-mode-colour "{P.colors["orange"]}"', text)
-        style = rf'(fg|bg)={HEX}(,(fg|bg)={HEX})?(,bold)?'
+        c = {k: v.lower() for k, v in P.colors.items() if isinstance(v, str)}
+        self.assertIn(f'set -g pane-active-border-style "fg={c["orange"]}"', text)
+        self.assertIn(f'set -g pane-border-style "fg={c["inactive"]}"', text)
+        self.assertIn(f'set -g clock-mode-colour "{c["text"]}"', text)
+        self.assertNotIn(f'set -g clock-mode-colour "{c["orange"]}"', text)
+        hex_lower = r"#[0-9a-f]{6}"
+        style = rf'(fg|bg)={hex_lower}(,(fg|bg)={hex_lower})?(,bold)?'
         for n, line in lines("ports/tmux/umber-calm.tmux", "#"):
-            self.assertRegex(line, rf'^set -g [a-z-]+ "({style}|{HEX})"$', f"line {n}")
+            self.assertRegex(line, rf'^set -g [a-z-]+ "({style}|{hex_lower})"$', f"line {n}")
+
+    def test_tmux_hex_survives_format_expansion(self):
+        """tmux expands styles as formats (#{E:mode-style} for the copy-mode selection, message and status formats),
+        where #D is the pane id and #F the window flags: fg=#D6C9B6 becomes fg=%46C9B6. Lowercase hex is left alone."""
+        body = "".join(line for _, line in lines("ports/tmux/umber-calm.tmux", "#"))
+        self.assertNotRegex(body, r"#[0-9A-Fa-f]*[A-F]")
 
     def test_zellij(self):
         """Zellij 0.45.1 component theme: the focused pane frame is ui.focus (spec §5.2), set explicitly."""
@@ -119,9 +127,14 @@ class VSCodePort(unittest.TestCase):
         self.assertEqual(pkg["engines"]["vscode"], "^" + port("vscode").min_version)
 
     def test_current_match_is_solid_with_bg_text(self):
+        """VS Code (checked in 1.139) paints the current match's text with editor.findMatchHighlightForeground and
+        the other matches' text with editor.findMatchForeground, the reverse of what the names suggest."""
         self.assertEqual(self.c["editor.findMatchBackground"], P.resolve("diag.search"))
-        self.assertEqual(self.c["editor.findMatchForeground"], P.colors["bg"])
+        self.assertEqual(self.c["editor.findMatchHighlightForeground"], P.colors["bg"])
         self.assertGreaterEqual(color.contrast(P.colors["bg"], P.resolve("diag.search")), 4.5)
+        other = composite(self.c["editor.findMatchHighlightBackground"], P.colors["bg"])
+        self.assertEqual(self.c["editor.findMatchForeground"], P.colors["text"])
+        self.assertGreaterEqual(color.contrast(P.colors["text"], other), 4.5)
 
     def test_text_backgrounds_are_measured(self):
         bg = self.c["editor.background"]

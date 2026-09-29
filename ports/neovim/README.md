@@ -1,10 +1,10 @@
 # Neovim — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 0.10 · Format documentation: https://neovim.io/doc/user/syntax.html#highlight-groups
 
-Verified on: —
+Verified on: 0.12.5 · macOS 26.6.2 (2026-09-28)
 
 ## Install
 
@@ -41,6 +41,8 @@ Print it yourself with `python3 tools/build.py digest neovim`. It covers these f
 - `lua/umber-calm/palette.lua`
 - `lua/umber-calm/palette_resolve.lua`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-28 | ✅ verified | 0.12.5 | macOS | 26.6.2 | Full checklist in WezTerm with lazy.nvim: treesitter (Lua, C), diagnostics, telescope, gitsigns, which-key, blink.cmp, ibl, lualine, :terminal, :help. |  | `8b91eb053607` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

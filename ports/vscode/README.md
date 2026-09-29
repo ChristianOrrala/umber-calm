@@ -1,10 +1,10 @@
 # VS Code — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 1.95 · Minimum version: 1.95.0 · Format documentation: https://code.visualstudio.com/api/extension-guides/color-theme
 
-Verified on: —
+Verified on: 1.139.1 · macOS 26.6.2 (2026-09-28)
 
 ## Install
 
@@ -27,13 +27,15 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:8e20fa1f8675f7ea0eaa823cc5ee6b41ee90db8f0c0609c86f6f53aa5d79bf08`
+Current digest: `sha256:0246d948acbe7732ed2d872e1c2e086ab8682cd0f298886d51bd2ef013ebc1ee`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 
 - `ports/vscode/package.json`
 - `ports/vscode/themes/umber-calm-color-theme.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-28 | ✅ verified | 1.139.1 | macOS | 26.6.2 | Full checklist after the find-foreground fix. Active tab top border shows with workbench.experimental.modernUI off; 1.139's default modern tabs hide it for every theme. |  | `0246d948acbe` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

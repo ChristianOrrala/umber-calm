@@ -1,10 +1,10 @@
 # Claude Code — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
-Target version: 2.1.282 · Format documentation: https://code.claude.com/docs/en/terminal-config
+Target version: 2.1.284 · Format documentation: https://code.claude.com/docs/en/terminal-config
 
-Verified on: —
+Verified on: 2.1.284 · macOS 26.6.2 (2026-09-28)
 
 ## Install
 
@@ -29,6 +29,8 @@ Print it yourself with `python3 tools/build.py digest claude-code`. It covers th
 
 - `ports/claude-code/umber-calm.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-28 | ✅ verified | 2.1.284 | macOS | 26.6.2 | Owner screenshots: user messages #201F1D, diff panel #2A2826 with no row bands, +/- counts #B9C684/#EC9A8C. |  | `69ea78169c34` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

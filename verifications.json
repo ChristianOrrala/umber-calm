@@ -1,0 +1,86 @@
+{
+  "claude-code": [
+    {
+      "app_version": "2.1.284",
+      "date": "2026-09-28",
+      "digest": "sha256:69ea78169c346b9c0ea58b79358954cd50001cf6464026348d39193ad9e31263",
+      "evidence": "",
+      "note": "Owner screenshots: user messages #201F1D, diff panel #2A2826 with no row bands, +/- counts #B9C684/#EC9A8C.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "neovim": [
+    {
+      "app_version": "0.12.5",
+      "date": "2026-09-28",
+      "digest": "sha256:8b91eb053607927fd4499a62189e314e596f92979cd2dadf0c0c69323aeb6751",
+      "evidence": "",
+      "note": "Full checklist in WezTerm with lazy.nvim: treesitter (Lua, C), diagnostics, telescope, gitsigns, which-key, blink.cmp, ibl, lualine, :terminal, :help.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "starship": [
+    {
+      "app_version": "1.26.0",
+      "date": "2026-09-28",
+      "digest": "sha256:5a93696bbb6f860202bbc7433b36e465054bf0e50f6fc7837a9b8174511f497a",
+      "evidence": "",
+      "note": "Escape codes carry palette truecolor for every named style incl. the red error symbol; ANSI fallback without the palette line.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "tmux": [
+    {
+      "app_version": "3.7",
+      "date": "2026-09-28",
+      "digest": "sha256:dfae7360e1c4899e140bf05f9d827646fefcc73f54f0b273a86dfc1811d234c3",
+      "evidence": "",
+      "note": "tmux 3.7c. Status, current/activity windows, pane borders, message, copy-mode selection and search pixel-checked after the lowercase-hex fix.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "vscode": [
+    {
+      "app_version": "1.139.1",
+      "date": "2026-09-28",
+      "digest": "sha256:0246d948acbe7732ed2d872e1c2e086ab8682cd0f298886d51bd2ef013ebc1ee",
+      "evidence": "",
+      "note": "Full checklist after the find-foreground fix. Active tab top border shows with workbench.experimental.modernUI off; 1.139's default modern tabs hide it for every theme.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "wezterm": [
+    {
+      "app_version": "20260901",
+      "date": "2026-09-28",
+      "digest": "sha256:2ef53e6927a3c5913c4e6462228703401329621c6cba594329ed81a9d1e54a1b",
+      "evidence": "",
+      "note": "Nightly 20260901-002820-4fbd6b8e. Pixel-sampled: 16 ANSI, bg, selection, cursor, tab bar match the port hex.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
+  "zellij": [
+    {
+      "app_version": "0.45.1",
+      "date": "2026-09-28",
+      "digest": "sha256:8ad27fb2e46e87fc18c5d70fa7ad80559b87c9ab2889408eb1637cb7b6b1c16b",
+      "evidence": "",
+      "note": "Focus frame #EDA97C in normal/resize/locked/search. Note: search sub-state labels are gold text (Zellij status-bar behavior).",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 # Starship — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 1.20 · Format documentation: https://starship.rs/advanced-config/
 
-Verified on: —
+Verified on: 1.26.0 · macOS 26.6.2 (2026-09-28)
 
 ## Install
 
@@ -28,6 +28,8 @@ Print it yourself with `python3 tools/build.py digest starship`. It covers these
 
 - `ports/starship/umber-calm.toml`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-28 | ✅ verified | 1.26.0 | macOS | 26.6.2 | Escape codes carry palette truecolor for every named style incl. the red error symbol; ANSI fallback without the palette line. |  | `5a93696bbb6f` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

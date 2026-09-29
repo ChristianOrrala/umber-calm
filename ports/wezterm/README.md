@@ -1,10 +1,10 @@
 # WezTerm — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 20240203 · Format documentation: https://wezterm.org/config/appearance.html
 
-Verified on: —
+Verified on: 20260901 · macOS 26.6.2 (2026-09-28)
 
 ## Install
 
@@ -30,6 +30,8 @@ Print it yourself with `python3 tools/build.py digest wezterm`. It covers these 
 
 - `ports/wezterm/umber-calm.toml`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-09-28 | ✅ verified | 20260901 | macOS | 26.6.2 | Nightly 20260901-002820-4fbd6b8e. Pixel-sampled: 16 ANSI, bg, selection, cursor, tab bar match the port hex. |  | `2ef53e6927a3` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

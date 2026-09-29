@@ -65,14 +65,14 @@ A warm, low-glare dark palette with measured contrast.
 | Konsole | terminal | 🧪 experimental | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
 | Ptyxis | terminal | 🟡 candidate | [ports/ptyxis/](ports/ptyxis/) | 47 | — | 🟡 The value syntax of .palette files could not be confirmed from official documentation. |
 | Termux | terminal | 🧪 experimental | [ports/termux/](ports/termux/) | 0.118 | — |  |
-| WezTerm | terminal | 🧪 experimental | [ports/wezterm/](ports/wezterm/) | 20240203 | — |  |
+| WezTerm | terminal | ✅ supported | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
 | Windows Terminal | terminal | 🧪 experimental | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
 | Xfce Terminal | terminal | 🧪 experimental | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
 | Xresources (xterm, urxvt; st with the xresources patch) | terminal | 🧪 experimental | [ports/xresources/](ports/xresources/) | X11 | — |  |
-| tmux | multiplexer | 🧪 experimental | [ports/tmux/](ports/tmux/) | 3.4 | — |  |
-| Zellij | multiplexer | 🧪 experimental | [ports/zellij/](ports/zellij/) | 0.45.1 | — |  |
+| tmux | multiplexer | ✅ supported | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
+| Zellij | multiplexer | ✅ supported | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | fish | shell | 🧪 experimental | [ports/fish/](ports/fish/) | 3.7 | — |  |
-| Starship | shell | 🧪 experimental | [ports/starship/](ports/starship/) | 1.20 | — |  |
+| Starship | shell | ✅ supported | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
 | bat | cli | 🧪 experimental | [ports/bat/](ports/bat/) | 0.24 | — |  |
 | btop | cli | 🧪 experimental | [ports/btop/](ports/btop/) | 1.4 | — |  |
 | delta | cli | 🧪 experimental | [ports/delta/](ports/delta/) | 0.18 | — |  |
@@ -83,10 +83,10 @@ A warm, low-glare dark palette with measured contrast.
 | yazi | cli | 🧪 experimental | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
 | Helix | editor | 🧪 experimental | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | 🧪 experimental | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
-| Neovim | editor | 🧪 experimental | [ports/neovim/](ports/neovim/README.md) | 0.10 | — |  |
+| Neovim | editor | ✅ supported | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
 | Sublime Text | editor | 🧪 experimental | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | 🧪 experimental | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
-| VS Code | editor | 🧪 experimental | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | — |  |
+| VS Code | editor | ✅ supported | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
 | Zed | editor | 🧪 experimental | [ports/zed/](ports/zed/) | 0.170 | — |  |
 | dunst | desktop | 🧪 experimental | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
 | fuzzel | desktop | 🧪 experimental | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
@@ -108,7 +108,7 @@ A warm, low-glare dark palette with measured contrast.
 | Vimium | web | 🟡 candidate | [ports/vimium/](ports/vimium/) | 2.1 | — | 🟡 The selectors follow community usage, not official documentation. |
 | Vivaldi | web | 🟡 candidate | [ports/vivaldi/](ports/vivaldi/) | 7.0 | — | 🟡 The value format of Vivaldi theme files could not be confirmed. |
 | aider | ai | 🧪 experimental | [ports/aider/](ports/aider/) | 0.70 | — |  |
-| Claude Code | ai | 🧪 experimental | [ports/claude-code/](ports/claude-code/) | 2.1.282 | — |  |
+| Claude Code | ai | ✅ supported | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 | opencode | ai | 🟡 candidate | [ports/opencode/](ports/opencode/) | 0.3 | — | 🟡 The value format of opencode theme files could not be confirmed. |
 | Tinted Theming (base24) | scheme | 🧪 experimental | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | 🧪 experimental | [ports/json/](ports/json/) | schema 1 | — |  |
@@ -125,7 +125,7 @@ Tiers: ✅ supported (tested in the real app, on the exact files) · 🧪 experi
 | Alacritty | 🧪 experimental | — |  |  | `a80cd10efbe6` |  |
 | bat | 🧪 experimental | — |  |  | `2489c43a5701` |  |
 | btop | 🧪 experimental | — |  |  | `3c5732c9c1c6` |  |
-| Claude Code | 🧪 experimental | — |  |  | `69ea78169c34` |  |
+| Claude Code | ✅ supported | 2026-09-28 | 2.1.284 | macOS 26.6.2 | `69ea78169c34` |  |
 | CSS variables | 🧪 experimental | — |  |  | `9ab8a88c7c9b` |  |
 | delta | 🧪 experimental | — |  |  | `3308e3be3a24` |  |
 | dircolors (ls) | 🧪 experimental | — |  |  | `83b2b3860ea3` |  |
@@ -149,7 +149,7 @@ Tiers: ✅ supported (tested in the real app, on the exact files) · 🧪 experi
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
-| Neovim | 🧪 experimental | — |  |  | `8b91eb053607` |  |
+| Neovim | ✅ supported | 2026-09-28 | 0.12.5 | macOS 26.6.2 | `8b91eb053607` |  |
 | Obsidian | 🧪 experimental | — |  |  | `259357114b2f` |  |
 | opencode | 🟡 candidate | — |  |  | `e4fc9ec9a42e` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `3c3ad48e75ae` |  |
@@ -157,26 +157,26 @@ Tiers: ✅ supported (tested in the real app, on the exact files) · 🧪 experi
 | rofi | 🧪 experimental | — |  |  | `954a168da103` |  |
 | Slack | 🧪 experimental | — |  |  | `aeb155227e30` |  |
 | Spotify (Spicetify) | 🟡 candidate | — |  |  | `9d1d4e2ce7c9` |  |
-| Starship | 🧪 experimental | — |  |  | `5a93696bbb6f` |  |
+| Starship | ✅ supported | 2026-09-28 | 1.26.0 | macOS 26.6.2 | `5a93696bbb6f` |  |
 | Sublime Text | 🧪 experimental | — |  |  | `f5191beac8c7` |  |
 | sway | 🧪 experimental | — |  |  | `6e2051171136` |  |
 | Tailwind CSS v4 | 🧪 experimental | — |  |  | `98fa9d137e80` |  |
 | Termux | 🧪 experimental | — |  |  | `d955f89d442b` |  |
 | Tinted Theming (base24) | 🧪 experimental | — |  |  | `12b120d7e443` |  |
-| tmux | 🧪 experimental | — |  |  | `58c29007c9b7` |  |
+| tmux | ✅ supported | 2026-09-28 | 3.7 | macOS 26.6.2 | `dfae7360e1c4` |  |
 | Vim | 🧪 experimental | — |  |  | `5e766e51c86d` |  |
 | Vimium | 🟡 candidate | — |  |  | `02b715566580` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | 🧪 experimental | — |  |  | `8e20fa1f8675` |  |
+| VS Code | ✅ supported | 2026-09-28 | 1.139.1 | macOS 26.6.2 | `0246d948acbe` |  |
 | Waybar | 🧪 experimental | — |  |  | `52fb3b90c649` |  |
-| WezTerm | 🧪 experimental | — |  |  | `2ef53e6927a3` |  |
+| WezTerm | ✅ supported | 2026-09-28 | 20260901 | macOS 26.6.2 | `2ef53e6927a3` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `f21b0b6c213a` |  |
 | Xfce Terminal | 🧪 experimental | — |  |  | `3a860d9ef4a6` |  |
 | Xresources (xterm, urxvt; st with the xresources patch) | 🧪 experimental | — |  |  | `154baa7a9fb5` |  |
 | yazi | 🧪 experimental | — |  |  | `ace28270c6bd` |  |
 | zathura | 🧪 experimental | — |  |  | `a687ceefae88` |  |
 | Zed | 🧪 experimental | — |  |  | `8489d64267b9` |  |
-| Zellij | 🧪 experimental | — |  |  | `8ad27fb2e46e` |  |
+| Zellij | ✅ supported | 2026-09-28 | 0.45.1 | macOS 26.6.2 | `8ad27fb2e46e` |  |
 <!-- verification:end -->
 
 ## Design

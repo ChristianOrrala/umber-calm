@@ -297,7 +297,9 @@ def _claude_code(root: Path, text: str) -> list[str]:
     return problems
 
 
-TMUX_STYLE = rf"(fg|bg)={HEX}(,(fg|bg)={HEX})?(,bold)?"
+# tmux hex is lowercase: its format expansion reads #D and #F as aliases (templates/tmux/umber-calm.tmux.tmpl).
+TMUX_HEX = "#[0-9a-f]{6}"
+TMUX_STYLE = rf"(fg|bg)={TMUX_HEX}(,(fg|bg)={TMUX_HEX})?(,bold)?"
 I3_LINE = rf"client\.(?:focused|focused_inactive|unfocused|urgent|placeholder) +{HEX}(?: {HEX}){{4}}|client\.background +{HEX}"
 FZF_COLORS = rf"--color=[a-z+]+:{HEX}(?:,[a-z+]+:{HEX})*"
 DIRCOLORS_CODE = r"[0-9]{1,2}(?:;[0-9]{1,3})*"
@@ -307,7 +309,7 @@ KONSOLE_SECTIONS = ("General", "Background", "BackgroundIntense", "Foreground", 
 
 # Output path pattern -> validators. A port task that adds a format with no standard parser adds its row here.
 RULES: list[tuple[str, tuple[Validator, ...]]] = [
-    ("ports/tmux/*.tmux", (lines(rf'set -g [a-z-]+ "({TMUX_STYLE}|{HEX})"'),)),
+    ("ports/tmux/*.tmux", (lines(rf'set -g [a-z-]+ "({TMUX_STYLE}|{TMUX_HEX})"'),)),
     ("ports/zellij/*.kdl", (_zellij,)),
     ("ports/konsole/*.colorscheme", (sections(*KONSOLE_SECTIONS, ordered=False),)),
     ("ports/foot/*.ini", (sections("colors-dark"), slots("colors-dark", r"(regular|bright)[0-7]", 16, "[0-9A-F]{6}"))),
