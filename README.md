@@ -106,7 +106,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (8)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (7)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -116,13 +116,12 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
 | Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
-| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 
 </details>
 
 <details>
-<summary><b>🧪 experimental (44)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (45)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -151,6 +150,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | — |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
+| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
 | Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
 | dunst | desktop | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
 | fuzzel | desktop | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
@@ -226,7 +226,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | JSON palette | 🧪 experimental | — |  |  | `16953139bba3` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
 | Kiro Crew | 🧪 experimental | — |  |  | `a2f532c83a71` |  |
-| Kiro IDE | 🧪 experimental | — |  |  | `aa7a6fe004d6` |  |
+| Kiro IDE | 🧪 experimental | — |  |  | `a6af61b7219b` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
@@ -248,7 +248,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Vim | 🧪 experimental | — |  |  | `5e766e51c86d` |  |
 | Vimium | 🟡 candidate | — |  |  | `02b715566580` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | ✅ supported | 2026-09-28 | 1.139.1 | macOS 26.6.2 | `0246d948acbe` |  |
+| VS Code | 🧪 experimental | 2026-09-28 (earlier revision) | 1.139.1 | macOS 26.6.2 | `fed6095242ee` |  |
 | Waybar | 🧪 experimental | — |  |  | `52fb3b90c649` |  |
 | WezTerm | ✅ supported | 2026-09-28 | 20260901 | macOS 26.6.2 | `2ef53e6927a3` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `f21b0b6c213a` |  |

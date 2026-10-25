@@ -8,7 +8,7 @@ Verified on: —
 
 ## Install
 
-For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It is the VS Code theme plus the colors Kiro's agent chat and Agent Focus read; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm.
+For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It ships the VS Code port's theme file unchanged; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm.
 
 ## Uninstall
 
@@ -27,12 +27,12 @@ Uninstall Umber Calm for Kiro from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:aa7a6fe004d67169dfd801e1a5267b7c5a7e6501aa1a84bb1bc5a35d52422c9f`
+Current digest: `sha256:a6af61b7219b1fab0519e45e40cdb1fa964a637c96b5a19422cf86a1b6f160b0`
 
 Print it yourself with `python3 tools/build.py digest kiro`. It covers these files:
 
 - `ports/kiro/package.json`
-- `ports/kiro/themes/umber-calm-color-theme.json`
+- `ports/vscode/themes/umber-calm-color-theme.json`
 
 No verification recorded yet.
 

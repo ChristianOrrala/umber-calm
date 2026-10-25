@@ -2,7 +2,21 @@
 
 ## Unreleased
 
-- New port: Kiro IDE 1.4.26 (experimental), as its own extension, `umber-calm-kiro-<version>.vsix`. It is the VS Code theme plus the colors Kiro's agent chat, Agent Focus window and dialogs read, which VS Code's defaults would otherwise fill with cool grays, bright blue and orange: icons, progress, tooltips, toggles, menus, quick pick, keybinding labels, validation, symbol icons, the light bulb and the overview ruler. Four values differ from the VS Code port. Diff lines use the 12% tint with changed words on the 22% tint. Active toggles are blue, not orange. List hover is half the overlay, so it shows on the sidebar.
+- VS Code: the syntax colors now follow the style guide, as the Neovim port already did.
+  - Keyword operators (`typeof`, `instanceof`, `in`, `new`; Python `and`, `or`, `not`, `in`, `is`) are keywords.
+  - `=>` is an operator.
+  - `const` and readonly bindings, JSON keys and CSS properties are variables.
+  - CSS units are constants.
+  - Python `self` and `cls` are built-ins.
+  - Brackets take the operator color at every nesting level.
+  - Diff files color added, removed and changed lines.
+- VS Code: every workbench color VS Code 1.140 would otherwise fill with a default outside the palette is now set from palette roles. That is about 250 keys, checked by enumerating every resolved color in VSCodium 1.140. They cover icons, progress, menus, quick pick, keybinding labels, validation, symbol icons, the light bulb, the overview ruler and minimap, debugging, testing and coverage, merge conflicts, inline edits, source control graph, chat and badges. Orange no longer appears outside focus (ratings stars, find matches in the overview ruler, class icons), red no longer marks anything but errors and deletions, and the no-folder status bar is no longer purple. Breakpoints are mauve.
+- VS Code: diff lines use the 12% tint with changed words on the 22% tint, since VS Code emphasizes changed words. Active toggles are blue instead of orange. List hover is half the overlay, so it shows on the sidebar.
+- VS Code: accessibility (WCAG 1.4.11, 3:1 for controls and focus).
+  - The focus outline is 60% orange (3.6:1 on panels).
+  - Input, dropdown and checkbox borders use `muted` (4.3:1 on panels).
+  - Ignored files, ghost text, placeholders and disabled text use `muted` instead of `dim_text`, which drops to 2.7:1 on panels.
+- New port: Kiro IDE 1.4.26 (experimental), as its own extension, `umber-calm-kiro-<version>.vsix`, that ships the VS Code port's theme file unchanged (the colors Kiro's agent chat and Agent Focus read are standard VS Code keys).
 - New port: Kiro Crew 0.9.0 (experimental), a level-0 theme pack that sets all 56 dashboard variables from palette roles. Orange only marks the text-field focus ring. Umber Calm has no light variant, so the light block repeats the dark palette. Kiro Crew's code highlighting uses fixed syntax colors that no pack can change; the port README says so.
 
 ## 0.1.0 (2026-09-29)

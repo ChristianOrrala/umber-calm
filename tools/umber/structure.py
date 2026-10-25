@@ -390,7 +390,6 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/firefox/manifest.json", (_firefox,)),
     ("ports/vscode/themes/*.json", (_vscode_theme,)),
     ("ports/vscode/package.json", (_vscode_package,)),
-    ("ports/kiro/themes/*.json", (_vscode_theme,)),
     ("ports/kiro/package.json", (_vscode_package,)),
     ("ports/claude-code/umber-calm.json", (_claude_code,)),
     ("ports/kitty/*.conf", (lines(rf"[a-z0-9_]+ {HEX}"),)),

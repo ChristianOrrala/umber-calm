@@ -23,7 +23,6 @@ BAD = {
     "ports/vscode/themes/umber-calm-color-theme.json": '{"name": "Umber Calm", "type": "dark", '
                                                        '"colors": {"editor.background": "#201F1D"}}',
     "ports/vscode/package.json": '{"engines": {"vscode": "^1.95.0"}}',
-    "ports/kiro/themes/umber-calm-color-theme.json": '{"name": "Umber Calm", "type": "light", "colors": {}}',
     "ports/kiro/package.json": '{"contributes": {"themes": [{"label": "Umber Calm"}]}}',
     "ports/herdr/umber-calm.toml": '[theme]\nname = "terminal"\n[theme.custom]\npeach = "orange"\nnot_a_token = "#201F1D"\n',
     "ports/claude-code/umber-calm.json": '{"name": "Umber Calm", "base": "dark-ansi"}',

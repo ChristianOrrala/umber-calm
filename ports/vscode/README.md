@@ -1,6 +1,6 @@
 # VS Code — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 1.95 · Minimum version: 1.95.0 · Format documentation: https://code.visualstudio.com/api/extension-guides/color-theme
 
@@ -18,16 +18,19 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 - [ ] editor background, text, current line
 - [ ] syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted
+- [ ] style guide rules: typeof/in/new/and/not gold, => and brackets tan, const bindings and JSON keys in text color, self mauve
 - [ ] selection, word highlights and find matches (current match solid gold with dark text)
-- [ ] cursor amber
+- [ ] cursor amber; focus outlines amber and visible on panels; nothing else amber
 - [ ] tabs: active tab has an amber top border
-- [ ] sidebar, status bar, panel
-- [ ] diff editor
+- [ ] sidebar (hovered rows visible), status bar, panel
+- [ ] inputs, dropdowns and checkboxes have visible borders
+- [ ] diff editor: changed lines on the light tint, changed words on the full tint
+- [ ] breadcrumbs and outline symbol icons in syntax colors, light bulb gold
 - [ ] integrated terminal ANSI colors
 
 ## Verification
 
-Current digest: `sha256:0246d948acbe7732ed2d872e1c2e086ab8682cd0f298886d51bd2ef013ebc1ee`
+Current digest: `sha256:fed6095242eea279f6b56aeca7f44e75244c8e40880c26336b1cf0f713be8a7a`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 

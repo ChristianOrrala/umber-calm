@@ -129,33 +129,68 @@ class ClaudeCodePort(unittest.TestCase):
     def test_target_version_is_an_exact_build(self):
         self.assertRegex(port("claude-code").target_version, r"^\d+\.\d+\.\d+$")
 
-# Backgrounds VS Code draws behind code text, with the minimum contrast for `muted` on each (spec §4.4:
-# E1 panels 4.0, E3 highlights 3.0). `text` must reach 4.5 on all of them.
+# Backgrounds VS Code draws behind code or UI text (composited over the editor background), with the minimum contrast for
+# `muted` on each (spec §4.4: E1 panels 4.0, E3 highlights 3.0). `text` must reach 4.5 on all of them.
 VSCODE_TEXT_BACKGROUNDS = {
     "editor.lineHighlightBackground": 4.0, "editor.selectionBackground": 3.0,
     "editor.inactiveSelectionBackground": 3.0, "editor.selectionHighlightBackground": 3.0,
     "editor.findMatchHighlightBackground": 3.0, "editor.wordHighlightBackground": 3.0,
-    "editor.wordHighlightStrongBackground": 3.0, "diffEditor.insertedLineBackground": 3.0,
-    "diffEditor.removedLineBackground": 3.0, "editorInlayHint.background": 4.0,
-    "peekViewEditor.background": 4.0, "editorHoverWidget.background": 4.0, "editorSuggestWidget.background": 4.0,
+    "editor.wordHighlightStrongBackground": 3.0, "editor.hoverHighlightBackground": 3.0,
+    "editor.linkedEditingBackground": 3.0, "editor.findRangeHighlightBackground": 3.0,
+    "editor.rangeHighlightBackground": 3.0, "editor.snippetTabstopHighlightBackground": 3.0,
+    "editor.stackFrameHighlightBackground": 3.0, "editor.focusedStackFrameHighlightBackground": 3.0,
+    "diffEditor.insertedLineBackground": 3.0, "diffEditor.removedLineBackground": 3.0,
+    "inlineEdit.originalBackground": 3.0, "inlineEdit.modifiedBackground": 3.0,
+    "merge.currentHeaderBackground": 3.0, "merge.incomingHeaderBackground": 3.0,
+    "merge.currentContentBackground": 3.0, "merge.incomingContentBackground": 3.0,
+    "mergeEditor.conflictingLines.background": 3.0, "testing.coveredBackground": 3.0, "testing.uncoveredBackground": 3.0,
+    "editorInlayHint.background": 4.0, "peekViewEditor.background": 4.0, "editorHoverWidget.background": 4.0,
+    "editorSuggestWidget.background": 4.0, "menu.background": 4.0, "quickInput.background": 4.0,
+    "keybindingLabel.background": 4.0, "debugToolBar.background": 4.0, "textCodeBlock.background": 4.0,
+    "menu.selectionBackground": 3.0, "quickInputList.focusBackground": 3.0, "inputOption.activeBackground": 3.0,
+    "toolbar.hoverBackground": 3.0, "inputValidation.errorBackground": 3.0, "inputValidation.warningBackground": 3.0,
+    "inputValidation.infoBackground": 3.0, "debugExceptionWidget.background": 3.0, "debugView.exceptionLabelBackground": 3.0,
+    "peekViewResult.selectionBackground": 3.0, "button.secondaryHoverBackground": 2.0,
 }
+# Keys that may be orange: where the user is (docs/style-guide.md, Interface: focus).
+VSCODE_FOCUS_KEYS = {"focusBorder", "editorCursor.foreground", "tab.activeBorderTop", "activityBar.activeBorder",
+                     "activityBarTop.activeBorder", "panelTitle.activeBorder", "list.focusOutline", "terminalCursor.foreground"}
 
 class VSCodePort(unittest.TestCase):
     def setUp(self):
         self.theme = json.loads(out("ports/vscode/themes/umber-calm-color-theme.json"))
         self.c = self.theme["colors"]
 
+    def rule(self, scope: str) -> dict:
+        return next(t["settings"] for t in self.theme["tokenColors"] if scope in t["scope"])
+
     def test_theme_and_manifest(self):
         c = self.c
         self.assertEqual(c["editor.background"], P.colors["bg"])
         self.assertEqual(c["editor.selectionBackground"], P.colors["overlay"])
         self.assertEqual(c["editorCursor.foreground"], P.colors["orange"])
-        keyword = next(t for t in self.theme["tokenColors"] if "keyword" in t["scope"])
-        self.assertEqual(keyword["settings"]["foreground"], P.colors["yellow"])
+        self.assertEqual(self.rule("keyword")["foreground"], P.colors["yellow"])
         pkg = json.loads(out("ports/vscode/package.json"))
         self.assertEqual(pkg["version"], P.meta["release"])
         self.assertEqual(pkg["contributes"]["themes"][0]["path"], "./themes/umber-calm-color-theme.json")
         self.assertEqual(pkg["engines"]["vscode"], "^" + port("vscode").min_version)
+
+    def test_style_guide_syntax_rules(self):
+        """docs/style-guide.md: keyword operators are keywords, `=>` is an operator, const and readonly bindings and
+        properties are variables, brackets are punctuation, built-in self is a built-in."""
+        s = lambda role: P.resolve(f"syntax.{role}")
+        for scope in ("keyword.operator.expression", "keyword.operator.new", "keyword.operator.logical.python"):
+            self.assertEqual(self.rule(scope)["foreground"], s("keyword"), scope)
+        self.assertEqual(self.rule("storage.type.function.arrow")["foreground"], s("operator"))
+        for scope in ("variable.other.constant", "support.type.property-name", "meta.object-literal.key"):
+            self.assertEqual(self.rule(scope)["foreground"], s("variable"), scope)
+        self.assertEqual(self.theme["semanticTokenColors"]["variable.readonly"], s("variable"))
+        self.assertEqual(self.rule("variable.other.enummember")["foreground"], s("constant"))
+        self.assertEqual(self.rule("keyword.other.unit")["foreground"], s("constant"))
+        self.assertEqual(self.rule("variable.parameter.function.language.special")["foreground"], s("builtin"))
+        for n in range(1, 7):
+            self.assertEqual(self.c[f"editorBracketHighlight.foreground{n}"], s("operator"), n)
+        self.assertEqual(self.rule("markup.deleted")["foreground"], P.resolve("diag.diff_delete"))
 
     def test_current_match_is_solid_with_bg_text(self):
         """VS Code (checked in 1.139) paints the current match's text with editor.findMatchHighlightForeground and
@@ -173,88 +208,41 @@ class VSCodePort(unittest.TestCase):
             drawn = composite(self.c[key], bg)
             self.assertGreaterEqual(color.contrast(P.colors["text"], drawn), 4.5, key)
             self.assertGreaterEqual(color.contrast(P.colors["muted"], drawn), muted_min, key)
-
-    def test_alpha_tints_equal_the_measured_tints(self):
-        bg = P.colors["bg"]
-        search = color.blend(P.resolve("diag.search"), bg, P.tints["search"])
-        self.assertEqual(composite(self.c["editor.findMatchHighlightBackground"], bg), search)
-        for key, role in (("diffEditor.insertedLineBackground", "diag.diff_add"),
-                          ("diffEditor.removedLineBackground", "diag.diff_delete")):
-            self.assertEqual(composite(self.c[key], bg), color.blend(P.resolve(role), bg, P.tints["diff"]), key)
-
-# Kiro IDE 1.4.26 is Code OSS 1.131.0 (product.json vsCodeVersion); its CLI refuses extensions whose engines.vscode
-# range that version does not satisfy.
-KIRO_CODE_OSS = (1, 131, 0)
-# Colors Kiro's agent chat, Agent Focus window and dialogs read that VS Code's defaults would otherwise fill with
-# cool grays and bright blue (kiro-ui-agent-chat style.css and the Agent Focus tokens in workbench.desktop.main.css).
-KIRO_READS = ("icon.foreground", "progressBar.background", "problemsErrorIcon.foreground", "debugToolBar.background",
-              "descriptionForeground", "disabledForeground", "toolbar.hoverBackground", "inputOption.activeBackground",
-              "inputOption.activeForeground", "inputOption.hoverBackground", "editorWidget.background",
-              "list.hoverBackground", "list.activeSelectionBackground", "list.warningForeground", "titleBar.activeBackground",
-              "editorGutter.addedBackground", "editorGutter.deletedBackground", "diffEditor.insertedTextBackground",
-              "diffEditor.removedTextBackground", "button.background", "button.foreground", "notificationsInfoIcon.foreground",
-              "symbolIcon.classForeground", "symbolIcon.functionForeground", "symbolIcon.variableForeground",
-              "editorLightBulb.foreground", "editorOverviewRuler.errorForeground")
-# The only VS Code values the Kiro theme changes: whole lines take the light tint because changed words are emphasized;
-# active toggles are blue, since Kiro's chat toggles and switches draw their active border with inputOption.activeBorder;
-# and list hover is half the overlay, because Agent Focus hovers rows on the sidebar, where surface would not show.
-KIRO_OVERRIDES = {"diffEditor.insertedLineBackground", "diffEditor.removedLineBackground", "inputOption.activeBorder",
-                  "list.hoverBackground"}
-
-class KiroPort(unittest.TestCase):
-    def setUp(self):
-        self.theme = json.loads(out("ports/kiro/themes/umber-calm-color-theme.json"))
-        self.vscode = json.loads(out("ports/vscode/themes/umber-calm-color-theme.json"))
-        self.c = self.theme["colors"]
-
-    def test_is_the_vscode_theme_plus_kiro_colors(self):
-        for key in ("name", "type", "semanticHighlighting", "tokenColors", "semanticTokenColors"):
-            self.assertEqual(self.theme[key], self.vscode[key], key)
-        for key, value in self.vscode["colors"].items():
-            if key not in KIRO_OVERRIDES:
-                self.assertEqual(self.c.get(key), value, key)
-        for key in KIRO_READS:
-            self.assertIn(key, self.c)
-
-    def test_manifest_installs_on_kiro_1_4(self):
-        pkg = json.loads(out("ports/kiro/package.json"))
-        self.assertEqual((pkg["name"], pkg["publisher"], pkg["version"]), ("umber-calm-kiro", "umber-calm", P.meta["release"]))
-        self.assertEqual(pkg["contributes"]["themes"], [{"label": "Umber Calm", "uiTheme": "vs-dark",
-                                                         "path": "./themes/umber-calm-color-theme.json"}])
-        floor = tuple(int(x) for x in re.fullmatch(r"\^(\d+)\.(\d+)\.(\d+)", pkg["engines"]["vscode"]).groups())
-        self.assertLessEqual(floor, KIRO_CODE_OSS)
-        self.assertEqual(floor[0], KIRO_CODE_OSS[0])
-        self.assertEqual(port("kiro").target_version, "1.4.26")
-
-    def test_diff_lines_and_words_land_on_the_measured_tints(self):
-        bg = P.colors["bg"]
-        for line, word, role in (("diffEditor.insertedLineBackground", "diffEditor.insertedTextBackground", "diag.diff_add"),
-                                 ("diffEditor.removedLineBackground", "diffEditor.removedTextBackground", "diag.diff_delete")):
-            drawn_line = composite(self.c[line], bg)
-            self.assertEqual(drawn_line, color.blend(P.resolve(role), bg, P.tints["diag"]), line)
-            self.assertEqual(composite(self.c[word], drawn_line), color.blend(P.resolve(role), bg, P.tints["diff"]), word)
-
-    def test_text_backgrounds_are_measured(self):
-        bg = self.c["editor.background"]
-        surfaces = dict(VSCODE_TEXT_BACKGROUNDS, **{
-            "menu.background": 4.0, "quickInput.background": 4.0, "keybindingLabel.background": 4.0,
-            "debugToolBar.background": 4.0, "textCodeBlock.background": 4.0, "menu.selectionBackground": 3.0,
-            "quickInputList.focusBackground": 3.0, "inputOption.activeBackground": 3.0, "toolbar.hoverBackground": 3.0,
-            "inputValidation.errorBackground": 3.0, "inputValidation.warningBackground": 3.0,
-            "inputValidation.infoBackground": 3.0, "button.secondaryHoverBackground": 2.0})
-        for key, muted_min in surfaces.items():
-            drawn = composite(self.c[key], bg)
-            self.assertGreaterEqual(color.contrast(P.colors["text"], drawn), 4.5, key)
-            self.assertGreaterEqual(color.contrast(P.colors["muted"], drawn), muted_min, key)
-        line = composite(self.c["diffEditor.removedLineBackground"], bg)
-        self.assertGreaterEqual(color.contrast(P.colors["muted"], composite(self.c["diffEditor.removedTextBackground"], line)), 3.0)
-        for fg in ("icon.foreground", "descriptionForeground", "disabledForeground"):  # Agent Focus text reads all three
-            self.assertGreaterEqual(color.contrast(self.c[fg], self.c["sideBar.background"]), 4.0, fg)
-        side = self.c["sideBar.background"]
+        side, status = self.c["sideBar.background"], self.c["statusBar.background"]
         hover = composite(self.c["list.hoverBackground"], side)
         self.assertNotIn(hover, (side, self.c["list.activeSelectionBackground"]), "hovered rows show on the sidebar")
         self.assertGreaterEqual(color.contrast(P.colors["text"], hover), 4.5)
         self.assertGreaterEqual(color.contrast(P.colors["muted"], hover), 3.0, "E3")
+        for key in ("statusBarItem.hoverBackground", "statusBarItem.activeBackground"):
+            self.assertGreaterEqual(color.contrast(self.c["statusBar.foreground"], composite(self.c[key], status)), 3.0, key)
+        for fg in ("descriptionForeground", "disabledForeground", "gitDecoration.ignoredResourceForeground",
+                   "editorGhostText.foreground", "editor.placeholder.foreground", "list.deemphasizedForeground"):
+            self.assertGreaterEqual(color.contrast(self.c[fg], side), 4.0, f"{fg} is readable on panels (E1)")
+
+    def test_controls_and_focus_reach_3_to_1(self):
+        """WCAG 1.4.11: focus indicators, control borders and icons reach 3:1 on bg and on panels."""
+        for base in (P.colors["bg"], P.colors["surface"]):
+            for key in ("focusBorder", "list.focusOutline", "input.border", "dropdown.border", "checkbox.border",
+                        "inputOption.activeBorder", "icon.foreground", "editorGutter.foldingControlForeground"):
+                self.assertGreaterEqual(color.contrast(composite(self.c[key], base), base), 3.0, f"{key} on {base}")
+
+    def test_diff_lines_and_words_land_on_the_measured_tints(self):
+        """VS Code emphasizes changed words, so whole lines take the light tint and words the full one (style guide)."""
+        bg = P.colors["bg"]
+        for line, word, role in (("diffEditor.insertedLineBackground", "diffEditor.insertedTextBackground", "diag.diff_add"),
+                                 ("diffEditor.removedLineBackground", "diffEditor.removedTextBackground", "diag.diff_delete"),
+                                 ("mergeEditor.change.background", "mergeEditor.change.word.background", "diag.diff_add")):
+            drawn_line = composite(self.c[line], bg)
+            self.assertEqual(drawn_line, color.blend(P.resolve(role), bg, P.tints["diag"]), line)
+            drawn_word = composite(self.c[word], drawn_line)
+            self.assertEqual(drawn_word, color.blend(P.resolve(role), bg, P.tints["diff"]), word)
+            self.assertGreaterEqual(color.contrast(P.colors["muted"], drawn_word), 3.0, f"comments on {word} (E3)")
+
+    def test_alpha_tints_equal_the_measured_tints(self):
+        bg = P.colors["bg"]
+        search = color.blend(P.resolve("diag.search"), bg, P.tints["search"])
+        for key in ("editor.findMatchHighlightBackground", "peekViewResult.matchHighlightBackground"):
+            self.assertEqual(composite(self.c[key], bg), search, key)
 
     def test_symbol_icons_follow_the_syntax_roles(self):
         """Breadcrumbs, outline and suggestions color symbol icons; VS Code's defaults are orange, purple and bright blue."""
@@ -264,12 +252,53 @@ class KiroPort(unittest.TestCase):
                           ("moduleForeground", "syntax.namespace")):
             self.assertEqual(self.c[f"symbolIcon.{key}"], P.resolve(role), key)
 
-    def test_adds_no_focus_color(self):
-        focus = P.resolve("ui.focus")
-        theirs = {k for k, v in self.c.items() if v.upper().startswith(focus)}
-        ours = {k for k, v in self.vscode["colors"].items() if v.upper().startswith(focus)}
-        self.assertEqual(theirs, ours - {"inputOption.activeBorder"}, "the Kiro colors never use orange")
-        self.assertEqual(self.c["inputOption.activeBorder"], P.colors["blue"])
+    def test_orange_only_marks_focus_and_red_only_errors_and_deletions(self):
+        focus, error = P.resolve("ui.focus"), P.resolve("diag.error")
+        self.assertEqual({k for k, v in self.c.items() if v.upper().startswith(focus)}, VSCODE_FOCUS_KEYS)
+        red = {k for k, v in self.c.items() if v.upper().startswith(error)}
+        allowed = ("error", "Error", "deleted", "Deleted", "removed", "Removed", "delete", "unexpectedBracket",
+                   "Deletions", "original", "Original", "changeBase", "uncovered", "Failed", "exception", "Exception",
+                   "stopForeground", "disconnectForeground", "noMatchesOutline", "ansiRed")
+        self.assertEqual({k for k in red if not any(a in k for a in allowed)}, set(), "red only marks errors and deletions")
+
+    def test_keys_are_registered_vscode_colors(self):
+        """Every color key is a VS Code 1.140 color: the workbench exposes each as --vscode-<id with dots as dashes>
+        (fixture: the color variables VSCodium 1.140 emitted with this theme)."""
+        known = pf.keys_in((REPO / "tests/fixtures/vscode-1.140-color-variables.txt").read_text(encoding="utf-8"))
+        self.assertEqual(sorted(k for k in self.c if k.replace(".", "-") not in known), [])
+
+# Kiro IDE 1.4.26 is Code OSS 1.131.0 (product.json vsCodeVersion); its CLI refuses extensions whose engines.vscode
+# range that version does not satisfy.
+KIRO_CODE_OSS = (1, 131, 0)
+# Colors Kiro's agent chat, Agent Focus window and dialogs read; VS Code's defaults for them are cool grays and bright
+# blue (kiro-ui-agent-chat style.css and the Agent Focus tokens in workbench.desktop.main.css).
+KIRO_READS = ("icon.foreground", "progressBar.background", "problemsErrorIcon.foreground", "debugToolBar.background",
+              "descriptionForeground", "disabledForeground", "toolbar.hoverBackground", "inputOption.activeBackground",
+              "inputOption.activeForeground", "inputOption.hoverBackground", "editorWidget.background",
+              "list.hoverBackground", "list.activeSelectionBackground", "list.warningForeground", "titleBar.activeBackground",
+              "editorGutter.addedBackground", "editorGutter.deletedBackground", "diffEditor.insertedTextBackground",
+              "diffEditor.removedTextBackground", "button.background", "button.foreground", "notificationsInfoIcon.foreground")
+
+class KiroPort(unittest.TestCase):
+    def test_ships_the_vscode_theme_unchanged(self):
+        p = port("kiro")
+        self.assertEqual(p.inputs, ("ports/vscode/themes/umber-calm-color-theme.json",))
+        self.assertTrue(p.syntax_exempt)
+        theme = json.loads(out("ports/vscode/themes/umber-calm-color-theme.json"))["colors"]
+        for key in KIRO_READS:
+            self.assertIn(key, theme)
+        self.assertEqual(theme["inputOption.activeBorder"], P.colors["blue"], "Kiro's chat toggles draw their active border with it")
+
+    def test_manifest_installs_on_kiro_1_4(self):
+        pkg = json.loads(out("ports/kiro/package.json"))
+        self.assertEqual((pkg["name"], pkg["publisher"], pkg["version"]), ("umber-calm-kiro", "umber-calm", P.meta["release"]))
+        # The packager puts inputs at the extension root, next to package.json.
+        self.assertEqual(pkg["contributes"]["themes"], [{"label": "Umber Calm", "uiTheme": "vs-dark",
+                                                         "path": "./umber-calm-color-theme.json"}])
+        floor = tuple(int(x) for x in re.fullmatch(r"\^(\d+)\.(\d+)\.(\d+)", pkg["engines"]["vscode"]).groups())
+        self.assertLessEqual(floor, KIRO_CODE_OSS)
+        self.assertEqual(floor[0], KIRO_CODE_OSS[0])
+        self.assertEqual(port("kiro").target_version, "1.4.26")
 
 class KiroCrewPort(unittest.TestCase):
     """Kiro Crew 0.9.0 level-0 theme pack: every variable set, no derivation, measured text pairs on every fill."""

@@ -93,7 +93,6 @@ kiro-crew	ports/kiro-crew/theme.json
 kiro-crew	ports/kiro-crew/variables.json
 readme:kiro	ports/kiro/README.md
 kiro	ports/kiro/package.json
-kiro	ports/kiro/themes/umber-calm-color-theme.json
 readme:kitty	ports/kitty/README.md
 kitty	ports/kitty/umber-calm.conf
 readme:konsole	ports/konsole/README.md

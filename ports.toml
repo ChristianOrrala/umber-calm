@@ -105,7 +105,7 @@ target_version = "1.95"
 min_version = "1.95.0"
 install = "Download umber-calm-<version>.vsix from the latest release and run `code --install-extension umber-calm-<version>.vsix`, then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T."
 uninstall = "Uninstall the Umber Calm extension from the Extensions view."
-checklist = ["editor background, text, current line", "syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted", "selection, word highlights and find matches (current match solid gold with dark text)", "cursor amber", "tabs: active tab has an amber top border", "sidebar, status bar, panel", "diff editor", "integrated terminal ANSI colors"]
+checklist = ["editor background, text, current line", "syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted", "style guide rules: typeof/in/new/and/not gold, => and brackets tan, const bindings and JSON keys in text color, self mauve", "selection, word highlights and find matches (current match solid gold with dark text)", "cursor amber; focus outlines amber and visible on panels; nothing else amber", "tabs: active tab has an amber top border", "sidebar (hovered rows visible), status bar, panel", "inputs, dropdowns and checkboxes have visible borders", "diff editor: changed lines on the light tint, changed words on the full tint", "breadcrumbs and outline symbol icons in syntax colors, light bulb gold", "integrated terminal ANSI colors"]
 syntax_check = { file = "themes/umber-calm-color-theme.json", format = "vscode" }
 
 [[port]]
@@ -117,10 +117,11 @@ output_root = "ports/kiro"
 docs = "https://kiro.dev/docs/upgrade-guides/migrating-from-vscode/"
 format_confirmed = true
 target_version = "1.4.26"
-install = "For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It is the VS Code theme plus the colors Kiro's agent chat and Agent Focus read; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm."
+install = "For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It ships the VS Code port's theme file unchanged; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm."
 uninstall = "Uninstall Umber Calm for Kiro from the Extensions view."
 checklist = ["editor, sidebar, tabs and status bar match the VS Code port (same colors)", "syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted", "agent chat: message and code backgrounds warm, tooltips on surface, no cool gray or bright blue", "agent status icons: in progress blue, accepted green, input needed yellow, error red", "chat toggles and pills: active state on the overlay, not orange", "Agent Focus window: background, sidebar, primary buttons blue, secondary text readable", "diff review: changed lines on the 12% tints, changed words on the 22% tints, comments readable on both", "menus, quick pick, keybinding labels and dialogs on surface"]
-syntax_check = { file = "themes/umber-calm-color-theme.json", format = "vscode" }
+inputs = ["ports/vscode/themes/umber-calm-color-theme.json"]
+syntax_exempt = "ships the VS Code port's theme file (inputs), which the vscode syntax check covers"
 
 [[port]]
 id = "neovim"

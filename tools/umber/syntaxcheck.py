@@ -23,11 +23,19 @@ VIM_HI = re.compile(r"^hi!?\s+(\S+)(.*)$")
 VIM_LINK = re.compile(r"^hi!?\s+(?:def(?:ault)?\s+)?link\s+(\S+)\s+(\S+)\s*$")
 VIM_GUIFG = re.compile(r"\bguifg=(\S+)")
 HEX = re.compile(r"#[0-9A-Fa-f]{6}(?:[0-9A-Fa-f]{2})?")
+TMTHEME_DIFF_SCOPES = ("markup.inserted", "markup.deleted", "markup.changed")  # diff contract, not syntax
+
+
+def _diff_scopes_only(scope) -> bool:
+    """A token rule whose every scope is a diff-file scope follows the diff contract (red marks deleted lines)."""
+    scopes = scope if isinstance(scope, list) else str(scope).split(",")
+    return all(s.strip().startswith(TMTHEME_DIFF_SCOPES) for s in scopes)
 
 
 def _vscode(text: str) -> list[str]:
     data = json.loads(text)
-    out = [t["settings"]["foreground"] for t in data.get("tokenColors", []) if "foreground" in t.get("settings", {})]
+    out = [t["settings"]["foreground"] for t in data.get("tokenColors", [])
+           if "foreground" in t.get("settings", {}) and not _diff_scopes_only(t.get("scope", ""))]
     for value in data.get("semanticTokenColors", {}).values():
         if isinstance(value, str):
             out.append(value)
@@ -99,9 +107,6 @@ def _vim(text: str) -> list[str]:
             return resolve(links[group], seen + (group,))
         return f"link {seen[0] if seen else group}"
     return [v for g in order if g in VIM_SYNTAX_GROUPS for v in [resolve(g)] if v is not None]
-
-
-TMTHEME_DIFF_SCOPES = ("markup.inserted", "markup.deleted", "markup.changed")
 
 
 def _tmtheme(data: bytes) -> list[str]:
