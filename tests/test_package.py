@@ -1,9 +1,9 @@
-import hashlib, re, unittest, zipfile
+import hashlib, re, struct, unittest, zipfile, zlib
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from tests.helpers import tempdir
 from tests.test_buildcmd import fixture
-from umber import buildcmd, package, registry
+from umber import buildcmd, package, palette, registry
 
 EXTRA = '''
 [[port]]
@@ -31,11 +31,25 @@ target_version = "1.95"
 install = "Install the vsix."
 uninstall = "Uninstall the extension."
 checklist = ["editor background"]
+inputs = ["assets/marketplace/icon.png"]
 '''
 PKG = ('{"name": "umber-calm", "displayName": "Umber Calm", "description": "A warm palette.", '
        '"version": "{{ meta.release }}", "publisher": "umber-calm", "engines": {"vscode": "^1.95.0"}, '
-       '"categories": ["Themes"], "keywords": ["theme"], "repository": {"type": "git", "url": "{{ meta.homepage }}"}}\n')
+       '"categories": ["Themes"], "keywords": ["theme"], "repository": {"type": "git", "url": "{{ meta.homepage }}"}, '
+       '"icon": "icon.png", "galleryBanner": {"color": "{{ ui.bg }}", "theme": "dark"}, "homepage": "{{ meta.homepage }}", '
+       '"bugs": {"url": "{{ meta.homepage }}/issues"}, "qna": "{{ meta.homepage }}/issues", '
+       '"contributes": {"themes": [{"label": "Umber Calm", "uiTheme": "vs-dark", "path": "./themes/t.json"}]}}\n')
 FIXED = (1980, 1, 1, 0, 0, 0)
+PAGE = b"# Listing page\n"
+CHANGELOG = b"# Changelog\n"
+NS = {"v": "http://schemas.microsoft.com/developer/vsx-schema/2011"}
+
+def tiny_png() -> bytes:
+    """A valid 1x1 PNG with no metadata chunks."""
+    def chunk(kind, data):
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(b"\x00\x20\x1f\x1d")) + chunk(b"IEND", b""))
 
 def repo(d, release="9.9.9") -> Path:
     root = fixture(d)
@@ -52,6 +66,11 @@ def repo(d, release="9.9.9") -> Path:
     (root / "templates/vscode/package.json.tmpl").write_text(PKG, encoding="utf-8")
     (root / "templates/vscode/themes/t.json.tmpl").write_text('{"colors": {"editor.background": "{{ bg }}"}}\n',
                                                               encoding="utf-8")
+    (root / "assets/marketplace").mkdir(parents=True)
+    (root / "assets/marketplace/icon.png").write_bytes(tiny_png())
+    (root / "docs/marketplace").mkdir(parents=True)
+    (root / "docs/marketplace/vscode.md").write_bytes(PAGE)
+    (root / "CHANGELOG.md").write_bytes(CHANGELOG)
     buildcmd.build(root)
     return root
 
@@ -71,8 +90,9 @@ class PackageTest(unittest.TestCase):
             with zipfile.ZipFile(root / "dist/umber-calm-jetbrains-9.9.9.jar") as z:
                 self.assertEqual(z.namelist(), ["LICENSE", "META-INF/plugin.xml"])
             with zipfile.ZipFile(root / "dist/umber-calm-9.9.9.vsix") as z:
-                self.assertEqual(z.namelist(), ["[Content_Types].xml", "extension.vsixmanifest", "extension/LICENSE.txt",
-                                                "extension/README.md", "extension/package.json", "extension/themes/t.json"])
+                self.assertEqual(z.namelist(), ["[Content_Types].xml", "extension.vsixmanifest", "extension/CHANGELOG.md",
+                                                "extension/LICENSE.txt", "extension/README.md", "extension/icon.png",
+                                                "extension/package.json", "extension/themes/t.json"])
                 manifest = ET.fromstring(z.read("extension.vsixmanifest"))
             ns = {"v": "http://schemas.microsoft.com/developer/vsx-schema/2011"}
             identity = manifest.find("v:Metadata/v:Identity", ns)
@@ -136,6 +156,79 @@ class PackageTest(unittest.TestCase):
             root = repo(d)
             (root / "templates/demo/demo.conf.tmpl").write_text("bg={{ surface }}\n", encoding="utf-8")
             with self.assertRaisesRegex(package.PackageError, "stale"):
+                package.package(root, root / "dist")
+
+class VsixListingTest(unittest.TestCase):
+    def vsix(self, root):
+        package.package(root, root / "dist")
+        return zipfile.ZipFile(root / "dist/umber-calm-9.9.9.vsix")
+
+    def test_vsix_carries_the_listing_page_changelog_and_icon(self):
+        with tempdir() as d:
+            root = repo(d)
+            with self.vsix(root) as z:
+                self.assertEqual(z.read("extension/README.md"), PAGE)
+                self.assertEqual(z.read("extension/CHANGELOG.md"), CHANGELOG)
+                self.assertEqual(z.read("extension/icon.png"), tiny_png())
+                self.assertIn('<Default Extension=".png" ContentType="image/png"/>', z.read("[Content_Types].xml").decode())
+
+    def test_vsix_manifest_has_the_listing_fields(self):
+        with tempdir() as d:
+            root = repo(d)
+            home = palette.load(root / "palette/umber-calm.toml").meta["homepage"]
+            bg = palette.load(root / "palette/umber-calm.toml").resolve("ui.bg")
+            with self.vsix(root) as z:
+                manifest = ET.fromstring(z.read("extension.vsixmanifest"))
+            props = {p.get("Id").removeprefix("Microsoft.VisualStudio."): p.get("Value")
+                     for p in manifest.findall("v:Metadata/v:Properties/v:Property", NS)}
+            self.assertEqual({k: props.get(k) for k in (
+                "Services.Branding.Color", "Services.Branding.Theme", "Services.Links.Source",
+                "Services.Links.Getstarted", "Services.Links.GitHub", "Services.Links.Support", "Services.Links.Learn",
+                "Services.CustomerQnALink", "Services.GitHubFlavoredMarkdown", "Services.Content.Pricing",
+                "Code.EnabledApiProposals")},
+                {"Services.Branding.Color": bg, "Services.Branding.Theme": "dark", "Services.Links.Source": home,
+                 "Services.Links.Getstarted": home, "Services.Links.GitHub": home,
+                 "Services.Links.Support": f"{home}/issues", "Services.Links.Learn": home,
+                 "Services.CustomerQnALink": f"{home}/issues", "Services.GitHubFlavoredMarkdown": "true",
+                 "Services.Content.Pricing": "Free", "Code.EnabledApiProposals": ""})
+            self.assertEqual(manifest.find("v:Metadata/v:Icon", NS).text, "extension/icon.png")
+            assets = {(a.get("Type"), a.get("Path")) for a in manifest.findall("v:Assets/v:Asset", NS)}
+            self.assertEqual(assets, {
+                ("Microsoft.VisualStudio.Code.Manifest", "extension/package.json"),
+                ("Microsoft.VisualStudio.Services.Content.Details", "extension/README.md"),
+                ("Microsoft.VisualStudio.Services.Content.Changelog", "extension/CHANGELOG.md"),
+                ("Microsoft.VisualStudio.Services.Content.License", "extension/LICENSE.txt"),
+                ("Microsoft.VisualStudio.Services.Icons.Default", "extension/icon.png")})
+
+    def test_theme_only_vsix_is_a_web_extension_like_vsce_makes_it(self):
+        # vscode.dev (the listing's "try it in your browser" link) only loads web extensions; vsce marks an extension
+        # without code as one and tags color themes.
+        with tempdir() as d:
+            root = repo(d)
+            with self.vsix(root) as z:
+                manifest = ET.fromstring(z.read("extension.vsixmanifest"))
+            kind = [p.get("Value") for p in manifest.findall("v:Metadata/v:Properties/v:Property", NS)
+                    if p.get("Id") == "Microsoft.VisualStudio.Code.ExtensionKind"]
+            self.assertEqual(kind, ["ui,workspace,web"])
+            tags = manifest.find("v:Metadata/v:Tags", NS).text.split(",")
+            self.assertLessEqual({"theme", "color-theme", "__web_extension"}, set(tags))
+            self.assertEqual(len(tags), len(set(tags)))
+
+    def test_vsix_refuses_a_missing_marketplace_page(self):
+        with tempdir() as d:
+            root = repo(d)
+            (root / "docs/marketplace/vscode.md").unlink()
+            with self.assertRaisesRegex(package.PackageError, "docs/marketplace/vscode.md is missing"):
+                package.package(root, root / "dist")
+
+    def test_vsix_refuses_missing_named_files(self):
+        with tempdir() as d:
+            root = repo(d)
+            text = (root / "ports.toml").read_text(encoding="utf-8")
+            (root / "ports.toml").write_text(text.replace('inputs = ["assets/marketplace/icon.png"]\n', ""),
+                                             encoding="utf-8")
+            buildcmd.build(root)
+            with self.assertRaisesRegex(package.PackageError, "package.json names icon.png, which is not packaged"):
                 package.package(root, root / "dist")
 
 if __name__ == "__main__":

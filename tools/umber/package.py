@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from . import buildcmd, palette, registry, safepath
+from . import buildcmd, marketplace, palette, registry, safepath
 
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 ARCHIVE_SUFFIX = {"jetbrains": "jar", "firefox": "xpi"}
@@ -20,6 +20,7 @@ CONTENT_TYPES = ('<?xml version="1.0" encoding="utf-8"?>\n'
                  '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
                  '<Default Extension=".json" ContentType="application/json"/>'
                  '<Default Extension=".md" ContentType="text/markdown"/>'
+                 '<Default Extension=".png" ContentType="image/png"/>'
                  '<Default Extension=".txt" ContentType="text/plain"/>'
                  '<Default Extension=".vsixmanifest" ContentType="text/xml"/>'
                  '</Types>\n')
@@ -97,9 +98,51 @@ def _port_files(root: Path, port: registry.Port, inputs: list[str]) -> list[tupl
     return files
 
 
-def _vsixmanifest(pkg: dict) -> str:
+def _vsixmanifest(pkg: dict, names: set[str]) -> str:
+    """The manifest the Marketplace reads the listing from, with the properties and assets `vsce` writes
+    (vsce src/package.ts, toVsixManifest), so a hand-built .vsix lists the same fields."""
     def e(value) -> str:
         return escape(str(value), {'"': "&quot;"})
+
+    def prop(pid: str, value) -> str:
+        return f'      <Property Id="Microsoft.VisualStudio.{pid}" Value="{e(value)}"/>\n'
+
+    web = "main" not in pkg and "browser" not in pkg  # no code to run: vsce marks it a web extension (vscode.dev)
+    tags = list(pkg.get("keywords", []))
+    if pkg.get("contributes", {}).get("themes"):
+        tags += ["theme", "color-theme"]
+    if web:
+        tags.append("__web_extension")
+    props = [prop("Code.Engine", pkg["engines"]["vscode"]), prop("Code.ExtensionDependencies", ""),
+             prop("Code.ExtensionPack", ""), prop("Code.ExtensionKind", "ui,workspace,web" if web else "ui,workspace"),
+             prop("Code.LocalizedLanguages", ""), prop("Code.EnabledApiProposals", "")]
+    repo = pkg.get("repository", {}).get("url")
+    if repo:
+        props += [prop("Services.Links.Source", repo), prop("Services.Links.Getstarted", repo),
+                  prop("Services.Links.GitHub" if "github.com" in repo else "Services.Links.Repository", repo)]
+    if pkg.get("bugs", {}).get("url"):
+        props.append(prop("Services.Links.Support", pkg["bugs"]["url"]))
+    if pkg.get("homepage"):
+        props.append(prop("Services.Links.Learn", pkg["homepage"]))
+    banner = pkg.get("galleryBanner", {})
+    if banner.get("color"):
+        props.append(prop("Services.Branding.Color", banner["color"]))
+    if banner.get("theme"):
+        props.append(prop("Services.Branding.Theme", banner["theme"]))
+    props += [prop("Services.GitHubFlavoredMarkdown", "false" if pkg.get("markdown") == "standard" else "true"),
+              prop("Services.Content.Pricing", pkg.get("pricing", "Free"))]
+    qna = pkg.get("qna")
+    if qna == "marketplace" or qna is False:
+        props.append(prop("Services.EnableMarketplaceQnA", "true" if qna else "false"))
+    elif isinstance(qna, str):
+        props.append(prop("Services.CustomerQnALink", qna))
+    icon = f"extension/{pkg['icon']}" if pkg.get("icon") else ""
+    assets = [("Code.Manifest", "extension/package.json"), ("Services.Content.Details", "extension/README.md")]
+    if "CHANGELOG.md" in names:
+        assets.append(("Services.Content.Changelog", "extension/CHANGELOG.md"))
+    assets.append(("Services.Content.License", "extension/LICENSE.txt"))
+    if icon:
+        assets.append(("Services.Icons.Default", icon))
     return ('<?xml version="1.0" encoding="utf-8"?>\n'
             '<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" '
             'xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">\n'
@@ -108,39 +151,36 @@ def _vsixmanifest(pkg: dict) -> str:
             f'Publisher="{e(pkg["publisher"])}"/>\n'
             f"    <DisplayName>{e(pkg['displayName'])}</DisplayName>\n"
             f'    <Description xml:space="preserve">{e(pkg["description"])}</Description>\n'
-            f"    <Tags>{e(','.join(pkg.get('keywords', [])))}</Tags>\n"
+            f"    <Tags>{e(','.join(dict.fromkeys(tags)))}</Tags>\n"
             f"    <Categories>{e(','.join(pkg.get('categories', [])))}</Categories>\n"
             "    <GalleryFlags>Public</GalleryFlags>\n"
-            "    <Properties>\n"
-            f'      <Property Id="Microsoft.VisualStudio.Code.Engine" Value="{e(pkg["engines"]["vscode"])}"/>\n'
-            '      <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value=""/>\n'
-            '      <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value=""/>\n'
-            '      <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="ui,workspace"/>\n'
-            '      <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value=""/>\n'
-            f'      <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="{e(pkg["repository"]["url"])}"/>\n'
-            "    </Properties>\n"
+            "    <Properties>\n" + "".join(props) + "    </Properties>\n"
             "    <License>extension/LICENSE.txt</License>\n"
+            + (f"    <Icon>{e(icon)}</Icon>\n" if icon else "") +
             "  </Metadata>\n"
             '  <Installation>\n    <InstallationTarget Id="Microsoft.VisualStudio.Code"/>\n  </Installation>\n'
             "  <Dependencies/>\n"
             "  <Assets>\n"
-            '    <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true"/>\n'
-            '    <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" '
-            'Addressable="true"/>\n'
-            '    <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" '
-            'Addressable="true"/>\n'
+            + "".join(f'    <Asset Type="Microsoft.VisualStudio.{t}" Path="{e(path)}" Addressable="true"/>\n'
+                      for t, path in assets) +
             "  </Assets>\n"
             "</PackageManifest>\n")
 
 
-def _write_vsix(target: Path, port: registry.Port, files: list[tuple[str, bytes]], license_bytes: bytes) -> None:
+def _write_vsix(target: Path, port: registry.Port, files: list[tuple[str, bytes]], license_bytes: bytes,
+                readme: bytes, changelog: bytes) -> None:
+    """The port's files with its listing page as README.md (not the port README) and the changelog."""
+    files = [(n, d) for n, d in files if n != "README.md"] + [("README.md", readme), ("CHANGELOG.md", changelog)]
     by_name = dict(files)
-    for required in ("package.json", "README.md"):
-        if required not in by_name:
-            raise PackageError(f"vsix: {port.output_root}/{required} is missing (run tools/build.py)")
+    if "package.json" not in by_name:
+        raise PackageError(f"vsix: {port.output_root}/package.json is missing (run tools/build.py)")
     pkg = json.loads(by_name["package.json"])
+    named = [pkg.get("icon")] + [t.get("path") for t in pkg.get("contributes", {}).get("themes", [])]
+    for name in (n.removeprefix("./") for n in named if n):
+        if name not in by_name:
+            raise PackageError(f"vsix: {port.id}: package.json names {name}, which is not packaged")
     members = [("[Content_Types].xml", CONTENT_TYPES.encode("utf-8")),
-               ("extension.vsixmanifest", _vsixmanifest(pkg).encode("utf-8")),
+               ("extension.vsixmanifest", _vsixmanifest(pkg, set(by_name)).encode("utf-8")),
                ("extension/LICENSE.txt", license_bytes)]
     members += [(f"extension/{name}", data) for name, data in files]
     _write_zip(target, members)
@@ -166,7 +206,12 @@ def package(root: Path, out_dir: Path) -> list[Path]:
         elif art.kind in ("jar", "xpi"):
             _write_zip(target, [(n, d) for n, d in files if n != "README.md"] + [("LICENSE", license_bytes)])
         elif art.kind == "vsix":
-            _write_vsix(target, port, files, license_bytes)
+            page = marketplace.PAGES[port.id]
+            for rel in (page, "CHANGELOG.md"):
+                if not (root / rel).is_file():
+                    raise PackageError(f"vsix: {rel} is missing (run tools/build.py)")
+            _write_vsix(target, port, files, license_bytes, safepath.read_bytes(root, page),
+                        safepath.read_bytes(root, "CHANGELOG.md"))
         else:
             target.write_bytes(safepath.read_bytes(root, f"{port.output_root}/umber-calm.json"))
         made.append(target)
