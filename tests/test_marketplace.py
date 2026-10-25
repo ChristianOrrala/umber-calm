@@ -1,5 +1,6 @@
-import json, re, unittest
+import json, re, struct, unittest, zlib
 from pathlib import Path
+from urllib.parse import quote
 from tests.helpers import REPO, load_real_palette, tempdir
 from umber import checks, docsgen, marketplace, registry
 
@@ -63,6 +64,24 @@ class PageTest(unittest.TestCase):
             self.assertIn("Amber only marks where you are: the cursor and whatever has focus.", text)
             self.assertNotIn("active tab", text)
 
+    def test_github_anchors_name_readme_headings(self):
+        # GitHub's anchor for "## Ports" is "#ports"; a renamed heading would leave the page linking nowhere.
+        readme = (REPO / "README.md").read_text(encoding="utf-8")
+        headings = {re.sub(r"[^\w\- ]", "", h.lower()).replace(" ", "-") for h in re.findall(r"^## (.+)$", readme, re.M)}
+        for pid, text in self.pages().items():
+            anchors = set(re.findall(re.escape(P.meta["homepage"]) + r"#([\w-]+)", text))
+            self.assertEqual(anchors, {"palette", "ports"}, pid)
+            self.assertLessEqual(anchors, headings, pid)
+
+    def test_registry_links_use_the_published_extension_names(self):
+        # The vscode.dev and Open VSX links are typed in the page; the IDs come from the rendered package.json files.
+        vs, kiro = (json.loads((REPO / f"ports/{pid}/package.json").read_text(encoding="utf-8"))
+                    for pid in ("vscode", "kiro"))
+        label = vs["contributes"]["themes"][0]["label"]
+        text = self.pages()["vscode"]
+        self.assertIn(f"https://vscode.dev/theme/{vs['publisher']}.{vs['name']}/{quote(label)})", text)
+        self.assertIn(f"https://open-vsx.org/extension/{kiro['publisher']}/{kiro['name']})", text)
+
     def test_unknown_port_is_refused(self):
         with self.assertRaises(ValueError):
             marketplace.page("neovim", P, PORTS)
@@ -112,6 +131,11 @@ class ManifestTemplateTest(unittest.TestCase):
         readme = (REPO / "README.md").read_text(encoding="utf-8")
         self.assertIn(f"https://marketplace.visualstudio.com/items?itemName={marketplace.PUBLISHER}.umber-calm", readme)
 
+def png(width, height) -> bytes:
+    """A PNG signature and IHDR chunk: all the image check reads."""
+    ihdr = b"IHDR" + struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + ihdr + struct.pack(">I", zlib.crc32(ihdr))
+
 class ImageCheckTest(unittest.TestCase):
     """A temp repo whose vscode page links icon.png, with the icon's SVG source next to it."""
     def setUp(self):
@@ -125,9 +149,9 @@ class ImageCheckTest(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def add_png(self, name="icon"):
+    def add_png(self, name="icon", data=None):
         self.images.mkdir(parents=True, exist_ok=True)
-        (self.images / f"{name}.png").write_bytes(b"\x89PNG\r\n\x1a\n")
+        (self.images / f"{name}.png").write_bytes(png(256, 256) if data is None else data)
 
     def record(self):
         sources = {"icon": marketplace.source_digest(self.root, "icon")}
@@ -157,6 +181,31 @@ class ImageCheckTest(unittest.TestCase):
         self.add_png("extra")
         self.assertIn("marketplace: assets/marketplace/extra.png is not a listed marketplace image",
                       marketplace.image_problems(self.root))
+
+    def test_unreadable_sources_file_is_reported(self):
+        self.add_png()
+        for data in (b"{not json", b"[]", b"\xff\xfe"):
+            with self.subTest(data=data):
+                (self.root / marketplace.SOURCES).write_bytes(data)
+                self.assertIn("marketplace: assets/marketplace/sources.json is not a JSON object of image digests "
+                              "(run tools/marketplace_images.py)", marketplace.image_problems(self.root))
+
+    def test_icon_smaller_than_the_marketplace_minimum_is_reported(self):
+        self.add_png(data=png(64, 128))
+        self.record()
+        self.assertEqual(marketplace.image_problems(self.root),
+            ["marketplace: assets/marketplace/icon.png must be a PNG of at least 128x128 pixels (it is 64x128)"])
+
+    def test_icon_that_is_not_a_png_is_reported(self):
+        self.add_png(data=b"GIF89a\x01\x00\x01\x00")
+        self.record()
+        self.assertEqual(marketplace.image_problems(self.root),
+            ["marketplace: assets/marketplace/icon.png must be a PNG of at least 128x128 pixels (it is not a PNG)"])
+
+    def test_icon_at_the_minimum_size_passes(self):
+        self.add_png(data=png(128, 128))
+        self.record()
+        self.assertEqual(marketplace.image_problems(self.root), [])
 
     def test_current_images_have_no_problems(self):
         self.add_png()
