@@ -282,7 +282,7 @@ KIRO_READS = ("icon.foreground", "progressBar.background", "problemsErrorIcon.fo
 class KiroPort(unittest.TestCase):
     def test_ships_the_vscode_theme_unchanged(self):
         p = port("kiro")
-        self.assertEqual(p.inputs, ("ports/vscode/themes/umber-calm-color-theme.json",))
+        self.assertEqual(p.inputs, ("ports/vscode/themes/umber-calm-color-theme.json", "assets/marketplace/icon.png"))
         self.assertTrue(p.syntax_exempt)
         theme = json.loads(out("ports/vscode/themes/umber-calm-color-theme.json"))["colors"]
         for key in KIRO_READS:
