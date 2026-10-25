@@ -2,7 +2,7 @@
   "name": "umber-calm",
   "displayName": "Umber Calm",
   "description": "A warm, low-glare dark palette with measured contrast.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "umber-calm",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/ChristianOrrala/umber-calm" },

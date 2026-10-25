@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (2026-10-25)
 
 - VS Code: the syntax colors now follow the style guide, as the Neovim port already did.
   - Keyword operators (`typeof`, `instanceof`, `in`, `new`; Python `and`, `or`, `not`, `in`, `is`) are keywords.

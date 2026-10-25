@@ -30,7 +30,7 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:fed6095242eea279f6b56aeca7f44e75244c8e40880c26336b1cf0f713be8a7a`
+Current digest: `sha256:8f793848e649f5b0ae1d433c926465f4346e293cd1b053ce8ea20af713a151c0`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 
@@ -39,6 +39,7 @@ Print it yourself with `python3 tools/build.py digest vscode`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 1.140 | Linux | 24.04 | VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI. |  | `8f793848e649` |
 | 2026-10-25 | ✅ verified | 1.140 | Linux | 24.04 | VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI. |  | `fed6095242ee` |
 | 2026-09-28 | ✅ verified | 1.139.1 | macOS | 26.6.2 | Full checklist after the find-foreground fix. Active tab top border shows with workbench.experimental.modernUI off; 1.139's default modern tabs hide it for every theme. |  | `0246d948acbe` |
 

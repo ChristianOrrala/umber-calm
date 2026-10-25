@@ -33,6 +33,16 @@
       "os": "Linux",
       "os_version": "24.04",
       "status": "verified"
+    },
+    {
+      "app_version": "1.4.26",
+      "date": "2026-10-25",
+      "digest": "sha256:0bb7f061e6bd2a3440d6e85b5ce5b64ba4549e77930c39f59bba607198237a26",
+      "evidence": "",
+      "note": "Ubuntu 24.04, Xvfb: 484/489 colors resolve exactly (5 are 1.140-only chat keys); syntax; diff tints; agent chat icons, toggles, tooltips; Agent Focus; menus.",
+      "os": "Linux",
+      "os_version": "24.04",
+      "status": "verified"
     }
   ],
   "kiro-crew": [
@@ -98,6 +108,16 @@
       "app_version": "1.140",
       "date": "2026-10-25",
       "digest": "sha256:fed6095242eea279f6b56aeca7f44e75244c8e40880c26336b1cf0f713be8a7a",
+      "evidence": "",
+      "note": "VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI.",
+      "os": "Linux",
+      "os_version": "24.04",
+      "status": "verified"
+    },
+    {
+      "app_version": "1.140",
+      "date": "2026-10-25",
+      "digest": "sha256:8f793848e649f5b0ae1d433c926465f4346e293cd1b053ce8ea20af713a151c0",
       "evidence": "",
       "note": "VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI.",
       "os": "Linux",

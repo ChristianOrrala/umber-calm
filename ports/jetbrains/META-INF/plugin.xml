@@ -2,7 +2,7 @@
 <idea-plugin>
   <id>dev.umbercalm.theme</id>
   <name>Umber Calm</name>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <vendor url="https://github.com/ChristianOrrala/umber-calm">The Umber Calm contributors</vendor>
   <description>A warm, low-glare dark palette with measured contrast.</description>
   <idea-version since-build="243"/>

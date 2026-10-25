@@ -2,7 +2,7 @@
   "name": "umber-calm-kiro",
   "displayName": "Umber Calm for Kiro",
   "description": "A warm, low-glare dark palette with measured contrast. The Umber Calm VS Code theme, packaged for Kiro.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "umber-calm",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/ChristianOrrala/umber-calm" },
