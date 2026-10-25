@@ -1,12 +1,12 @@
 # Kiro Crew — Umber Calm
 
-> ⚠️ **Warning:** Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself.
+> ⚠️ **Warning:** Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself.
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 0.9.0 · Format documentation: https://github.com/kirodotdev/KiroCrew/blob/v0.9.0/website/docs/theming-contract.md
 
-Verified on: —
+Verified on: 0.9.0 · Linux 24.04 (2026-10-25)
 
 ## Install
 
@@ -20,7 +20,7 @@ Choose another theme in Settings → Display → Theme, then delete ~/.kiro/crew
 
 - [ ] the pack installs from a local folder with no validation error
 - [ ] chat and pages on bg; cards, inputs, menus and side panels one step lighter (surface)
-- [ ] primary buttons, links and the active tab are blue with dark text; text fields take the orange focus ring and nothing else is orange
+- [ ] primary buttons, links and the active tab are blue with dark text; text fields take the orange focus ring and nothing else the pack colors is orange (the settings icon tiles are fixed)
 - [ ] secondary text, timestamps and labels readable on bg and on cards
 - [ ] input, dropdown and card borders visible (3:1 on the page)
 - [ ] selected rows and text selection use the overlay, hovered rows a quieter step
@@ -38,6 +38,8 @@ Print it yourself with `python3 tools/build.py digest kiro-crew`. It covers thes
 - `ports/kiro-crew/theme.json`
 - `ports/kiro-crew/variables.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 0.9.0 | Linux | 24.04 | Ubuntu 24.04, gateway --test-mode: installs from the release zip; all 56 variables match on 10 pages; borders #6E6961 (3:1); terminal ANSI; light block repeats dark. |  | `1390e083d1d6` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

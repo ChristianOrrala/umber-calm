@@ -1,10 +1,10 @@
 # VS Code — Umber Calm
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 1.95 · Minimum version: 1.95.0 · Format documentation: https://code.visualstudio.com/api/extension-guides/color-theme
 
-Verified on: 1.139.1 · macOS 26.6.2 (2026-09-28)
+Verified on: 1.140 · Linux 24.04 (2026-10-25)
 
 ## Install
 
@@ -39,6 +39,7 @@ Print it yourself with `python3 tools/build.py digest vscode`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 1.140 | Linux | 24.04 | VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI. |  | `fed6095242ee` |
 | 2026-09-28 | ✅ verified | 1.139.1 | macOS | 26.6.2 | Full checklist after the find-foreground fix. Active tab top border shows with workbench.experimental.modernUI off; 1.139's default modern tabs hide it for every theme. |  | `0246d948acbe` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

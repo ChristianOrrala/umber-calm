@@ -1,10 +1,10 @@
 # Kiro IDE — Umber Calm
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 1.4.26 · Format documentation: https://kiro.dev/docs/upgrade-guides/migrating-from-vscode/
 
-Verified on: —
+Verified on: 1.4.26 · Linux 24.04 (2026-10-25)
 
 ## Install
 
@@ -34,6 +34,8 @@ Print it yourself with `python3 tools/build.py digest kiro`. It covers these fil
 - `ports/kiro/package.json`
 - `ports/vscode/themes/umber-calm-color-theme.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 1.4.26 | Linux | 24.04 | Ubuntu 24.04, Xvfb: 484/489 colors resolve exactly (5 are 1.140-only chat keys); syntax; diff tints; agent chat icons, toggles, tooltips; Agent Focus; menus. |  | `a6af61b7219b` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

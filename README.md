@@ -106,7 +106,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (7)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (10)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -115,13 +115,16 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
+| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.26 · Linux 24.04 |  |
 | Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
+| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.140 · Linux 24.04 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
+| Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
 
 </details>
 
 <details>
-<summary><b>🧪 experimental (45)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -147,10 +150,8 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
 | Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
-| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | — |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
-| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.139.1 · macOS 26.6.2 |  |
 | Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
 | dunst | desktop | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
 | fuzzel | desktop | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
@@ -167,7 +168,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Firefox | web | [ports/firefox/](ports/firefox/) | 133 | — |  |
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
-| Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | — | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -225,8 +225,8 @@ A tier is supported only while its last real-app test covers the exact files you
 | JetBrains IDEs | 🧪 experimental | — |  |  | `860671984433` |  |
 | JSON palette | 🧪 experimental | — |  |  | `16953139bba3` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
-| Kiro Crew | 🧪 experimental | — |  |  | `1390e083d1d6` |  |
-| Kiro IDE | 🧪 experimental | — |  |  | `a6af61b7219b` |  |
+| Kiro Crew | ✅ supported | 2026-10-25 | 0.9.0 | Linux 24.04 | `1390e083d1d6` |  |
+| Kiro IDE | ✅ supported | 2026-10-25 | 1.4.26 | Linux 24.04 | `a6af61b7219b` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
@@ -248,7 +248,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Vim | 🧪 experimental | — |  |  | `5e766e51c86d` |  |
 | Vimium | 🟡 candidate | — |  |  | `02b715566580` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | 🧪 experimental | 2026-09-28 (earlier revision) | 1.139.1 | macOS 26.6.2 | `fed6095242ee` |  |
+| VS Code | ✅ supported | 2026-10-25 | 1.140 | Linux 24.04 | `fed6095242ee` |  |
 | Waybar | 🧪 experimental | — |  |  | `52fb3b90c649` |  |
 | WezTerm | ✅ supported | 2026-09-28 | 20260901 | macOS 26.6.2 | `2ef53e6927a3` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `f21b0b6c213a` |  |

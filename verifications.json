@@ -23,6 +23,30 @@
       "status": "verified"
     }
   ],
+  "kiro": [
+    {
+      "app_version": "1.4.26",
+      "date": "2026-10-25",
+      "digest": "sha256:a6af61b7219b1fab0519e45e40cdb1fa964a637c96b5a19422cf86a1b6f160b0",
+      "evidence": "",
+      "note": "Ubuntu 24.04, Xvfb: 484/489 colors resolve exactly (5 are 1.140-only chat keys); syntax; diff tints; agent chat icons, toggles, tooltips; Agent Focus; menus.",
+      "os": "Linux",
+      "os_version": "24.04",
+      "status": "verified"
+    }
+  ],
+  "kiro-crew": [
+    {
+      "app_version": "0.9.0",
+      "date": "2026-10-25",
+      "digest": "sha256:1390e083d1d655c922521c6be2999bd2de6cc16cdedec2b06212662795452852",
+      "evidence": "",
+      "note": "Ubuntu 24.04, gateway --test-mode: installs from the release zip; all 56 variables match on 10 pages; borders #6E6961 (3:1); terminal ANSI; light block repeats dark.",
+      "os": "Linux",
+      "os_version": "24.04",
+      "status": "verified"
+    }
+  ],
   "neovim": [
     {
       "app_version": "0.12.5",
@@ -68,6 +92,16 @@
       "note": "Full checklist after the find-foreground fix. Active tab top border shows with workbench.experimental.modernUI off; 1.139's default modern tabs hide it for every theme.",
       "os": "macOS",
       "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "1.140",
+      "date": "2026-10-25",
+      "digest": "sha256:fed6095242eea279f6b56aeca7f44e75244c8e40880c26336b1cf0f713be8a7a",
+      "evidence": "",
+      "note": "VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI.",
+      "os": "Linux",
+      "os_version": "24.04",
       "status": "verified"
     }
   ],
