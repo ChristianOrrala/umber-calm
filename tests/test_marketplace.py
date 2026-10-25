@@ -1,5 +1,6 @@
-import re, unittest
-from tests.helpers import REPO, load_real_palette
+import json, re, unittest
+from pathlib import Path
+from tests.helpers import REPO, load_real_palette, tempdir
 from umber import checks, docsgen, marketplace, registry
 
 P = load_real_palette()
@@ -83,6 +84,57 @@ class SourceSvgTest(unittest.TestCase):
         for rel, entry in planned.items():
             self.assertEqual(docs[rel], entry)
             self.assertEqual(entry[0], "docs")
+
+class ImageCheckTest(unittest.TestCase):
+    """A temp repo whose vscode page links icon.png, with the icon's SVG source next to it."""
+    def setUp(self):
+        self.tmp = tempdir()
+        self.root = Path(self.tmp.name)
+        (self.root / "docs/marketplace").mkdir(parents=True)
+        (self.root / "docs/marketplace/vscode.md").write_text(f'<img src="{BASE}icon.png">\n', encoding="utf-8")
+        (self.root / "docs/marketplace/icon.svg").write_text("<svg/>\n", encoding="utf-8")
+        self.images = self.root / "assets/marketplace"
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def add_png(self, name="icon"):
+        self.images.mkdir(parents=True, exist_ok=True)
+        (self.images / f"{name}.png").write_bytes(b"\x89PNG\r\n\x1a\n")
+
+    def record(self):
+        sources = {"icon": marketplace.source_digest(self.root, "icon")}
+        (self.root / marketplace.SOURCES).write_text(json.dumps(sources, indent=2, sort_keys=True) + "\n",
+                                                     encoding="utf-8")
+
+    def test_missing_png_is_reported(self):
+        self.assertEqual(marketplace.image_problems(self.root),
+            ["marketplace: docs/marketplace/vscode.md links assets/marketplace/icon.png, which does not exist"])
+
+    def test_png_without_a_recorded_source_is_reported(self):
+        self.add_png()
+        self.assertEqual(marketplace.image_problems(self.root),
+            ["marketplace: assets/marketplace/icon.png has no entry in assets/marketplace/sources.json"])
+
+    def test_stale_source_is_reported(self):
+        self.add_png()
+        self.record()
+        (self.root / "docs/marketplace/icon.svg").write_text("<svg><rect/></svg>\n", encoding="utf-8")
+        self.assertEqual(marketplace.image_problems(self.root),
+            ["marketplace: assets/marketplace/icon.png is stale: docs/marketplace/icon.svg changed since it was made "
+             "(run tools/marketplace_images.py)"])
+
+    def test_unexpected_png_is_reported(self):
+        self.add_png()
+        self.record()
+        self.add_png("extra")
+        self.assertIn("marketplace: assets/marketplace/extra.png is not a listed marketplace image",
+                      marketplace.image_problems(self.root))
+
+    def test_current_images_have_no_problems(self):
+        self.add_png()
+        self.record()
+        self.assertEqual(marketplace.image_problems(self.root), [])
 
 if __name__ == "__main__":
     unittest.main()

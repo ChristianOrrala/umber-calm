@@ -1,6 +1,6 @@
 # Kiro IDE — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 1.4.26 · Format documentation: https://kiro.dev/docs/upgrade-guides/migrating-from-vscode/
 
@@ -27,10 +27,11 @@ Uninstall Umber Calm for Kiro from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:0bb7f061e6bd2a3440d6e85b5ce5b64ba4549e77930c39f59bba607198237a26`
+Current digest: `sha256:08ddc5079f94360d839f42138c4480ed49e4c06bdce81569c95e45afd15a64c1`
 
 Print it yourself with `python3 tools/build.py digest kiro`. It covers these files:
 
+- `assets/marketplace/icon.png`
 - `ports/kiro/package.json`
 - `ports/vscode/themes/umber-calm-color-theme.json`
 

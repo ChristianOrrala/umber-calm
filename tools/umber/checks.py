@@ -9,7 +9,7 @@ import tomllib
 import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
 
-from . import outputs, palette, readability, registry, safepath, structure, syntaxcheck, template
+from . import marketplace, outputs, palette, readability, registry, safepath, structure, syntaxcheck, template
 from .hygiene import line_of as _line, png_problems, scan_text
 
 UNRESOLVED = re.compile(r"\{\{\s*[A-Za-z]")
@@ -230,6 +230,7 @@ def run(root: Path) -> list[str]:
 
     found += manifest_floor_problems(root, ports)
     found += _hygiene_problems(root) + _readme_problems(root) + _workflow_problems(root)
+    found += marketplace.image_problems(root)
 
     for path in _tracked_files(root):
         rel = path.relative_to(root).as_posix()
