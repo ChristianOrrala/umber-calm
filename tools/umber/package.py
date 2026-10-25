@@ -206,7 +206,9 @@ def package(root: Path, out_dir: Path) -> list[Path]:
         elif art.kind in ("jar", "xpi"):
             _write_zip(target, [(n, d) for n, d in files if n != "README.md"] + [("LICENSE", license_bytes)])
         elif art.kind == "vsix":
-            page = marketplace.PAGES[port.id]
+            page = marketplace.PAGES.get(port.id)
+            if page is None:
+                raise PackageError(f"vsix: {port.id} has no listing page (add it to marketplace.PAGES)")
             for rel in (page, "CHANGELOG.md"):
                 if not (root / rel).is_file():
                     raise PackageError(f"vsix: {rel} is missing (run tools/build.py)")

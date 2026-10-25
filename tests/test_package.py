@@ -1,9 +1,10 @@
 import hashlib, re, struct, unittest, zipfile, zlib
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from unittest import mock
 from tests.helpers import tempdir
 from tests.test_buildcmd import fixture
-from umber import buildcmd, package, palette, registry
+from umber import buildcmd, marketplace, package, palette, registry
 
 EXTRA = '''
 [[port]]
@@ -230,6 +231,25 @@ class VsixListingTest(unittest.TestCase):
             buildcmd.build(root)
             with self.assertRaisesRegex(package.PackageError, "package.json names icon.png, which is not packaged"):
                 package.package(root, root / "dist")
+
+    def test_vsix_refuses_a_theme_file_that_is_not_packaged(self):
+        with tempdir() as d:
+            root = repo(d)
+            tmpl = root / "templates/vscode/package.json.tmpl"
+            tmpl.write_text(tmpl.read_text(encoding="utf-8").replace("./themes/t.json", "./themes/gone.json"),
+                            encoding="utf-8")
+            buildcmd.build(root)
+            with self.assertRaisesRegex(package.PackageError,
+                                        "package.json names themes/gone.json, which is not packaged"):
+                package.package(root, root / "dist")
+
+    def test_vsix_port_without_a_listing_page_is_refused(self):
+        # A new vsix port must get a page in marketplace.PAGES before it can be packaged.
+        with tempdir() as d:
+            root = repo(d)
+            with mock.patch.dict(marketplace.PAGES, clear=True):
+                with self.assertRaisesRegex(package.PackageError, "vsix: vscode has no listing page"):
+                    package.package(root, root / "dist")
 
 if __name__ == "__main__":
     unittest.main()
