@@ -4,6 +4,10 @@ docs	docs/badges/license.svg
 docs	docs/badges/ports.svg
 docs	docs/badges/release.svg
 docs	docs/color-vision.md
+docs	docs/marketplace/icon.svg
+docs	docs/marketplace/kiro.md
+docs	docs/marketplace/palette.svg
+docs	docs/marketplace/vscode.md
 docs	docs/renders/color-vision.svg
 docs	docs/renders/deuteranopia.svg
 docs	docs/renders/grayscale.svg

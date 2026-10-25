@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="168" viewBox="0 0 760 168" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+<rect width="760" height="168" rx="12" fill="#201F1D"/>
+<rect x="16" y="16" width="95.43" height="44" rx="6" fill="#DCC07D"/>
+<text x="63.71" y="76" fill="#D6C9B6">yellow</text>
+<text x="63.71" y="92" fill="#938A7B">keywords</text>
+<rect x="121.43" y="16" width="95.43" height="44" rx="6" fill="#88B0B4"/>
+<text x="169.14" y="76" fill="#D6C9B6">blue</text>
+<text x="169.14" y="92" fill="#938A7B">functions</text>
+<rect x="226.86" y="16" width="95.43" height="44" rx="6" fill="#88C0AE"/>
+<text x="274.57" y="76" fill="#D6C9B6">cyan</text>
+<text x="274.57" y="92" fill="#938A7B">types</text>
+<rect x="332.29" y="16" width="95.43" height="44" rx="6" fill="#A7B56E"/>
+<text x="380" y="76" fill="#D6C9B6">green</text>
+<text x="380" y="92" fill="#938A7B">strings</text>
+<rect x="437.71" y="16" width="95.43" height="44" rx="6" fill="#C9A0C0"/>
+<text x="485.43" y="76" fill="#D6C9B6">purple</text>
+<text x="485.43" y="92" fill="#938A7B">constants</text>
+<rect x="543.14" y="16" width="95.43" height="44" rx="6" fill="#E08374"/>
+<text x="590.86" y="76" fill="#D6C9B6">red</text>
+<text x="590.86" y="92" fill="#938A7B">errors</text>
+<rect x="648.57" y="16" width="95.43" height="44" rx="6" fill="#EDA97C"/>
+<text x="696.29" y="76" fill="#D6C9B6">orange</text>
+<text x="696.29" y="92" fill="#938A7B">focus</text>
+<rect x="16" y="112" width="82.25" height="40" rx="5" fill="#1A1917" stroke="#3C3A36"/>
+<rect x="108.25" y="112" width="82.25" height="40" rx="5" fill="#201F1D" stroke="#3C3A36"/>
+<rect x="200.5" y="112" width="82.25" height="40" rx="5" fill="#2A2826" stroke="#3C3A36"/>
+<rect x="292.75" y="112" width="82.25" height="40" rx="5" fill="#3C3A36" stroke="#3C3A36"/>
+<rect x="385" y="112" width="82.25" height="40" rx="5" fill="#938A7B" stroke="#3C3A36"/>
+<rect x="477.25" y="112" width="82.25" height="40" rx="5" fill="#C2A98C" stroke="#3C3A36"/>
+<rect x="569.5" y="112" width="82.25" height="40" rx="5" fill="#D6C9B6" stroke="#3C3A36"/>
+<rect x="661.75" y="112" width="82.25" height="40" rx="5" fill="#EDE3D2" stroke="#3C3A36"/>
+</svg>

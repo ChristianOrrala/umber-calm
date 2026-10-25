@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from . import color, cvd, render_svg, safepath, sessions
+from . import color, cvd, marketplace, render_svg, safepath, sessions
 from .palette import Palette
 
 OWNER = "docs"
@@ -100,4 +100,5 @@ def plan(root: Path, pal: Palette, ports=()) -> dict[str, tuple[str, bytes]]:
         out[f"docs/swatches/{name}.svg"] = (OWNER, swatch(hx, outline).encode("utf-8"))
     for name, (label, value) in badge_values(pal, ports).items():
         out[f"docs/badges/{name}.svg"] = (OWNER, badge(label, value, pal).encode("utf-8"))
+    out.update(marketplace.plan(pal, ports))
     return out
