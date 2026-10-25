@@ -22,6 +22,7 @@ Choose another theme in Settings → Display → Theme, then delete ~/.kiro/crew
 - [ ] chat and pages on bg; cards, inputs, menus and side panels one step lighter (surface)
 - [ ] primary buttons, links and the active tab are blue with dark text; text fields take the orange focus ring and nothing else is orange
 - [ ] secondary text, timestamps and labels readable on bg and on cards
+- [ ] input, dropdown and card borders visible (3:1 on the page)
 - [ ] selected rows and text selection use the overlay, hovered rows a quieter step
 - [ ] status colors: success green, warning and agent questions yellow, errors red, info blue, agent highlights mauve
 - [ ] git panel and file tree: added counts and files green, deleted red
@@ -30,7 +31,7 @@ Choose another theme in Settings → Display → Theme, then delete ~/.kiro/crew
 
 ## Verification
 
-Current digest: `sha256:a2f532c83a71ca34662368e561a462e31358e3a356fdc754cd1f63e93fcb310c`
+Current digest: `sha256:1390e083d1d655c922521c6be2999bd2de6cc16cdedec2b06212662795452852`
 
 Print it yourself with `python3 tools/build.py digest kiro-crew`. It covers these files:
 

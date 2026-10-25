@@ -358,6 +358,13 @@ class KiroCrewPort(unittest.TestCase):
                            ("--diff-hunk-text", "--diff-hunk")):
             self.assertGreaterEqual(color.contrast(self.v[text], self.v[fill]), 4.5, f"{text} on {fill}")
 
+    def test_control_borders_reach_3_to_1_on_the_page(self):
+        """Kiro Crew draws inputs, dropdowns and card outlines with --border (measured in 0.9.0), so it meets WCAG 1.4.11
+        on the page background; the stronger steps stay stronger."""
+        self.assertGreaterEqual(color.contrast(self.v["--border"], self.v["--bg"]), 3.0)
+        steps = [color.contrast(self.v[k], self.v["--bg"]) for k in ("--border", "--border-strong", "--border-hover")]
+        self.assertEqual(steps, sorted(steps))
+
     def test_terminal_hues_match_the_ansi_slots(self):
         """Kiro Crew reads ANSI red, green, yellow and blue from the status colors, magenta and cyan from --term-*."""
         a = P.ansi

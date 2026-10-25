@@ -17,7 +17,7 @@
   - Input, dropdown and checkbox borders use `muted` (4.3:1 on panels).
   - Ignored files, ghost text, placeholders and disabled text use `muted` instead of `dim_text`, which drops to 2.7:1 on panels.
 - New port: Kiro IDE 1.4.26 (experimental), as its own extension, `umber-calm-kiro-<version>.vsix`, that ships the VS Code port's theme file unchanged (the colors Kiro's agent chat and Agent Focus read are standard VS Code keys).
-- New port: Kiro Crew 0.9.0 (experimental), a level-0 theme pack that sets all 56 dashboard variables from palette roles. Orange only marks the text-field focus ring. Umber Calm has no light variant, so the light block repeats the dark palette. Kiro Crew's code highlighting uses fixed syntax colors that no pack can change; the port README says so.
+- New port: Kiro Crew 0.9.0 (experimental), a level-0 theme pack that sets all 56 dashboard variables from palette roles. Orange only marks the text-field focus ring. Inputs, dropdowns and card outlines (`--border`) reach 3:1 on the page. Umber Calm has no light variant, so the light block repeats the dark palette. Kiro Crew's code highlighting uses fixed syntax colors that no pack can change; the port README says so.
 
 ## 0.1.0 (2026-09-29)
 

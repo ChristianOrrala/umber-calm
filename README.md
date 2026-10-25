@@ -225,7 +225,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | JetBrains IDEs | 🧪 experimental | — |  |  | `860671984433` |  |
 | JSON palette | 🧪 experimental | — |  |  | `16953139bba3` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
-| Kiro Crew | 🧪 experimental | — |  |  | `a2f532c83a71` |  |
+| Kiro Crew | 🧪 experimental | — |  |  | `1390e083d1d6` |  |
 | Kiro IDE | 🧪 experimental | — |  |  | `a6af61b7219b` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
