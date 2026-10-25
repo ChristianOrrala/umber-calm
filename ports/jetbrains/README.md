@@ -32,7 +32,7 @@ Settings → Plugins → Umber Calm → Uninstall.
 
 ## Verification
 
-Current digest: `sha256:5e5fdb7bfef527c8c11d018b060e424767d676fafbcda2a33d50ca6d22c091af`
+Current digest: `sha256:e57a3cf99d7d18e3d15bd73b2a32635f70f11d3a562fe099cd286b56dd2efad0`
 
 Print it yourself with `python3 tools/build.py digest jetbrains`. It covers these files:
 

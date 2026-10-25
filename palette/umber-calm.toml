@@ -4,7 +4,7 @@
 name = "Umber Calm"
 slug = "umber-calm"
 palette_version = "0.1.0"
-release = "0.2.0"
+release = "0.2.1"
 schema_version = 1
 license = "MIT"
 author = "The Umber Calm contributors"

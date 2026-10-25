@@ -1,6 +1,6 @@
 # JSON palette
 
-`umber-calm.json` exports the Umber Calm palette (version 0.1.0, release 0.2.0, schema 1) for tooling: metadata, colors, the 16 ANSI slots, the role contracts (syntax, ui, diag, term) resolved to hex, and tint amounts.
+`umber-calm.json` exports the Umber Calm palette (version 0.1.0, release 0.2.1, schema 1) for tooling: metadata, colors, the 16 ANSI slots, the role contracts (syntax, ui, diag, term) resolved to hex, and tint amounts.
 
 Tier: 🧪 experimental
 
@@ -23,7 +23,7 @@ Stop reading the file.
 
 ## Verification
 
-Current digest: `sha256:3c1b08f64177cf50cae86837fff7b1f2c7473ac878e2824db3a53f337a0b83a3`
+Current digest: `sha256:5154d75476eccd29d415c0dc1d1f99a705b1a797dfd8e33cc4d456e99b4ef7c3`
 
 Print it yourself with `python3 tools/build.py digest json`. It covers these files:
 

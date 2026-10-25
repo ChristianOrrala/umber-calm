@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 (2026-10-25)
+
+- VS Code and Kiro: the extensions are published on the VS Code Marketplace and Open VSX as `ChristianOrrala.umber-calm` and `ChristianOrrala.umber-calm-kiro`, with a listing page, an icon and a warm header. If you installed an earlier `.vsix` from a GitHub release, uninstall it first: both are named Umber Calm.
+- The `.vsix` files now carry this changelog.
+
 ## 0.2.0 (2026-10-25)
 
 - VS Code: the syntax colors now follow the style guide, as the Neovim port already did.

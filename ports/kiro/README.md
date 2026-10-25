@@ -1,10 +1,10 @@
 # Kiro IDE — Umber Calm
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 1.4.26 · Format documentation: https://kiro.dev/docs/upgrade-guides/migrating-from-vscode/
 
-Verified on: 1.4.26 · Linux 24.04 (2026-10-25)
+Verified on: 1.4.26 · macOS 26.6.2 (2026-10-25)
 
 ## Install
 
@@ -27,7 +27,7 @@ Uninstall Umber Calm for Kiro from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:1661ab85d19b816ab26a5ccd55f4f25ee50333e03a4aed2f8ca1d142b0e3e039`
+Current digest: `sha256:dc282dab7dc48dd83115ca07a72c5279f7a04044d01abd630087dd9529cefbd3`
 
 Print it yourself with `python3 tools/build.py digest kiro`. It covers these files:
 
@@ -37,6 +37,7 @@ Print it yourself with `python3 tools/build.py digest kiro`. It covers these fil
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 1.4.26 | macOS | 26.6.2 | Kiro 1.4.26: 474/489 colors resolve exactly over CDP (5 are 1.140-only chat keys, 10 git decoration keys not registered); syntax; agent chat and approvals confirmed in the app. |  | `dc282dab7dc4` |
 | 2026-10-25 | ✅ verified | 1.4.26 | Linux | 24.04 | Ubuntu 24.04, Xvfb: 484/489 colors resolve exactly (5 are 1.140-only chat keys); syntax; diff tints; agent chat icons, toggles, tooltips; Agent Focus; menus. |  | `0bb7f061e6bd` |
 | 2026-10-25 | ✅ verified | 1.4.26 | Linux | 24.04 | Ubuntu 24.04, Xvfb: 484/489 colors resolve exactly (5 are 1.140-only chat keys); syntax; diff tints; agent chat icons, toggles, tooltips; Agent Focus; menus. |  | `a6af61b7219b` |
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Umber Calm",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A warm, low-glare dark palette with measured contrast.",
   "browser_specific_settings": { "gecko": { "id": "{8f2b0c1e-6a5d-4b7e-9c3a-2d1e0f4a5b6c}" } },
   "theme": {

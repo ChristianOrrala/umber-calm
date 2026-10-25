@@ -43,6 +43,16 @@
       "os": "Linux",
       "os_version": "24.04",
       "status": "verified"
+    },
+    {
+      "app_version": "1.4.26",
+      "date": "2026-10-25",
+      "digest": "sha256:dc282dab7dc48dd83115ca07a72c5279f7a04044d01abd630087dd9529cefbd3",
+      "evidence": "",
+      "note": "Kiro 1.4.26: 474/489 colors resolve exactly over CDP (5 are 1.140-only chat keys, 10 git decoration keys not registered); syntax; agent chat and approvals confirmed in the app.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "kiro-crew": [
@@ -122,6 +132,16 @@
       "note": "VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI.",
       "os": "Linux",
       "os_version": "24.04",
+      "status": "verified"
+    },
+    {
+      "app_version": "1.143.1",
+      "date": "2026-10-25",
+      "digest": "sha256:63402f4907bfbb44eaad12dbb08016fa518017a13db9e183cdee469a3b6ad4f8",
+      "evidence": "",
+      "note": "VS Code 1.143.1, clean profile: 489/489 theme colors resolve exactly over CDP; syntax tokens; amber cursor. 1.143 hides the active tab top border in its new tab style.",
+      "os": "macOS",
+      "os_version": "26.6.2",
       "status": "verified"
     }
   ],

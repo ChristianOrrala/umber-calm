@@ -2,7 +2,7 @@
 
 A warm, low-glare dark theme with measured contrast.
 
-<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.0/assets/marketplace/editor.png" width="760" alt="An editor session in Umber Calm: a Python file with line numbers, one amber cursor and a statusline">
+<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/editor.png" width="760" alt="An editor session in Umber Calm: a Python file with line numbers, one amber cursor and a statusline">
 
 <sub>Warm near-black background, warm off-white text, and color only where it tells you something.</sub>
 
@@ -23,13 +23,13 @@ What's left is the palette I want to look at all day. I'm sharing it in case it 
 
 ## The palette
 
-<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.0/assets/marketplace/palette.png" width="760" alt="The Umber Calm palette: seven accents with their roles, above the warm background-to-text ramp">
+<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/palette.png" width="760" alt="The Umber Calm palette: seven accents with their roles, above the warm background-to-text ramp">
 
 Every hex value and contrast ratio is in the [palette table on GitHub](https://github.com/ChristianOrrala/umber-calm#palette).
 
 ## Checked for color vision
 
-<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.0/assets/marketplace/color-vision.png" width="760" alt="The same code in grayscale and as seen with deuteranopia, protanopia and tritanopia">
+<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/color-vision.png" width="760" alt="The same code in grayscale and as seen with deuteranopia, protanopia and tritanopia">
 
 <sub>The same code in grayscale and under deuteranopia, protanopia and tritanopia.</sub>
 
@@ -37,7 +37,7 @@ Every hex value and contrast ratio is in the [palette table on GitHub](https://g
 
 Umber Calm isn't only a Kiro theme. The same palette ships as 59 ports for editors, terminals and tools, so everything you use can match: Neovim, JetBrains IDEs, Zed, VS Code, Ghostty, iTerm2, Kitty, WezTerm, Windows Terminal, tmux, Starship and Obsidian.
 
-<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.0/assets/marketplace/terminal.png" width="372" alt="A terminal session in Umber Calm"> <img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.0/assets/marketplace/claude.png" width="372" alt="A Claude Code session in Umber Calm">
+<img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/terminal.png" width="372" alt="A terminal session in Umber Calm"> <img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/claude.png" width="372" alt="A Claude Code session in Umber Calm">
 
 [See every port on GitHub →](https://github.com/ChristianOrrala/umber-calm#ports)
 
