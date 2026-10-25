@@ -8,7 +8,7 @@ Verified on: 1.140 · Linux 24.04 (2026-10-25)
 
 ## Install
 
-Download umber-calm-<version>.vsix from the latest release and run `code --install-extension umber-calm-<version>.vsix`, then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T.
+Install Umber Calm from the VS Code Marketplace (Extensions view, search "Umber Calm"), or download umber-calm-<version>.vsix from the latest release and run `code --install-extension umber-calm-<version>.vsix`; then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T.
 
 ## Uninstall
 
@@ -30,7 +30,7 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:9e9745ccf2e83be2ac09301e08904feb635d0ca813ec88467d8abeff4b4ff450`
+Current digest: `sha256:04a12edc01cf260878a044ccf20e99e31866f5689dd783d3c35ed0c2d884e179`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 

@@ -291,7 +291,7 @@ class KiroPort(unittest.TestCase):
 
     def test_manifest_installs_on_kiro_1_4(self):
         pkg = json.loads(out("ports/kiro/package.json"))
-        self.assertEqual((pkg["name"], pkg["publisher"], pkg["version"]), ("umber-calm-kiro", "umber-calm", P.meta["release"]))
+        self.assertEqual((pkg["name"], pkg["publisher"], pkg["version"]), ("umber-calm-kiro", "ChristianOrrala", P.meta["release"]))
         # The packager puts inputs at the extension root, next to package.json.
         self.assertEqual(pkg["contributes"]["themes"], [{"label": "Umber Calm", "uiTheme": "vs-dark",
                                                          "path": "./umber-calm-color-theme.json"}])

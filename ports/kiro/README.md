@@ -8,7 +8,7 @@ Verified on: 1.4.26 · Linux 24.04 (2026-10-25)
 
 ## Install
 
-For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It ships the VS Code port's theme file unchanged; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm.
+For Kiro IDE 1.4 or newer. Install Umber Calm for Kiro from Open VSX (Extensions view, search "Umber Calm for Kiro"), or download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix`; then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It ships the VS Code port's theme file unchanged; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm.
 
 ## Uninstall
 
@@ -27,7 +27,7 @@ Uninstall Umber Calm for Kiro from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:08ddc5079f94360d839f42138c4480ed49e4c06bdce81569c95e45afd15a64c1`
+Current digest: `sha256:1661ab85d19b816ab26a5ccd55f4f25ee50333e03a4aed2f8ca1d142b0e3e039`
 
 Print it yourself with `python3 tools/build.py digest kiro`. It covers these files:
 

@@ -85,6 +85,27 @@ class SourceSvgTest(unittest.TestCase):
             self.assertEqual(docs[rel], entry)
             self.assertEqual(entry[0], "docs")
 
+class ManifestTemplateTest(unittest.TestCase):
+    def test_package_json_listing_fields(self):
+        home = P.meta["homepage"]
+        for pid, extra in (("vscode", set()), ("kiro", {"kiro"})):
+            pkg = json.loads((REPO / f"ports/{pid}/package.json").read_text(encoding="utf-8"))
+            self.assertEqual(pkg["publisher"], marketplace.PUBLISHER)
+            self.assertIn("theme", pkg["description"].lower())
+            self.assertLessEqual(len(pkg["keywords"]), 30)
+            self.assertLessEqual(extra, set(pkg["keywords"]))
+            self.assertFalse([k for k in pkg["keywords"] if re.search(r"eye|strain|health|fatigue|headache", k)])
+            self.assertEqual(pkg["icon"], "icon.png")
+            self.assertEqual(pkg["galleryBanner"], {"color": P.resolve("ui.bg"), "theme": "dark"})
+            self.assertEqual((pkg["homepage"], pkg["bugs"], pkg["qna"]), (home, {"url": f"{home}/issues"}, f"{home}/issues"))
+
+    def test_install_lines_point_to_the_registries(self):
+        ports = {p.id: p for p in PORTS}
+        self.assertIn("VS Code Marketplace", ports["vscode"].install)
+        self.assertIn("Open VSX", ports["kiro"].install)
+        readme = (REPO / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"https://marketplace.visualstudio.com/items?itemName={marketplace.PUBLISHER}.umber-calm", readme)
+
 class ImageCheckTest(unittest.TestCase):
     """A temp repo whose vscode page links icon.png, with the icon's SVG source next to it."""
     def setUp(self):

@@ -94,7 +94,7 @@ What's left is the palette I want to look at all day. I'm sharing it in case it 
 { "ChristianOrrala/umber-calm", lazy = false, priority = 1000, config = function() vim.cmd.colorscheme("umber-calm") end }
 ```
 
-**VS Code:** download `umber-calm-<version>.vsix` from the [latest release](https://github.com/ChristianOrrala/umber-calm/releases/latest), run `code --install-extension umber-calm-<version>.vsix`, then pick *Umber Calm* with Cmd/Ctrl+K Cmd/Ctrl+T.
+**VS Code:** install [Umber Calm from the Marketplace](https://marketplace.visualstudio.com/items?itemName=ChristianOrrala.umber-calm), or download `umber-calm-<version>.vsix` from the [latest release](https://github.com/ChristianOrrala/umber-calm/releases/latest) and run `code --install-extension umber-calm-<version>.vsix`; then pick *Umber Calm* with Cmd/Ctrl+K Cmd/Ctrl+T.
 
 **A terminal (WezTerm):** copy [`ports/wezterm/umber-calm.toml`](ports/wezterm/umber-calm.toml) to `~/.config/wezterm/colors/` and set `config.color_scheme = 'Umber Calm'` in `wezterm.lua`.
 
@@ -226,7 +226,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | JSON palette | 🧪 experimental | — |  |  | `3c1b08f64177` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
 | Kiro Crew | ✅ supported | 2026-10-25 | 0.9.0 | Linux 24.04 | `1390e083d1d6` |  |
-| Kiro IDE | 🧪 experimental | 2026-10-25 (earlier revision) | 1.4.26 | Linux 24.04 | `08ddc5079f94` |  |
+| Kiro IDE | 🧪 experimental | 2026-10-25 (earlier revision) | 1.4.26 | Linux 24.04 | `1661ab85d19b` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
@@ -248,7 +248,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Vim | 🧪 experimental | — |  |  | `5e766e51c86d` |  |
 | Vimium | 🟡 candidate | — |  |  | `02b715566580` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | 🧪 experimental | 2026-10-25 (earlier revision) | 1.140 | Linux 24.04 | `9e9745ccf2e8` |  |
+| VS Code | 🧪 experimental | 2026-10-25 (earlier revision) | 1.140 | Linux 24.04 | `04a12edc01cf` |  |
 | Waybar | 🧪 experimental | — |  |  | `52fb3b90c649` |  |
 | WezTerm | ✅ supported | 2026-09-28 | 20260901 | macOS 26.6.2 | `2ef53e6927a3` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `f21b0b6c213a` |  |
