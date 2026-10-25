@@ -57,6 +57,12 @@ class PageTest(unittest.TestCase):
             self.assertEqual(text.lower().count("eyes"), 1)
             self.assertIn("I made Umber Calm for my own eyes.", text)
 
+    def test_amber_names_only_what_every_editor_shows(self):
+        # VS Code 1.143 hides the active tab's top border, so the page names the cursor and focus, not the tab.
+        for text in self.pages().values():
+            self.assertIn("Amber only marks where you are: the cursor and whatever has focus.", text)
+            self.assertNotIn("active tab", text)
+
     def test_unknown_port_is_refused(self):
         with self.assertRaises(ValueError):
             marketplace.page("neovim", P, PORTS)

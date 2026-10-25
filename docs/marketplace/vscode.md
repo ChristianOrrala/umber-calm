@@ -20,7 +20,7 @@ What's left is the palette I want to look at all day. I'm sharing it in case it 
 
 - **Never pure black, never pure white.** A warm near-black background keeps the screen gently lit, and warm off-white text stays crisp without glare.
 - **Measured, not eyeballed.** Body text at 10:1, accents between 6:1 and 9.3:1. Every pair is checked automatically on each change.
-- **Color with a job.** Red only means errors and deletions. Amber only marks where you are: the cursor, the active tab, the focused panel.
+- **Color with a job.** Red only means errors and deletions. Amber only marks where you are: the cursor and whatever has focus.
 - **Calm by design.** Hues separate keywords, functions, types and strings while lightness stays in a narrow band, so nothing shouts.
 
 ## The palette

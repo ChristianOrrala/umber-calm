@@ -119,8 +119,8 @@ def page(port_id: str, pal: Palette, ports) -> str:
         "warm off-white text stays crisp without glare.",
         f"- **Measured, not eyeballed.** Body text at {n['text']}:1, accents between {n['accent_min']}:1 and "
         f"{n['accent_max']}:1. Every pair is checked automatically on each change.",
-        "- **Color with a job.** Red only means errors and deletions. Amber only marks where you are: the cursor, "
-        "the active tab, the focused panel.",
+        "- **Color with a job.** Red only means errors and deletions. Amber only marks where you are: the cursor and "
+        "whatever has focus.",
         "- **Calm by design.** Hues separate keywords, functions, types and strings while lightness stays in a "
         "narrow band, so nothing shouts.", "",
         "## The palette", "",

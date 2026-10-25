@@ -37,6 +37,15 @@ class ChecksTest(unittest.TestCase):
             root = fixture(d); buildcmd.build(root)
             self.assertEqual(checks.run(root), [])
 
+    def test_listing_images_are_checked(self):
+        with tempdir() as d:
+            root = fixture(d); buildcmd.build(root)
+            (root / "docs/marketplace").mkdir(parents=True, exist_ok=True)
+            (root / "docs/marketplace/vscode.md").write_text(
+                '<img src="https://raw.githubusercontent.com/o/r/v1/assets/marketplace/icon.png">\n', encoding="utf-8")
+            self.assertIn("marketplace: docs/marketplace/vscode.md links assets/marketplace/icon.png, which does not exist",
+                          checks.run(root))
+
     def test_unresolved_placeholder(self):
         with tempdir() as d:
             root = fixture(d); buildcmd.build(root)
