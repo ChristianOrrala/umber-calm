@@ -4,5 +4,6 @@
   "editor": "sha256:e34f05afe90a406f7830e5378daa3940a0f1ce9e16406d8ab7c84c67b7401eb6",
   "icon": "sha256:d8a1439c267fcb6e288189fef4777e027c3462d01cd0e45e505f20c10c073aa7",
   "palette": "sha256:a2ab2cad24f7cfa94eb8fcab24a64f7e52cca5bbeb79b8292ac1bd2d066fa362",
-  "terminal": "sha256:cbb44ba21121ecae66ae7af1f024f6e1f5f429581593e10afdc84db28c7aeb9a"
+  "terminal": "sha256:cbb44ba21121ecae66ae7af1f024f6e1f5f429581593e10afdc84db28c7aeb9a",
+  "vscode-hero": "sha256:2743fece88cb8363391169794e0f9fc6cdeb8bfd31ef43fca31374dafbb0362d"
 }
