@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- New port: Kiro IDE 1.4.26 (experimental), as its own extension, `umber-calm-kiro-<version>.vsix`. It is the VS Code theme plus the colors Kiro's agent chat, Agent Focus window and dialogs read, which VS Code's defaults would otherwise fill with cool grays, bright blue and orange: icons, progress, tooltips, toggles, menus, quick pick, keybinding labels, validation, symbol icons, the light bulb and the overview ruler. Four values differ from the VS Code port. Diff lines use the 12% tint with changed words on the 22% tint. Active toggles are blue, not orange. List hover is half the overlay, so it shows on the sidebar.
+- New port: Kiro Crew 0.9.0 (experimental), a level-0 theme pack that sets all 56 dashboard variables from palette roles. Orange only marks the text-field focus ring. Umber Calm has no light variant, so the light block repeats the dark palette. Kiro Crew's code highlighting uses fixed syntax colors that no pack can change; the port README says so.
+
 ## 0.1.0 (2026-09-29)
 
 - Foundation: palette source of truth, generator with safe writes, checks (formats, readability, wording, repository hygiene), digest-bound verification tiers, release gate, JSON export.

@@ -233,6 +233,48 @@ def _herdr(root: Path, text: str) -> list[str]:
     return problems
 
 
+# Kiro Crew 0.9.0 theme packs (src/kiro_crew/dashboard/theme_validate.py): the installer refuses any file it does not
+# know, so the port ships only the level-0 files plus its README (installed as the pack's readme.md).
+KIRO_CREW_FILES = {"theme.json", "variables.json", "README.md"}
+KIRO_CREW_VALUE = re.compile(r"[a-zA-Z0-9#(),.\- %/]{1,200}")  # _CSS_VALUE_ALLOWED_RE and the 200-character cap
+KIRO_CREW_FUNCS = re.compile(r"(?:url|expression|image|image-set|paint|element)\s*\(", re.I)
+
+
+def _kiro_crew_theme(root: Path, text: str) -> list[str]:
+    data = json.loads(text)
+    problems = [f"unexpected key {k!r}" for k in sorted(set(data) - {"formatVersion", "slug", "name", "emoji", "level"})]
+    if data.get("formatVersion") != 1 or isinstance(data.get("formatVersion"), bool):
+        problems.append("formatVersion must be the integer 1")
+    if data.get("level") != 0 or isinstance(data.get("level"), bool):
+        problems.append("level must be 0 (the port ships only theme.json and variables.json)")
+    if not (isinstance(data.get("name"), str) and 0 < len(data["name"]) <= 60):
+        problems.append("name must be 1 to 60 characters")
+    if not (isinstance(data.get("slug"), str) and re.fullmatch(r"[a-z0-9-]{1,40}", data["slug"])):
+        problems.append("slug must be 1 to 40 of a-z, 0-9 and '-'")
+    if not (isinstance(data.get("emoji"), str) and 0 < len(data["emoji"]) <= 4):
+        problems.append("emoji must be 1 to 4 characters")
+    base = Path(root) / "ports" / "kiro-crew"
+    extra = sorted(p.name for p in base.iterdir() if p.name not in KIRO_CREW_FILES) if base.is_dir() else []
+    return problems + [f"ports/kiro-crew/{name} would fail the pack install (unexpected file)" for name in extra]
+
+
+def _kiro_crew_vars(root: Path, text: str) -> list[str]:
+    """Both mode blocks set every allowlisted variable with a value the installer accepts. Umber Calm has no light
+    variant, so the light block must repeat the dark one."""
+    known = _fixture(root, "kirocrew-0.9.0-theme-vars.txt")
+    data = json.loads(text)
+    problems = [f"top-level keys {sorted(data)} are not ['dark', 'light']"] if set(data) != {"dark", "light"} else []
+    for mode in ("dark", "light"):
+        block = data.get(mode, {})
+        problems += [f"{mode}: unknown Kiro Crew 0.9.0 variable {k!r}" for k in sorted(set(block) - known)]
+        problems += [f"{mode}: {k} is not set (Kiro Crew would derive it)" for k in sorted(known - set(block))]
+        problems += [f"{mode}: {k} = {v!r} would be rejected by the installer" for k, v in sorted(block.items())
+                     if not (isinstance(v, str) and KIRO_CREW_VALUE.fullmatch(v) and not KIRO_CREW_FUNCS.search(v))]
+    if data.get("dark") != data.get("light"):
+        problems.append("the light block differs from the dark block (Umber Calm is dark only)")
+    return problems
+
+
 def _jetbrains(root: Path, text: str) -> list[str]:
     attributes = ET.fromstring(text).find("attributes")
     mapped = {o.get("name") for o in ([] if attributes is None else attributes)}
@@ -342,10 +384,14 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/zed/themes/*.json", (_zed,)),
     ("ports/yazi/umber-calm.yazi/flavor.toml", (_yazi,)),
     ("ports/herdr/umber-calm.toml", (_herdr,)),
+    ("ports/kiro-crew/theme.json", (_kiro_crew_theme,)),
+    ("ports/kiro-crew/variables.json", (_kiro_crew_vars,)),
     ("ports/jetbrains/UmberCalm.xml", (_jetbrains,)),
     ("ports/firefox/manifest.json", (_firefox,)),
     ("ports/vscode/themes/*.json", (_vscode_theme,)),
     ("ports/vscode/package.json", (_vscode_package,)),
+    ("ports/kiro/themes/*.json", (_vscode_theme,)),
+    ("ports/kiro/package.json", (_vscode_package,)),
     ("ports/claude-code/umber-calm.json", (_claude_code,)),
     ("ports/kitty/*.conf", (lines(rf"[a-z0-9_]+ {HEX}"),)),
     ("ports/ghostty/umber-calm", (lines(rf"[a-z-]+ = {HEX}|palette = (?:1[0-5]|[0-9])={HEX}"),

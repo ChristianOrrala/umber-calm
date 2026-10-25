@@ -122,7 +122,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (44)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -148,6 +148,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
 | Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
+| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | — |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
 | Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
@@ -166,6 +167,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Firefox | web | [ports/firefox/](ports/firefox/) | 133 | — |  |
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
+| Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | — | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -223,6 +225,8 @@ A tier is supported only while its last real-app test covers the exact files you
 | JetBrains IDEs | 🧪 experimental | — |  |  | `860671984433` |  |
 | JSON palette | 🧪 experimental | — |  |  | `16953139bba3` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
+| Kiro Crew | 🧪 experimental | — |  |  | `a2f532c83a71` |  |
+| Kiro IDE | 🧪 experimental | — |  |  | `aa7a6fe004d6` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |

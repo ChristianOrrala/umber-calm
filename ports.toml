@@ -109,6 +109,20 @@ checklist = ["editor background, text, current line", "syntax: keywords gold, fu
 syntax_check = { file = "themes/umber-calm-color-theme.json", format = "vscode" }
 
 [[port]]
+id = "kiro"
+name = "Kiro IDE"
+category = "editor"
+phase = 2
+output_root = "ports/kiro"
+docs = "https://kiro.dev/docs/upgrade-guides/migrating-from-vscode/"
+format_confirmed = true
+target_version = "1.4.26"
+install = "For Kiro IDE 1.4 or newer. Download umber-calm-kiro-<version>.vsix from the latest release and run `kiro --install-extension umber-calm-kiro-<version>.vsix` (or Extensions → ⋯ → Install from VSIX…), then pick Umber Calm with Cmd/Ctrl+K Cmd/Ctrl+T. It is the VS Code theme plus the colors Kiro's agent chat and Agent Focus read; if you imported the VS Code Umber Calm extension, uninstall it first, since both themes are named Umber Calm."
+uninstall = "Uninstall Umber Calm for Kiro from the Extensions view."
+checklist = ["editor, sidebar, tabs and status bar match the VS Code port (same colors)", "syntax: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted", "agent chat: message and code backgrounds warm, tooltips on surface, no cool gray or bright blue", "agent status icons: in progress blue, accepted green, input needed yellow, error red", "chat toggles and pills: active state on the overlay, not orange", "Agent Focus window: background, sidebar, primary buttons blue, secondary text readable", "diff review: changed lines on the 12% tints, changed words on the 22% tints, comments readable on both", "menus, quick pick, keybinding labels and dialogs on surface"]
+syntax_check = { file = "themes/umber-calm-color-theme.json", format = "vscode" }
+
+[[port]]
 id = "neovim"
 name = "Neovim"
 category = "editor"
@@ -771,3 +785,18 @@ install = "Copy umber-calm.json to ~/.config/opencode/themes/ and select it with
 uninstall = "Pick another theme and delete the file."
 checklist = ["theme loads", "background and text", "diff colors", "syntax colors"]
 syntax_check = { file = "umber-calm.json", format = "opencode" }
+
+[[port]]
+id = "kiro-crew"
+name = "Kiro Crew"
+category = "ai"
+phase = 2
+output_root = "ports/kiro-crew"
+docs = "https://github.com/kirodotdev/KiroCrew/blob/v0.9.0/website/docs/theming-contract.md"
+format_confirmed = true
+target_version = "0.9.0"
+install = "A level-0 theme pack (theme.json and variables.json) for the Kiro Crew dashboard. Unzip umber-calm-kiro-crew-<version>.zip from the latest release (or use ports/kiro-crew/ from a clone), then in Settings → Display → Theme choose Local folder, enter that folder's path and click Install. Set the mode to Dark: Umber Calm has no light variant, so the pack's light block repeats the dark palette."
+uninstall = "Choose another theme in Settings → Display → Theme, then delete ~/.kiro/crew/themes/umber-calm/ (or call DELETE /api/themes/umber-calm)."
+risk = "Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself."
+checklist = ["the pack installs from a local folder with no validation error", "chat and pages on bg; cards, inputs, menus and side panels one step lighter (surface)", "primary buttons, links and the active tab are blue with dark text; text fields take the orange focus ring and nothing else is orange", "secondary text, timestamps and labels readable on bg and on cards", "selected rows and text selection use the overlay, hovered rows a quieter step", "status colors: success green, warning and agent questions yellow, errors red, info blue, agent highlights mauve", "git panel and file tree: added counts and files green, deleted red", "JSON tool details: keys text, strings olive, numbers and booleans mauve", "terminal: ANSI red, green, yellow, blue, magenta and cyan match the palette"]
+syntax_exempt = "colors code only through the JSON tool view (--json-key, --json-str, --json-num, --json-bool: variable, string and constant roles); there is no keyword mapping, and tests/test_ports.py keeps them off red and orange"

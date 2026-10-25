@@ -182,6 +182,159 @@ class VSCodePort(unittest.TestCase):
                           ("diffEditor.removedLineBackground", "diag.diff_delete")):
             self.assertEqual(composite(self.c[key], bg), color.blend(P.resolve(role), bg, P.tints["diff"]), key)
 
+# Kiro IDE 1.4.26 is Code OSS 1.131.0 (product.json vsCodeVersion); its CLI refuses extensions whose engines.vscode
+# range that version does not satisfy.
+KIRO_CODE_OSS = (1, 131, 0)
+# Colors Kiro's agent chat, Agent Focus window and dialogs read that VS Code's defaults would otherwise fill with
+# cool grays and bright blue (kiro-ui-agent-chat style.css and the Agent Focus tokens in workbench.desktop.main.css).
+KIRO_READS = ("icon.foreground", "progressBar.background", "problemsErrorIcon.foreground", "debugToolBar.background",
+              "descriptionForeground", "disabledForeground", "toolbar.hoverBackground", "inputOption.activeBackground",
+              "inputOption.activeForeground", "inputOption.hoverBackground", "editorWidget.background",
+              "list.hoverBackground", "list.activeSelectionBackground", "list.warningForeground", "titleBar.activeBackground",
+              "editorGutter.addedBackground", "editorGutter.deletedBackground", "diffEditor.insertedTextBackground",
+              "diffEditor.removedTextBackground", "button.background", "button.foreground", "notificationsInfoIcon.foreground",
+              "symbolIcon.classForeground", "symbolIcon.functionForeground", "symbolIcon.variableForeground",
+              "editorLightBulb.foreground", "editorOverviewRuler.errorForeground")
+# The only VS Code values the Kiro theme changes: whole lines take the light tint because changed words are emphasized;
+# active toggles are blue, since Kiro's chat toggles and switches draw their active border with inputOption.activeBorder;
+# and list hover is half the overlay, because Agent Focus hovers rows on the sidebar, where surface would not show.
+KIRO_OVERRIDES = {"diffEditor.insertedLineBackground", "diffEditor.removedLineBackground", "inputOption.activeBorder",
+                  "list.hoverBackground"}
+
+class KiroPort(unittest.TestCase):
+    def setUp(self):
+        self.theme = json.loads(out("ports/kiro/themes/umber-calm-color-theme.json"))
+        self.vscode = json.loads(out("ports/vscode/themes/umber-calm-color-theme.json"))
+        self.c = self.theme["colors"]
+
+    def test_is_the_vscode_theme_plus_kiro_colors(self):
+        for key in ("name", "type", "semanticHighlighting", "tokenColors", "semanticTokenColors"):
+            self.assertEqual(self.theme[key], self.vscode[key], key)
+        for key, value in self.vscode["colors"].items():
+            if key not in KIRO_OVERRIDES:
+                self.assertEqual(self.c.get(key), value, key)
+        for key in KIRO_READS:
+            self.assertIn(key, self.c)
+
+    def test_manifest_installs_on_kiro_1_4(self):
+        pkg = json.loads(out("ports/kiro/package.json"))
+        self.assertEqual((pkg["name"], pkg["publisher"], pkg["version"]), ("umber-calm-kiro", "umber-calm", P.meta["release"]))
+        self.assertEqual(pkg["contributes"]["themes"], [{"label": "Umber Calm", "uiTheme": "vs-dark",
+                                                         "path": "./themes/umber-calm-color-theme.json"}])
+        floor = tuple(int(x) for x in re.fullmatch(r"\^(\d+)\.(\d+)\.(\d+)", pkg["engines"]["vscode"]).groups())
+        self.assertLessEqual(floor, KIRO_CODE_OSS)
+        self.assertEqual(floor[0], KIRO_CODE_OSS[0])
+        self.assertEqual(port("kiro").target_version, "1.4.26")
+
+    def test_diff_lines_and_words_land_on_the_measured_tints(self):
+        bg = P.colors["bg"]
+        for line, word, role in (("diffEditor.insertedLineBackground", "diffEditor.insertedTextBackground", "diag.diff_add"),
+                                 ("diffEditor.removedLineBackground", "diffEditor.removedTextBackground", "diag.diff_delete")):
+            drawn_line = composite(self.c[line], bg)
+            self.assertEqual(drawn_line, color.blend(P.resolve(role), bg, P.tints["diag"]), line)
+            self.assertEqual(composite(self.c[word], drawn_line), color.blend(P.resolve(role), bg, P.tints["diff"]), word)
+
+    def test_text_backgrounds_are_measured(self):
+        bg = self.c["editor.background"]
+        surfaces = dict(VSCODE_TEXT_BACKGROUNDS, **{
+            "menu.background": 4.0, "quickInput.background": 4.0, "keybindingLabel.background": 4.0,
+            "debugToolBar.background": 4.0, "textCodeBlock.background": 4.0, "menu.selectionBackground": 3.0,
+            "quickInputList.focusBackground": 3.0, "inputOption.activeBackground": 3.0, "toolbar.hoverBackground": 3.0,
+            "inputValidation.errorBackground": 3.0, "inputValidation.warningBackground": 3.0,
+            "inputValidation.infoBackground": 3.0, "button.secondaryHoverBackground": 2.0})
+        for key, muted_min in surfaces.items():
+            drawn = composite(self.c[key], bg)
+            self.assertGreaterEqual(color.contrast(P.colors["text"], drawn), 4.5, key)
+            self.assertGreaterEqual(color.contrast(P.colors["muted"], drawn), muted_min, key)
+        line = composite(self.c["diffEditor.removedLineBackground"], bg)
+        self.assertGreaterEqual(color.contrast(P.colors["muted"], composite(self.c["diffEditor.removedTextBackground"], line)), 3.0)
+        for fg in ("icon.foreground", "descriptionForeground", "disabledForeground"):  # Agent Focus text reads all three
+            self.assertGreaterEqual(color.contrast(self.c[fg], self.c["sideBar.background"]), 4.0, fg)
+        side = self.c["sideBar.background"]
+        hover = composite(self.c["list.hoverBackground"], side)
+        self.assertNotIn(hover, (side, self.c["list.activeSelectionBackground"]), "hovered rows show on the sidebar")
+        self.assertGreaterEqual(color.contrast(P.colors["text"], hover), 4.5)
+        self.assertGreaterEqual(color.contrast(P.colors["muted"], hover), 3.0, "E3")
+
+    def test_symbol_icons_follow_the_syntax_roles(self):
+        """Breadcrumbs, outline and suggestions color symbol icons; VS Code's defaults are orange, purple and bright blue."""
+        for key, role in (("classForeground", "syntax.type"), ("enumeratorForeground", "syntax.type"),
+                          ("eventForeground", "syntax.function"), ("methodForeground", "syntax.function"),
+                          ("fieldForeground", "syntax.variable"), ("enumeratorMemberForeground", "syntax.constant"),
+                          ("moduleForeground", "syntax.namespace")):
+            self.assertEqual(self.c[f"symbolIcon.{key}"], P.resolve(role), key)
+
+    def test_adds_no_focus_color(self):
+        focus = P.resolve("ui.focus")
+        theirs = {k for k, v in self.c.items() if v.upper().startswith(focus)}
+        ours = {k for k, v in self.vscode["colors"].items() if v.upper().startswith(focus)}
+        self.assertEqual(theirs, ours - {"inputOption.activeBorder"}, "the Kiro colors never use orange")
+        self.assertEqual(self.c["inputOption.activeBorder"], P.colors["blue"])
+
+class KiroCrewPort(unittest.TestCase):
+    """Kiro Crew 0.9.0 level-0 theme pack: every variable set, no derivation, measured text pairs on every fill."""
+    def setUp(self):
+        self.v = json.loads(out("ports/kiro-crew/variables.json"))["dark"]
+
+    def drawn(self, key: str, over: str = "bg") -> str:
+        return composite(self.v[key], P.colors[over])
+
+    def test_manifest_and_dark_only(self):
+        manifest = json.loads(out("ports/kiro-crew/theme.json"))
+        self.assertEqual((manifest["formatVersion"], manifest["level"]), (1, 0))
+        self.assertEqual((manifest["slug"], manifest["name"]), (P.meta["slug"], P.meta["name"]))
+        data = json.loads(out("ports/kiro-crew/variables.json"))
+        self.assertEqual(data["light"], data["dark"], "Umber Calm has no light variant")
+        known = pf.keys_in((REPO / "tests/fixtures/kirocrew-0.9.0-theme-vars.txt").read_text(encoding="utf-8"))
+        self.assertEqual(set(self.v), known)
+        self.assertEqual(port("kiro-crew").target_version, "0.9.0")
+
+    def test_focus_and_error_colors_are_reserved(self):
+        focus, error = P.resolve("ui.focus"), P.resolve("diag.error")
+        self.assertEqual({k for k, v in self.v.items() if v == focus}, {"--ring"}, "orange only marks keyboard focus")
+        self.assertEqual({k for k, v in self.v.items() if v == error}, {"--danger", "--diff-del-text"})
+        for key in ("--json-key", "--json-str", "--json-num", "--json-bool"):
+            self.assertNotIn(self.v[key], (focus, error), key)
+
+    def test_text_on_every_fill(self):
+        """Text tokens on the fills Kiro Crew draws them on (composited over bg and surface where translucent)."""
+        for fill in ("--bg", "--bg-accent", "--bg-elevated", "--card", "--panel", "--panel-strong", "--chrome"):
+            self.assertGreaterEqual(color.contrast(self.v["--text"], self.v[fill]), 4.5, fill)
+            self.assertGreaterEqual(color.contrast(self.v["--accent"], self.v[fill]), 4.5, f"accent text on {fill}")
+            for fg in ("--muted", "--muted-strong"):
+                self.assertGreaterEqual(color.contrast(self.v[fg], self.v[fill]), 4.0, f"{fg} on {fill} (E1)")
+        for over in ("bg", "surface"):
+            for fill in ("--bg-hover", "--card-hl"):
+                self.assertGreaterEqual(color.contrast(self.v["--text"], self.drawn(fill, over)), 4.5, f"{fill}/{over}")
+                self.assertGreaterEqual(color.contrast(self.v["--muted"], self.drawn(fill, over)), 3.0, f"{fill}/{over} (E3)")
+        for fill in ("--accent-subtle", "--aim-subtle"):  # selection, selected rows and agent tints: the overlay
+            self.assertEqual(self.v[fill], P.resolve("ui.selection_bg"), fill)
+            self.assertGreaterEqual(color.contrast(self.v["--text-strong"], self.v[fill]), 4.5, fill)
+        self.assertGreaterEqual(color.contrast(self.v["--accent"], self.v["--accent-subtle"]), 4.5)
+        self.assertGreaterEqual(color.contrast(self.v["--aim"], self.v["--aim-subtle"]), 4.5)
+
+    def test_status_fills_and_tints(self):
+        for fill in ("--accent", "--accent-hover", "--ok", "--warn", "--danger", "--info", "--aim"):
+            fg = self.v.get(f"{fill}-fg", self.v["--accent-fg"])
+            self.assertGreaterEqual(color.contrast(fg, self.v[fill]), 4.5, f"{fill}-fg on {fill}")
+        self.assertGreaterEqual(color.contrast(self.v["--muted-fg"], self.v["--muted"]), 4.5)
+        bg = P.colors["bg"]
+        for tint, role in (("--ok-subtle", "diag.ok"), ("--warn-subtle", "diag.warning"), ("--danger-subtle", "diag.error"),
+                           ("--clarify-subtle", "diag.warning"), ("--diff-add", "diag.diff_add"),
+                           ("--diff-del", "diag.diff_delete"), ("--diff-hunk", "diag.diff_change")):
+            self.assertEqual(self.v[tint], color.blend(P.resolve(role), bg, P.tints["diag"]), tint)
+            self.assertGreaterEqual(color.contrast(P.resolve(role), self.v[tint]), 4.5, f"{role} on {tint}")
+            self.assertGreaterEqual(color.contrast(self.v["--text"], self.v[tint]), 4.5, f"text on {tint}")
+        for text, fill in (("--diff-add-text", "--diff-add"), ("--diff-del-text", "--diff-del"),
+                           ("--diff-hunk-text", "--diff-hunk")):
+            self.assertGreaterEqual(color.contrast(self.v[text], self.v[fill]), 4.5, f"{text} on {fill}")
+
+    def test_terminal_hues_match_the_ansi_slots(self):
+        """Kiro Crew reads ANSI red, green, yellow and blue from the status colors, magenta and cyan from --term-*."""
+        a = P.ansi
+        self.assertEqual([self.v[k] for k in ("--danger", "--ok", "--warn", "--info", "--term-magenta", "--term-cyan")],
+                         [a["red"], a["green"], a["yellow"], a["blue"], a["magenta"], a["cyan"]])
+
 WT_KEYS = {"name", "background", "foreground", "cursorColor", "selectionBackground", "black", "red", "green",
            "yellow", "blue", "purple", "cyan", "white", "brightBlack", "brightRed", "brightGreen", "brightYellow",
            "brightBlue", "brightPurple", "brightCyan", "brightWhite"}

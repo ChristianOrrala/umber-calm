@@ -14,6 +14,7 @@ from . import buildcmd, palette, registry, safepath
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 ARCHIVE_SUFFIX = {"jetbrains": "jar", "firefox": "xpi"}
 PREFIX = {"obsidian": "Umber Calm/"}
+VSIX = {"vscode": "umber-calm-{version}.vsix", "kiro": "umber-calm-kiro-{version}.vsix"}
 SUMS = "SHA256SUMS"
 CONTENT_TYPES = ('<?xml version="1.0" encoding="utf-8"?>\n'
                  '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
@@ -43,8 +44,8 @@ def inventory(root: Path, ports: list[registry.Port]) -> list[Artifact]:
         if p.id in ARCHIVE_SUFFIX:
             kind = ARCHIVE_SUFFIX[p.id]
             items.append(Artifact(f"umber-calm-{p.id}-{version}.{kind}", kind, p.id))
-        if p.id == "vscode":
-            items.append(Artifact(f"umber-calm-{version}.vsix", "vsix", p.id))
+        if p.id in VSIX:
+            items.append(Artifact(VSIX[p.id].format(version=version), "vsix", p.id))
         if p.id == "json":
             items.append(Artifact("umber-calm.json", "json", p.id))
     return items
@@ -132,11 +133,11 @@ def _vsixmanifest(pkg: dict) -> str:
             "</PackageManifest>\n")
 
 
-def _write_vsix(target: Path, files: list[tuple[str, bytes]], license_bytes: bytes) -> None:
+def _write_vsix(target: Path, port: registry.Port, files: list[tuple[str, bytes]], license_bytes: bytes) -> None:
     by_name = dict(files)
     for required in ("package.json", "README.md"):
         if required not in by_name:
-            raise PackageError(f"vsix: ports/vscode/{required} is missing (run tools/build.py)")
+            raise PackageError(f"vsix: {port.output_root}/{required} is missing (run tools/build.py)")
     pkg = json.loads(by_name["package.json"])
     members = [("[Content_Types].xml", CONTENT_TYPES.encode("utf-8")),
                ("extension.vsixmanifest", _vsixmanifest(pkg).encode("utf-8")),
@@ -165,7 +166,7 @@ def package(root: Path, out_dir: Path) -> list[Path]:
         elif art.kind in ("jar", "xpi"):
             _write_zip(target, [(n, d) for n, d in files if n != "README.md"] + [("LICENSE", license_bytes)])
         elif art.kind == "vsix":
-            _write_vsix(target, files, license_bytes)
+            _write_vsix(target, port, files, license_bytes)
         else:
             target.write_bytes(safepath.read_bytes(root, f"{port.output_root}/umber-calm.json"))
         made.append(target)
