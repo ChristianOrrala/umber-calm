@@ -18,7 +18,7 @@ REQUIRED = ("id", "name", "category", "phase", "output_root", "docs", "format_co
             "target_version", "install", "uninstall", "checklist")
 OPTIONAL = ("risk", "min_version", "inputs", "syntax_check", "syntax_exempt", "archived", "candidate_reason")
 SYNTAX_FORMATS = ("vscode", "sublime", "zed", "helix", "tmtheme", "vim",
-                  "jetbrains", "fish", "obsidian", "opencode")  # Part 3 extends this tuple (Tasks 22–26)
+                  "jetbrains", "fish", "obsidian", "opencode", "fresh")  # Part 3 extends this tuple (Tasks 22–26)
 ID_RE = re.compile(r"[a-z0-9][a-z0-9-]*")
 SEMVER_RE = re.compile(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)")
 STATUSES = ("verified", "needs-fix")

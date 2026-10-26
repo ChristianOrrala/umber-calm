@@ -30,6 +30,7 @@ PAIRS: list[tuple[str, str, str, float]] = [
     *[(f"text on light diff {k}", "text", f"blend:diag.diff_{k}:bg:tint.diag", 4.5) for k in DIFF_KINDS],
     *[(f"muted on light diff {k} (E3)", "muted", f"blend:diag.diff_{k}:bg:tint.diag", 3.0) for k in DIFF_KINDS],
     *[(f"{s} virtual text", f"diag.{s}", f"blend:diag.{s}:bg:tint.diag", 4.5) for s in ("error", "warning", "info", "hint")],
+    *[(f"muted on {s} wash (E3)", "muted", f"blend:diag.{s}:bg:tint.diag", 3.0) for s in ("error", "warning", "info", "hint")],
     ("ansi.bright_black on bg (E2)", "ansi.bright_black", "bg", 3.0),
     *[(f"ansi.{s} on bg", f"ansi.{s}", "bg", 4.5) for s in ANSI_SLOTS if s not in ("black", "bright_black")],
 ]

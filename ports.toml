@@ -262,6 +262,21 @@ checklist = ["editor background, text, cursor line", "syntax roles", "selection 
 syntax_check = { file = "umber-calm.toml", format = "helix" }
 
 [[port]]
+id = "fresh"
+name = "Fresh"
+category = "editor"
+phase = 2
+output_root = "ports/fresh"
+docs = "https://github.com/sinelaw/fresh/blob/v0.5.4/docs/features/themes.md"
+format_confirmed = true
+target_version = "0.5.4"
+install = "Copy umber-calm.json to ~/.config/fresh/themes/ and set `\"theme\": \"umber-calm.json\"` in ~/.config/fresh/config.json (or pick Umber Calm from Ctrl+P, Select Theme)."
+uninstall = "Pick another theme and delete the file."
+risk = "Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says."
+checklist = ["editor background, text and current line", "cursor orange in the focused split (from the terminal theme), a dim block with readable text in the others", "active tab orange, inactive tabs readable, nothing else orange", "syntax roles", "brackets quiet with rainbow brackets on, matched pair bold and underlined", "selection, search matches (all and current), and word occurrences underlined on a soft band with the current line unbroken", "diagnostics on code and in the status bar", "diff and git review: lines and changed words", "menus, command palette, popups, completion, help and settings readable", "file explorer git status", "embedded terminal"]
+syntax_check = { file = "umber-calm.json", format = "fresh" }
+
+[[port]]
 id = "zed"
 name = "Zed"
 category = "editor"

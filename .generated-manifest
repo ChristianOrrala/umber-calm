@@ -65,6 +65,8 @@ readme:fish	ports/fish/README.md
 fish	ports/fish/Umber Calm.theme
 readme:foot	ports/foot/README.md
 foot	ports/foot/umber-calm.ini
+readme:fresh	ports/fresh/README.md
+fresh	ports/fresh/umber-calm.json
 readme:fuzzel	ports/fuzzel/README.md
 fuzzel	ports/fuzzel/umber-calm.ini
 readme:fzf	ports/fzf/README.md

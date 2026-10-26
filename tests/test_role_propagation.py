@@ -66,9 +66,16 @@ def _opencode(data: bytes) -> list[str]:
     return [] if value is None else [value]
 
 
+def _fresh(data: bytes) -> list[str]:
+    value = json.loads(data).get("syntax", {}).get("keyword")
+    rgb = value.get("color") if isinstance(value, dict) else value
+    return [] if not isinstance(rgb, list) else ["#{:02X}{:02X}{:02X}".format(*rgb)]
+
+
 # Format -> the colors of its keyword mappings (exactly the keyword token, never keyword.operator and the like).
 KEYWORD_VALUES = {"vscode": _vscode, "sublime": _sublime, "zed": _zed, "helix": _helix, "tmtheme": _tmtheme,
-                  "vim": _vim, "jetbrains": _jetbrains, "fish": _fish, "obsidian": _obsidian, "opencode": _opencode}
+                  "vim": _vim, "jetbrains": _jetbrains, "fish": _fish, "obsidian": _obsidian, "opencode": _opencode,
+                  "fresh": _fresh}
 
 
 def keyword_values(fmt: str, data: bytes) -> list[str]:

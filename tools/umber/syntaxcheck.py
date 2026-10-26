@@ -163,6 +163,20 @@ def _opencode(text: str) -> list[str]:
     return [v for k, v in theme.items() if k.startswith(("syntax", "markdown")) and isinstance(v, str)]
 
 
+def _fresh(text: str) -> list[str]:
+    """Fresh colors are [r, g, b] or {"color": [r, g, b], "modifier": [...]}; anything else is returned unchecked."""
+    out = []
+    syntax = json.loads(text).get("syntax", {})
+    for value in syntax.values() if isinstance(syntax, dict) else ():
+        rgb = value.get("color") if isinstance(value, dict) else value
+        if (isinstance(rgb, list) and len(rgb) == 3
+                and all(isinstance(c, int) and not isinstance(c, bool) and 0 <= c <= 255 for c in rgb)):
+            out.append("#{:02X}{:02X}{:02X}".format(*rgb))
+        else:
+            out.append(rgb if isinstance(rgb, str) else repr(rgb))
+    return out
+
+
 # Format -> extractor(bytes) -> colors used by syntax mappings. Later tasks add formats here.
 EXTRACTORS = {
     "vscode": _text(_vscode),
@@ -175,6 +189,7 @@ EXTRACTORS = {
     "fish": _text(_fish),
     "obsidian": _text(_obsidian),
     "opencode": _text(_opencode),
+    "fresh": _text(_fresh),
 }
 
 

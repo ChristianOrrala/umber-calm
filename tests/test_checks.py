@@ -31,6 +31,12 @@ class ReadabilityTest(unittest.TestCase):
     def test_light_diff_rows_are_measured(self):
         self.assertIn("#303127", readability.measured_blends(load_real_palette()))  # green at tint.diag
 
+    def test_comments_are_measured_on_every_diagnostic_wash(self):
+        """Fresh draws diagnostic washes under code, so comments land on them (style guide E3)."""
+        rows = {label: (fg, bg, floor) for label, fg, bg, floor in readability.PAIRS}
+        for s in ("error", "warning", "info", "hint"):
+            self.assertEqual(rows[f"muted on {s} wash (E3)"], ("muted", f"blend:diag.{s}:bg:tint.diag", 3.0))
+
 class ChecksTest(unittest.TestCase):
     def test_clean_fixture_passes(self):
         with tempdir() as d:

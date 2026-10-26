@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New port: Fresh 0.5.4 (experimental). A standalone theme that sets all 142 colors from palette roles. Orange only marks the cursor and the active tab; brackets stay quiet with rainbow brackets on; occurrences of the word under the cursor are underlined on a soft band. Fresh leaves the cursor color to the terminal.
+
 ## 0.2.1 (2026-10-25)
 
 - VS Code and Kiro: the extensions are published on the VS Code Marketplace and Open VSX as `ChristianOrrala.umber-calm` and `ChristianOrrala.umber-calm-kiro`, with a listing page, an icon and a warm header. If you installed an earlier `.vsix` from a GitHub release, uninstall it first: both are named Umber Calm.

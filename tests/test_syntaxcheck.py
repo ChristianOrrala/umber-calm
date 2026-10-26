@@ -24,6 +24,13 @@ class SyntaxCheckTest(unittest.TestCase):
         self.assertEqual(syntaxcheck.extract("tmtheme", tm), ["#938A7B"])
         vim = "hi Keyword guifg=#DCC07D\nhi Cursor guifg=#201F1D guibg=#EDA97C\nhi Error guifg=#E08374\n"
         self.assertEqual(syntaxcheck.extract("vim", vim.encode()), ["#DCC07D"])
+        fresh = json.dumps({"name": "x", "editor": {"cursor": [237, 169, 124]},
+                            "syntax": {"keyword": [220, 192, 125],
+                                       "comment": {"color": [147, 138, 123], "modifier": ["italic"]},
+                                       "type": "Red"}})
+        self.assertEqual(syntaxcheck.extract("fresh", fresh.encode()), ["#DCC07D", "#938A7B", "Red"])
+        self.assertEqual(syntaxcheck.extract("fresh", b'{"syntax": []}'), [])
+        self.assertEqual(syntaxcheck.extract("fresh", b'{"syntax": {"keyword": [true, 0, 0]}}'), ["[True, 0, 0]"])
         self.assertEqual(set(syntaxcheck.EXTRACTORS), set(registry.SYNTAX_FORMATS), "extend both together")
 
     def test_violations(self):

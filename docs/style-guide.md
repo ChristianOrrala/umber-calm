@@ -135,7 +135,7 @@ Contrast is the WCAG 2.x ratio. Translucent backgrounds are composited in sRGB c
 | Diff added / deleted / changed line | 22 % → `#3E402F` · `#4A3530` · `#373F3E` | 6.5 · 7.0 · 6.6 | 3.1 · 3.3 · 3.2 |
 | Diff line, light (12 %) | `#303127` · `#372B27` · `#2C302F` | 8.1 · 8.4 · 8.2 | 3.9 · 4.0 · 3.9 |
 | Cursor | `orange`, text `bg` | 8.3 | — |
-| Diagnostic virtual text | severity color at 12 % | error 5.0 · warning 7.2 · info 5.7 · hint 6.4 (severity color on its tint) | — |
+| Diagnostic virtual text, and the wash under code | severity color at 12 % | error 5.0 · warning 7.2 · info 5.7 · hint 6.4 (severity color on its tint) | 4.0 · 3.7 · 3.9 · 3.8 |
 
 A port may only blend to a background listed here; `tools/check.py` rejects any other blend.
 
@@ -143,4 +143,4 @@ A port may only blend to a background listed here; `tools/check.py` rejects any 
 
 - **E1: comments on panels (4.3:1).** Comments are meant to recede; they stay at or above 4.0.
 - **E2: ANSI bright black (3.0:1).** Terminal applications use it for de-emphasized text; 3.0 keeps it distinct from `muted` (ΔE_OK 11.5).
-- **E3: secondary text on highlights.** Where a format cannot force the foreground to `text` on a highlight (for example VS Code selections), comments may drop to 3.0 on that highlight. Where a format can set a selection foreground, it uses `text`.
+- **E3: secondary text on highlights.** Where a format cannot force the foreground to `text` on a highlight (for example VS Code selections, or diagnostic washes Fresh draws under code), comments may drop to 3.0 on that highlight. Where a format can set a selection foreground, it uses `text`.

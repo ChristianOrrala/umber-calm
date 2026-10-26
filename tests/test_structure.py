@@ -1,5 +1,5 @@
 """check.py runs the structural validators (spec §8.1 item 3) on every generated file."""
-import fnmatch, os, unittest
+import fnmatch, json, os, unittest
 from pathlib import Path
 from tests.helpers import REPO, tempdir
 from umber import checks, outputs, structure
@@ -25,6 +25,8 @@ BAD = {
     "ports/vscode/package.json": '{"engines": {"vscode": "^1.95.0"}}',
     "ports/kiro/package.json": '{"contributes": {"themes": [{"label": "Umber Calm"}]}}',
     "ports/herdr/umber-calm.toml": '[theme]\nname = "terminal"\n[theme.custom]\npeach = "orange"\nnot_a_token = "#201F1D"\n',
+    "ports/fresh/umber-calm.json": '{"name": "Umber Calm", "extends": "dark", "editor": {"bg": "#201F1D", "bg": [32, 31, 29]}, '
+                                   '"syntax": {"keyword": [300, 0, 0], "bogus": [1, 2, 3]}}',
     "ports/claude-code/umber-calm.json": '{"name": "Umber Calm", "base": "dark-ansi"}',
     "ports/kiro-crew/theme.json": '{"formatVersion": 2, "slug": "Umber Calm", "name": "Umber Calm", "level": 1}',
     "ports/kiro-crew/variables.json": '{"dark": {"--bg": "#201F1D", "--text": "url(x)", "--not-a-var": "#000000"}}',
@@ -85,6 +87,42 @@ class StructureTest(unittest.TestCase):
             if not any(fnmatch.fnmatchcase(rel, pattern) for pattern, _ in structure.RULES):
                 unchecked.append(rel)
         self.assertEqual(unchecked, [])
+
+    def test_fresh_wrong_containers_are_reported_not_raised(self):
+        for text in ("[]", "null", '{"name": "Umber Calm", "editor": 42}', '{"name": "Umber Calm", "ui": []}'):
+            self.assertTrue(structure.problems(REPO, "ports/fresh/umber-calm.json", text), text)
+
+    def test_fresh_validator_names_each_defect(self):
+        """One defect at a time on the generated theme: each safeguard reports on its own."""
+        rel = "ports/fresh/umber-calm.json"
+        good = (REPO / rel).read_text(encoding="utf-8")
+        self.assertEqual(structure.problems(REPO, rel, good), [])
+
+        def mutated(section, key, value):
+            data = json.loads(good)
+            data[section][key] = value
+            return json.dumps(data)
+        cases = [
+            (good.replace('"fg": [', '"fg": [1, 2, 3], "fg": [', 1), "duplicate key 'fg'"),
+            (mutated("editor", "bg", "#201F1D"), "editor.bg is not [r, g, b]"),
+            (mutated("syntax", "keyword", "Red"), "syntax.keyword is not [r, g, b]"),
+            (mutated("editor", "bg", "Default"), "editor.bg is not [r, g, b]"),
+            (mutated("ui", "semantic_highlight_bg", {"color": "Default", "modifier": ["underlined"]}),
+             "ui.semantic_highlight_bg is not [r, g, b]"),  # Color::Reset: the terminal's own background
+            (mutated("editor", "bg", [256, 0, 0]), "editor.bg is not [r, g, b]"),
+            (mutated("editor", "bg", [True, 0, 0]), "editor.bg is not [r, g, b]"),
+            (mutated("syntax", "comment", {"color": [147, 138, 123], "modifier": ["blink"]}), "syntax.comment must be {color, modifier}"),
+            (mutated("syntax", "comment", {"color": [147, 138, 123], "bold": True}), "syntax.comment must be {color, modifier}"),
+            (mutated("editor", "bracket_rainbow_match_modifier", "bold"), "editor.bracket_rainbow_match_modifier must be a list"),
+            (mutated("editor", "not_a_key", [1, 2, 3]), "unknown Fresh 0.5.4 theme key 'editor.not_a_key'"),
+            (json.dumps({**json.loads(good), "extends": "dark"}), "the port is standalone: no extends"),
+        ]
+        dropped = json.loads(good)
+        del dropped["ui"]["menu_bg"]
+        cases.append((json.dumps(dropped), "Fresh theme key 'ui.menu_bg' is not set"))
+        for text, expected in cases:
+            found = structure.problems(REPO, rel, text)
+            self.assertTrue(any(expected in p for p in found), (expected, found))
 
     def test_bad_shapes_are_reported(self):
         self.assertEqual({p for p, _ in structure.RULES} - {p for p, _ in structure.RULES

@@ -233,6 +233,62 @@ def _herdr(root: Path, text: str) -> list[str]:
     return problems
 
 
+FRESH_SECTIONS = ("editor", "ui", "search", "diagnostic", "syntax")
+FRESH_LEGACY = {"editor.selection_modifier", "ui.semantic_highlight_modifier"}  # superseded by bundled attributes
+FRESH_MODIFIER_KEYS = {"editor.bracket_rainbow_match_modifier"}
+FRESH_MODIFIERS = {"bold", "italic", "underlined", "dim", "reversed"}
+
+
+def _fresh_rgb(value) -> bool:
+    return (isinstance(value, list) and len(value) == 3
+            and all(isinstance(c, int) and not isinstance(c, bool) and 0 <= c <= 255 for c in value))
+
+
+def _fresh_modifiers(value) -> bool:
+    return isinstance(value, list) and all(isinstance(m, str) and m in FRESH_MODIFIERS for m in value)
+
+
+def _fresh(root: Path, text: str) -> list[str]:
+    """Fresh 0.5.4 (crates/fresh-editor/plugins/schemas/theme.schema.json at tag v0.5.4): a standalone theme that sets
+    every color key as [r, g, b] or {"color": [r, g, b], "modifier": [...]}. One unreadable value makes Fresh drop the
+    whole theme, so every value is checked."""
+    duplicates = []
+
+    def pairs(items):
+        seen = {}
+        for k, v in items:
+            if k in seen:
+                duplicates.append(k)
+            seen[k] = v
+        return seen
+    data = json.loads(text, object_pairs_hook=pairs)
+    if not isinstance(data, dict):
+        return ["the theme must be a JSON object"]
+    problems = [f"duplicate key {k!r}" for k in duplicates]
+    for k in sorted(set(data) - {"name", *FRESH_SECTIONS}):
+        problems.append("the port is standalone: no extends" if k == "extends" else f"unexpected top-level key {k!r}")
+    if not (isinstance(data.get("name"), str) and data["name"]):
+        problems.append("name must be a non-empty string")
+    problems += [f"section {s!r} must be a JSON object" for s in FRESH_SECTIONS if not isinstance(data.get(s, {}), dict)]
+    values = {f"{s}.{k}": v for s in FRESH_SECTIONS if isinstance(data.get(s, {}), dict)
+              for k, v in data.get(s, {}).items()}
+    known = _fixture(root, "fresh-0.5.4-theme-keys.txt")
+    problems += [f"unknown Fresh 0.5.4 theme key {k!r}" for k in sorted(set(values) - known)]
+    problems += [f"Fresh theme key {k!r} is not set (Fresh would fall back to a color the port did not choose)"
+                 for k in sorted(known - FRESH_LEGACY - set(values))]
+    for k, v in sorted(values.items()):
+        if k in FRESH_MODIFIER_KEYS or k in FRESH_LEGACY:
+            if not _fresh_modifiers(v):
+                problems.append(f"{k} must be a list of {sorted(FRESH_MODIFIERS)}")
+            continue
+        color = v.get("color") if isinstance(v, dict) else v
+        if isinstance(v, dict) and (set(v) - {"color", "modifier"} or not _fresh_modifiers(v.get("modifier", []))):
+            problems.append(f"{k} must be {{color, modifier}} with modifiers from {sorted(FRESH_MODIFIERS)}")
+        if not _fresh_rgb(color):  # names, "Default" included (Color::Reset), are never the port's colors
+            problems.append(f"{k} is not [r, g, b] with channels 0-255")
+    return problems
+
+
 # Kiro Crew 0.9.0 theme packs (src/kiro_crew/dashboard/theme_validate.py): the installer refuses any file it does not
 # know, so the port ships only the level-0 files plus its README (installed as the pack's readme.md).
 KIRO_CREW_FILES = {"theme.json", "variables.json", "README.md"}
@@ -384,6 +440,7 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/zed/themes/*.json", (_zed,)),
     ("ports/yazi/umber-calm.yazi/flavor.toml", (_yazi,)),
     ("ports/herdr/umber-calm.toml", (_herdr,)),
+    ("ports/fresh/umber-calm.json", (_fresh,)),
     ("ports/kiro-crew/theme.json", (_kiro_crew_theme,)),
     ("ports/kiro-crew/variables.json", (_kiro_crew_vars,)),
     ("ports/jetbrains/UmberCalm.xml", (_jetbrains,)),

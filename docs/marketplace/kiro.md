@@ -35,7 +35,7 @@ Every hex value and contrast ratio is in the [palette table on GitHub](https://g
 
 ## The same calm everywhere
 
-Umber Calm isn't only a Kiro theme. The same palette ships as 59 ports for editors, terminals and tools, so everything you use can match: Neovim, JetBrains IDEs, Zed, VS Code, Ghostty, iTerm2, Kitty, WezTerm, Windows Terminal, tmux, Starship and Obsidian.
+Umber Calm isn't only a Kiro theme. The same palette ships as 60 ports for editors, terminals and tools, so everything you use can match: Neovim, JetBrains IDEs, Zed, VS Code, Ghostty, iTerm2, Kitty, WezTerm, Windows Terminal, tmux, Starship and Obsidian.
 
 <img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/terminal.png" width="372" alt="A terminal session in Umber Calm"> <img src="https://raw.githubusercontent.com/ChristianOrrala/umber-calm/v0.2.1/assets/marketplace/claude.png" width="372" alt="A Claude Code session in Umber Calm">
 

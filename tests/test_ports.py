@@ -529,6 +529,148 @@ class EditorPorts(unittest.TestCase):
         self.assertEqual(data["globals"]["selection_foreground"], P.resolve("ui.selection_fg"))
         self.assertEqual(pf.non_hex(list(data["globals"].values()) + [r["foreground"] for r in data["rules"]]), [])
 
+FRESH_LEGACY = {"editor.selection_modifier", "ui.semantic_highlight_modifier"}  # superseded by bundled attributes
+FRESH_MODIFIER_KEYS = {"editor.bracket_rainbow_match_modifier"}
+
+def fresh_colors() -> dict[str, tuple[str, tuple[str, ...]]]:
+    """Every color key of the generated theme as 'section.key' -> ('#RRGGBB' or 'Default', modifiers)."""
+    theme = json.loads(out("ports/fresh/umber-calm.json"))
+    found = {}
+    for section in ("editor", "ui", "search", "diagnostic", "syntax"):
+        for key, value in theme.get(section, {}).items():
+            if f"{section}.{key}" in FRESH_MODIFIER_KEYS:
+                continue
+            rgb, mods = (value.get("color"), tuple(value.get("modifier", ()))) if isinstance(value, dict) else (value, ())
+            found[f"{section}.{key}"] = (rgb if rgb == "Default" else "#{:02X}{:02X}{:02X}".format(*rgb), mods)
+    return found
+
+CODE_BGS = ("editor.bg", "editor.current_line_bg", "editor.selection_bg", "editor.ruler_bg",
+            "editor.diff_add_bg", "editor.diff_remove_bg", "editor.diff_modify_bg",
+            "editor.diff_add_highlight_bg", "editor.diff_remove_highlight_bg",
+            "diagnostic.error_bg", "diagnostic.warning_bg", "diagnostic.info_bg", "diagnostic.hint_bg", "search.match_bg",
+            "ui.semantic_highlight_bg")  # occurrences of the word under the cursor, drawn over the code
+CODE_FGS = ("editor.fg", "syntax.keyword", "syntax.string", "syntax.function", "syntax.type", "syntax.variable",
+            "syntax.variable_builtin", "syntax.constant", "syntax.operator", "syntax.punctuation_bracket",
+            "syntax.punctuation_delimiter", *(f"editor.bracket_rainbow_{i}" for i in range(1, 7)))
+COMMENT_FLOORS = {"editor.bg": 4.5, "editor.current_line_bg": 4.0, "ui.semantic_highlight_bg": 4.0}  # E1 on panels; 3.0 (E3) on every other code background
+TEXT_PAIRS = (  # >= 4.5
+    ("ui.tab_active_fg", "ui.tab_active_bg"), ("ui.tab_close_hover_fg", "ui.tab_active_bg"), ("ui.tab_close_hover_fg", "ui.tab_inactive_bg"),
+    ("ui.menu_fg", "ui.menu_bg"), ("ui.menu_active_fg", "ui.menu_active_bg"), ("ui.menu_dropdown_fg", "ui.menu_dropdown_bg"),
+    ("ui.menu_highlight_fg", "ui.menu_highlight_bg"), ("ui.menu_hover_fg", "ui.menu_hover_bg"),
+    ("ui.status_lsp_on_fg", "ui.status_lsp_on_bg"), ("ui.status_lsp_actionable_fg", "ui.status_lsp_actionable_bg"),
+    ("ui.prompt_fg", "ui.prompt_bg"), ("ui.prompt_selection_fg", "ui.prompt_selection_bg"), ("ui.prompt_fg", "ui.text_input_selection_bg"),
+    ("ui.popup_text_fg", "ui.popup_bg"), ("ui.popup_selection_fg", "ui.popup_selection_bg"),
+    ("ui.suggestion_fg", "ui.suggestion_bg"), ("ui.suggestion_fg", "ui.suggestion_selected_bg"),
+    ("ui.help_fg", "ui.help_bg"), ("ui.help_key_fg", "ui.help_bg"),
+    ("editor.fg", "ui.inline_code_bg"), ("editor.fg", "ui.tour_step_bg"), ("editor.fg", "ui.list_drop_target_bg"), ("editor.fg", "ui.tab_drop_zone_bg"),
+    ("ui.terminal_fg", "ui.terminal_bg"), ("ui.settings_selected_fg", "ui.settings_selected_bg"),
+    ("ui.status_warning_indicator_fg", "ui.status_warning_indicator_bg"), ("ui.status_warning_indicator_hover_fg", "ui.status_warning_indicator_hover_bg"),
+    ("ui.status_error_indicator_fg", "ui.status_error_indicator_bg"), ("ui.status_error_indicator_hover_fg", "ui.status_error_indicator_hover_bg"),
+    # Explorer rows keep their status color on the plain, cursor and selected grounds (Fresh 0.5.4 file_explorer.rs).
+    *((f"ui.file_status_{s}_fg", bg) for s in ("added", "modified", "deleted", "renamed", "untracked", "conflicted")
+      for bg in ("editor.bg", "editor.current_line_bg", "editor.selection_bg")),
+    ("editor.fg", "editor.inactive_cursor"),  # Fresh draws editor.fg over the cursor block of an unfocused split
+    ("search.match_fg", "search.match_bg"), ("search.current_match_fg", "search.current_match_bg"), ("search.label_fg", "search.label_bg"),
+    *((f"diagnostic.{s}_fg", f"diagnostic.{s}_bg") for s in ("error", "warning", "info", "hint")),
+    *((f"diagnostic.{s}_fg", "editor.bg") for s in ("error", "warning", "info", "hint")),
+    ("editor.diff_add_collision_fg", "editor.diff_add_bg"), ("editor.diff_remove_collision_fg", "editor.diff_remove_bg"),
+    ("editor.diff_modify_collision_fg", "editor.diff_modify_bg"))
+SECONDARY_PAIRS = (  # (fg, bg, floor): 4.5 on bg-level backgrounds, 4.0 on panels (E1)
+    ("editor.line_number_fg", "editor.line_number_bg", 4.5), ("editor.line_number_fg", "editor.current_line_bg", 4.0),
+    ("ui.tab_inactive_fg", "ui.tab_inactive_bg", 4.5),
+    ("ui.tab_inactive_fg", "ui.tab_hover_bg", 4.0), ("ui.status_bar_fg", "ui.status_bar_bg", 4.0),
+    ("ui.status_palette_fg", "ui.status_palette_bg", 4.0), ("ui.menu_disabled_fg", "ui.menu_disabled_bg", 4.0),
+    ("ui.help_indicator_fg", "ui.help_indicator_bg", 4.0), ("ui.blame_header_fg", "ui.blame_header_bg", 4.0))
+INDICATORS = ("editor.cursor", "editor.bracket_match_fg")  # >= 3.0 on editor.bg and editor.current_line_bg
+DECORATION = {"editor.indentation_guide_fg", *(f"editor.indent_rainbow_{i}" for i in range(1, 7)), "editor.whitespace_indicator_fg",
+              "editor.whitespace_indicator_selected_fg", "editor.after_eof_bg", "ui.tab_separator_bg", "ui.menu_border_fg",
+              "ui.menu_separator_fg", "ui.status_separator_fg", "ui.status_separator_bg", "ui.popup_border_fg", "ui.help_separator_fg",
+              "ui.split_separator_fg", "ui.split_separator_hover_fg", "ui.scrollbar_track_fg", "ui.scrollbar_thumb_fg",
+              "ui.scrollbar_track_hover_fg", "ui.scrollbar_thumb_hover_fg", "ui.compose_margin_bg", "ui.tab_drop_zone_border"}
+FRESH_RED = {"diagnostic.error_fg", "diagnostic.error_bg", "editor.diff_remove_bg", "editor.diff_remove_highlight_bg",
+             "ui.status_error_indicator_bg", "ui.status_error_indicator_hover_bg", "ui.file_status_deleted_fg"}
+
+class FreshPort(unittest.TestCase):
+    def test_sets_every_0_5_4_key_and_stands_alone(self):
+        theme = json.loads(out("ports/fresh/umber-calm.json"))
+        known = pf.keys_in((REPO / "tests/fixtures/fresh-0.5.4-theme-keys.txt").read_text(encoding="utf-8"))
+        self.assertEqual(len(known), 145)
+        self.assertEqual(set(fresh_colors()), known - FRESH_LEGACY - FRESH_MODIFIER_KEYS)
+        self.assertEqual(theme["editor"]["bracket_rainbow_match_modifier"], ["bold", "underlined"])
+        self.assertEqual(theme["name"], "Umber Calm")
+        self.assertNotIn("extends", theme)
+        self.assertEqual(port("fresh").target_version, "0.5.4")
+        self.assertIn("terminal", port("fresh").risk, "Fresh leaves the cursor color to the terminal (loader.rs)")
+
+    def test_orange_marks_only_focus(self):
+        focus = P.resolve("ui.focus")
+        self.assertEqual({k for k, (c, _) in fresh_colors().items() if c == focus}, {"editor.cursor", "ui.tab_active_fg"})
+
+    def test_red_marks_only_errors_and_deletions(self):
+        red, bg = P.resolve("diag.error"), P.colors["bg"]
+        derived = {red, P.resolve("ansi.bright_red"), color.blend(red, bg, P.tints["diag"]), color.blend(red, bg, P.tints["diff"])}
+        self.assertEqual({k for k, (c, _) in fresh_colors().items() if c in derived}, FRESH_RED)
+
+    def test_inactive_cursor_is_a_text_ground_apart_from_its_neighbours(self):
+        """No role gives both text >= 4.5 on the block and a 3:1 edge, so the character wins; the block stays distinct."""
+        c = fresh_colors()
+        self.assertEqual(c["editor.inactive_cursor"][0], P.resolve("ui.border"))
+        for other in ("editor.bg", "editor.current_line_bg", "editor.selection_bg"):
+            self.assertNotEqual(c["editor.inactive_cursor"][0], c[other][0], other)
+        # unfocused splits draw no current-line band, so the edge that matters is on editor.bg (2.2 with ui.border)
+        self.assertGreaterEqual(color.contrast(c["editor.inactive_cursor"][0], c["editor.bg"][0]), 2.0)
+
+    def test_syntax_and_quiet_brackets_follow_the_roles(self):
+        c = fresh_colors()
+        roles = {"keyword": "syntax.keyword", "string": "syntax.string", "comment": "syntax.comment",
+                 "function": "syntax.function", "type": "syntax.type", "variable": "syntax.variable",
+                 "variable_builtin": "syntax.builtin", "constant": "syntax.constant", "operator": "syntax.operator",
+                 "punctuation_bracket": "syntax.operator", "punctuation_delimiter": "syntax.operator"}
+        for key, role in roles.items():
+            self.assertEqual(c[f"syntax.{key}"][0], P.resolve(role), key)
+        self.assertEqual(c["syntax.comment"][1], ("italic",))
+        for i in range(1, 7):
+            self.assertEqual(c[f"editor.bracket_rainbow_{i}"][0], P.resolve("syntax.operator"))
+            self.assertEqual(c[f"editor.indent_rainbow_{i}"][0], P.resolve("ui.border_strong"))
+        self.assertEqual(c["editor.bracket_match_fg"], (P.resolve("ui.text"), ("bold", "underlined")))
+
+    def test_washes_land_on_the_measured_tints(self):
+        c, bg = fresh_colors(), P.colors["bg"]
+        blend = lambda role, tint: color.blend(P.resolve(role), bg, P.tints[tint])
+        expected = {"editor.diff_add_bg": blend("diag.diff_add", "diag"), "editor.diff_remove_bg": blend("diag.diff_delete", "diag"),
+                    "editor.diff_modify_bg": blend("diag.diff_change", "diag"),
+                    "editor.diff_add_highlight_bg": blend("diag.diff_add", "diff"),
+                    "editor.diff_remove_highlight_bg": blend("diag.diff_delete", "diff"),
+                    "search.match_bg": blend("diag.search", "search"), "ui.list_drop_target_bg": blend("diag.info", "diag"),
+                    **{f"diagnostic.{s}_bg": blend(f"diag.{s}", "diag") for s in ("error", "warning", "info", "hint")}}
+        for key, value in expected.items():
+            self.assertEqual(c[key][0], value, key)
+        # "Default" is Color::Reset in Fresh 0.5.4: the terminal's own background, cutting through the current line
+        self.assertEqual(c["ui.semantic_highlight_bg"], (P.resolve("ui.surface"), ("underlined",)), "a soft band plus an underline")
+
+    def test_every_pair_reaches_its_floor(self):
+        c = fresh_colors()
+        ratio = lambda fg, bg: color.contrast(c[fg][0], c[bg][0])
+        for fg in CODE_FGS:
+            for bg in CODE_BGS:
+                self.assertGreaterEqual(ratio(fg, bg), 4.5, f"{fg} on {bg}")
+        for bg in CODE_BGS:
+            self.assertGreaterEqual(ratio("syntax.comment", bg), COMMENT_FLOORS.get(bg, 3.0), f"comment on {bg}")
+        for fg, bg in TEXT_PAIRS:
+            self.assertGreaterEqual(ratio(fg, bg), 4.5, f"{fg} on {bg}")
+        for fg, bg, floor in SECONDARY_PAIRS:
+            self.assertGreaterEqual(ratio(fg, bg), floor, f"{fg} on {bg}")
+        for fg in INDICATORS:
+            for bg in ("editor.bg", "editor.current_line_bg"):
+                self.assertGreaterEqual(ratio(fg, bg), 3.0, f"{fg} on {bg}")
+
+    def test_every_key_is_measured_or_decoration(self):
+        measured = {*CODE_BGS, *CODE_FGS, "syntax.comment", *INDICATORS, "editor.bg", "editor.current_line_bg",
+                    *(k for pair in TEXT_PAIRS for k in pair), *(k for fg, bg, _ in SECONDARY_PAIRS for k in (fg, bg))}
+        self.assertEqual(measured & DECORATION, set())
+        self.assertEqual(measured | DECORATION, set(fresh_colors()))
+
+
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'
                       r'|  [a-z_]+: \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \}')
 EZA_SECTIONS = {"colourful", "filekinds", "perms", "size", "users", "links", "git", "git_repo", "security_context",
