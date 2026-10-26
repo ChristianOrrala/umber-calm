@@ -21,6 +21,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "0.5.4",
+      "date": "2026-10-25",
+      "digest": "sha256:ffafe30b365d5207dd91da35172160eac61741cdc66878b0c4db7d3a5a0fc789",
+      "evidence": "",
+      "note": "",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "herdr": [

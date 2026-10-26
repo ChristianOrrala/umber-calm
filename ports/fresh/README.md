@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says.
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 0.5.4 · Format documentation: https://github.com/sinelaw/fresh/blob/v0.5.4/docs/features/themes.md
 
@@ -40,6 +40,7 @@ Print it yourself with `python3 tools/build.py digest fresh`. It covers these fi
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-10-25 | ✅ verified | 0.5.4 | macOS | 26.6.2 |  |  | `ffafe30b365d` |
 | 2026-10-25 | ✅ verified | 0.5.4 | macOS | 26.6.2 |  |  | `97e2ef9cc126` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.
