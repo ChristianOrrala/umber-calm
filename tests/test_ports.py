@@ -578,6 +578,7 @@ TEXT_PAIRS = (  # >= 4.5
 SECONDARY_PAIRS = (  # (fg, bg, floor): 4.5 on bg-level backgrounds, 4.0 on panels (E1)
     ("editor.line_number_fg", "editor.line_number_bg", 4.5), ("editor.line_number_fg", "editor.current_line_bg", 4.0),
     ("ui.tab_inactive_fg", "ui.tab_inactive_bg", 4.5),
+    ("editor.line_number_fg", "editor.selection_bg", 3.0),  # cut files on a selected explorer row (E3)
     ("ui.tab_inactive_fg", "ui.tab_hover_bg", 4.0), ("ui.status_bar_fg", "ui.status_bar_bg", 4.0),
     ("ui.status_palette_fg", "ui.status_palette_bg", 4.0), ("ui.menu_disabled_fg", "ui.menu_disabled_bg", 4.0),
     ("ui.help_indicator_fg", "ui.help_indicator_bg", 4.0), ("ui.blame_header_fg", "ui.blame_header_bg", 4.0))
@@ -587,6 +588,15 @@ DECORATION = {"editor.indentation_guide_fg", *(f"editor.indent_rainbow_{i}" for 
               "ui.menu_separator_fg", "ui.status_separator_fg", "ui.status_separator_bg", "ui.popup_border_fg", "ui.help_separator_fg",
               "ui.split_separator_fg", "ui.split_separator_hover_fg", "ui.scrollbar_track_fg", "ui.scrollbar_thumb_fg",
               "ui.scrollbar_track_hover_fg", "ui.scrollbar_thumb_hover_fg", "ui.compose_margin_bg", "ui.tab_drop_zone_border"}
+# Fixed (fg, bg) pairs Fresh 0.5.4 draws, read from its source at tag v0.5.4: every pair("a", "b"), attrs("a", "b", ...)
+# and theme_fg(..., "a") ... theme_bg(..., "b") chain under crates/. Each is text at 4.5 unless declared below, or its
+# foreground is decoration.
+DRAWN_PAIR_FLOORS = {
+    ("editor.line_number_fg", "ui.popup_bg"): 4.0,                # E1: muted on a panel
+    ("ui.status_bar_fg", "ui.status_bar_bg"): 4.0,                # E1
+    ("editor.line_number_fg", "ui.suggestion_selected_bg"): 3.0,  # E3: muted on the selection band
+}
+
 FRESH_RED = {"diagnostic.error_fg", "diagnostic.error_bg", "editor.diff_remove_bg", "editor.diff_remove_highlight_bg",
              "ui.status_error_indicator_bg", "ui.status_error_indicator_hover_bg", "ui.file_status_deleted_fg"}
 
@@ -663,6 +673,18 @@ class FreshPort(unittest.TestCase):
         for fg in INDICATORS:
             for bg in ("editor.bg", "editor.current_line_bg"):
                 self.assertGreaterEqual(ratio(fg, bg), 3.0, f"{fg} on {bg}")
+
+    def test_every_pair_fresh_draws_reaches_its_floor(self):
+        c = fresh_colors()
+        text = (REPO / "tests/fixtures/fresh-0.5.4-drawn-pairs.txt").read_text(encoding="utf-8")
+        drawn = [tuple(line.split()) for line in text.splitlines() if line.strip()]
+        self.assertEqual(len(drawn), 72)
+        for fg, bg in drawn:
+            if fg in DECORATION:
+                continue
+            floor = DRAWN_PAIR_FLOORS.get((fg, bg), 4.5)
+            self.assertGreaterEqual(color.contrast(c[fg][0], c[bg][0]), floor, f"{fg} on {bg}")
+        self.assertLessEqual(set(DRAWN_PAIR_FLOORS), set(drawn), "a declared floor names a pair Fresh does not draw")
 
     def test_every_key_is_measured_or_decoration(self):
         measured = {*CODE_BGS, *CODE_FGS, "syntax.comment", *INDICATORS, "editor.bg", "editor.current_line_bg",

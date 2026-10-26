@@ -166,7 +166,8 @@ def _opencode(text: str) -> list[str]:
 def _fresh(text: str) -> list[str]:
     """Fresh colors are [r, g, b] or {"color": [r, g, b], "modifier": [...]}; anything else is returned unchecked."""
     out = []
-    syntax = json.loads(text).get("syntax", {})
+    data = json.loads(text)
+    syntax = data.get("syntax", {}) if isinstance(data, dict) else {}
     for value in syntax.values() if isinstance(syntax, dict) else ():
         rgb = value.get("color") if isinstance(value, dict) else value
         if (isinstance(rgb, list) and len(rgb) == 3

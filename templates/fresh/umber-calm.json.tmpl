@@ -131,7 +131,7 @@
     "label_fg": [{{ term.cursor_text | rgb_decimal }}]
   },
   "diagnostic": {
-    "error_fg": [{{ diag.error | rgb_decimal }}],
+    "error_fg": [{{ ansi.bright_red | rgb_decimal }}],
     "error_bg": [{{ diag.error | blend(ui.bg, tint.diag) | rgb_decimal }}],
     "warning_fg": [{{ diag.warning | rgb_decimal }}],
     "warning_bg": [{{ diag.warning | blend(ui.bg, tint.diag) | rgb_decimal }}],

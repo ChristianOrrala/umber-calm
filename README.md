@@ -106,7 +106,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (11)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (10)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -115,7 +115,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
-| Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.4 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. |
 | Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.26 · macOS 26.6.2 |  |
 | Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
 | VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.143.1 · macOS 26.6.2 |  |
@@ -125,7 +124,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -149,6 +148,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | fzf | cli | [ports/fzf/](ports/fzf/) | 0.56 | — |  |
 | lazygit | cli | [ports/lazygit/](ports/lazygit/) | 0.44 | — |  |
 | yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
+| Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.4 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. |
 | Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
@@ -214,7 +214,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Firefox | 🧪 experimental | — |  |  | `05b5e318c811` |  |
 | fish | 🧪 experimental | — |  |  | `c42a72950b4f` |  |
 | foot | 🧪 experimental | — |  |  | `ecacdd9402bc` |  |
-| Fresh | ✅ supported | 2026-10-25 | 0.5.4 | macOS 26.6.2 | `97e2ef9cc126` |  |
+| Fresh | 🧪 experimental | 2026-10-25 (earlier revision) | 0.5.4 | macOS 26.6.2 | `ffafe30b365d` |  |
 | fuzzel | 🧪 experimental | — |  |  | `3fe79bd2457d` |  |
 | fzf | 🧪 experimental | — |  |  | `ae8fbdd67487` |  |
 | Ghostty | 🧪 experimental | — |  |  | `3a140bb745a0` |  |

@@ -30,6 +30,8 @@ class SyntaxCheckTest(unittest.TestCase):
                                        "type": "Red"}})
         self.assertEqual(syntaxcheck.extract("fresh", fresh.encode()), ["#DCC07D", "#938A7B", "Red"])
         self.assertEqual(syntaxcheck.extract("fresh", b'{"syntax": []}'), [])
+        self.assertEqual(syntaxcheck.extract("fresh", b"[]"), [])
+        self.assertEqual(syntaxcheck.extract("fresh", b"null"), [])
         self.assertEqual(syntaxcheck.extract("fresh", b'{"syntax": {"keyword": [true, 0, 0]}}'), ["[True, 0, 0]"])
         self.assertEqual(set(syntaxcheck.EXTRACTORS), set(registry.SYNTAX_FORMATS), "extend both together")
 
