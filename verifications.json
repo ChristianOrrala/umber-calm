@@ -11,6 +11,18 @@
       "status": "verified"
     }
   ],
+  "fresh": [
+    {
+      "app_version": "0.5.4",
+      "date": "2026-10-25",
+      "digest": "sha256:97e2ef9cc126e4f269fa87bb17c99b7f427ef0fc7e378cdd44197667e87ef282",
+      "evidence": "",
+      "note": "",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
   "herdr": [
     {
       "app_version": "0.9.1",

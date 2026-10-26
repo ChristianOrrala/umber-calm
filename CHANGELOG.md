@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- New port: Fresh 0.5.4 (experimental). A standalone theme that sets all 142 colors from palette roles. Orange only marks the cursor and the active tab; brackets stay quiet with rainbow brackets on; occurrences of the word under the cursor are underlined on a soft band. Fresh leaves the cursor color to the terminal.
+- New port: Fresh 0.5.4, verified in the app on macOS 26.6.2. A standalone theme that sets all 142 colors from palette roles. Orange only marks the cursor and the active tab; brackets stay quiet with rainbow brackets on; occurrences of the word under the cursor are underlined on a soft band. Fresh leaves the cursor color to the terminal.
 
 ## 0.2.1 (2026-10-25)
 
