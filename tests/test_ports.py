@@ -108,6 +108,8 @@ class LaunchTerminalPorts(unittest.TestCase):
             self.assertGreaterEqual(color.contrast(custom[fg], custom["surface0"]), 3.0, f"{fg} on surface0 (dim tier)")
         self.assertNotEqual(custom["active_row_bg"], custom["selection_bg"], "navigate cursor distinct from the active row")
         self.assertEqual(port("herdr").target_version, "0.9.1")
+        self.assertEqual(port("herdr").name, "Herdr TUI")
+        self.assertEqual(port("herdr").docs, "https://herdr.dev/tui/docs/configuration/")
 
     def test_starship(self):
         data = tomllib.loads(out("ports/starship/umber-calm.toml"))

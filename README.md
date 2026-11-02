@@ -111,7 +111,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
 | WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
-| herdr | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
+| Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
@@ -222,8 +222,8 @@ A tier is supported only while its last real-app test covers the exact files you
 | GNOME Terminal | 🧪 experimental | — |  |  | `483e82f0dd6c` |  |
 | GTK 3/4 + libadwaita | 🧪 experimental | — |  |  | `75042c4bc795` |  |
 | Helix | 🧪 experimental | — |  |  | `fe1cda73f826` |  |
-| herdr | ✅ supported | 2026-09-29 | 0.9.1 | macOS 26.6.2 | `b10fed21b5e9` |  |
 | Herdr | 🧪 experimental | — |  |  | `0f770544524e` |  |
+| Herdr TUI | ✅ supported | 2026-09-29 | 0.9.1 | macOS 26.6.2 | `b10fed21b5e9` |  |
 | i3 | 🧪 experimental | — |  |  | `993976e10b90` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `31d0cc69bd19` |  |
 | JetBrains IDEs | 🧪 experimental | — |  |  | `e57a3cf99d7d` |  |

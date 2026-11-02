@@ -55,11 +55,11 @@ checklist = ["status bar and tab bar: active tab and current mode are orange (fo
 
 [[port]]
 id = "herdr"
-name = "herdr"
+name = "Herdr TUI"
 category = "multiplexer"
 phase = 2
 output_root = "ports/herdr"
-docs = "https://herdr.dev/docs/configuration/"
+docs = "https://herdr.dev/tui/docs/configuration/"
 format_confirmed = true
 target_version = "0.9.1"
 install = "herdr has no includes: paste the contents of umber-calm.toml into ~/.config/herdr/config.toml, replacing any [theme] and [theme.custom] tables, then run `herdr server reload-config`."

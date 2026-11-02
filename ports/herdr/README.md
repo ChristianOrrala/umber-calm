@@ -1,10 +1,10 @@
-# herdr — Umber Calm
+# Herdr TUI — Umber Calm
 
 > ⚠️ **Warning:** herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations.
 
 Tier: ✅ supported
 
-Target version: 0.9.1 · Format documentation: https://herdr.dev/docs/configuration/
+Target version: 0.9.1 · Format documentation: https://herdr.dev/tui/docs/configuration/
 
 Verified on: 0.9.1 · macOS 26.6.2 (2026-09-29)
 
