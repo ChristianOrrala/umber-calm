@@ -220,14 +220,14 @@ def _yazi(root: Path, text: str) -> list[str]:
 
 
 def _herdr(root: Path, text: str) -> list[str]:
-    """herdr 0.9.1 (src/config/theme.rs, CustomThemeColors): [theme] plus every [theme.custom] token, in hex."""
+    """Herdr TUI 0.9.1 (src/config/theme.rs, CustomThemeColors): [theme] plus every [theme.custom] token, in hex."""
     known = _fixture(root, "herdr-0.9.1-theme-keys.txt")
     data = tomllib.loads(text)
     theme = data.get("theme", {})
     custom = theme.get("custom", {})
     problems = [f"unexpected top-level table {k!r} (the port only sets [theme])" for k in sorted(set(data) - {"theme"})]
-    problems += [f"unknown herdr 0.9.1 theme token {k!r}" for k in sorted(set(custom) - known)]
-    problems += [f"herdr theme token {k!r} is not set (the base theme would show through)" for k in sorted(known - set(custom))]
+    problems += [f"unknown Herdr TUI 0.9.1 theme token {k!r}" for k in sorted(set(custom) - known)]
+    problems += [f"Herdr TUI 0.9.1 theme token {k!r} is not set (the base theme would show through)" for k in sorted(known - set(custom))]
     problems += [f"theme.custom.{k} = {v!r} is not #RRGGBB" for k, v in sorted(custom.items())
                  if not (isinstance(v, str) and re.fullmatch(HEX, v))]
     return problems

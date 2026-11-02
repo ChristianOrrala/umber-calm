@@ -79,7 +79,7 @@ class LaunchTerminalPorts(unittest.TestCase):
         self.assertEqual(port("zellij").target_version, "0.45.1")
 
     def test_herdr(self):
-        """herdr 0.9.1: every [theme.custom] token set; orange only on accent; the text ladder measured on its rows."""
+        """Herdr TUI 0.9.1: every [theme.custom] token set; orange only on accent; the text ladder measured on its rows."""
         data = tomllib.loads(out("ports/herdr/umber-calm.toml"))
         self.assertEqual(set(data), {"theme"})
         self.assertEqual(data["theme"]["name"], "terminal")

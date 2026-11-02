@@ -1,6 +1,6 @@
 # Herdr — Umber Calm
 
-> ⚠️ **Warning:** Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, orange on switches and primary buttons, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code.
+> ⚠️ **Warning:** Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers.
 
 Tier: 🧪 experimental
 
@@ -19,7 +19,7 @@ Pick another theme and delete the file.
 ## Verification checklist
 
 - [ ] terminals on bg with warm text, sidebars a step darker, menus and popovers a step lighter
-- [ ] focused pane border and focused inputs orange; switches and primary buttons orange too (known limit); nothing else
+- [ ] focused pane border and focused inputs orange; Herdr's other accent marks (switches, primary buttons, chosen options, matches, notices, update dots, drop markers) orange too (known limit); nothing else
 - [ ] hover and selected rows warm and distinct in the sidebar, menus and the picker
 - [ ] agent states: working yellow spinner, blocked bright red Needs you, done green dot, idle ring
 - [ ] secondary labels readable, on selected rows too

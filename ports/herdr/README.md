@@ -1,6 +1,6 @@
 # Herdr TUI — Umber Calm
 
-> ⚠️ **Warning:** herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations.
+> ⚠️ **Warning:** Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations.
 
 Tier: ✅ supported
 
@@ -10,7 +10,7 @@ Verified on: 0.9.1 · macOS 26.6.2 (2026-09-29)
 
 ## Install
 
-herdr has no includes: paste the contents of umber-calm.toml into ~/.config/herdr/config.toml, replacing any [theme] and [theme.custom] tables, then run `herdr server reload-config`.
+Herdr TUI has no includes: paste the contents of umber-calm.toml into ~/.config/herdr/config.toml, replacing any [theme] and [theme.custom] tables, then run `herdr server reload-config`.
 
 ## Uninstall
 

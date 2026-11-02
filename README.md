@@ -111,7 +111,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
 | WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
-| Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ herdr has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
+| Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
@@ -133,7 +133,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | foot | terminal | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
 | Ghostty | terminal | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
 | GNOME Terminal | terminal | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
-| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.11 | — | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, orange on switches and primary buttons, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. |
+| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.11 | — | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. |
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
