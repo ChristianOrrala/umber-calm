@@ -24,7 +24,7 @@ Choose another theme and delete the folder.
 
 ## Verification
 
-Current digest: `sha256:9cf8cee6fd8ee59515a0a99178ae313747312ed4e97c89340daf18fcd76ff563`
+Current digest: `sha256:fc5ea6bd1fbcf4d4dcff2e5b696cd98f272315d522ac533aa9d99795280e38f2`
 
 Print it yourself with `python3 tools/build.py digest obsidian`. It covers these files:
 

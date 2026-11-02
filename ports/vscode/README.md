@@ -4,7 +4,7 @@ Tier: ✅ supported
 
 Target version: 1.95 · Minimum version: 1.95.0 · Format documentation: https://code.visualstudio.com/api/extension-guides/color-theme
 
-Verified on: 1.143.1 · macOS 26.6.2 (2026-10-25)
+Verified on: 1.143.1 · macOS 26.6.2 (2026-11-02)
 
 ## Install
 
@@ -30,7 +30,7 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:63402f4907bfbb44eaad12dbb08016fa518017a13db9e183cdee469a3b6ad4f8`
+Current digest: `sha256:a170ea34703f8f28405546df36ed4199576526ff230972ba2e1b7158c02fc53e`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 
@@ -40,6 +40,7 @@ Print it yourself with `python3 tools/build.py digest vscode`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-02 | ✅ verified | 1.143.1 | macOS | 26.6.2 | VS Code 1.143.1, clean profile, 0.3.0 vsix: 489/489 theme colors resolve exactly over CDP; theme file unchanged since 0.2.1, only the version |  | `a170ea34703f` |
 | 2026-10-25 | ✅ verified | 1.143.1 | macOS | 26.6.2 | VS Code 1.143.1, clean profile: 489/489 theme colors resolve exactly over CDP; syntax tokens; amber cursor. 1.143 hides the active tab top border in its new tab style. |  | `63402f4907bf` |
 | 2026-10-25 | ✅ verified | 1.140 | Linux | 24.04 | VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI. |  | `8f793848e649` |
 | 2026-10-25 | ✅ verified | 1.140 | Linux | 24.04 | VSCodium 1.140.06880, Ubuntu 24.04, Xvfb: 489/489 theme colors resolve exactly over CDP; style-guide tokens in TS, Python, JSON, CSS; diff tints; tab border; ANSI. |  | `fed6095242ee` |
