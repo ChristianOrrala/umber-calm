@@ -4,7 +4,7 @@
 
 Tier: 🧪 experimental
 
-Target version: 0.1.11 · Format documentation: https://github.com/herdrdev/herdr-app/blob/v0.1.11/defaults/AGENTS.md
+Target version: 0.1.12 · Format documentation: https://github.com/herdrdev/herdr-app/blob/v0.1.12/defaults/AGENTS.md
 
 Verified on: —
 

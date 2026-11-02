@@ -256,7 +256,7 @@ HERDR_APP_ALPHA_OK = {"hover", "selected"}
 
 
 def _herdr_app(root: Path, text: str) -> list[str]:
-    """Herdr app 0.1.11 (src/settings.rs ThemeFile and resolve() at tag v0.1.11)."""
+    """Herdr app 0.1.12 (src/settings.rs ThemeFile and resolve() at tag v0.1.12)."""
     data, duplicates = _json_with_duplicates(text)
     problems = [f"duplicate key {k!r}" for k in duplicates]
     if not isinstance(data, dict):
@@ -290,7 +290,7 @@ def _herdr_app(root: Path, text: str) -> list[str]:
         covered.add("terminal_foreground")
     if isinstance(ansi, list):
         covered.update(f"ansi{i}" for i in range(len(ansi)))
-    known = _fixture(root, "herdr-app-0.1.11-theme-keys.txt")
+    known = _fixture(root, "herdr-app-0.1.12-theme-keys.txt")
     problems += [f"resolved name {k!r} is not covered (Herdr would derive it)" for k in sorted(known - covered)]
     return problems
 

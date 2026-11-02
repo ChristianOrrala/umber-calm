@@ -696,14 +696,14 @@ class FreshPort(unittest.TestCase):
         self.assertEqual(measured | DECORATION, set(fresh_colors()))
 
 
-HERDR_APP_VERSION = "0.1.11"
+HERDR_APP_VERSION = "0.1.12"
 HERDR_APP_KEYS = REPO / f"tests/fixtures/herdr-app-{HERDR_APP_VERSION}-theme-keys.txt"
 HERDR_APP_PAIRS = REPO / f"tests/fixtures/herdr-app-{HERDR_APP_VERSION}-drawn-pairs.txt"
 HERDR_APP_CLASSES = ("text", "secondary", "indicator", "decoration", "disabled")
 
 
 def herdr_app_pairs() -> list[tuple[tuple[str, str | None], tuple[tuple[str, str | None], ...], str, str]]:
-    """Theme ink and background stacks audited at Herdr tag v0.1.11 (defaults/ and src/)."""
+    """Theme ink and background stacks audited at Herdr tag v0.1.12 (defaults/ and src/)."""
     def token(value: str) -> tuple[str, str | None]:
         name, alpha = value.split("@") if "@" in value else (value, None)
         return name, alpha
@@ -730,7 +730,7 @@ class HerdrAppFixtures(unittest.TestCase):
 
     def test_pairs_parse_and_name_known_colors(self):
         known, pairs = set(HERDR_APP_KEYS.read_text(encoding="utf-8").split()), herdr_app_pairs()
-        self.assertEqual(len(pairs), 275)
+        self.assertEqual(len(pairs), 276)
         self.assertEqual(len({(fg, stack, cls) for fg, stack, cls, _ in pairs}), len(pairs))
         records = [line for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines()
                    if line.strip() and not line.lstrip().startswith("#")]
@@ -825,7 +825,7 @@ def herdr_app_ink(fg, stack, theme: dict[str, str]) -> str:
 
 
 def herdr_app_theme() -> dict[str, str]:
-    """Resolve top-level terminal fields first, then colors overrides, as Herdr 0.1.11 does."""
+    """Resolve top-level terminal fields first, then colors overrides, as Herdr 0.1.12 does."""
     data = json.loads(out("ports/herdr-app/umber-calm.json"))
     return {"background": data["background"], "terminal_foreground": data["foreground"],
             "selection": data["selection"], "cursor": data["cursor"],
@@ -891,7 +891,7 @@ class HerdrAppPort(unittest.TestCase):
                 measured += 1
                 ratio = color.contrast(herdr_app_ink(fg, stack, self.t), herdr_app_drawn(stack, self.t))
                 self.assertGreaterEqual(ratio, floor, f"{fg[0]} on {'+'.join(n for n, _ in stack)} ({source})")
-        self.assertEqual(measured, 212)
+        self.assertEqual(measured, 213)
 
 
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'
