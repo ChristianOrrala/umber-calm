@@ -693,6 +693,58 @@ class FreshPort(unittest.TestCase):
         self.assertEqual(measured | DECORATION, set(fresh_colors()))
 
 
+HERDR_APP_VERSION = "0.1.11"
+HERDR_APP_KEYS = REPO / f"tests/fixtures/herdr-app-{HERDR_APP_VERSION}-theme-keys.txt"
+HERDR_APP_PAIRS = REPO / f"tests/fixtures/herdr-app-{HERDR_APP_VERSION}-drawn-pairs.txt"
+HERDR_APP_CLASSES = ("text", "secondary", "indicator", "decoration", "disabled")
+
+
+def herdr_app_pairs() -> list[tuple[tuple[str, str | None], tuple[tuple[str, str | None], ...], str, str]]:
+    """Theme ink and background stacks audited at Herdr tag v0.1.11 (defaults/ and src/)."""
+    def token(value: str) -> tuple[str, str | None]:
+        name, alpha = value.split("@") if "@" in value else (value, None)
+        return name, alpha
+
+    pairs = []
+    for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        fg, stack, cls, source = line.split()
+        pairs.append((token(fg), tuple(token(part) for part in stack.split("+")), cls, source))
+    return pairs
+
+
+class HerdrAppFixtures(unittest.TestCase):
+    def test_keys_are_resolves_names(self):
+        keys = HERDR_APP_KEYS.read_text(encoding="utf-8").split()
+        self.assertEqual(len(keys), 42)
+        self.assertEqual(len(set(keys)), 42)
+        self.assertEqual(keys[-16:], [f"ansi{i}" for i in range(16)])
+        self.assertLessEqual({"foreground", "terminal_foreground", "hover", "selected", "blocked", "accent"}, set(keys))
+
+    def test_pairs_parse_and_name_known_colors(self):
+        known, pairs = set(HERDR_APP_KEYS.read_text(encoding="utf-8").split()), herdr_app_pairs()
+        self.assertEqual(len(pairs), 276)
+        self.assertEqual(len({(fg, stack, cls) for fg, stack, cls, _ in pairs}), len(pairs))
+        records = [line for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines()
+                   if line.strip() and not line.lstrip().startswith("#")]
+        self.assertEqual(records, sorted(records))
+        for fg, stack, cls, source in pairs:
+            self.assertIn(fg[0], known, source)
+            if fg[1] is not None:
+                self.assertRegex(fg[1], r"^[0-9a-fA-F]{2}$", source)
+            self.assertIn(cls, HERDR_APP_CLASSES, source)
+            self.assertIsNone(stack[0][1], f"{source}: a stack starts on a solid panel")
+            self.assertNotIn(stack[0][0], {"hover", "selected"}, source)
+            for name, alpha in stack:
+                self.assertIn(name, known, source)
+                if alpha is not None:
+                    self.assertRegex(alpha, r"^[0-9a-fA-F]{2}$", source)
+            self.assertRegex(source, r"^(defaults|src)/[^:]+:\d+$")
+        self.assertIn((("blocked", None), (("chrome", None), ("selected", None), ("blocked", "26"))),
+                      {(f, s) for f, s, _, _ in pairs})
+
+
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'
                       r'|  [a-z_]+: \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \}')
 EZA_SECTIONS = {"colourful", "filekinds", "perms", "size", "users", "links", "git", "git_repo", "security_context",
