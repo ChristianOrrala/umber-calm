@@ -233,6 +233,68 @@ def _herdr(root: Path, text: str) -> list[str]:
     return problems
 
 
+def _json_with_duplicates(text: str) -> tuple[object, list[str]]:
+    """Parse JSON while recording duplicate object keys at every depth."""
+    duplicates = []
+
+    def pairs(items):
+        seen = {}
+        for k, v in items:
+            if k in seen:
+                duplicates.append(k)
+            seen[k] = v
+        return seen
+
+    return json.loads(text, object_pairs_hook=pairs), duplicates
+
+
+HERDR_APP_TOP = ("background", "foreground", "selection", "cursor", "ansi", "colors")
+HERDR_APP_COLORS = {"foreground", "surface", "canvas", "chrome", "popover", "raised", "hover", "selected",
+                    "border", "input", "ring", "muted", "dim", "accent", "accent_foreground", "solid",
+                    "solid_foreground", "working", "blocked", "done", "idle", "unknown"}
+HERDR_APP_ALPHA_OK = {"hover", "selected"}
+
+
+def _herdr_app(root: Path, text: str) -> list[str]:
+    """Herdr app 0.1.11 (src/settings.rs ThemeFile and resolve() at tag v0.1.11)."""
+    data, duplicates = _json_with_duplicates(text)
+    problems = [f"duplicate key {k!r}" for k in duplicates]
+    if not isinstance(data, dict):
+        return problems + ["the theme must be a JSON object"]
+    problems += [f"unexpected top-level key {k!r} (Herdr refuses the whole theme)"
+                 for k in sorted(set(data) - set(HERDR_APP_TOP))]
+    problems += [f"missing top-level key {k!r}" for k in HERDR_APP_TOP if k not in data]
+    for k in HERDR_APP_TOP[:4]:
+        if k in data and not (isinstance(data[k], str) and re.fullmatch(HEX, data[k])):
+            problems.append(f"{k} is not #RRGGBB")
+    ansi = data.get("ansi")
+    if not isinstance(ansi, list):
+        problems.append("ansi must be a list")
+    else:
+        if len(ansi) != 16:
+            problems.append("ansi must have exactly 16 entries")
+        problems += [f"ansi[{i}] is not #RRGGBB" for i, v in enumerate(ansi)
+                     if not (isinstance(v, str) and re.fullmatch(HEX, v))]
+    colors = data.get("colors")
+    if not isinstance(colors, dict):
+        problems.append("colors must be a JSON object")
+        colors = {}
+    problems += [f"unknown Herdr color {k!r}" for k in sorted(set(colors) - HERDR_APP_COLORS)]
+    problems += [f"color {k!r} is not set (Herdr would derive it)" for k in sorted(HERDR_APP_COLORS - set(colors))]
+    for k, v in sorted(colors.items()):
+        pattern, label = (r"#[0-9A-F]{8}", "#RRGGBBAA") if k in HERDR_APP_ALPHA_OK else (HEX, "#RRGGBB")
+        if not (isinstance(v, str) and re.fullmatch(pattern, v)):
+            problems.append(f"colors.{k} is not {label}")
+    covered = {k for k in ("background", "selection", "cursor") if k in data} | set(colors)
+    if "foreground" in data:
+        covered.add("terminal_foreground")
+    if isinstance(ansi, list):
+        covered.update(f"ansi{i}" for i in range(len(ansi)))
+    known = _fixture(root, "herdr-app-0.1.11-theme-keys.txt")
+    problems += [f"resolved name {k!r} is not covered (Herdr would derive it)" for k in sorted(known - covered)]
+    return problems
+
+
 FRESH_SECTIONS = ("editor", "ui", "search", "diagnostic", "syntax")
 FRESH_LEGACY = {"editor.selection_modifier", "ui.semantic_highlight_modifier"}  # superseded by bundled attributes
 FRESH_MODIFIER_KEYS = {"editor.bracket_rainbow_match_modifier"}
@@ -252,16 +314,7 @@ def _fresh(root: Path, text: str) -> list[str]:
     """Fresh 0.5.4 (crates/fresh-editor/plugins/schemas/theme.schema.json at tag v0.5.4): a standalone theme that sets
     every color key as [r, g, b] or {"color": [r, g, b], "modifier": [...]}. One unreadable value makes Fresh drop the
     whole theme, so every value is checked."""
-    duplicates = []
-
-    def pairs(items):
-        seen = {}
-        for k, v in items:
-            if k in seen:
-                duplicates.append(k)
-            seen[k] = v
-        return seen
-    data = json.loads(text, object_pairs_hook=pairs)
+    data, duplicates = _json_with_duplicates(text)
     if not isinstance(data, dict):
         return ["the theme must be a JSON object"]
     problems = [f"duplicate key {k!r}" for k in duplicates]
@@ -440,6 +493,7 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/zed/themes/*.json", (_zed,)),
     ("ports/yazi/umber-calm.yazi/flavor.toml", (_yazi,)),
     ("ports/herdr/umber-calm.toml", (_herdr,)),
+    ("ports/herdr-app/umber-calm.json", (_herdr_app,)),
     ("ports/fresh/umber-calm.json", (_fresh,)),
     ("ports/kiro-crew/theme.json", (_kiro_crew_theme,)),
     ("ports/kiro-crew/variables.json", (_kiro_crew_vars,)),

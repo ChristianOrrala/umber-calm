@@ -143,4 +143,4 @@ A port may only blend to a background listed here; `tools/check.py` rejects any 
 
 - **E1: comments on panels (4.3:1).** Comments are meant to recede; they stay at or above 4.0.
 - **E2: ANSI bright black (3.0:1).** Terminal applications use it for de-emphasized text; 3.0 keeps it distinct from `muted` (ΔE_OK 11.5).
-- **E3: secondary text on highlights.** Where a format cannot force the foreground to `text` on a highlight (for example VS Code selections, or diagnostic washes Fresh draws under code), comments may drop to 3.0 on that highlight. Where a format can set a selection foreground, it uses `text`.
+- **E3: secondary text on highlights.** Where a format cannot force the foreground to `text` on a highlight (for example VS Code selections, diagnostic washes Fresh draws under code, or the rows Herdr highlights and the washes it tints in its panels), comments and secondary text may drop to 3.0 on that highlight. Where a format can set a selection foreground, it uses `text`.

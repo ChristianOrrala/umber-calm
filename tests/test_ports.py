@@ -775,6 +775,108 @@ class HerdrAppFixtures(unittest.TestCase):
                     self.assertIn(repr(record), str(error.exception))
 
 
+HERDR_APP_TOP = ("background", "foreground", "selection", "cursor", "ansi", "colors")
+HERDR_APP_ROLES = {  # colors -> palette role (the spec's map); highlight roles and alpha are tested below
+    "foreground": "ui.text", "surface": "ui.bg", "canvas": "ui.chrome", "chrome": "ui.chrome",
+    "popover": "ui.surface", "raised": "ui.surface", "border": "ui.border_strong", "input": "ui.border_strong",
+    "ring": "ui.border", "muted": "ui.text_secondary", "dim": "ui.text_secondary", "accent": "ui.focus",
+    "accent_foreground": "term.cursor_text", "solid": "ui.text", "solid_foreground": "ui.bg",
+    "working": "diag.warning", "blocked": "ansi.bright_red", "done": "diag.ok",
+    "idle": "ui.text_secondary", "unknown": "ui.text_secondary"}
+HERDR_APP_HIGHLIGHTS = ("hover", "selected")
+HERDR_APP_PANELS = {"chrome", "canvas", "popover", "raised"}  # E1; background and surface are bg-level
+HERDR_APP_SECONDARY = {"muted", "dim", "idle", "unknown"}  # the port's secondary tier (all ui.text_secondary)
+
+
+def herdr_app_floor(ink: str, fg_class: str, stack, theme: dict[str, str]) -> float | None:
+    """decoration and disabled None; indicator 3.0; text 4.5 unless the ink is in HERDR_APP_SECONDARY. Secondary ink:
+    find the topmost opaque layer (the base, or a later layer with no @XX whose theme value is #RRGGBB); 3.0 (E3) if any
+    layer above it is translucent, else 4.0 (E1) if it is in HERDR_APP_PANELS, else 4.5."""
+    if fg_class in {"decoration", "disabled"}:
+        return None
+    if fg_class == "indicator":
+        return 3.0
+    if ink not in HERDR_APP_SECONDARY:
+        return 4.5
+    opaque = max(i for i, (name, alpha) in enumerate(stack)
+                 if i == 0 or (alpha is None and len(theme[name]) == 7))
+    if opaque < len(stack) - 1:
+        return 3.0
+    return 4.0 if stack[opaque][0] in HERDR_APP_PANELS else 4.5
+
+
+def herdr_app_drawn(stack, theme: dict[str, str]) -> str:
+    """Composite every layer bottom-up with composite(); a code-imposed alpha replaces the theme value's own."""
+    current = theme[stack[0][0]]
+    for name, alpha in stack[1:]:
+        current = composite(theme[name][:7] + alpha if alpha else theme[name], current)
+    return current
+
+
+def herdr_app_ink(fg, stack, theme: dict[str, str]) -> str:
+    """The foreground as drawn: its color, with a code-imposed alpha if any, composited over herdr_app_drawn(stack)."""
+    name, alpha = fg
+    return composite(theme[name][:7] + alpha if alpha else theme[name], herdr_app_drawn(stack, theme))
+
+
+def herdr_app_theme() -> dict[str, str]:
+    """Resolve top-level terminal fields first, then colors overrides, as Herdr 0.1.11 does."""
+    data = json.loads(out("ports/herdr-app/umber-calm.json"))
+    return {"background": data["background"], "terminal_foreground": data["foreground"],
+            "selection": data["selection"], "cursor": data["cursor"],
+            **{f"ansi{i}": value for i, value in enumerate(data["ansi"])}, **data["colors"]}
+
+
+class HerdrAppPort(unittest.TestCase):
+    def setUp(self):
+        self.file = json.loads(out("ports/herdr-app/umber-calm.json"))
+        self.t = herdr_app_theme()
+
+    def test_sets_every_name_and_lets_nothing_derive(self):
+        self.assertEqual(tuple(self.file), HERDR_APP_TOP)
+        self.assertEqual(set(self.file["colors"]), set(HERDR_APP_ROLES) | set(HERDR_APP_HIGHLIGHTS))
+        self.assertEqual(set(self.t), set(HERDR_APP_KEYS.read_text(encoding="utf-8").split()))
+        for name, value in self.t.items():
+            self.assertRegex(value, r"^#[0-9A-F]{8}$" if name in HERDR_APP_HIGHLIGHTS else f"^{HEX}$", name)
+        self.assertEqual(port("herdr-app").target_version, HERDR_APP_VERSION)
+
+    def test_follows_the_roles(self):
+        for name, role in HERDR_APP_ROLES.items():
+            self.assertEqual(self.t[name], P.resolve(role), name)
+        self.assertEqual(self.t["hover"][:7], P.resolve("ui.selection_bg"), "gpui-kit selects text in hover's color at 40%")
+        self.assertEqual(self.t["selected"][:7], P.resolve("ui.text"))
+        a = P.ansi
+        self.assertEqual([self.t[f"ansi{i}"] for i in range(16)],
+                         [a[k] for k in ("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
+                                         "bright_black", "bright_red", "bright_green", "bright_yellow", "bright_blue",
+                                         "bright_magenta", "bright_cyan", "bright_white")])
+        self.assertEqual((self.t["background"], self.t["terminal_foreground"], self.t["selection"], self.t["cursor"]),
+                         (P.resolve("term.background"), P.resolve("term.foreground"),
+                          P.resolve("term.selection_bg"), P.resolve("term.cursor")))
+
+    def test_orange_marks_only_focus(self):
+        self.assertEqual({k for k, v in self.t.items() if v == P.resolve("ui.focus")}, {"accent", "cursor"})
+
+    def test_red_marks_only_errors_and_blocked_agents(self):
+        reds = {P.ansi["red"], P.ansi["bright_red"]}
+        self.assertEqual({k for k, v in self.t.items() if v in reds}, {"blocked", "ansi1", "ansi9"})
+
+    def test_highlights_stay_distinct_on_every_panel(self):
+        for base in ("chrome", "background", "popover"):
+            shades = {self.t[base], herdr_app_drawn(((base, None), ("hover", None)), self.t),
+                      herdr_app_drawn(((base, None), ("selected", None)), self.t)}
+            self.assertEqual(len(shades), 3, base)
+            hover, selected = (herdr_app_drawn(((base, None), (h, None)), self.t) for h in HERDR_APP_HIGHLIGHTS)
+            self.assertLess(color.contrast(hover, self.t[base]), color.contrast(selected, self.t[base]), f"selected outranks hover on {base}")
+
+    def test_every_pair_herdr_draws_reaches_its_floor(self):
+        for fg, stack, cls, source in herdr_app_pairs():
+            floor = herdr_app_floor(fg[0], cls, stack, self.t)
+            if floor is not None:
+                ratio = color.contrast(herdr_app_ink(fg, stack, self.t), herdr_app_drawn(stack, self.t))
+                self.assertGreaterEqual(ratio, floor, f"{fg[0]} on {'+'.join(n for n, _ in stack)} ({source})")
+
+
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'
                       r'|  [a-z_]+: \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \}')
 EZA_SECTIONS = {"colourful", "filekinds", "perms", "size", "users", "links", "git", "git_repo", "security_context",

@@ -5,6 +5,9 @@ from tests.helpers import REPO, tempdir
 from umber import checks, outputs, structure
 
 BAD = {
+    "ports/herdr-app/umber-calm.json": '{"background": "#201F1D", "background": "#201F1D", "foreground": "#D6C9B6AA", '
+                                       '"selection": "#3C3A36", "ansi": ["#2A2826"], "extends": "graphite", '
+                                       '"colors": {"hover": "#D6C9B6", "muted": "#938A7B0D", "bogus": "#000000"}}',
     "ports/tmux/umber-calm.tmux": 'set -g status-style "fg=#d6c9b6"\nset-option -g bogus 1\n',
     "ports/zellij/umber-calm.kdl": 'themes {\n    umber-calm {\n        fg "#D6C9B6"\n    }\n',
     "ports/foot/umber-calm.ini": "[colors-dark]\nregular0=201F1D\nregular0=201F1D\n",
@@ -87,6 +90,41 @@ class StructureTest(unittest.TestCase):
             if not any(fnmatch.fnmatchcase(rel, pattern) for pattern, _ in structure.RULES):
                 unchecked.append(rel)
         self.assertEqual(unchecked, [])
+
+    def test_herdr_app_validator_names_each_defect(self):
+        rel = "ports/herdr-app/umber-calm.json"
+        top = {"background", "terminal_foreground", "selection", "cursor", *(f"ansi{i}" for i in range(16))}
+        known = set((REPO / "tests/fixtures/herdr-app-0.1.11-theme-keys.txt").read_text().split())
+        good = {"background": "#201F1D", "foreground": "#D6C9B6", "selection": "#3C3A36", "cursor": "#EDA97C",
+                "ansi": ["#201F1D"] * 16,
+                "colors": {k: "#D6C9B617" if k in {"hover", "selected"} else "#201F1D" for k in sorted(known - top)}}
+        self.assertEqual(structure.problems(REPO, rel, json.dumps(good)), [])
+        cases = [
+            ("[]", "the theme must be a JSON object"),
+            ("null", "the theme must be a JSON object"),
+            (json.dumps(good).replace('"background":', '"background": "#201F1D", "background":', 1),
+             "duplicate key 'background'"),
+            (json.dumps(good).replace('"hover":', '"hover": "#D6C9B617", "hover":', 1), "duplicate key 'hover'"),
+            (json.dumps({**good, "extends": "graphite"}), "unexpected top-level key 'extends'"),
+            (json.dumps({k: v for k, v in good.items() if k != "cursor"}), "missing top-level key 'cursor'"),
+            (json.dumps({**good, "foreground": "#D6C9B6AA"}), "foreground is not #RRGGBB"),
+            (json.dumps({**good, "background": 42}), "background is not #RRGGBB"),
+            (json.dumps({**good, "ansi": ["#201F1D"]}), "ansi must have exactly 16 entries"),
+            (json.dumps({**good, "ansi": {}}), "ansi must be a list"),
+            (json.dumps({**good, "ansi": ["#201F1D"] * 15 + ["#201F1DAA"]}), "ansi[15] is not #RRGGBB"),
+            (json.dumps({**good, "ansi": ["#201F1D"] * 15 + [None]}), "ansi[15] is not #RRGGBB"),
+            (json.dumps({**good, "colors": []}), "colors must be a JSON object"),
+            (json.dumps({**good, "colors": {**good["colors"], "bogus": "#000000"}}), "unknown Herdr color 'bogus'"),
+            (json.dumps({**good, "colors": {k: v for k, v in good["colors"].items() if k != "muted"}}),
+             "color 'muted' is not set (Herdr would derive it)"),
+            (json.dumps({**good, "colors": {**good["colors"], "muted": "#938A7B0D"}}), "colors.muted is not #RRGGBB"),
+            (json.dumps({**good, "colors": {**good["colors"], "hover": "#D6C9B6"}}), "colors.hover is not #RRGGBBAA"),
+            (json.dumps({**good, "colors": {**good["colors"], "selected": False}}), "colors.selected is not #RRGGBBAA"),
+        ]
+        for text, expected in cases:
+            with self.subTest(expected=expected):
+                found = structure.problems(REPO, rel, text)
+                self.assertTrue(any(expected in p for p in found), (expected, found))
 
     def test_fresh_wrong_containers_are_reported_not_raised(self):
         for text in ("[]", "null", '{"name": "Umber Calm", "editor": 42}', '{"name": "Umber Calm", "ui": []}'):

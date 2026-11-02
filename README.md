@@ -125,7 +125,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -133,6 +133,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | foot | terminal | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
 | Ghostty | terminal | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
 | GNOME Terminal | terminal | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
+| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.11 | — | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, orange on switches and primary buttons, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. |
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
@@ -222,6 +223,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | GTK 3/4 + libadwaita | 🧪 experimental | — |  |  | `75042c4bc795` |  |
 | Helix | 🧪 experimental | — |  |  | `fe1cda73f826` |  |
 | herdr | ✅ supported | 2026-09-29 | 0.9.1 | macOS 26.6.2 | `b10fed21b5e9` |  |
+| Herdr | 🧪 experimental | — |  |  | `0f770544524e` |  |
 | i3 | 🧪 experimental | — |  |  | `993976e10b90` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `31d0cc69bd19` |  |
 | JetBrains IDEs | 🧪 experimental | — |  |  | `e57a3cf99d7d` |  |

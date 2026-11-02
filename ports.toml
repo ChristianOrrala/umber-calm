@@ -68,6 +68,20 @@ risk = "herdr has one red token: it marks blocked agents and needs-attention not
 checklist = ["panes on bg, sidebar a step lighter", "focused pane border and active popup are orange (focus); nothing else is", "active space and agent row readable, navigate cursor row distinct from it", "agent states: working yellow, done green, blocked red, unseen blue or cyan", "secondary labels (workspace numbers, headers, inactive tabs) readable", "worktree and settings overlays readable"]
 
 [[port]]
+id = "herdr-app"
+name = "Herdr"
+category = "terminal"
+phase = 2
+output_root = "ports/herdr-app"
+docs = "https://github.com/herdrdev/herdr-app/blob/v0.1.11/defaults/AGENTS.md"
+format_confirmed = true
+target_version = "0.1.11"
+install = "Copy umber-calm.json to ~/.config/herdr-app/themes/, then pick umber-calm from the theme list in Settings (or add \"theme\": \"umber-calm\" to ~/.config/herdr-app/settings.json). Keep minimum_contrast at 1."
+uninstall = "Pick another theme and delete the file."
+risk = "Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, orange on switches and primary buttons, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code."
+checklist = ["terminals on bg with warm text, sidebars a step darker, menus and popovers a step lighter", "focused pane border and focused inputs orange; switches and primary buttons orange too (known limit); nothing else", "hover and selected rows warm and distinct in the sidebar, menus and the picker", "agent states: working yellow spinner, blocked bright red Needs you, done green dot, idle ring", "secondary labels readable, on selected rows too", "settings, welcome, help, picker and palette readable", "Changes panel: diff rows and file statuses", "file preview"]
+
+[[port]]
 id = "starship"
 name = "Starship"
 category = "shell"
