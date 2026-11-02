@@ -2,6 +2,7 @@ import json, plistlib, re, tempfile, tomllib, unittest
 import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
+from unittest.mock import patch
 from tests import portformats as pf
 from tests.helpers import REPO, load_real_palette
 from umber import buildcmd, color, registry
@@ -706,11 +707,14 @@ def herdr_app_pairs() -> list[tuple[tuple[str, str | None], tuple[tuple[str, str
         return name, alpha
 
     pairs = []
-    for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines():
+    for number, line in enumerate(HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip() or line.lstrip().startswith("#"):
             continue
-        fg, stack, cls, source = line.split()
-        pairs.append((token(fg), tuple(token(part) for part in stack.split("+")), cls, source))
+        try:
+            fg, stack, cls, source = line.split()
+            pairs.append((token(fg), tuple(token(part) for part in stack.split("+")), cls, source))
+        except ValueError as error:
+            raise ValueError(f"{HERDR_APP_PAIRS.name}:{number}: invalid pair record {line!r}") from error
     return pairs
 
 
@@ -724,7 +728,7 @@ class HerdrAppFixtures(unittest.TestCase):
 
     def test_pairs_parse_and_name_known_colors(self):
         known, pairs = set(HERDR_APP_KEYS.read_text(encoding="utf-8").split()), herdr_app_pairs()
-        self.assertEqual(len(pairs), 276)
+        self.assertEqual(len(pairs), 274)
         self.assertEqual(len({(fg, stack, cls) for fg, stack, cls, _ in pairs}), len(pairs))
         records = [line for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines()
                    if line.strip() and not line.lstrip().startswith("#")]
@@ -740,9 +744,35 @@ class HerdrAppFixtures(unittest.TestCase):
                 self.assertIn(name, known, source)
                 if alpha is not None:
                     self.assertRegex(alpha, r"^[0-9a-fA-F]{2}$", source)
-            self.assertRegex(source, r"^(defaults|src)/[^:]+:\d+$")
+            self.assertRegex(source, r"^(defaults|src)/[^:]+:\d+$", source)
         self.assertIn((("blocked", None), (("chrome", None), ("selected", None), ("blocked", "26"))),
                       {(f, s) for f, s, _, _ in pairs})
+
+    def test_terminal_selection_and_reachable_focus_states(self):
+        pairs = {(fg, stack, cls) for fg, stack, cls, _ in herdr_app_pairs()}
+        for fg, bg, cls in (("terminal_foreground", "selection", "text"), ("accent", "canvas", "indicator")):
+            with self.subTest(fg=fg, bg=bg):
+                self.assertTrue(((fg, None), ((bg, None),), cls) in pairs, f"missing {fg} on {bg} ({cls})")
+        for fg, names, cls in (("foreground", ("chrome", "selected", "hover"), "text"),
+                               ("foreground", ("chrome", "selected", "hover"), "indicator"),
+                               ("muted", ("chrome", "selected"), "secondary"),
+                               ("done", ("chrome", "raised"), "indicator")):
+            with self.subTest(fg=fg, stack=names, cls=cls):
+                self.assertFalse(((fg, None), tuple((name, None) for name in names), cls) in pairs,
+                                 f"unreachable {fg} on {'+'.join(names)} ({cls})")
+
+    def test_malformed_pairs_name_the_line_and_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture = Path(tmp) / "bad-pairs.txt"
+            for record in ("foreground background text", "foreground@AA@BB background text src/vt.rs:72",
+                           "foreground background+hover@AA@BB text src/vt.rs:72"):
+                with self.subTest(record=record):
+                    fixture.write_text(f"# comment\n\n{record}\n", encoding="utf-8")
+                    with patch(__name__ + ".HERDR_APP_PAIRS", fixture):
+                        with self.assertRaises(ValueError) as error:
+                            herdr_app_pairs()
+                    self.assertIn("bad-pairs.txt:3:", str(error.exception))
+                    self.assertIn(repr(record), str(error.exception))
 
 
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'

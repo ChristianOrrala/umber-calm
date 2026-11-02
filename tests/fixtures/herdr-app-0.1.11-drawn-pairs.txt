@@ -7,6 +7,7 @@ accent background indicator defaults/frame/palette/main.js:295
 accent background text defaults/frame/welcome/main.js:333
 accent background+accent@2E indicator src/window/pane_drag.rs:158
 accent background+hover text defaults/frame/welcome/main.js:333
+accent canvas indicator defaults/layouts/main.json:122
 accent chrome indicator defaults/mods/spaces/main.js:304
 accent chrome+hover indicator defaults/mods/spaces/main.js:304
 accent chrome+selected indicator defaults/mods/spaces/main.js:304
@@ -151,7 +152,6 @@ done chrome indicator defaults/mods/agents/main.js:207
 done chrome text defaults/mods/agents/main.js:253
 done chrome+hover indicator defaults/mods/agents/main.js:207
 done chrome+hover text defaults/mods/agents/main.js:253
-done chrome+raised indicator defaults/mods/agents/main.js:207
 done chrome+selected indicator defaults/mods/agents/main.js:207
 done chrome+selected text defaults/mods/agents/main.js:253
 done popover indicator defaults/mods/picker/main.js:111
@@ -179,8 +179,6 @@ foreground chrome+hover+hover text defaults/mods/agents/main.js:255
 foreground chrome+popover text defaults/frame/welcome/main.js:178
 foreground chrome+raised text defaults/mods/agents/main.js:176
 foreground chrome+selected text defaults/mods/agents/main.js:346
-foreground chrome+selected+hover indicator defaults/mods/agents/main.js:255
-foreground chrome+selected+hover text defaults/mods/agents/main.js:255
 foreground popover indicator defaults/frame/welcome/main.js:468
 foreground popover text defaults/frame/feedback/main.js:95
 foreground popover+accent@10 text defaults/frame/welcome/main.js:372
@@ -232,7 +230,6 @@ muted background+hover secondary defaults/mods/files/main.js:148
 muted chrome secondary defaults/frame/welcome/main.js:179
 muted chrome+hover secondary defaults/mods/agents/main.js:195
 muted chrome+raised secondary defaults/mods/tabs/main.js:68
-muted chrome+selected secondary defaults/mods/agents/main.js:346
 muted popover secondary defaults/frame/feedback/main.js:84
 muted popover+accent@10 secondary defaults/frame/welcome/main.js:375
 muted popover+blocked@14 secondary defaults/mods/machine-add/main.js:140
@@ -255,6 +252,7 @@ solid_foreground@E0 popover+solid@E0 text defaults/frame/welcome/main.js:153
 terminal_foreground background decoration defaults/frame/settings/main.js:368
 terminal_foreground background text src/vt.rs:72
 terminal_foreground raised text src/terminal.rs:1497
+terminal_foreground selection text src/vt.rs:72
 unknown chrome indicator defaults/mods/agents/main.js:253
 unknown chrome text defaults/mods/agents/main.js:253
 unknown chrome+hover indicator defaults/mods/agents/main.js:253
