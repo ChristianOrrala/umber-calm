@@ -814,9 +814,11 @@ def herdr_app_drawn(stack, theme: dict[str, str]) -> str:
 
 
 def herdr_app_ink(fg, stack, theme: dict[str, str]) -> str:
-    """The foreground as drawn: its color, with a code-imposed alpha if any, composited over herdr_app_drawn(stack)."""
+    """The foreground as drawn: its color, with a code-imposed alpha if any, composited over herdr_app_drawn(stack);
+    when the ink's @XX equals the top layer's @XX (one element faded as a whole), over herdr_app_drawn(stack[:-1]) instead."""
     name, alpha = fg
-    return composite(theme[name][:7] + alpha if alpha else theme[name], herdr_app_drawn(stack, theme))
+    ground = stack[:-1] if alpha is not None and alpha == stack[-1][1] else stack
+    return composite(theme[name][:7] + alpha if alpha else theme[name], herdr_app_drawn(ground, theme))
 
 
 def herdr_app_theme() -> dict[str, str]:
@@ -869,12 +871,24 @@ class HerdrAppPort(unittest.TestCase):
             hover, selected = (herdr_app_drawn(((base, None), (h, None)), self.t) for h in HERDR_APP_HIGHLIGHTS)
             self.assertLess(color.contrast(hover, self.t[base]), color.contrast(selected, self.t[base]), f"selected outranks hover on {base}")
 
+    def test_element_opacity_fades_ink_and_fill_together(self):
+        pairs = [(fg, stack, source) for fg, stack, cls, source in herdr_app_pairs()
+                 if cls == "text" and fg[1] is not None and fg[1] == stack[-1][1]]
+        self.assertEqual(len(pairs), 6)
+        for fg, stack, source in pairs:
+            with self.subTest(fg=fg, stack=stack, source=source):
+                expected = composite(self.t[fg[0]][:7] + fg[1], herdr_app_drawn(stack[:-1], self.t))
+                self.assertEqual(herdr_app_ink(fg, stack, self.t), expected)
+
     def test_every_pair_herdr_draws_reaches_its_floor(self):
+        measured = 0
         for fg, stack, cls, source in herdr_app_pairs():
             floor = herdr_app_floor(fg[0], cls, stack, self.t)
             if floor is not None:
+                measured += 1
                 ratio = color.contrast(herdr_app_ink(fg, stack, self.t), herdr_app_drawn(stack, self.t))
                 self.assertGreaterEqual(ratio, floor, f"{fg[0]} on {'+'.join(n for n, _ in stack)} ({source})")
+        self.assertEqual(measured, 211)
 
 
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'

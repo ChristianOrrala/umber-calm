@@ -1,5 +1,6 @@
 # Herdr v0.1.11: theme ink, bottom-first background stack, class, source.
 # Code alpha and element opacity use @XX; same-element hover replaces its fill.
+# Matching ink and top-fill @XX fade one whole element over the layers below it.
 # Nested elements retain ancestor fills. Disabled fades are listed, not measured.
 # Sources are ordered by path then line before deduplication; records are sorted.
 accent background decoration defaults/frame/settings/main.js:369

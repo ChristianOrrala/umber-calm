@@ -94,7 +94,7 @@ class StructureTest(unittest.TestCase):
     def test_herdr_app_validator_names_each_defect(self):
         rel = "ports/herdr-app/umber-calm.json"
         top = {"background", "terminal_foreground", "selection", "cursor", *(f"ansi{i}" for i in range(16))}
-        known = set((REPO / "tests/fixtures/herdr-app-0.1.11-theme-keys.txt").read_text().split())
+        known = set((REPO / "tests/fixtures/herdr-app-0.1.11-theme-keys.txt").read_text(encoding="utf-8").split())
         good = {"background": "#201F1D", "foreground": "#D6C9B6", "selection": "#3C3A36", "cursor": "#EDA97C",
                 "ansi": ["#201F1D"] * 16,
                 "colors": {k: "#D6C9B617" if k in {"hover", "selected"} else "#201F1D" for k in sorted(known - top)}}
