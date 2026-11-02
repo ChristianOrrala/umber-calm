@@ -106,10 +106,11 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (11)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (12)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
+| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.12 | 0.1.12 · macOS 26.6.2 | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. |
 | WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
 | Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
@@ -125,7 +126,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -133,7 +134,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | foot | terminal | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
 | Ghostty | terminal | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
 | GNOME Terminal | terminal | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
-| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.12 | — | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. |
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
@@ -222,7 +222,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | GNOME Terminal | 🧪 experimental | — |  |  | `483e82f0dd6c` |  |
 | GTK 3/4 + libadwaita | 🧪 experimental | — |  |  | `75042c4bc795` |  |
 | Helix | 🧪 experimental | — |  |  | `fe1cda73f826` |  |
-| Herdr | 🧪 experimental | — |  |  | `0f770544524e` |  |
+| Herdr | ✅ supported | 2026-11-02 | 0.1.12 | macOS 26.6.2 | `0f770544524e` |  |
 | Herdr TUI | ✅ supported | 2026-09-29 | 0.9.1 | macOS 26.6.2 | `b10fed21b5e9` |  |
 | i3 | 🧪 experimental | — |  |  | `993976e10b90` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `31d0cc69bd19` |  |

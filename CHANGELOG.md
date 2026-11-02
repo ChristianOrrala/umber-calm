@@ -3,7 +3,7 @@
 ## Unreleased
 
 - New port: Fresh 0.5.4, verified in the app on macOS 26.6.2. A standalone theme that sets all 142 colors from palette roles. Orange only marks the cursor and the active tab; brackets stay quiet with rainbow brackets on; occurrences of the word under the cursor are underlined on a soft band. Error text and deleted files use the bright red, which stays readable on selected rows. Fresh leaves the cursor color to the terminal.
-- New port: Herdr 0.1.12, the desktop app. A theme that sets every panel color from palette roles, so none of Herdr's cool defaults show through, with warm see-through hover and selection rows. Orange marks the focused pane, focused inputs and the cursor; blocked agents use the bright red. Some colors are set in Herdr's code and stay as they are (the port's README lists them).
+- New port: Herdr 0.1.12, the desktop app, verified in the app on macOS 26.6.2. A theme that sets every panel color from palette roles, so none of Herdr's cool defaults show through, with warm see-through hover and selection rows. Orange marks the focused pane, focused inputs and the cursor; blocked agents use the bright red. Some colors are set in Herdr's code and stay as they are (the port's README lists them).
 - The herdr port is now named Herdr TUI, as upstream calls it, and links to its new docs page.
 
 ## 0.2.1 (2026-10-25)

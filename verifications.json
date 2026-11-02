@@ -45,6 +45,18 @@
       "status": "verified"
     }
   ],
+  "herdr-app": [
+    {
+      "app_version": "0.1.12",
+      "date": "2026-11-02",
+      "digest": "sha256:0f770544524e6ceb545f060a35b181b6547bf6ab56bfde7f3517c4f5bd6f1071",
+      "evidence": "",
+      "note": "",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
   "kiro": [
     {
       "app_version": "1.4.26",
