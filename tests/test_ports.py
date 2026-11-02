@@ -730,7 +730,7 @@ class HerdrAppFixtures(unittest.TestCase):
 
     def test_pairs_parse_and_name_known_colors(self):
         known, pairs = set(HERDR_APP_KEYS.read_text(encoding="utf-8").split()), herdr_app_pairs()
-        self.assertEqual(len(pairs), 274)
+        self.assertEqual(len(pairs), 275)
         self.assertEqual(len({(fg, stack, cls) for fg, stack, cls, _ in pairs}), len(pairs))
         records = [line for line in HERDR_APP_PAIRS.read_text(encoding="utf-8").splitlines()
                    if line.strip() and not line.lstrip().startswith("#")]
@@ -755,10 +755,11 @@ class HerdrAppFixtures(unittest.TestCase):
         for fg, bg, cls in (("terminal_foreground", "selection", "text"), ("accent", "canvas", "indicator")):
             with self.subTest(fg=fg, bg=bg):
                 self.assertTrue(((fg, None), ((bg, None),), cls) in pairs, f"missing {fg} on {bg} ({cls})")
+        self.assertIn((("done", None), (("chrome", None), ("raised", None)), "indicator"), pairs,
+                      "missing done on chrome+raised (indicator) for the active compact space")
         for fg, names, cls in (("foreground", ("chrome", "selected", "hover"), "text"),
                                ("foreground", ("chrome", "selected", "hover"), "indicator"),
-                               ("muted", ("chrome", "selected"), "secondary"),
-                               ("done", ("chrome", "raised"), "indicator")):
+                               ("muted", ("chrome", "selected"), "secondary")):
             with self.subTest(fg=fg, stack=names, cls=cls):
                 self.assertFalse(((fg, None), tuple((name, None) for name in names), cls) in pairs,
                                  f"unreachable {fg} on {'+'.join(names)} ({cls})")
@@ -890,7 +891,7 @@ class HerdrAppPort(unittest.TestCase):
                 measured += 1
                 ratio = color.contrast(herdr_app_ink(fg, stack, self.t), herdr_app_drawn(stack, self.t))
                 self.assertGreaterEqual(ratio, floor, f"{fg[0]} on {'+'.join(n for n, _ in stack)} ({source})")
-        self.assertEqual(measured, 211)
+        self.assertEqual(measured, 212)
 
 
 EZA_LINE = re.compile(r'[a-z_]+:( \{ foreground: "#[0-9A-F]{6}"(, is_(?:bold|underline): true)? \})?'

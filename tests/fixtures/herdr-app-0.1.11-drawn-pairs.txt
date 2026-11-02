@@ -153,6 +153,7 @@ done chrome indicator defaults/mods/agents/main.js:207
 done chrome text defaults/mods/agents/main.js:253
 done chrome+hover indicator defaults/mods/agents/main.js:207
 done chrome+hover text defaults/mods/agents/main.js:253
+done chrome+raised indicator defaults/mods/spaces/main.js:352
 done chrome+selected indicator defaults/mods/agents/main.js:207
 done chrome+selected text defaults/mods/agents/main.js:253
 done popover indicator defaults/mods/picker/main.js:111
