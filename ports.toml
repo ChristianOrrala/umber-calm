@@ -521,6 +521,19 @@ uninstall = "Delete ~/.termux/colors.properties and run `termux-reload-settings`
 checklist = ["background and text", "16 ANSI colors", "cursor"]
 
 [[port]]
+id = "moshi"
+name = "Moshi"
+category = "terminal"
+phase = 2
+output_root = "ports/moshi"
+docs = "https://getmoshi.app/docs/personalization"
+format_confirmed = true
+target_version = "3.2.2"
+install = "In Moshi, open Settings → Theme → Import theme and scan the QR code above with the import screen's camera (the system camera works too). On the phone itself, copy the line in umber-calm-import.txt instead and paste it on the import screen. Then choose Umber Calm in Settings → Theme."
+uninstall = "Choose another theme in Settings → Theme."
+checklist = ["terminal background and text", "16 ANSI colors", "selection", "cursor is orange (focus)", "Moshi's own screens (session list, connection cards, settings, keyboard bar) readable"]
+
+[[port]]
 id = "dunst"
 name = "dunst"
 category = "desktop"

@@ -1,11 +1,11 @@
-import json, plistlib, re, tempfile, tomllib, unittest
+import base64, json, plistlib, re, tempfile, tomllib, unittest
 import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
 from unittest.mock import patch
 from tests import portformats as pf
 from tests.helpers import REPO, load_real_palette
-from umber import buildcmd, color, registry
+from umber import buildcmd, color, moshi, outputs, qr, registry
 
 P = load_real_palette()
 HEX = r"#[0-9A-F]{6}"
@@ -904,6 +904,55 @@ LAZYGIT_KEYS = {"activeBorderColor", "inactiveBorderColor", "searchingActiveBord
                 "selectedLineBgColor", "inactiveViewSelectedLineBgColor", "cherryPickedCommitFgColor",
                 "cherryPickedCommitBgColor", "markedBaseCommitFgColor", "markedBaseCommitBgColor",
                 "unstagedChangesColor", "defaultFgColor"}
+
+
+class MoshiPort(unittest.TestCase):
+    """Moshi theme format v1 (getmoshi.app/docs/personalization, "Custom themes"). The paste string and the QR code
+    carry the same compact JSON in base64url without padding, as the links of Moshi's own theme gallery do."""
+    ANSI = {"black": "black", "red": "red", "green": "green", "yellow": "yellow", "blue": "blue",
+            "magenta": "magenta", "cyan": "cyan", "white": "white",
+            **{f"bright{n.capitalize()}": f"bright_{n}"
+               for n in ("black", "red", "green", "yellow", "blue", "magenta", "cyan", "white")}}
+
+    def theme(self) -> dict:
+        return json.loads(out("ports/moshi/umber-calm.json"))
+
+    def test_every_color_comes_from_the_terminal_roles(self):
+        data = self.theme()
+        self.assertEqual(list(data), ["v", "name", "mode", "colors"])
+        self.assertEqual((data["v"], data["name"], data["mode"]), (1, "Umber Calm", "dark"))
+        expected = {"background": P.resolve("term.background"), "foreground": P.resolve("term.foreground"),
+                    "cursor": P.resolve("term.cursor"), "selectionBackground": P.resolve("term.selection_bg"),
+                    **{k: P.ansi[v] for k, v in self.ANSI.items()}}
+        self.assertEqual(data["colors"], {k: v.lower() for k, v in expected.items()})
+        known = pf.keys_in((REPO / "tests/fixtures/moshi-theme-v1-keys.txt").read_text(encoding="utf-8"))
+        self.assertEqual(set(data["colors"]), known - {"bold"}, "bold stays unset: bold text keeps its own color")
+        focus = P.resolve("ui.focus").lower()
+        self.assertEqual({k for k, v in data["colors"].items() if v == focus}, {"cursor"},
+                         "focus marks where the user is, never decoration")
+
+    def test_paste_string_and_qr_carry_the_theme(self):
+        compact = json.dumps(self.theme(), separators=(",", ":"))
+        encoded = base64.urlsafe_b64encode(compact.encode("utf-8")).decode("ascii").rstrip("=")
+        self.assertEqual(out("ports/moshi/umber-calm-import.txt"), f"moshi-theme:{encoded}\n")
+        matrix = qr.encode(f"moshi://theme?d={encoded}".encode("ascii"))
+        self.assertEqual(out("ports/moshi/umber-calm-qr.svg"),
+                         qr.svg(matrix, dark=P.colors["bg"], light=P.colors["text_bright"]))
+
+    def test_qr_modules_stand_out(self):
+        self.assertGreaterEqual(color.contrast(P.colors["bg"], P.colors["text_bright"]), 7.0)
+
+    def test_plan_derives_nothing_without_the_theme(self):
+        self.assertEqual(moshi.plan({}, P), {})
+
+    def test_plan_refuses_a_template_that_writes_a_derived_path(self):
+        theme = out("ports/moshi/umber-calm.json").encode("utf-8")
+        for rel in (moshi.PASTE, moshi.QR):
+            with self.subTest(rel), self.assertRaisesRegex(outputs.BuildError, "collision"):
+                moshi.plan({moshi.THEME: ("moshi", theme), rel: ("moshi", b"")}, P)
+
+    def test_target_version(self):
+        self.assertEqual(port("moshi").target_version, "3.2.2")
 
 
 class ShellCliPorts(unittest.TestCase):

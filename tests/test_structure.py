@@ -8,6 +8,8 @@ BAD = {
     "ports/herdr-app/umber-calm.json": '{"background": "#201F1D", "background": "#201F1D", "foreground": "#D6C9B6AA", '
                                        '"selection": "#3C3A36", "ansi": ["#2A2826"], "extends": "graphite", '
                                        '"colors": {"hover": "#D6C9B6", "muted": "#938A7B0D", "bogus": "#000000"}}',
+    "ports/moshi/umber-calm.json": '{"v": 2, "name": "Umber Calm", "mode": "dim", "colors": {"background": "#201F1D"}}',
+    "ports/moshi/umber-calm-import.txt": "moshi-theme:eyJ2IjoxfQ==\n",
     "ports/tmux/umber-calm.tmux": 'set -g status-style "fg=#d6c9b6"\nset-option -g bogus 1\n',
     "ports/zellij/umber-calm.kdl": 'themes {\n    umber-calm {\n        fg "#D6C9B6"\n    }\n',
     "ports/foot/umber-calm.ini": "[colors-dark]\nregular0=201F1D\nregular0=201F1D\n",
@@ -124,6 +126,52 @@ class StructureTest(unittest.TestCase):
         for text, expected in cases:
             with self.subTest(expected=expected):
                 found = structure.problems(REPO, rel, text)
+                self.assertTrue(any(expected in p for p in found), (expected, found))
+
+    def test_moshi_validator_names_each_defect(self):
+        """One defect at a time on the generated theme, and the same theme behind the paste string."""
+        rel = "ports/moshi/umber-calm.json"
+        good = json.loads((REPO / rel).read_text(encoding="utf-8"))
+        self.assertEqual(structure.problems(REPO, rel, json.dumps(good)), [])
+
+        def colors(**changes):
+            merged = {**good["colors"], **changes}
+            return json.dumps({**good, "colors": {k: v for k, v in merged.items() if v is not None}})
+        cases = [
+            ("[]", "the theme must be a JSON object"),
+            (json.dumps(good).replace('"v":', '"v": 1, "v":', 1), "duplicate key 'v'"),
+            (json.dumps({**good, "v": 2}), "v must be 1"),
+            (json.dumps({**good, "v": True}), "v must be 1"),
+            (json.dumps({**good, "v": 1.0}), "v must be 1"),
+            (json.dumps({**good, "name": ""}), "name must be 1 to 40 characters"),
+            (json.dumps({**good, "name": "x" * 41}), "name must be 1 to 40 characters"),
+            (json.dumps({**good, "mode": "dim"}), "mode must be 'dark' or 'light'"),
+            (json.dumps({k: v for k, v in good.items() if k != "mode"}), "missing top-level key 'mode'"),
+            (json.dumps({**good, "extra": 1}), "unexpected top-level key 'extra'"),
+            (json.dumps({**good, "colors": []}), "colors must be a JSON object"),
+            (colors(glow="#ffffff"), "unknown Moshi color 'glow'"),
+            (colors(cursor=None), "color 'cursor' is not set (Moshi would derive it)"),
+            (colors(background="#201F1D"), "colors.background is not #rrggbb"),
+            (colors(red="#e08"), "colors.red is not #rrggbb"),
+            (colors(bold="loud"), "colors.bold is not #rrggbb or 'bright'"),
+        ]
+        for text, expected in cases:
+            with self.subTest(expected=expected):
+                found = structure.problems(REPO, rel, text)
+                self.assertTrue(any(expected in p for p in found), (expected, found))
+        self.assertEqual(structure.problems(REPO, rel, colors(bold="bright")), [])
+
+        paste = "ports/moshi/umber-calm-import.txt"
+        self.assertEqual(structure.problems(REPO, paste, (REPO / paste).read_text(encoding="utf-8")), [])
+        for text, expected in [
+            ("moshi-theme:eyJ2IjoxfQ==\n", "one line: moshi-theme: and base64url without padding"),
+            ("eyJ2IjoxfQ\n", "one line: moshi-theme: and base64url without padding"),
+            ("moshi-theme:eyJ2IjoxfQ\nmore\n", "one line: moshi-theme: and base64url without padding"),
+            ("moshi-theme:e\n", "the payload is not base64url of UTF-8 JSON"),
+            ("moshi-theme:eyJ2IjoxfQ\n", "payload: missing top-level key 'name'"),
+        ]:
+            with self.subTest(expected=expected):
+                found = structure.problems(REPO, paste, text)
                 self.assertTrue(any(expected in p for p in found), (expected, found))
 
     def test_fresh_wrong_containers_are_reported_not_raised(self):

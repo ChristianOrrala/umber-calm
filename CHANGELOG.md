@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New port: Moshi 3.2.2, the SSH and Mosh terminal for iPhone and iPad (experimental). It sets every color of Moshi's theme format from the terminal roles, and Moshi colors its own screens from them too. Orange only marks the cursor. Scan the QR code in the port's README from Moshi's import screen, or paste the `moshi-theme:` line next to it.
+
 ## 0.3.0 (2026-11-02)
 
 - New port: Fresh 0.5.4, verified in the app on macOS 26.6.2. A standalone theme that sets all 142 colors from palette roles. Orange only marks the cursor and the active tab; brackets stay quiet with rainbow brackets on; occurrences of the word under the cursor are underlined on a soft band. Error text and deleted files use the bright red, which stays readable on selected rows. Fresh leaves the cursor color to the terminal.

@@ -1,0 +1,43 @@
+# Moshi — Umber Calm
+
+A theme for [Moshi](https://getmoshi.app), the SSH and Mosh terminal for iPhone and iPad. Moshi colors its own screens from the theme too, so the session list, the connection cards and the keyboard bar wear Umber Calm as well as the terminal. Which of the 16 colors each of those controls uses is Moshi's choice.
+
+<img src="umber-calm-qr.svg" width="232" alt="QR code that imports Umber Calm into Moshi">
+
+The QR code holds a `moshi://theme` link with the theme inside. `umber-calm-import.txt` holds the same theme as a `moshi-theme:` string for pasting, and `umber-calm.json` is the theme itself, which Moshi also accepts pasted as text.
+
+Tier: 🧪 experimental
+
+Target version: 3.2.2 · Format documentation: https://getmoshi.app/docs/personalization
+
+Verified on: —
+
+## Install
+
+In Moshi, open Settings → Theme → Import theme and scan the QR code above with the import screen's camera (the system camera works too). On the phone itself, copy the line in umber-calm-import.txt instead and paste it on the import screen. Then choose Umber Calm in Settings → Theme.
+
+## Uninstall
+
+Choose another theme in Settings → Theme.
+
+## Verification checklist
+
+- [ ] terminal background and text
+- [ ] 16 ANSI colors
+- [ ] selection
+- [ ] cursor is orange (focus)
+- [ ] Moshi's own screens (session list, connection cards, settings, keyboard bar) readable
+
+## Verification
+
+Current digest: `sha256:448a39ba4619ef2871880e185944a8728f940b8a0788712f11ce382a27cf3fa2`
+
+Print it yourself with `python3 tools/build.py digest moshi`. It covers these files:
+
+- `ports/moshi/umber-calm-import.txt`
+- `ports/moshi/umber-calm-qr.svg`
+- `ports/moshi/umber-calm.json`
+
+No verification recorded yet.
+
+Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

@@ -126,7 +126,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -137,6 +137,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
+| Moshi | terminal | [ports/moshi/](ports/moshi/) | 3.2.2 | — |  |
 | Termux | terminal | [ports/termux/](ports/termux/) | 0.118 | — |  |
 | Windows Terminal | terminal | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
 | Xfce Terminal | terminal | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
@@ -234,6 +235,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
+| Moshi | 🧪 experimental | — |  |  | `448a39ba4619` |  |
 | Neovim | ✅ supported | 2026-09-28 | 0.12.5 | macOS 26.6.2 | `8b91eb053607` |  |
 | Obsidian | 🧪 experimental | — |  |  | `fc5ea6bd1fbc` |  |
 | opencode | 🟡 candidate | — |  |  | `e4fc9ec9a42e` |  |

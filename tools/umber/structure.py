@@ -6,6 +6,7 @@ shape — INI sections and palette lengths, KDL and tmux line grammars, the YAML
 (keys against committed upstream key lists) — never application behavior, which verification records."""
 from __future__ import annotations
 
+import base64
 import configparser
 import fnmatch
 import json
@@ -295,6 +296,53 @@ def _herdr_app(root: Path, text: str) -> list[str]:
     return problems
 
 
+MOSHI_TOP = ("v", "name", "mode", "colors")
+MOSHI_HEX = "#[0-9a-f]{6}"  # Moshi reads #rrggbb or #rgb; the port writes #rrggbb in lowercase, as its gallery does
+
+
+def _moshi(root: Path, text: str) -> list[str]:
+    """Moshi theme format v1 (getmoshi.app/docs/personalization, "Custom themes"; key list in the fixture)."""
+    data, duplicates = _json_with_duplicates(text)
+    problems = [f"duplicate key {k!r}" for k in duplicates]
+    if not isinstance(data, dict):
+        return problems + ["the theme must be a JSON object"]
+    problems += [f"unexpected top-level key {k!r}" for k in sorted(set(data) - set(MOSHI_TOP))]
+    problems += [f"missing top-level key {k!r}" for k in MOSHI_TOP if k not in data]
+    if "v" in data and not (type(data["v"]) is int and data["v"] == 1):  # not true, not 1.0
+        problems.append("v must be 1")
+    if "name" in data and not (isinstance(data["name"], str) and 1 <= len(data["name"]) <= 40):
+        problems.append("name must be 1 to 40 characters")
+    if "mode" in data and data["mode"] not in ("dark", "light"):
+        problems.append("mode must be 'dark' or 'light' (Moshi never guesses it)")
+    colors = data.get("colors", {})
+    if not isinstance(colors, dict):
+        return problems + ["colors must be a JSON object"]
+    known = _fixture(root, "moshi-theme-v1-keys.txt")
+    problems += [f"unknown Moshi color {k!r}" for k in sorted(set(colors) - known)]
+    problems += [f"color {k!r} is not set (Moshi would derive it)" for k in sorted(known - {"bold"} - set(colors))]
+    for k, v in sorted(colors.items()):
+        if k == "bold":
+            if not (v == "bright" or (isinstance(v, str) and re.fullmatch(MOSHI_HEX, v))):
+                problems.append("colors.bold is not #rrggbb or 'bright'")
+        elif not (isinstance(v, str) and re.fullmatch(MOSHI_HEX, v)):
+            problems.append(f"colors.{k} is not #rrggbb")
+    return problems
+
+
+def _moshi_import(root: Path, text: str) -> list[str]:
+    """The paste string: `moshi-theme:` and the compact theme JSON in base64url without padding, on one line."""
+    m = re.fullmatch(r"moshi-theme:([A-Za-z0-9_-]+)\n", text)
+    if not m:
+        return ["must be one line: moshi-theme: and base64url without padding"]
+    encoded = m.group(1)
+    try:
+        theme = base64.urlsafe_b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
+        json.loads(theme)
+    except (ValueError, UnicodeDecodeError):  # binascii.Error and JSONDecodeError are ValueErrors
+        return ["the payload is not base64url of UTF-8 JSON"]
+    return [f"payload: {p}" for p in _moshi(root, theme)]
+
+
 FRESH_SECTIONS = ("editor", "ui", "search", "diagnostic", "syntax")
 FRESH_LEGACY = {"editor.selection_modifier", "ui.semantic_highlight_modifier"}  # superseded by bundled attributes
 FRESH_MODIFIER_KEYS = {"editor.bracket_rainbow_match_modifier"}
@@ -494,6 +542,8 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/yazi/umber-calm.yazi/flavor.toml", (_yazi,)),
     ("ports/herdr/umber-calm.toml", (_herdr,)),
     ("ports/herdr-app/umber-calm.json", (_herdr_app,)),
+    ("ports/moshi/umber-calm.json", (_moshi,)),
+    ("ports/moshi/umber-calm-import.txt", (_moshi_import,)),
     ("ports/fresh/umber-calm.json", (_fresh,)),
     ("ports/kiro-crew/theme.json", (_kiro_crew_theme,)),
     ("ports/kiro-crew/variables.json", (_kiro_crew_vars,)),

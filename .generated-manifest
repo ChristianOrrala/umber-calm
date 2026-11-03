@@ -107,6 +107,10 @@ readme:konsole	ports/konsole/README.md
 konsole	ports/konsole/Umber Calm.colorscheme
 readme:lazygit	ports/lazygit/README.md
 lazygit	ports/lazygit/umber-calm.yml
+readme:moshi	ports/moshi/README.md
+moshi	ports/moshi/umber-calm-import.txt
+moshi	ports/moshi/umber-calm-qr.svg
+moshi	ports/moshi/umber-calm.json
 readme:neovim	ports/neovim/README.md
 readme:obsidian	ports/obsidian/README.md
 obsidian	ports/obsidian/manifest.json

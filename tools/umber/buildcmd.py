@@ -4,7 +4,7 @@ from __future__ import annotations
 import dataclasses
 from pathlib import Path
 
-from . import docsgen, outputs, palette, portreadme, readme, registry, safepath
+from . import docsgen, moshi, outputs, palette, portreadme, readme, registry, safepath
 from .hygiene import scan_text
 
 
@@ -19,6 +19,7 @@ def _plan(root: Path):
     pal = palette.load(safepath.inside(root, "palette/umber-calm.toml"))
     ports = registry.load_ports(safepath.inside(root, "ports.toml"))
     planned = outputs.plan(root, pal, ports)
+    planned.update(moshi.plan(planned, pal))
     intros = portreadme.split_intros(planned, ports)
     planned.update(docsgen.plan(root, pal, ports))
     return pal, ports, planned, intros
