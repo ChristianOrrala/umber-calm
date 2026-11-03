@@ -6,11 +6,11 @@ A theme for [Moshi](https://getmoshi.app), the SSH and Mosh terminal for iPhone 
 
 The QR code holds a `moshi://theme` link with the theme inside. `umber-calm-import.txt` holds the same theme as a `moshi-theme:` string for pasting, and `umber-calm.json` is the theme itself, which Moshi also accepts pasted as text.
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 3.2.2 · Format documentation: https://getmoshi.app/docs/personalization
 
-Verified on: —
+Verified on: 3.2.2 · iOS 27.3 (2026-11-02)
 
 ## Install
 
@@ -38,6 +38,8 @@ Print it yourself with `python3 tools/build.py digest moshi`. It covers these fi
 - `ports/moshi/umber-calm-qr.svg`
 - `ports/moshi/umber-calm.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-11-02 | ✅ verified | 3.2.2 | iOS | 27.3 | Developer beta of iOS 27.3; imported by scanning the QR code |  | `448a39ba4619` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- New port: Moshi 3.2.2, the SSH and Mosh terminal for iPhone and iPad (experimental). It sets every color of Moshi's theme format from the terminal roles, and Moshi colors its own screens from them too. Orange only marks the cursor. Scan the QR code in the port's README from Moshi's import screen, or paste the `moshi-theme:` line next to it.
+- New port: Moshi 3.2.2, the SSH and Mosh terminal for iPhone and iPad, verified in the app on iOS 27.3. It sets every color of Moshi's theme format from the terminal roles, and Moshi colors its own screens from them too. Orange only marks the cursor. Scan the QR code in the port's README from Moshi's import screen, or paste the `moshi-theme:` line next to it.
 
 ## 0.3.0 (2026-11-02)
 

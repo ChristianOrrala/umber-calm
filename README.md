@@ -106,11 +106,12 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (12)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (13)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
 | Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.12 | 0.1.12 · macOS 26.6.2 | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. |
+| Moshi | terminal | [ports/moshi/](ports/moshi/) | 3.2.2 | 3.2.2 · iOS 27.3 |  |
 | WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
 | Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
 | tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
@@ -126,7 +127,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -137,7 +138,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
-| Moshi | terminal | [ports/moshi/](ports/moshi/) | 3.2.2 | — |  |
 | Termux | terminal | [ports/termux/](ports/termux/) | 0.118 | — |  |
 | Windows Terminal | terminal | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
 | Xfce Terminal | terminal | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
@@ -235,7 +235,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
-| Moshi | 🧪 experimental | — |  |  | `448a39ba4619` |  |
+| Moshi | ✅ supported | 2026-11-02 | 3.2.2 | iOS 27.3 | `448a39ba4619` |  |
 | Neovim | ✅ supported | 2026-09-28 | 0.12.5 | macOS 26.6.2 | `8b91eb053607` |  |
 | Obsidian | 🧪 experimental | — |  |  | `fc5ea6bd1fbc` |  |
 | opencode | 🟡 candidate | — |  |  | `e4fc9ec9a42e` |  |

@@ -111,6 +111,18 @@
       "status": "verified"
     }
   ],
+  "moshi": [
+    {
+      "app_version": "3.2.2",
+      "date": "2026-11-02",
+      "digest": "sha256:448a39ba4619ef2871880e185944a8728f940b8a0788712f11ce382a27cf3fa2",
+      "evidence": "",
+      "note": "Developer beta of iOS 27.3; imported by scanning the QR code",
+      "os": "iOS",
+      "os_version": "27.3",
+      "status": "verified"
+    }
+  ],
   "neovim": [
     {
       "app_version": "0.12.5",
