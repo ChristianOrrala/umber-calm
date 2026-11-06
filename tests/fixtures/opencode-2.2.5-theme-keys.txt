@@ -1,0 +1,104 @@
+text.base
+text.muted
+text.faint ?
+text.action.primary.base
+text.action.primary.$hovered ?
+text.action.primary.$focused ?
+text.action.primary.$pressed ?
+text.action.primary.$selected ?
+text.action.primary.$disabled ?
+text.action.secondary.base
+text.action.secondary.$hovered ?
+text.action.secondary.$focused ?
+text.action.secondary.$pressed ?
+text.action.secondary.$selected ?
+text.action.secondary.$disabled ?
+text.action.destructive.base
+text.action.destructive.$hovered ?
+text.action.destructive.$focused ?
+text.action.destructive.$pressed ?
+text.action.destructive.$selected ?
+text.action.destructive.$disabled ?
+text.formfield.base
+text.formfield.$hovered ?
+text.formfield.$focused ?
+text.formfield.$pressed ?
+text.formfield.$selected ?
+text.formfield.$disabled ?
+text.feedback.error.base
+text.feedback.error.muted ?
+text.feedback.warning.base
+text.feedback.warning.muted ?
+text.feedback.success.base
+text.feedback.success.muted ?
+text.feedback.info.base
+text.feedback.info.muted ?
+background.base
+background.raised.base
+background.raised.high
+background.raised.max
+background.action.primary.base
+background.action.primary.$hovered ?
+background.action.primary.$focused ?
+background.action.primary.$pressed ?
+background.action.primary.$selected ?
+background.action.primary.$disabled ?
+background.action.secondary.base
+background.action.secondary.$hovered ?
+background.action.secondary.$focused ?
+background.action.secondary.$pressed ?
+background.action.secondary.$selected ?
+background.action.secondary.$disabled ?
+background.action.destructive.base
+background.action.destructive.$hovered ?
+background.action.destructive.$focused ?
+background.action.destructive.$pressed ?
+background.action.destructive.$selected ?
+background.action.destructive.$disabled ?
+background.formfield.base
+background.formfield.$hovered ?
+background.formfield.$focused ?
+background.formfield.$pressed ?
+background.formfield.$selected ?
+background.formfield.$disabled ?
+background.feedback.error.base
+background.feedback.warning.base
+background.feedback.success.base
+background.feedback.info.base
+border.base
+scrollbar.base
+diff.text.added
+diff.text.removed
+diff.text.context
+diff.text.hunkHeader
+diff.background.added
+diff.background.removed
+diff.background.context
+diff.highlight.added
+diff.highlight.removed
+diff.lineNumber.text
+diff.lineNumber.background.added
+diff.lineNumber.background.removed
+syntax.comment
+syntax.keyword
+syntax.function
+syntax.variable
+syntax.string
+syntax.number
+syntax.type
+syntax.operator
+syntax.punctuation
+markdown.text
+markdown.heading
+markdown.link
+markdown.linkText
+markdown.code
+markdown.blockQuote
+markdown.emphasis
+markdown.strong
+markdown.horizontalRule
+markdown.listItem
+markdown.listEnumeration
+markdown.image
+markdown.imageText
+markdown.codeBlock

@@ -390,6 +390,224 @@ def _fresh(root: Path, text: str) -> list[str]:
     return problems
 
 
+# OpenCode 2.2.5 theme documents (packages/theme/src/tui/{schema,expand,resolve}.ts at tag v2.2.5). A file with "base"
+# is used as written; a flat "theme" file goes through migrateV1, which generates the scales the TUI draws from.
+OPENCODE_STEPS = ("100", "200", "300", "400", "500", "600", "700", "800", "900")
+OPENCODE_HUE_REF = re.compile(r"\$hue\.(.+)\.(100|200|300|400|500|600|700|800|900)")
+OPENCODE_HEX = re.compile(r"#(?:[\da-f]{3}|[\da-f]{4}|[\da-f]{6}|[\da-f]{8})", re.I)
+OPENCODE_STATES = ("disabled", "pressed", "focused", "selected", "hovered")
+OPENCODE_SURFACE_KEYS = ("text", "background", "border", "scrollbar", "diff", "syntax", "markdown")
+
+
+def _opencode_leaves(node: dict, prefix: str = "") -> dict[str, object]:
+    found: dict[str, object] = {}
+    for key, value in node.items():
+        path = f"{prefix}{key}"
+        if isinstance(value, dict):
+            found.update(_opencode_leaves(value, f"{path}."))
+        else:
+            found[path] = value
+    return found
+
+
+def _opencode_merge(*values: dict) -> dict:
+    merged: dict = {}
+    for value in values:
+        for key, item in value.items():
+            merged[key] = _opencode_merge(merged.get(key, {}), item) if isinstance(item, dict) else item
+    return merged
+
+
+def _opencode_expand_states(group: dict | None, path: str) -> dict | None:
+    if not group or "base" not in group:
+        return group
+    return {**group, **{f"${s}": group.get(f"${s}", f"${path}.base") for s in OPENCODE_STATES}}
+
+
+def _opencode_expand(tokens: dict) -> dict:
+    """expand.ts: defaults for what a document may leave out."""
+    tokens = dict(tokens)
+    if "text" in tokens:
+        text = dict(tokens["text"])
+        if "base" in text:
+            text.setdefault("muted", "$text.base")
+        if "muted" in text or "base" in text:
+            text.setdefault("faint", "$text.muted")
+        if "formfield" in text:
+            text["formfield"] = _opencode_expand_states(text["formfield"], "text.formfield")
+        if "action" in text:
+            text["action"] = {v: _opencode_expand_states(g, f"text.action.{v}") for v, g in text["action"].items()}
+        if "feedback" in text:
+            text["feedback"] = {k: ({**f, "muted": f.get("muted", f"$text.feedback.{k}.base")} if "base" in f else f)
+                                for k, f in text["feedback"].items()}
+        tokens["text"] = text
+    if "background" in tokens:
+        background = dict(tokens["background"])
+        if "formfield" in background:
+            background["formfield"] = _opencode_expand_states(background["formfield"], "background.formfield")
+        if "action" in background:
+            background["action"] = {v: _opencode_expand_states(g, f"background.action.{v}")
+                                    for v, g in background["action"].items()}
+        tokens["background"] = background
+    return tokens
+
+
+def _opencode_contextual_actions(base: dict | None, surface: dict | None) -> dict:
+    """resolve.ts contextualActions: a surface's own state, then its base, then the page's state, then the page's base."""
+    result = {}
+    for variant in ("primary", "secondary", "destructive"):
+        page, own = (base or {}).get(variant) or {}, (surface or {}).get(variant) or {}
+        states = {"base": own.get("base", page.get("base"))}
+        for state in OPENCODE_STATES:
+            key = f"${state}"
+            states[key] = own.get(key, own.get("base", page.get(key, page.get("base"))))
+        result[variant] = states
+    return result
+
+
+def _opencode_contextualize(base: dict, override: dict) -> dict:
+    merged = _opencode_merge(base, override)
+    for section in ("text", "background"):
+        merged[section]["action"] = _opencode_contextual_actions(base.get(section, {}).get("action"),
+                                                                 override.get(section, {}).get("action"))
+    return merged
+
+
+def opencode_hues(document: dict) -> dict[str, dict[str, str]]:
+    """resolve.ts resolveHue for the dark mode: each hue's nine steps; a "$hue.name" alias takes its target's steps."""
+    source = document["dark"]["hue"]
+
+    def resolve(name: str, chain: tuple[str, ...]) -> dict[str, str]:
+        if name in chain:
+            raise ValueError(f"circular hue reference: {' -> '.join((*chain, name))}")
+        if name not in source:
+            raise ValueError(f"hue {name!r} was not found")
+        value = source[name]
+        if isinstance(value, str):
+            if not value.startswith("$hue."):
+                raise ValueError(f"hue alias {value!r} must reference a hue scale")
+            return resolve(value[5:], (*chain, name))
+        if not isinstance(value, dict) or set(value) != set(OPENCODE_STEPS):
+            raise ValueError(f"hue {name!r} must set exactly the steps {', '.join(OPENCODE_STEPS)}")
+        for step, color in value.items():
+            if not (isinstance(color, str) and OPENCODE_HEX.fullmatch(color)):
+                raise ValueError(f"hue.{name}.{step} is not a hex color")
+        return value
+
+    return {name: resolve(name, ()) for name in source}
+
+
+def opencode_view(document: dict, surface: str | None = None) -> dict[str, str]:
+    """What the TUI reads for a document's dark mode, every token resolved to a color: the page, or surface "dialog"
+    (or "dialog.footer"). "transparent" stays "transparent". Raises ValueError where resolve.ts would throw."""
+    hues = opencode_hues(document)
+    merged = _opencode_merge(document["base"], {k: v for k, v in document["dark"].items() if k != "hue"})
+    page = _opencode_expand({k: merged[k] for k in OPENCODE_SURFACE_KEYS if k in merged})
+    tokens = page
+    if surface:
+        dialog = merged.get("@dialog", {})
+        expanded = _opencode_expand({k: dialog[k] for k in OPENCODE_SURFACE_KEYS if k in dialog})
+        tokens = _opencode_contextualize(page, expanded)
+        if surface == "dialog.footer" and "@footer" in dialog:
+            tokens = _opencode_contextualize(tokens, dialog["@footer"])
+
+    def read(path: str) -> object:
+        ref = OPENCODE_HUE_REF.fullmatch(f"${path}")
+        if ref:
+            if ref[1] not in hues:
+                raise ValueError(f"theme reference ${path} was not found")
+            return hues[ref[1]][ref[2]]
+        value: object = tokens
+        for key in path.split("."):
+            value = value.get(key) if isinstance(value, dict) else None
+        if value is None:
+            raise ValueError(f"theme reference ${path} was not found")
+        return value
+
+    def resolve(value: object, chain: tuple[str, ...] = ()) -> str:
+        if not isinstance(value, str):
+            raise ValueError(f"theme reference ${chain[-1] if chain else '?'} is not a color")
+        if value == "transparent" or OPENCODE_HEX.fullmatch(value):
+            return value
+        if not value.startswith("$"):
+            raise ValueError(f"invalid color {value!r}")
+        target = value[1:]
+        if target in chain:
+            raise ValueError(f"circular theme reference: {' -> '.join((*chain, target))}")
+        return resolve(read(target), (*chain, target))
+
+    return {path: resolve(value) for path, value in _opencode_leaves(tokens).items()}
+
+
+def opencode_document_problems(data: dict, known_lines: set[str]) -> list[str]:
+    """schema.ts ThemeDocument for a document with a dark mode. `known_lines` lists every token path: required ones
+    bare, optional ones ending in " ?"."""
+    if not isinstance(data.get("base"), dict):
+        return ["base must be a JSON object"]
+    if not isinstance(data.get("dark"), dict) or not isinstance(data["dark"].get("hue"), dict):
+        return ["dark must be a JSON object with a hue section"]
+    base, hue = data["base"], data["dark"]["hue"]
+    problems = [f"hue {name!r} is required" for name in ("accent", "interactive", "neutral") if name not in hue]
+    categorical = base.get("categorical")
+    if not (isinstance(categorical, list) and categorical and all(isinstance(c, str) and c for c in categorical)):
+        problems.append("categorical must be a non-empty list of hue names")
+    else:
+        problems += [f"categorical hue {c!r} was not found" for c in categorical if c not in hue]
+    required = {k for k in known_lines if not k.endswith(" ?")}
+    known = required | {k[:-2] for k in known_lines if k.endswith(" ?")}
+    dialog = base.get("@dialog", {})
+    if not isinstance(dialog, dict):
+        return [*problems, "@dialog must be a JSON object"]
+    for prefix, tokens in (("", {k: v for k, v in base.items() if k not in ("categorical", "@dialog")}),
+                           ("@dialog.", {k: v for k, v in dialog.items() if k != "@footer"}),
+                           ("@dialog.@footer.", dialog.get("@footer", {}))):
+        if not isinstance(tokens, dict):
+            problems.append(f"{prefix or 'base'} must be a JSON object")
+            continue
+        leaves = _opencode_leaves(tokens)
+        problems += [f"unknown OpenCode 2.2.5 theme key {prefix + k!r}" for k in sorted(set(leaves) - known)]
+        if not prefix:
+            problems += [f"OpenCode theme key {k!r} is not set (OpenCode would refuse the theme)"
+                         for k in sorted(required - set(leaves))]
+        for k, v in sorted(leaves.items()):
+            if k not in known:
+                continue
+            if not isinstance(v, str):
+                problems.append(f"{prefix}{k} must be a string")
+            elif k.startswith(("syntax.", "markdown.")):
+                if not (OPENCODE_HEX.fullmatch(v) or OPENCODE_HUE_REF.fullmatch(v)):
+                    problems.append(f"{prefix}{k} must be a hex color or a $hue.<name>.<step> reference")
+            elif not (v == "transparent" or OPENCODE_HEX.fullmatch(v) or (v.startswith("$") and len(v) > 1)):
+                problems.append(f"{prefix}{k} must be a hex color, transparent or a $reference")
+    if problems:
+        return problems
+    try:
+        for surface in (None, "dialog", "dialog.footer"):
+            opencode_view(data, surface)
+    except ValueError as error:
+        problems.append(str(error))
+    return problems
+
+
+def _opencode(root: Path, text: str) -> list[str]:
+    """OpenCode 2.2.5: a dark-only v2 document. The TUI keeps it in a light terminal (select.ts falls back to the one
+    mode), and every color is written out, so nothing comes from migrateV1's generated scales."""
+    data, duplicates = _json_with_duplicates(text)
+    if not isinstance(data, dict):
+        return ["the theme must be a JSON object"]
+    problems = [f"duplicate key {k!r}" for k in duplicates]
+    if "theme" in data:
+        problems.append("a flat theme is migrated into generated colors: the port is a v2 document (base and dark)")
+    if "light" in data:
+        problems.append("the port is dark only: no light mode")
+    problems += [f"unexpected top-level key {k!r}" for k in sorted(set(data) - {"base", "dark", "theme", "light"})]
+    problems += opencode_document_problems(data, _fixture(root, "opencode-2.2.5-theme-keys.txt"))
+    for path, value in _opencode_leaves({k: v for k, v in data.items() if isinstance(v, dict)}).items():
+        if isinstance(value, str) and value.startswith("#") and not re.fullmatch(HEX, value):
+            problems.append(f"{path} is not #RRGGBB")
+    return problems
+
+
 # Kiro Crew 0.9.0 theme packs (src/kiro_crew/dashboard/theme_validate.py): the installer refuses any file it does not
 # know, so the port ships only the level-0 files plus its README (installed as the pack's readme.md).
 KIRO_CREW_FILES = {"theme.json", "variables.json", "README.md"}
@@ -545,6 +763,7 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/moshi/umber-calm.json", (_moshi,)),
     ("ports/moshi/umber-calm-import.txt", (_moshi_import,)),
     ("ports/fresh/umber-calm.json", (_fresh,)),
+    ("ports/opencode/umber-calm.json", (_opencode,)),
     ("ports/kiro-crew/theme.json", (_kiro_crew_theme,)),
     ("ports/kiro-crew/variables.json", (_kiro_crew_vars,)),
     ("ports/jetbrains/UmberCalm.xml", (_jetbrains,)),

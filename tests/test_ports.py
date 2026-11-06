@@ -1,11 +1,12 @@
-import base64, json, plistlib, re, tempfile, tomllib, unittest
+import base64, json, math, plistlib, re, tempfile, tomllib, unittest
 import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
 from unittest.mock import patch
 from tests import portformats as pf
 from tests.helpers import REPO, load_real_palette
-from umber import buildcmd, color, moshi, outputs, qr, registry
+from umber import buildcmd, color, moshi, outputs, qr, registry, structure
+from umber.palette import ANSI_SLOTS
 
 P = load_real_palette()
 HEX = r"#[0-9A-F]{6}"
@@ -694,6 +695,192 @@ class FreshPort(unittest.TestCase):
                     *(k for pair in TEXT_PAIRS for k in pair), *(k for fg, bg, _ in SECONDARY_PAIRS for k in (fg, bg))}
         self.assertEqual(measured & DECORATION, set())
         self.assertEqual(measured | DECORATION, set(fresh_colors()))
+
+
+OPENCODE_VERSION = "2.2.5"
+OPENCODE_PAIRS = REPO / f"tests/fixtures/opencode-{OPENCODE_VERSION}-drawn-pairs.txt"
+OPENCODE_CLASSES = {"text", "secondary", "indicator", "disabled", "decoration"}
+# theme.decrease() moves one step toward 100 (resolve.ts compileHueSteps): lighter on a dark theme.
+OPENCODE_DECREASED = {"text.muted>1": ("neutral", "300"), "background.raised.base>1": ("neutral", "600")}
+OPENCODE_FOCUS = {"background.action.primary.$focused", "text.action.primary.$selected", "text.formfield.$focused"}
+OPENCODE_RED = {"text.feedback.error.base", "text.feedback.error.muted", "diff.text.removed", "diff.highlight.removed",
+                "diff.background.removed", "diff.lineNumber.background.removed",
+                *(f"background.action.destructive.{s}" for s in ("base", "$hovered", "$focused", "$pressed", "$selected", "$disabled"))}
+OPENCODE_SYNTAX = {"comment": "syntax.comment", "keyword": "syntax.keyword", "function": "syntax.function",
+                   "variable": "syntax.variable", "string": "syntax.string", "number": "syntax.constant",
+                   "type": "syntax.type", "operator": "syntax.operator", "punctuation": "syntax.operator"}
+OPENCODE_MARKDOWN = {"text": "ui.text", "heading": "syntax.heading", "link": "syntax.link", "linkText": "syntax.link",
+                     "code": "syntax.code", "blockQuote": "ui.text_secondary", "emphasis": "ui.text", "strong": "ui.text",
+                     "horizontalRule": "ui.border", "listItem": "syntax.operator", "listEnumeration": "syntax.operator",
+                     "image": "syntax.link", "imageText": "syntax.link", "codeBlock": "ui.text"}
+
+
+def opencode_pairs() -> list[tuple[str, str, str, str, str]]:
+    """Fixture records: view, foreground, background, class, source."""
+    lines = OPENCODE_PAIRS.read_text(encoding="utf-8").splitlines()
+    return [tuple(line.split()) for line in lines if line and not line.startswith("#")]
+
+
+def oklch_hue(hex_color: str) -> float:
+    _, a, b = color._oklab(hex_color)
+    return math.degrees(math.atan2(b, a)) % 360
+
+
+class OpenCodePort(unittest.TestCase):
+    def setUp(self):
+        self.doc = json.loads(out("ports/opencode/umber-calm.json"))
+        self.page = structure.opencode_view(self.doc)
+        self.dialog = structure.opencode_view(self.doc, "dialog")
+        self.hues = structure.opencode_hues(self.doc)
+
+    def color(self, view: str, token: str) -> str:
+        """A token as drawn: a transparent ground shows the view's own background."""
+        if token in OPENCODE_DECREASED:
+            hue, step = OPENCODE_DECREASED[token]
+            return self.hues[hue][step]
+        if token.startswith("hue."):
+            _, hue, step = token.split(".")
+            return self.hues[hue][step]
+        table = self.dialog if view == "dialog" else self.page
+        return table["background.base"] if table[token] == "transparent" else table[token]
+
+    def test_format(self):
+        self.assertEqual(port("opencode").target_version, OPENCODE_VERSION)
+        self.assertEqual(set(self.doc), {"base", "dark"})
+        self.assertEqual(self.page["background.base"], P.colors["bg"])
+        self.assertEqual(self.dialog["background.base"], P.colors["surface"])
+        self.assertEqual(self.dialog["background.action.primary.$hovered"], P.colors["overlay"])
+        for risk in ("cursor", "error color", "OpenCode 1"):
+            self.assertIn(risk, port("opencode").risk)
+
+    def test_orange_marks_only_focus(self):
+        focus = P.resolve("ui.focus")
+        self.assertEqual({k for k, v in self.page.items() if v == focus}, OPENCODE_FOCUS)
+        self.assertEqual({name for name, scale in self.hues.items() if focus in scale.values()}, {"orange"})
+        self.assertNotIn("orange", self.doc["base"]["categorical"])
+        self.assertEqual(self.page["text.action.primary.$focused"], P.resolve("term.cursor_text"), "the active row's text")
+
+    def test_red_marks_only_errors_and_deletions(self):
+        red, bg = P.resolve("diag.error"), P.colors["bg"]
+        derived = {red, P.resolve("ansi.bright_red"), color.blend(red, bg, P.tints["diag"]), color.blend(red, bg, P.tints["diff"])}
+        self.assertEqual({k for k, v in self.page.items() if v in derived}, OPENCODE_RED)
+        self.assertEqual({name for name, scale in self.hues.items() if derived & set(scale.values())}, {"red"})
+        self.assertNotIn("red", self.doc["base"]["categorical"])
+
+    def test_syntax_and_markdown_follow_their_roles(self):
+        for token, role in OPENCODE_SYNTAX.items():
+            self.assertEqual(self.page[f"syntax.{token}"], P.resolve(role), token)
+        for token, role in OPENCODE_MARKDOWN.items():
+            self.assertEqual(self.page[f"markdown.{token}"], P.resolve(role), token)
+
+    def test_neutrals_are_the_palette_from_bright_to_dark(self):
+        names = ("text_bright", "text", "subtle", "muted", "dim_text", "surface", "surface", "bg", "bg_dim")
+        scale = [self.hues["neutral"][step] for step in structure.OPENCODE_STEPS]
+        self.assertEqual(scale, [P.colors[name] for name in names])
+        self.assertEqual(scale, sorted(scale, key=color.luminance, reverse=True))
+
+    def test_prompt_sits_on_surface(self):
+        """The prompt, its status text and some bands are theme.decrease(background.raised.base), so neutral 600. On
+        overlay it read as a permanent selection and held its secondary text at 3.33:1 (checked in the running app)."""
+        self.assertEqual(self.hues["neutral"]["600"], P.colors["surface"])
+        self.assertGreaterEqual(color.contrast(self.page["text.muted"], self.hues["neutral"]["600"]), 4.0)
+        self.assertEqual(self.page["background.raised.high"], P.colors["overlay"], "the slash menu and the active tab")
+
+    def test_paste_chip_stays_readable(self):
+        """theme/syntax.ts draws the chip with text.action.primary.$focused on the warning color, so that token cannot
+        be a light color, which rules out orange text on an overlay row (seen in the running app: unreadable)."""
+        self.assertGreaterEqual(color.contrast(self.page["text.action.primary.$focused"],
+                                               self.page["text.feedback.warning.base"]), 4.5)
+
+    def test_every_scale_color_is_a_palette_color(self):
+        """Nothing is generated: a scale step is a palette color, so no step can slip past the measured table."""
+        allowed = {*P.colors.values(), *(P.resolve(f"ansi.{slot}") for slot in ANSI_SLOTS)}
+        for name, scale in self.hues.items():
+            self.assertLessEqual(set(scale.values()), allowed, name)
+
+    def test_tokens_the_tui_shifts_come_from_a_scale(self):
+        """theme.decrease() only moves a color read from a scale; a literal hex stays put (resolve.ts compileHueSteps)."""
+        text, background = self.doc["base"]["text"], self.doc["base"]["background"]
+        self.assertEqual(text["muted"], "$hue.neutral.400")
+        self.assertEqual(background["base"], "$hue.neutral.800")
+        self.assertEqual(background["raised"]["base"], "$hue.neutral.700")
+        for kind, hue in (("error", "red"), ("warning", "yellow"), ("success", "green"), ("info", "cyan")):
+            self.assertEqual(text["feedback"][kind]["base"], f"$hue.{hue}.200")
+
+    def test_embedded_terminal_gets_the_ansi_table(self):
+        """component/terminal-pane.tsx terminalPalette: normal slots from feedback tokens and the hues nearest pure blue
+        and magenta (within 30 degrees, else hue.accent), bright slots theme.decrease() of those, so step 100. Umber's
+        blue is too teal to be found, so hue.accent has to be blue. Read in the running app, all 16 slots match."""
+        hues, ansi = self.hues, lambda slot: P.resolve(f"ansi.{slot}")
+
+        def nearest(target: float) -> tuple[str, str]:
+            found = []
+            for name, scale in hues.items():
+                _, a, b = color._oklab(scale["200"])
+                if math.hypot(a, b) >= 0.03:
+                    distance = abs(oklch_hue(scale["200"]) - target)
+                    found.append((min(distance, 360 - distance), name))
+            distance, name = min(found)
+            return ("accent", "fallback") if distance > 30 else (name, "found")
+
+        self.assertEqual(nearest(oklch_hue("#0000FF")), ("accent", "fallback"))
+        self.assertEqual(nearest(oklch_hue("#FF00FF"))[1], "found")
+        self.assertEqual(self.doc["dark"]["hue"]["accent"], "$hue.blue")
+        slots = {"red": "red", "green": "green", "yellow": "yellow", "blue": "accent",
+                 "magenta": nearest(oklch_hue("#FF00FF"))[0], "cyan": "cyan"}
+        for slot, hue in slots.items():
+            self.assertEqual(hues[hue]["200"], ansi(slot), slot)
+            self.assertEqual(hues[hue]["100"], ansi(f"bright_{slot}"), slot)
+        self.assertEqual(hues["neutral"]["200"], ansi("white"))
+        self.assertEqual(hues["neutral"]["100"], ansi("bright_white"))
+
+    def test_fixture_records_are_well_formed(self):
+        pairs = opencode_pairs()
+        self.assertEqual(len(pairs), 91)
+        self.assertEqual(len(pairs), len({p[:3] for p in pairs}))
+        for view, fg, bg, cls, source in pairs:
+            self.assertIn(view, {"base", "dialog"}, source)
+            self.assertIn(cls, OPENCODE_CLASSES, source)
+            self.assertRegex(source, r"^[\w./-]+\.tsx?:\d+$")
+            self.color(view, fg), self.color(view, bg)
+
+    def test_every_pair_the_tui_draws_reaches_its_floor(self):
+        floors = {P.colors["bg"]: 4.5, P.colors["surface"]: 4.0, P.colors["overlay"]: 3.0}
+        for view, fg, bg, cls, source in opencode_pairs():
+            ink, ground = self.color(view, fg), self.color(view, bg)
+            if cls in {"disabled", "decoration"}:
+                continue
+            floor = {"text": 4.5, "indicator": 3.0}.get(cls) or floors.get(ground, 4.5)
+            self.assertGreaterEqual(color.contrast(ink, ground), floor, f"{view} {fg} on {bg} ({source})")
+
+    def test_code_is_readable_on_every_ground_it_lands_on(self):
+        grounds = ("background.base", "background.raised.base", "diff.background.added", "diff.background.removed",
+                   "diff.background.context")
+        quiet = {"syntax.comment", "markdown.blockQuote"}
+        decoration = {"markdown.horizontalRule"}
+        tints = {self.page["diff.background.added"], self.page["diff.background.removed"]}
+        code = [k for k in self.page if k.startswith(("syntax.", "markdown."))]
+        for fg in code:
+            for bg in grounds:
+                if fg in decoration:
+                    continue
+                ink, ground = self.page[fg], self.page[bg]
+                floor = 4.5
+                if fg in quiet:
+                    floor = 3.0 if ground in tints else 4.0 if ground == P.colors["surface"] else 4.5
+                self.assertGreaterEqual(color.contrast(ink, ground), floor, f"{fg} on {bg}")
+
+    def test_diff_gutter_and_borrowed_error_color(self):
+        number = self.page["diff.lineNumber.text"]
+        self.assertGreaterEqual(color.contrast(number, self.page["diff.background.context"]), 4.0)
+        for kind in ("added", "removed"):
+            ground = self.page[f"diff.lineNumber.background.{kind}"]
+            self.assertGreaterEqual(color.contrast(number, ground), 3.0, kind)
+            self.assertGreaterEqual(color.contrast(self.page[f"diff.highlight.{kind}"], ground), 4.5, kind)
+        # theme/syntax.ts paints builtins and tags with the error token, which has no other measured use on a tint.
+        for kind in ("added", "removed"):
+            self.assertGreaterEqual(color.contrast(self.page["text.feedback.error.base"],
+                                                   self.page[f"diff.background.{kind}"]), 3.0, kind)
 
 
 HERDR_APP_VERSION = "0.1.12"

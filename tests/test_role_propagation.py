@@ -62,7 +62,7 @@ def _obsidian(data: bytes) -> list[str]:
 
 
 def _opencode(data: bytes) -> list[str]:
-    value = json.loads(data).get("theme", {}).get("syntaxKeyword")
+    value = json.loads(data).get("base", {}).get("syntax", {}).get("keyword")
     return [] if value is None else [value]
 
 

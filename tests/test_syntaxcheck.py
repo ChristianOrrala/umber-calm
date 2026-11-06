@@ -108,7 +108,7 @@ class MoreExtractors(unittest.TestCase):
         self.assertEqual(syntaxcheck.extract("obsidian", css.encode()), [self.KEYWORD])
 
     def test_opencode_reads_syntax_and_markdown_keys(self):
-        data = json.dumps({"theme": {"syntaxKeyword": self.KEYWORD, "error": self.ERROR}})
+        data = json.dumps({"base": {"syntax": {"keyword": self.KEYWORD}, "text": {"feedback": {"error": {"base": self.ERROR}}}}})
         self.assertEqual(syntaxcheck.extract("opencode", data.encode()), [self.KEYWORD])
 
     def test_tmtheme_ignores_diff_scopes(self):

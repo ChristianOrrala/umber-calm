@@ -159,8 +159,10 @@ def _obsidian(text: str) -> list[str]:
 
 
 def _opencode(text: str) -> list[str]:
-    theme = json.loads(text).get("theme", {})
-    return [v for k, v in theme.items() if k.startswith(("syntax", "markdown")) and isinstance(v, str)]
+    data = json.loads(text)
+    base = data.get("base", {}) if isinstance(data, dict) else {}
+    sections = [base.get(s) for s in ("syntax", "markdown")] if isinstance(base, dict) else []
+    return [v for section in sections if isinstance(section, dict) for v in section.values() if isinstance(v, str)]
 
 
 def _fresh(text: str) -> list[str]:

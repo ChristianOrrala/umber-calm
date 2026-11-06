@@ -32,6 +32,7 @@ BAD = {
     "ports/herdr/umber-calm.toml": '[theme]\nname = "terminal"\n[theme.custom]\npeach = "orange"\nnot_a_token = "#201F1D"\n',
     "ports/fresh/umber-calm.json": '{"name": "Umber Calm", "extends": "dark", "editor": {"bg": "#201F1D", "bg": [32, 31, 29]}, '
                                    '"syntax": {"keyword": [300, 0, 0], "bogus": [1, 2, 3]}}',
+    "ports/opencode/umber-calm.json": '{"$schema": "https://opencode.ai/theme.json", "theme": {"primary": "#88B0B4"}}',
     "ports/claude-code/umber-calm.json": '{"name": "Umber Calm", "base": "dark-ansi"}',
     "ports/kiro-crew/theme.json": '{"formatVersion": 2, "slug": "Umber Calm", "name": "Umber Calm", "level": 1}',
     "ports/kiro-crew/variables.json": '{"dark": {"--bg": "#201F1D", "--text": "url(x)", "--not-a-var": "#000000"}}',
@@ -206,6 +207,56 @@ class StructureTest(unittest.TestCase):
         dropped = json.loads(good)
         del dropped["ui"]["menu_bg"]
         cases.append((json.dumps(dropped), "Fresh theme key 'ui.menu_bg' is not set"))
+        for text, expected in cases:
+            found = structure.problems(REPO, rel, text)
+            self.assertTrue(any(expected in p for p in found), (expected, found))
+
+    def test_opencode_wrong_containers_are_reported_not_raised(self):
+        for text in ("[]", "null", '{"base": 42, "dark": {}}', '{"base": {}, "dark": {"hue": []}}',
+                     '{"base": {"text": 7, "@dialog": []}, "dark": {"hue": {}}}'):
+            self.assertTrue(structure.problems(REPO, "ports/opencode/umber-calm.json", text), text)
+
+    def test_opencode_validator_names_each_defect(self):
+        """One defect at a time on the generated theme: each safeguard reports on its own."""
+        rel = "ports/opencode/umber-calm.json"
+        good = (REPO / rel).read_text(encoding="utf-8")
+        self.assertEqual(structure.problems(REPO, rel, good), [])
+
+        def mutated(path, value):
+            data = json.loads(good)
+            node = data
+            for key in path[:-1]:
+                node = node[key]
+            if value is None:
+                del node[path[-1]]
+            else:
+                node[path[-1]] = value
+            return json.dumps(data)
+        cases = [
+            (good.replace('"base": "$hue.neutral.200"', '"base": "$hue.neutral.200", "base": "$hue.neutral.200"', 1),
+             "duplicate key 'base'"),
+            (mutated(["theme"], {"primary": "#88B0B4"}), "a flat theme is migrated"),
+            (mutated(["light"], {"hue": {}}), "the port is dark only"),
+            (mutated(["name"], "Umber Calm"), "unexpected top-level key 'name'"),
+            (mutated(["base", "text", "shiny"], "#201F1D"), "unknown OpenCode 2.2.5 theme key 'text.shiny'"),
+            (mutated(["base", "@dialog", "text"], {"shiny": "#201F1D"}), "unknown OpenCode 2.2.5 theme key '@dialog.text.shiny'"),
+            (mutated(["base", "diff", "text", "added"], None), "OpenCode theme key 'diff.text.added' is not set"),
+            (mutated(["base", "text", "base"], 7), "text.base must be a string"),
+            (mutated(["base", "border", "base"], "orange"), "border.base must be a hex color, transparent or a $reference"),
+            (mutated(["base", "syntax", "keyword"], "$text.base"), "syntax.keyword must be a hex color or a $hue"),
+            (mutated(["base", "text", "muted"], "$text.nowhere"), "theme reference $text.nowhere was not found"),
+            (mutated(["base", "text", "muted"], "$hue.nowhere.200"), "theme reference $hue.nowhere.200 was not found"),
+            (mutated(["base", "text", "muted"], "$text.muted"), "circular theme reference"),
+            (mutated(["base", "text", "muted"], "$text.action"), "is not a color"),
+            (mutated(["base", "categorical"], []), "categorical must be a non-empty list"),
+            (mutated(["base", "categorical"], ["nowhere"]), "categorical hue 'nowhere' was not found"),
+            (mutated(["dark", "hue", "accent"], None), "hue 'accent' is required"),
+            (mutated(["dark", "hue", "accent"], "$hue.nowhere"), "hue 'nowhere' was not found"),
+            (mutated(["dark", "hue", "accent"], "$hue.accent"), "circular hue reference"),
+            (mutated(["dark", "hue", "red", "500"], None), "hue 'red' must set exactly the steps"),
+            (mutated(["dark", "hue", "red", "500"], "red"), "hue.red.500 is not a hex color"),
+            (mutated(["base", "border", "base"], "#5A554E80"), "base.border.base is not #RRGGBB"),
+        ]
         for text, expected in cases:
             found = structure.problems(REPO, rel, text)
             self.assertTrue(any(expected in p for p in found), (expected, found))

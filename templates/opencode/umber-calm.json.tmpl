@@ -1,34 +1,219 @@
 {
-  "$schema": "https://opencode.ai/theme.json",
-  "theme": {
-    "primary": "{{ blue }}",
-    "secondary": "{{ purple }}",
-    "accent": "{{ ui.focus }}",
-    "error": "{{ diag.error }}",
-    "warning": "{{ diag.warning }}",
-    "success": "{{ diag.ok }}",
-    "info": "{{ diag.info }}",
-    "text": "{{ ui.text }}",
-    "textMuted": "{{ ui.text_secondary }}",
-    "background": "{{ ui.bg }}",
-    "backgroundPanel": "{{ ui.surface }}",
-    "backgroundElement": "{{ ui.surface }}",
-    "border": "{{ ui.border_strong }}",
-    "borderActive": "{{ ui.focus }}",
-    "borderSubtle": "{{ ui.border }}",
-    "diffAdded": "{{ diag.diff_add }}",
-    "diffRemoved": "{{ diag.diff_delete }}",
-    "diffContext": "{{ ui.text_secondary }}",
-    "markdownHeading": "{{ syntax.heading }}",
-    "markdownLink": "{{ syntax.link }}",
-    "syntaxComment": "{{ syntax.comment }}",
-    "syntaxKeyword": "{{ syntax.keyword }}",
-    "syntaxFunction": "{{ syntax.function }}",
-    "syntaxVariable": "{{ syntax.variable }}",
-    "syntaxString": "{{ syntax.string }}",
-    "syntaxNumber": "{{ syntax.constant }}",
-    "syntaxType": "{{ syntax.type }}",
-    "syntaxOperator": "{{ syntax.operator }}",
-    "syntaxPunctuation": "{{ syntax.operator }}"
+  "base": {
+    "categorical": ["blue", "purple", "green", "cyan", "yellow"],
+    "text": {
+      "base": "$hue.neutral.200",
+      "muted": "$hue.neutral.400",
+      "faint": "$hue.neutral.500",
+      "action": {
+        "primary": {
+          "base": "$text.base",
+          "$disabled": "$text.faint",
+          "$focused": "$hue.neutral.800",
+          "$selected": "$hue.orange.200"
+        },
+        "secondary": {
+          "base": "$text.muted",
+          "$hovered": "$text.base",
+          "$focused": "$hue.neutral.800"
+        },
+        "destructive": {
+          "base": "$hue.neutral.800",
+          "$disabled": "$text.faint"
+        }
+      },
+      "formfield": {
+        "base": "$text.base",
+        "$disabled": "$text.faint",
+        "$focused": "$hue.orange.200",
+        "$selected": "$hue.green.200"
+      },
+      "feedback": {
+        "error": { "base": "$hue.red.200" },
+        "warning": { "base": "$hue.yellow.200" },
+        "success": { "base": "$hue.green.200" },
+        "info": { "base": "$hue.cyan.200" }
+      }
+    },
+    "background": {
+      "base": "$hue.neutral.800",
+      "raised": {
+        "base": "$hue.neutral.700",
+        "high": "{{ ui.selection_bg }}",
+        "max": "{{ ui.selection_bg }}"
+      },
+      "action": {
+        "primary": {
+          "base": "transparent",
+          "$hovered": "$hue.neutral.700",
+          "$focused": "$hue.orange.200",
+          "$selected": "transparent"
+        },
+        "secondary": { "base": "transparent" },
+        "destructive": { "base": "$hue.red.200" }
+      },
+      "formfield": { "base": "$background.base" },
+      "feedback": {
+        "error": { "base": "$background.base" },
+        "warning": { "base": "$background.base" },
+        "success": { "base": "$background.base" },
+        "info": { "base": "$background.base" }
+      }
+    },
+    "border": { "base": "{{ ui.border }}" },
+    "scrollbar": { "base": "$hue.neutral.500" },
+    "diff": {
+      "text": {
+        "added": "{{ diag.diff_add }}",
+        "removed": "{{ ansi.bright_red }}",
+        "context": "{{ ui.text_secondary }}",
+        "hunkHeader": "{{ ui.text_secondary }}"
+      },
+      "background": {
+        "added": "{{ diag.diff_add | blend(ui.bg, tint.diff) }}",
+        "removed": "{{ diag.diff_delete | blend(ui.bg, tint.diff) }}",
+        "context": "$hue.neutral.700"
+      },
+      "highlight": {
+        "added": "{{ diag.diff_add }}",
+        "removed": "{{ diag.diff_delete }}"
+      },
+      "lineNumber": {
+        "text": "{{ ui.line_number }}",
+        "background": {
+          "added": "{{ diag.diff_add | blend(ui.bg, tint.diag) }}",
+          "removed": "{{ diag.diff_delete | blend(ui.bg, tint.diag) }}"
+        }
+      }
+    },
+    "syntax": {
+      "comment": "{{ syntax.comment }}",
+      "keyword": "{{ syntax.keyword }}",
+      "function": "{{ syntax.function }}",
+      "variable": "{{ syntax.variable }}",
+      "string": "{{ syntax.string }}",
+      "number": "{{ syntax.constant }}",
+      "type": "{{ syntax.type }}",
+      "operator": "{{ syntax.operator }}",
+      "punctuation": "{{ syntax.operator }}"
+    },
+    "markdown": {
+      "text": "{{ ui.text }}",
+      "heading": "{{ syntax.heading }}",
+      "link": "{{ syntax.link }}",
+      "linkText": "{{ syntax.link }}",
+      "code": "{{ syntax.code }}",
+      "blockQuote": "{{ ui.text_secondary }}",
+      "emphasis": "{{ ui.text }}",
+      "strong": "{{ ui.text }}",
+      "horizontalRule": "{{ ui.border }}",
+      "listItem": "{{ syntax.operator }}",
+      "listEnumeration": "{{ syntax.operator }}",
+      "image": "{{ syntax.link }}",
+      "imageText": "{{ syntax.link }}",
+      "codeBlock": "{{ ui.text }}"
+    },
+    "@dialog": {
+      "background": {
+        "base": "$background.raised.base",
+        "action": {
+          "primary": { "$hovered": "$background.raised.high" }
+        }
+      }
+    }
+  },
+  "dark": {
+    "hue": {
+      "neutral": {
+        "100": "{{ ansi.bright_white }}",
+        "200": "{{ ui.text }}",
+        "300": "{{ subtle }}",
+        "400": "{{ ui.text_secondary }}",
+        "500": "{{ ui.text_dim }}",
+        "600": "{{ ui.surface }}",
+        "700": "{{ ui.surface }}",
+        "800": "{{ ui.bg }}",
+        "900": "{{ ui.chrome }}"
+      },
+      "red": {
+        "100": "{{ ansi.bright_red }}",
+        "200": "{{ diag.error }}",
+        "300": "{{ diag.error }}",
+        "400": "{{ diag.error }}",
+        "500": "{{ diag.error }}",
+        "600": "{{ diag.error }}",
+        "700": "{{ diag.error }}",
+        "800": "{{ diag.error }}",
+        "900": "{{ diag.error }}"
+      },
+      "orange": {
+        "100": "{{ ui.focus }}",
+        "200": "{{ ui.focus }}",
+        "300": "{{ ui.focus }}",
+        "400": "{{ ui.focus }}",
+        "500": "{{ ui.focus }}",
+        "600": "{{ ui.focus }}",
+        "700": "{{ ui.focus }}",
+        "800": "{{ ui.focus }}",
+        "900": "{{ ui.focus }}"
+      },
+      "yellow": {
+        "100": "{{ ansi.bright_yellow }}",
+        "200": "{{ diag.warning }}",
+        "300": "{{ diag.warning }}",
+        "400": "{{ diag.warning }}",
+        "500": "{{ diag.warning }}",
+        "600": "{{ diag.warning }}",
+        "700": "{{ diag.warning }}",
+        "800": "{{ diag.warning }}",
+        "900": "{{ diag.warning }}"
+      },
+      "green": {
+        "100": "{{ ansi.bright_green }}",
+        "200": "{{ diag.ok }}",
+        "300": "{{ diag.ok }}",
+        "400": "{{ diag.ok }}",
+        "500": "{{ diag.ok }}",
+        "600": "{{ diag.ok }}",
+        "700": "{{ diag.ok }}",
+        "800": "{{ diag.ok }}",
+        "900": "{{ diag.ok }}"
+      },
+      "cyan": {
+        "100": "{{ ansi.bright_cyan }}",
+        "200": "{{ diag.hint }}",
+        "300": "{{ diag.hint }}",
+        "400": "{{ diag.hint }}",
+        "500": "{{ diag.hint }}",
+        "600": "{{ diag.hint }}",
+        "700": "{{ diag.hint }}",
+        "800": "{{ diag.hint }}",
+        "900": "{{ diag.hint }}"
+      },
+      "blue": {
+        "100": "{{ ansi.bright_blue }}",
+        "200": "{{ diag.info }}",
+        "300": "{{ diag.info }}",
+        "400": "{{ diag.info }}",
+        "500": "{{ diag.info }}",
+        "600": "{{ diag.info }}",
+        "700": "{{ diag.info }}",
+        "800": "{{ diag.info }}",
+        "900": "{{ diag.info }}"
+      },
+      "purple": {
+        "100": "{{ ansi.bright_magenta }}",
+        "200": "{{ ansi.magenta }}",
+        "300": "{{ ansi.magenta }}",
+        "400": "{{ ansi.magenta }}",
+        "500": "{{ ansi.magenta }}",
+        "600": "{{ ansi.magenta }}",
+        "700": "{{ ansi.magenta }}",
+        "800": "{{ ansi.magenta }}",
+        "900": "{{ ansi.magenta }}"
+      },
+      "accent": "$hue.blue",
+      "interactive": "$hue.yellow"
+    }
   }
 }
