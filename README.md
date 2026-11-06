@@ -118,9 +118,9 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
 | Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.4 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. |
-| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.26 · macOS 26.6.2 |  |
+| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.86 · macOS 26.6.2 |  |
 | Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
-| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.143.1 · macOS 26.6.2 |  |
+| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.144.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 | Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
 | OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
@@ -210,10 +210,10 @@ A tier is supported only while its last real-app test covers the exact files you
 | CSS variables | 🧪 experimental | — |  |  | `9ab8a88c7c9b` |  |
 | delta | 🧪 experimental | — |  |  | `3308e3be3a24` |  |
 | dircolors (ls) | 🧪 experimental | — |  |  | `83b2b3860ea3` |  |
-| Discord | 🟡 candidate | — |  |  | `8f3763e09c94` |  |
+| Discord | 🟡 candidate | — |  |  | `6864fc114e56` |  |
 | dunst | 🧪 experimental | — |  |  | `609fb82b5980` |  |
 | eza | 🧪 experimental | — |  |  | `6059afb38427` |  |
-| Firefox | 🧪 experimental | — |  |  | `0514be718692` |  |
+| Firefox | 🧪 experimental | — |  |  | `7d4cca54281b` |  |
 | fish | 🧪 experimental | — |  |  | `c42a72950b4f` |  |
 | foot | 🧪 experimental | — |  |  | `ecacdd9402bc` |  |
 | Fresh | ✅ supported | 2026-10-25 | 0.5.4 | macOS 26.6.2 | `ffafe30b365d` |  |
@@ -227,17 +227,17 @@ A tier is supported only while its last real-app test covers the exact files you
 | Herdr TUI | ✅ supported | 2026-09-29 | 0.9.1 | macOS 26.6.2 | `b10fed21b5e9` |  |
 | i3 | 🧪 experimental | — |  |  | `993976e10b90` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `31d0cc69bd19` |  |
-| JetBrains IDEs | 🧪 experimental | — |  |  | `fda59d513792` |  |
-| JSON palette | 🧪 experimental | — |  |  | `6eedb5ccb730` |  |
+| JetBrains IDEs | 🧪 experimental | — |  |  | `2f06fdb1f950` |  |
+| JSON palette | 🧪 experimental | — |  |  | `9563347d38bf` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `92dd51c9508e` |  |
 | Kiro Crew | ✅ supported | 2026-10-25 | 0.9.0 | Linux 24.04 | `1390e083d1d6` |  |
-| Kiro IDE | ✅ supported | 2026-11-02 | 1.4.26 | macOS 26.6.2 | `0acd3c6271db` |  |
+| Kiro IDE | ✅ supported | 2026-11-05 | 1.4.86 | macOS 26.6.2 | `ce445867b36e` |  |
 | Kitty | 🧪 experimental | — |  |  | `af11f9c1c9a3` |  |
 | Konsole | 🧪 experimental | — |  |  | `6c43aa80731f` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
 | Moshi | ✅ supported | 2026-11-02 | 3.2.2 | iOS 27.3 | `448a39ba4619` |  |
 | Neovim | ✅ supported | 2026-09-28 | 0.12.5 | macOS 26.6.2 | `8b91eb053607` |  |
-| Obsidian | 🧪 experimental | — |  |  | `fc5ea6bd1fbc` |  |
+| Obsidian | 🧪 experimental | — |  |  | `38ed0fd140fc` |  |
 | OpenCode | ✅ supported | 2026-11-05 | 2.2.5 | macOS 26.6.2 | `dd26b6ee09dd` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `3c3ad48e75ae` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `4ff58683ce80` |  |
@@ -254,7 +254,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Vim | 🧪 experimental | — |  |  | `5e766e51c86d` |  |
 | Vimium | 🟡 candidate | — |  |  | `02b715566580` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | ✅ supported | 2026-11-02 | 1.143.1 | macOS 26.6.2 | `a170ea34703f` |  |
+| VS Code | ✅ supported | 2026-11-05 | 1.144.1 | macOS 26.6.2 | `d3d6206f584e` |  |
 | Waybar | 🧪 experimental | — |  |  | `52fb3b90c649` |  |
 | WezTerm | ✅ supported | 2026-09-28 | 20260901 | macOS 26.6.2 | `2ef53e6927a3` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `f21b0b6c213a` |  |
@@ -262,7 +262,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Xresources (xterm, urxvt; st with the xresources patch) | 🧪 experimental | — |  |  | `154baa7a9fb5` |  |
 | yazi | 🧪 experimental | — |  |  | `ace28270c6bd` |  |
 | zathura | 🧪 experimental | — |  |  | `a687ceefae88` |  |
-| Zed | 🧪 experimental | — |  |  | `19f264ce3e7f` |  |
+| Zed | 🧪 experimental | — |  |  | `8c7828fbf3fa` |  |
 | Zellij | ✅ supported | 2026-09-28 | 0.45.1 | macOS 26.6.2 | `8ad27fb2e46e` |  |
 <!-- verification:end -->
 

@@ -97,6 +97,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "1.4.86",
+      "date": "2026-11-05",
+      "digest": "sha256:ce445867b36e35d88700280992e2ac82399b953a5f5cae33caa102f920b8b242",
+      "evidence": "",
+      "note": "Kiro 1.4.86, clean profile, 0.4.0 vsix: 484/489 colors resolve exactly over CDP (5 VS Code-only chat keys unregistered); theme unchanged since 0.3.0",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "kiro-crew": [
@@ -218,6 +228,16 @@
       "digest": "sha256:a170ea34703f8f28405546df36ed4199576526ff230972ba2e1b7158c02fc53e",
       "evidence": "",
       "note": "VS Code 1.143.1, clean profile, 0.3.0 vsix: 489/489 theme colors resolve exactly over CDP; theme file unchanged since 0.2.1, only the version",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "1.144.1",
+      "date": "2026-11-05",
+      "digest": "sha256:d3d6206f584e37ca71eb664b0b0f61c08ae7d5d76dd5be0fa5fa9f8df7cb130e",
+      "evidence": "",
+      "note": "VS Code 1.144.1, clean profile, 0.4.0 vsix: 489/489 theme colors resolve exactly over CDP; theme file unchanged since 0.3.0, only the version",
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 (2026-11-06)
 
 - OpenCode: the port is rebuilt for OpenCode 2 and verified in the app on 2.2.5 and macOS 26.6.2. It is a v2 theme document, so every color it draws comes from the palette instead of scales OpenCode would generate. Orange marks the active row, focused form fields and the selected file; the prompt sits quietly on the panel color, and the embedded terminal gets the ANSI table. OpenCode 1 cannot read this file. Some colors stay OpenCode's choice: its builtins, types and tags use the error color, so `string` and `null` are red in code (the port's README lists them).
 - New port: Moshi 3.2.2, the SSH and Mosh terminal for iPhone and iPad, verified in the app on iOS 27.3. It sets every color of Moshi's theme format from the terminal roles, and Moshi colors its own screens from them too. Orange only marks the cursor. Scan the QR code in the port's README from Moshi's import screen, or paste the `moshi-theme:` line next to it.
