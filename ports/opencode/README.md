@@ -2,11 +2,11 @@
 
 > ⚠️ **Warning:** OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it.
 
-Tier: 🧪 experimental
+Tier: ✅ supported
 
 Target version: 2.2.5 · Format documentation: https://github.com/anomalyco/opencode/blob/v2.2.5/packages/theme/src/tui/schema.ts
 
-Verified on: —
+Verified on: 2.2.5 · macOS 26.6.2 (2026-11-05)
 
 ## Install
 
@@ -35,6 +35,8 @@ Print it yourself with `python3 tools/build.py digest opencode`. It covers these
 
 - `ports/opencode/umber-calm.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-11-05 | ✅ verified | 2.2.5 | macOS | 26.6.2 | Maintainer's look at session, forms and chips; other screens read cell by cell from the running app on a local mock: colors as designed, 16/16 ANSI slots |  | `dd26b6ee09dd` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

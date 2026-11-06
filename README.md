@@ -106,7 +106,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (13)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (14)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -123,11 +123,12 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.143.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 | Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
+| OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
 
 </details>
 
 <details>
-<summary><b>🧪 experimental (43)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (42)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -171,7 +172,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Firefox | web | [ports/firefox/](ports/firefox/) | 133 | — |  |
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
-| OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | — | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -238,7 +238,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Moshi | ✅ supported | 2026-11-02 | 3.2.2 | iOS 27.3 | `448a39ba4619` |  |
 | Neovim | ✅ supported | 2026-09-28 | 0.12.5 | macOS 26.6.2 | `8b91eb053607` |  |
 | Obsidian | 🧪 experimental | — |  |  | `fc5ea6bd1fbc` |  |
-| OpenCode | 🧪 experimental | — |  |  | `dd26b6ee09dd` |  |
+| OpenCode | ✅ supported | 2026-11-05 | 2.2.5 | macOS 26.6.2 | `dd26b6ee09dd` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `3c3ad48e75ae` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `4ff58683ce80` |  |
 | rofi | 🧪 experimental | — |  |  | `954a168da103` |  |

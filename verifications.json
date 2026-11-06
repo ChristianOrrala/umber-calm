@@ -135,6 +135,18 @@
       "status": "verified"
     }
   ],
+  "opencode": [
+    {
+      "app_version": "2.2.5",
+      "date": "2026-11-05",
+      "digest": "sha256:dd26b6ee09dd5eb961c70948d6b9fedf8ee6a9b2c6adbbe90371ec2cf539ed03",
+      "evidence": "",
+      "note": "Maintainer's look at session, forms and chips; other screens read cell by cell from the running app on a local mock: colors as designed, 16/16 ANSI slots",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
   "starship": [
     {
       "app_version": "1.26.0",
