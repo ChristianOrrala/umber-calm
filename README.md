@@ -62,6 +62,34 @@ What's left is the palette I want to look at all day. I'm sharing it in case it 
 - Categories are separated by hue while lightness stays in a narrow band.
 - Red only means errors and deletions; amber only marks where you are.
 
+## Recommendations
+
+### Font
+
+Umber Calm works with any monospaced font, but the font changes how the palette looks. A heavy font makes the whole screen look denser. A more open one leaves more of the warm background around each letter.
+
+What I look for:
+
+- **Regular weight.** Medium and bold put more ink in every letter. I looked for evidence that heavier strokes read better on a dark background and didn't find it: a 2023 study detected no dark-mode reading advantage from heavier strokes in the text it tested ([CHI 2023, PDF](https://thereadabilityconsortium.org/wp-content/uploads/2023/07/How-bold-can-we-be-The-impact-of-adjusting-font-grade-on-readability-in-light-and-dark-polarities-1.pdf)).
+- **Size by lowercase height, not by point size.** Two fonts at 12 can have very different lowercase heights. Compare them with their lowercase at the same height, then pick the size you like.
+- **Look-alike characters.** Check `0` and `O`, `1`, `l` and `I`, `rn` and `m`, and the punctuation you actually mix up, at the size you use.
+- **Icons**, if your prompt or status line uses them: a [Nerd Fonts](https://www.nerdfonts.com/font-downloads) build, or the font plus Symbols Nerd Font Mono as a fallback.
+- **Your own app.** The same font can look lighter or heavier depending on the app, the screen and its scaling.
+
+Three I'd start with, in the order I'd try them. All are free under the SIL Open Font License:
+
+| Font | Icons | Size next to JetBrains Mono at 12 | Why I like it |
+|---|---|---|---|
+| [Atkinson Hyperlegible Mono](https://fonts.google.com/specimen/Atkinson+Hyperlegible+Mono) | Install the Google Fonts build plus Symbols Nerd Font Mono. The Nerd Font build (AtkynsonMono Nerd Font Mono, Nerd Fonts 3.5.1) has no backtick. | about 13.3 | Look-alike characters get clearly different shapes, and the letters are wide and open. |
+| [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) | SauceCodePro Nerd Font Mono | about 13.5 | Open letters and the most line spacing of the three for its lowercase height. Its lowercase is small, so it needs a larger size. |
+| [IBM Plex Mono](https://github.com/IBM/plex) | BlexMono Nerd Font Mono | about 13 | The thinnest strokes of the three and the most columns. Its `1`, `l` and `I` are closer to each other, so check them first. |
+
+Wider letters fit fewer columns: in the same pane, at the same lowercase height, JetBrains Mono fits about 72 columns, Plex 69, Source Code Pro 64 and Atkinson 62. The sizes are approximate and depend on the app.
+
+For sidebars, menus and settings, consider a proportional font: the interface doesn't have to share the terminal's font. Change one thing at a time, so you can tell which change you like.
+
+These are starting points, not rules. Choose the font, weight and size you prefer in your own app.
+
 ## Palette
 
 <!-- palette:begin -->
