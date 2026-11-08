@@ -217,6 +217,18 @@
       "status": "verified"
     }
   ],
+  "orca": [
+    {
+      "app_version": "1.4.253",
+      "date": "2026-11-08",
+      "digest": "sha256:784b295cba5422df21e477c410b8a8f0af91d1c2a73e36db6824e28320330121",
+      "evidence": "",
+      "note": "Agent chat not checked: Orca 1.4.253 skips the chat tokens. Terminal selection not on screen.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    }
+  ],
   "starship": [
     {
       "app_version": "1.26.0",

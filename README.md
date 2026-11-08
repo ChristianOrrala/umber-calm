@@ -134,7 +134,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (11)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (12)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -149,11 +149,12 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.144.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 | OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
+| Orca | ai | [ports/orca/](ports/orca/) | main (fca1d7b) (min 1.4.246) | 1.4.253 · macOS 26.6.2 | ⚠️ Orca paints some colors in code that no theme reaches. The code editor takes its cursor and its selection from the focus ring, so selections are tinted orange (the ring at 30 %, 15 % when the editor is not focused) and comments inside a selection read about 2.7:1. The editor colors bracket pairs with Monaco's defaults (gold, orchid and blue). Agent status dots use Orca's own amber, trust and approval dialogs keep Orca's colors, and program icons keep their own. |
 
 </details>
 
 <details>
-<summary><b>🧪 experimental (46)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (45)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -200,7 +201,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
 | Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
-| Orca | ai | [ports/orca/](ports/orca/) | main (fca1d7b) (min 1.4.246) | — |  |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -268,7 +268,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Neovim | ✅ supported | 2026-11-07 | 0.12.6 | macOS 26.6.2 | `ed774b57c799` |  |
 | Obsidian | 🧪 experimental | — |  |  | `5713f2513941` |  |
 | OpenCode | ✅ supported | 2026-11-07 | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
-| Orca | 🧪 experimental | — |  |  | `784b295cba54` |  |
+| Orca | ✅ supported | 2026-11-08 | 1.4.253 | macOS 26.6.2 | `784b295cba54` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `4aa24eb96b4d` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `2608019f3897` |  |
 | rofi | 🧪 experimental | — |  |  | `f19ccbb7af97` |  |

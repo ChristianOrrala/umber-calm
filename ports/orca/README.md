@@ -1,10 +1,12 @@
 # Orca — Umber Calm
 
-Tier: 🧪 experimental
+> ⚠️ **Warning:** Orca paints some colors in code that no theme reaches. The code editor takes its cursor and its selection from the focus ring, so selections are tinted orange (the ring at 30 %, 15 % when the editor is not focused) and comments inside a selection read about 2.7:1. The editor colors bracket pairs with Monaco's defaults (gold, orchid and blue). Agent status dots use Orca's own amber, trust and approval dialogs keep Orca's colors, and program icons keep their own.
+
+Tier: ✅ supported
 
 Target version: main (fca1d7b) · Minimum version: 1.4.246 · Format documentation: https://github.com/stablyai/orca/blob/main/docs/reference/plugin-themes.md
 
-Verified on: —
+Verified on: 1.4.253 · macOS 26.6.2 (2026-11-08)
 
 ## Install
 
@@ -17,7 +19,7 @@ Pick other themes in Appearance and Terminal, then remove the folder under Setti
 ## Verification checklist
 
 - [ ] window, editor and terminals on bg with warm text; both sidebars and the tab strip a step darker; cards, menus and popovers a step lighter
-- [ ] focus rings, the active tab line and the terminal cursor are orange; nothing else is
+- [ ] focus rings, the editor cursor, the active tab line and the terminal cursor are orange; editor selections tinted orange (known limit); nothing else is
 - [ ] workspace sidebar: hovered rows a step lighter, the current workspace on the selection color, host badges readable on every row
 - [ ] secondary text readable: inactive tabs, descriptions, settings help
 - [ ] inputs, switches and checkboxes have visible borders; primary buttons light with dark text
@@ -36,6 +38,8 @@ Print it yourself with `python3 tools/build.py digest orca`. It covers these fil
 - `ports/orca/terminal/umber-calm.json`
 - `ports/orca/themes/umber-calm.json`
 
-No verification recorded yet.
+| Date | Result | App version | OS | OS version | Note | Evidence | Digest |
+|---|---|---|---|---|---|---|---|
+| 2026-11-08 | ✅ verified | 1.4.253 | macOS | 26.6.2 | Agent chat not checked: Orca 1.4.253 skips the chat tokens. Terminal selection not on screen. |  | `784b295cba54` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

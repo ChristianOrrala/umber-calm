@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- New port: Orca, pinned to its `main` branch at `fca1d7b`. A content-only Orca plugin: an app theme that sets all 73 public tokens from palette roles and colors code from the syntax roles, plus a matching terminal theme. Sidebars and the tab strip sit a step darker than the editor, with hovered and current rows a step lighter each. Orange marks focus rings, the active tab line and the terminal cursor. Every color pair Orca checks clears its floor, so Orca keeps all of them. Orca 1.4.253 and older skip the seven chat tokens and keep their own chat colors.
+- New port: Orca, pinned to its `main` branch at `fca1d7b` and verified in the app on Orca 1.4.253 and macOS 26.6.2. A content-only Orca plugin: an app theme that sets all 73 public tokens from palette roles and colors code from the syntax roles, plus a matching terminal theme. Sidebars and the tab strip sit a step darker than the editor, with hovered and current rows a step lighter each. Orange marks focus rings, the active tab line and the terminal cursor. Every color pair Orca checks clears its floor, so Orca keeps all of them. Orca 1.4.253 and older skip the seven chat tokens and keep their own chat colors. Some colors stay Orca's choice: the code editor tints selections with the focus ring, so they are orange, and bracket pairs keep Monaco's colors (the port's README lists them).
 
 ## 0.5.0 (2026-11-08)
 
