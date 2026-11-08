@@ -1,10 +1,10 @@
 # Neovim — Umber Calm
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 0.10 · Format documentation: https://neovim.io/doc/user/syntax.html#highlight-groups
 
-Verified on: 0.12.5 · macOS 26.6.2 (2026-09-28)
+Verified on: 0.12.6 · macOS 26.6.2 (2026-11-07)
 
 ## Install
 
@@ -43,6 +43,7 @@ Print it yourself with `python3 tools/build.py digest neovim`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 0.12.6 | macOS | 26.6.2 | Built-ins plus telescope, gitsigns, which-key, blink.cmp 1.10.2, lazy UI, ibl 3.10.1 and lualine (orange mode in every mode) drawn; no old greys. |  | `ed774b57c799` |
 | 2026-09-28 | ✅ verified | 0.12.5 | macOS | 26.6.2 | Full checklist in WezTerm with lazy.nvim: treesitter (Lua, C), diagnostics, telescope, gitsigns, which-key, blink.cmp, ibl, lualine, :terminal, :help. |  | `8b91eb053607` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

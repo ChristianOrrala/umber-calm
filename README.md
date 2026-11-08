@@ -134,7 +134,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (10)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (11)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -145,6 +145,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.27.0 · macOS 26.6.2 |  |
 | Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.7 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. It also paints some colors in code that no theme reaches: the git gutter and its scrollbar marks (green, orange and red), the gutter marks of `fresh --diff`, and the embedded terminal's 16 colors, which come from VS Code's defaults. |
 | Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.86 · macOS 26.6.2 |  |
+| Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.6 · macOS 26.6.2 |  |
 | VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.144.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
 | OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
@@ -152,7 +153,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (46)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (45)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -180,7 +181,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
 | Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
-| Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
 | Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
@@ -264,7 +264,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Konsole | 🧪 experimental | — |  |  | `563d60e1e6f0` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
 | Moshi | 🧪 experimental | 2026-11-02 (earlier revision) | 3.2.2 | iOS 27.3 | `ca6dce14efbc` |  |
-| Neovim | 🧪 experimental | 2026-09-28 (earlier revision) | 0.12.5 | macOS 26.6.2 | `ed774b57c799` |  |
+| Neovim | ✅ supported | 2026-11-07 | 0.12.6 | macOS 26.6.2 | `ed774b57c799` |  |
 | Obsidian | 🧪 experimental | — |  |  | `13f51a218f71` |  |
 | OpenCode | ✅ supported | 2026-11-07 | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `4aa24eb96b4d` |  |

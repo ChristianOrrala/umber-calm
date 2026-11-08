@@ -173,6 +173,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "0.12.6",
+      "date": "2026-11-07",
+      "digest": "sha256:ed774b57c799960fe4a3ec069158e1b1c27330fc218ba68d3ab5b2b437b8bc9b",
+      "evidence": "",
+      "note": "Built-ins plus telescope, gitsigns, which-key, blink.cmp 1.10.2, lazy UI, ibl 3.10.1 and lualine (orange mode in every mode) drawn; no old greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "opencode": [
