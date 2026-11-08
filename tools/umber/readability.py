@@ -15,8 +15,8 @@ PAIRS: list[tuple[str, str, str, float]] = [
     ("red on bg", "red", "bg", 4.5),
     ("red on surface", "red", "surface", 4.5),
     ("muted on bg", "muted", "bg", 4.5),
-    ("muted on surface (E1)", "muted", "surface", 4.0),
-    ("dim_text on bg (E2)", "dim_text", "bg", 3.0),
+    ("muted on surface", "muted", "surface", 4.5),
+    ("dim_text on bg (E2)", "dim_text", "bg", 3.4),
     ("orange on bg", "orange", "bg", 3.0),
     ("orange on surface", "orange", "surface", 3.0),
     ("text on selection", "text", "overlay", 4.5),
@@ -31,7 +31,7 @@ PAIRS: list[tuple[str, str, str, float]] = [
     *[(f"muted on light diff {k} (E3)", "muted", f"blend:diag.diff_{k}:bg:tint.diag", 3.0) for k in DIFF_KINDS],
     *[(f"{s} virtual text", f"diag.{s}", f"blend:diag.{s}:bg:tint.diag", 4.5) for s in ("error", "warning", "info", "hint")],
     *[(f"muted on {s} wash (E3)", "muted", f"blend:diag.{s}:bg:tint.diag", 3.0) for s in ("error", "warning", "info", "hint")],
-    ("ansi.bright_black on bg (E2)", "ansi.bright_black", "bg", 3.0),
+    ("ansi.bright_black on bg (E2)", "ansi.bright_black", "bg", 3.4),
     *[(f"ansi.{s} on bg", f"ansi.{s}", "bg", 4.5) for s in ANSI_SLOTS if s not in ("black", "bright_black")],
 ]
 

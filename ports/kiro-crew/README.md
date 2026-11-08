@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself.
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 0.9.0 · Format documentation: https://github.com/kirodotdev/KiroCrew/blob/v0.9.0/website/docs/theming-contract.md
 
@@ -31,7 +31,7 @@ Choose another theme in Settings → Display → Theme, then delete ~/.kiro/crew
 
 ## Verification
 
-Current digest: `sha256:1390e083d1d655c922521c6be2999bd2de6cc16cdedec2b06212662795452852`
+Current digest: `sha256:b837cb5370272a1dc1a3aedbe6cf2c7dde04ef7c08e106bb04901ac466620cb5`
 
 Print it yourself with `python3 tools/build.py digest kiro-crew`. It covers these files:
 

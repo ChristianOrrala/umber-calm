@@ -1,6 +1,6 @@
 # VS Code — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 1.95 · Minimum version: 1.95.0 · Format documentation: https://code.visualstudio.com/api/extension-guides/color-theme
 
@@ -30,7 +30,7 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:d3d6206f584e37ca71eb664b0b0f61c08ae7d5d76dd5be0fa5fa9f8df7cb130e`
+Current digest: `sha256:fa5f201e3eaa0f0023b8af249c11a625a196459b4440ba766d37297d6fbe75c8`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 

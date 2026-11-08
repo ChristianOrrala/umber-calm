@@ -83,16 +83,16 @@ themes {
             background "#201F1D"
             emphasis_0 "#EDA97C"
             emphasis_1 "#D6C9B6"
-            emphasis_2 "#938A7B"
-            emphasis_3 "#938A7B"
+            emphasis_2 "#988F7F"
+            emphasis_3 "#988F7F"
         }
         frame_unselected {
-            base "#938A7B"
+            base "#988F7F"
             background "#201F1D"
-            emphasis_0 "#938A7B"
+            emphasis_0 "#988F7F"
             emphasis_1 "#D6C9B6"
-            emphasis_2 "#938A7B"
-            emphasis_3 "#938A7B"
+            emphasis_2 "#988F7F"
+            emphasis_3 "#988F7F"
         }
         // The focused pane frame while a mode other than the base mode is active: still the current location.
         frame_highlight {
@@ -108,16 +108,16 @@ themes {
             background "#201F1D"
             emphasis_0 "#A7B56E"
             emphasis_1 "#D6C9B6"
-            emphasis_2 "#938A7B"
-            emphasis_3 "#938A7B"
+            emphasis_2 "#988F7F"
+            emphasis_3 "#988F7F"
         }
         exit_code_error {
             base "#E08374"
             background "#201F1D"
             emphasis_0 "#E08374"
             emphasis_1 "#D6C9B6"
-            emphasis_2 "#938A7B"
-            emphasis_3 "#938A7B"
+            emphasis_2 "#988F7F"
+            emphasis_3 "#988F7F"
         }
         // Other users' cursors in a shared session: accents, never focus or red.
         multiplayer_user_colors {

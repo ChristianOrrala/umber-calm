@@ -23,7 +23,7 @@ Delete theme.yml.
 
 ## Verification
 
-Current digest: `sha256:6059afb3842749fb27952f095e55b149621e16e2ef713a67c319720c05988cc2`
+Current digest: `sha256:fa152632b3dca1913d3b6635bd4f34d5aa12bcca43e764d97c763195788c935a`
 
 Print it yourself with `python3 tools/build.py digest eza`. It covers these files:
 

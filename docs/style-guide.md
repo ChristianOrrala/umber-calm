@@ -11,8 +11,8 @@ The contracts every port follows. `tests/test_docs.py` checks these tables again
 | `surface` | `#2A2826` | Panels, status bars, floating windows, sidebars |
 | `overlay` | `#3C3A36` | Selection background, strong borders |
 | `inactive` | `#5A554E` | Non-text UI only: borders, indent guides, inactive icons (2.2:1, never text) |
-| `dim_text` | `#6E6961` | Least important readable text; also ANSI bright black (3.0:1) |
-| `muted` | `#938A7B` | Comments, secondary text |
+| `dim_text` | `#77726A` | Least important readable text; also ANSI bright black (3.45:1) |
+| `muted` | `#988F7F` | Comments, secondary text |
 | `subtle` | `#C2A98C` | Operators, punctuation |
 | `text` | `#D6C9B6` | Main foreground |
 | `text_bright` | `#EDE3D2` | Emphasis only |
@@ -94,7 +94,7 @@ Focus is never decoration: not for buttons in general, badges, links or syntax. 
 
 | Slot | Normal | Bright |
 |---|---|---|
-| black | `#2A2826` | `#6E6961` |
+| black | `#2A2826` | `#77726A` |
 | red | `#E08374` | `#EC9A8C` |
 | green | `#A7B56E` | `#B9C684` |
 | yellow | `#DCC07D` | `#E8CE92` |
@@ -112,7 +112,7 @@ Focus is never decoration: not for buttons in general, badges, links or syntax. 
 | selection_bg | `overlay` |
 | selection_fg | `text` |
 
-Applications decide how they use ANSI colors, so the terminal contract promises readability, not meaning: every slot except `black` is at least 4.5:1 on `bg`; `bright_black` is 3.0:1 (exception E2); `black` is a background color by design.
+Applications decide how they use ANSI colors, so the terminal contract promises readability, not meaning: every slot except `black` is at least 4.5:1 on `bg`; `bright_black` is 3.45:1 (exception E2); `black` is a background color by design.
 
 ## Measured readability
 
@@ -123,24 +123,23 @@ Contrast is the WCAG 2.x ratio. Translucent backgrounds are composited in sRGB c
 | `text` | 10.1 | 9.0 | ≥ 4.5 |
 | syntax accents (`yellow` `blue` `cyan` `green` `purple` `subtle`) | 7.0–9.3 | 6.2–8.3 | ≥ 4.5 |
 | `red` | 6.0 | 5.4 | ≥ 4.5 |
-| `muted` | 4.8 | 4.3 | ≥ 4.5 on `bg`; ≥ 4.0 on `surface` (E1) |
-| `dim_text` / ANSI bright black | 3.0 | 2.7 | ≥ 3.0 on `bg` (E2) |
+| `muted` | 5.2 | 4.6 | ≥ 4.5 |
+| `dim_text` / ANSI bright black | 3.45 | 3.1 | ≥ 3.4 on `bg` (E2) |
 | `orange` | 8.3 | 7.4 | ≥ 3.0 |
 
 | State | Background | `text` on it | `muted` on it |
 |---|---|---|---|
-| Selection | `overlay` `#3C3A36` | 7.0 | 3.3 |
-| Search match | `yellow` 18 % → `#423C2E` | 6.7 | 3.2 |
+| Selection | `overlay` `#3C3A36` | 7.0 | 3.5 |
+| Search match | `yellow` 18 % → `#423C2E` | 6.7 | 3.4 |
 | Current search match | `yellow`, text `bg` | 9.3 | — |
-| Diff added / deleted / changed line | 22 % → `#3E402F` · `#4A3530` · `#373F3E` | 6.5 · 7.0 · 6.6 | 3.1 · 3.3 · 3.2 |
-| Diff line, light (12 %) | `#303127` · `#372B27` · `#2C302F` | 8.1 · 8.4 · 8.2 | 3.9 · 4.0 · 3.9 |
+| Diff added / deleted / changed line | 22 % → `#3E402F` · `#4A3530` · `#373F3E` | 6.5 · 7.0 · 6.6 | 3.3 · 3.6 · 3.4 |
+| Diff line, light (12 %) | `#303127` · `#372B27` · `#2C302F` | 8.1 · 8.4 · 8.2 | 4.1 · 4.3 · 4.2 |
 | Cursor | `orange`, text `bg` | 8.3 | — |
-| Diagnostic virtual text, and the wash under code | severity color at 12 % | error 5.0 · warning 7.2 · info 5.7 · hint 6.4 (severity color on its tint) | 4.0 · 3.7 · 3.9 · 3.8 |
+| Diagnostic virtual text, and the wash under code | severity color at 12 % | error 5.0 · warning 7.2 · info 5.7 · hint 6.4 (severity color on its tint) | 4.3 · 4.0 · 4.2 · 4.1 |
 
 A port may only blend to a background listed here; `tools/check.py` rejects any other blend.
 
 ## Exceptions
 
-- **E1: comments on panels (4.3:1).** Comments are meant to recede; they stay at or above 4.0.
-- **E2: ANSI bright black (3.0:1).** Terminal applications use it for de-emphasized text; 3.0 keeps it distinct from `muted` (ΔE_OK 11.5).
+- **E2: least important text and ANSI bright black (3.45:1).** Terminal applications use bright black for de-emphasized text; staying below 4.5 keeps it a separate step from `muted` (ΔE_OK 10.0). Its floor is 3.4.
 - **E3: secondary text on highlights.** Where a format cannot force the foreground to `text` on a highlight (for example VS Code selections, diagnostic washes Fresh draws under code, or the rows Herdr highlights and the washes it tints in its panels), comments and secondary text may drop to 3.0 on that highlight. Where a format can set a selection foreground, it uses `text`.

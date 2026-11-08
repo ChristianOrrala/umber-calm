@@ -2,8 +2,8 @@
 # Add `palette = "umber_calm"` at the top level of ~/.config/starship.toml.
 [palettes.umber_calm]
 text = "#D6C9B6"
-muted = "#938A7B"
-dim = "#6E6961"
+muted = "#988F7F"
+dim = "#77726A"
 subtle = "#C2A98C"
 surface = "#2A2826"
 overlay = "#3C3A36"

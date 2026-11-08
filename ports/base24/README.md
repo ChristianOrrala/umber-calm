@@ -21,7 +21,7 @@ Switch the manager to another scheme.
 
 ## Verification
 
-Current digest: `sha256:12b120d7e4439ea5b54ebf29efa3f5ed563c0d13ae7174680c176c29b08263fb`
+Current digest: `sha256:f92da2865b251d6d584caf7b3c268d1f263db66673d63cf9bdc502103b7a7ba7`
 
 Print it yourself with `python3 tools/build.py digest base24`. It covers these files:
 

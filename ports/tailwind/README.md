@@ -21,7 +21,7 @@ Remove the import.
 
 ## Verification
 
-Current digest: `sha256:98fa9d137e807937a0ae7f18ae0c48c6512c432cb931520b49cd7c39803728dd`
+Current digest: `sha256:6f39be60ced9445e36f61308fe5fd10e973805ac9cdbd8157002e7f93db6bb60`
 
 Print it yourself with `python3 tools/build.py digest tailwind`. It covers these files:
 

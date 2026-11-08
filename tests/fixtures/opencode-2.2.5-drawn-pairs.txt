@@ -1,7 +1,7 @@
 # Every (foreground, background) pair OpenCode 2.2.5's TUI draws from theme tokens, read from packages/tui/src at
 # tag v2.2.5 unless a source says otherwise: view, foreground, background, class, first source.
 # view: base (the page) or dialog (useTheme().surface("dialog")). A token ending in >1 is theme.decrease(token), one step toward 100.
-# Class: text 4.5; secondary 4.5 on bg, 4.0 on surface (E1), 3.0 on overlay (E3); indicator 3.0;
+# Class: text 4.5; secondary 4.5 on bg and surface, 3.0 on overlay (E3); indicator 3.0;
 # disabled and decoration have no floor. A component that sets no ground of its own is listed on the view's
 # background.base and, in the base view, on background.raised.base too: it may sit in a tool block.
 # Left out: animated tints (tab glow, pulse, shimmer) and dialog-go-upsell's logo blend.

@@ -6,8 +6,8 @@
   --background-secondary-alt: #1A1917;
   --background-modifier-border: #3C3A36;
   --text-normal: #D6C9B6;
-  --text-muted: #938A7B;
-  --text-faint: #6E6961;
+  --text-muted: #988F7F;
+  --text-faint: #77726A;
   --text-accent: #88B0B4;
   --text-accent-hover: #9DC2C5;
   --interactive-accent: #88B0B4;
@@ -15,7 +15,7 @@
   --text-selection: #3C3A36;
   --text-highlight-bg: #DCC07D2E;
   --code-normal: #D6C9B6;
-  --code-comment: #938A7B;
+  --code-comment: #988F7F;
   --code-keyword: #DCC07D;
   --code-function: #88B0B4;
   --code-string: #A7B56E;

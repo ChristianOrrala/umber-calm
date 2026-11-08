@@ -30,7 +30,7 @@ The same sample code in every simulation, generated from [`tests/fixtures/sample
 ## Known trade-offs
 
 - Close hue pairs: orange/yellow (ΔE_OK 6.2) and cyan/blue (ΔE_OK 4.9). With low chroma, even lightness and warm hues only, about five categories separate clearly; cyan and blue act as one "cool" family.
-- Comments on panels are 4.3:1 (exception E1) because comments are meant to recede.
+- Comments and secondary text reach 4.5:1 on the background and on panels. The least important text (`dim_text`, also ANSI bright black) stays at 3.45:1 so it remains a separate step below comments (exception E2).
 - Color-vision data for every accent pair is in [color-vision.md](color-vision.md).
 
 ## References

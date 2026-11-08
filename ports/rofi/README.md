@@ -23,7 +23,7 @@ Remove the @theme line and the file.
 
 ## Verification
 
-Current digest: `sha256:954a168da103d7334a602f4da792293e5b1d9cfd462429f736992a4cfec1124c`
+Current digest: `sha256:f19ccbb7af974fd4f16503cf43aa3ea56d5abc29c8f0c86e38caac2eeb00497e`
 
 Print it yourself with `python3 tools/build.py digest rofi`. It covers these files:
 

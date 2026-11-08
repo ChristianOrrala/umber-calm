@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it.
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 2.2.5 · Format documentation: https://github.com/anomalyco/opencode/blob/v2.2.5/packages/theme/src/tui/schema.ts
 
@@ -29,7 +29,7 @@ Pick another theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:dd26b6ee09dd5eb961c70948d6b9fedf8ee6a9b2c6adbbe90371ec2cf539ed03`
+Current digest: `sha256:fa6fce334e3ffc5dd1db6e5b2fc7b1e0396eea950330c0e9acb0a0cf69c26d8d`
 
 Print it yourself with `python3 tools/build.py digest opencode`. It covers these files:
 

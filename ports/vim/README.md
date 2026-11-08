@@ -24,7 +24,7 @@ Remove the colorscheme line and the file.
 
 ## Verification
 
-Current digest: `sha256:5e766e51c86d7108f0d0407ecb4492e55f046533e300fa44e34058f2d53cc8e7`
+Current digest: `sha256:57437cc425391d7850b88a92fa8dccc8abbc2fc540f05b885dd1172b12378cdf`
 
 Print it yourself with `python3 tools/build.py digest vim`. It covers these files:
 

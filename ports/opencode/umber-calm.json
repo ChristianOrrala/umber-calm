@@ -66,8 +66,8 @@
       "text": {
         "added": "#A7B56E",
         "removed": "#EC9A8C",
-        "context": "#938A7B",
-        "hunkHeader": "#938A7B"
+        "context": "#988F7F",
+        "hunkHeader": "#988F7F"
       },
       "background": {
         "added": "#3E402F",
@@ -79,7 +79,7 @@
         "removed": "#E08374"
       },
       "lineNumber": {
-        "text": "#938A7B",
+        "text": "#988F7F",
         "background": {
           "added": "#303127",
           "removed": "#372B27"
@@ -87,7 +87,7 @@
       }
     },
     "syntax": {
-      "comment": "#938A7B",
+      "comment": "#988F7F",
       "keyword": "#DCC07D",
       "function": "#88B0B4",
       "variable": "#D6C9B6",
@@ -103,7 +103,7 @@
       "link": "#88B0B4",
       "linkText": "#88B0B4",
       "code": "#A7B56E",
-      "blockQuote": "#938A7B",
+      "blockQuote": "#988F7F",
       "emphasis": "#D6C9B6",
       "strong": "#D6C9B6",
       "horizontalRule": "#5A554E",
@@ -128,8 +128,8 @@
         "100": "#EDE3D2",
         "200": "#D6C9B6",
         "300": "#C2A98C",
-        "400": "#938A7B",
-        "500": "#6E6961",
+        "400": "#988F7F",
+        "500": "#77726A",
         "600": "#2A2826",
         "700": "#2A2826",
         "800": "#201F1D",

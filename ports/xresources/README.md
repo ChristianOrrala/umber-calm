@@ -23,7 +23,7 @@ Remove the lines or the #include and run xrdb again.
 
 ## Verification
 
-Current digest: `sha256:154baa7a9fb5c9f2eab6f32cf8a96feb779920b32b0270f92356a98026eaaa15`
+Current digest: `sha256:7f9c13453c88708ff19f043156603b4cab9152b859a8c941985c89bb28752f46`
 
 Print it yourself with `python3 tools/build.py digest xresources`. It covers these files:
 

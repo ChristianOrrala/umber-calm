@@ -23,7 +23,7 @@ Stop reading the file.
 
 ## Verification
 
-Current digest: `sha256:9563347d38bfb8ca65b0de66fe90e833af0f4554b97ccfb2ec9feaf570a914f4`
+Current digest: `sha256:47f590e40f19654c8ad7bbd2a3060ca746b10f676346b7b4fa2c1a78b086443a`
 
 Print it yourself with `python3 tools/build.py digest json`. It covers these files:
 

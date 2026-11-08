@@ -24,7 +24,7 @@ Run `bash install.sh --remove`. If Umber Calm is your default profile, the first
 
 ## Verification
 
-Current digest: `sha256:483e82f0dd6ca27b25f34f0784d475c3b34012a90893d32d29aea0e1027c92e8`
+Current digest: `sha256:c9885374659f6de05fc3b3b4360d4cebc9e275a34dbae1c9515eb032a7ced194`
 
 Print it yourself with `python3 tools/build.py digest gnome-terminal`. It covers these files:
 

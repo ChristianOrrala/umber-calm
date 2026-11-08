@@ -1,6 +1,6 @@
 # WezTerm — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 20240203 · Format documentation: https://wezterm.org/config/appearance.html
 
@@ -24,7 +24,7 @@ Remove the color_scheme line and the file.
 
 ## Verification
 
-Current digest: `sha256:2ef53e6927a3c5913c4e6462228703401329621c6cba594329ed81a9d1e54a1b`
+Current digest: `sha256:a8fbc485f7f2c9342cef578cbd02b2acafcc9e3d814eb5728a2591050979a101`
 
 Print it yourself with `python3 tools/build.py digest wezterm`. It covers these files:
 

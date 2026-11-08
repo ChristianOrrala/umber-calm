@@ -213,7 +213,6 @@ def _terminal(pal) -> _Canvas:
 
 
 _DRAW = {"claude": _claude, "editor": _editor, "terminal": _terminal}
-PANELS = ("ui.surface", "ui.chrome")
 
 
 def render(name: str, pal) -> str:
@@ -227,5 +226,5 @@ def drawn_pairs(name: str, pal) -> tuple[set[tuple[str, str]], set[tuple[str, st
 
 
 def minimum(fg: str, bg: str) -> float:
-    """The contrast a text pair must reach: 4.5:1, or 4.0:1 for secondary text on a panel (the documented E1 exception)."""
-    return 4.0 if fg == "ui.text_secondary" and bg in PANELS else 4.5
+    """The contrast a text pair must reach: 4.5:1, secondary text on a panel included."""
+    return 4.5

@@ -23,7 +23,7 @@ Remove the colorScheme setting and the scheme object.
 
 ## Verification
 
-Current digest: `sha256:f21b0b6c213a263ba91dfb00363da955ed92cb8a198e3c8461c0ad75c193ccb6`
+Current digest: `sha256:82d37fd73d36da18e32998e0d8ff8620a5ded948aa0f4537088bb67bfbc3505b`
 
 Print it yourself with `python3 tools/build.py digest windows-terminal`. It covers these files:
 

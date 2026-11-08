@@ -24,7 +24,7 @@ Pick another color scheme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:92dd51c9508e94f5cab633b05200121498f7fcf084ce8817aa9668c1f000e353`
+Current digest: `sha256:dd488b67100444a2503bdc13d666c4babd7674a8230a6ac92e70a734ccf77fba`
 
 Print it yourself with `python3 tools/build.py digest kde`. It covers these files:
 

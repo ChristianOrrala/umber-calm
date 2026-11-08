@@ -22,7 +22,7 @@ Delete ~/.termux/colors.properties and run `termux-reload-settings`.
 
 ## Verification
 
-Current digest: `sha256:d955f89d442b9f6556830743a6a5a8fe9f47198a5f194c1d9cdd349ddc961641`
+Current digest: `sha256:ebe456bde2fca864d19a715c547e0c2cc0824abe0381784385d7c0c118713f3f`
 
 Print it yourself with `python3 tools/build.py digest termux`. It covers these files:
 

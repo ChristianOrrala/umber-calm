@@ -89,6 +89,6 @@ dconf write "$P/cursor-foreground-color" "'#201F1D'"
 dconf write "$P/highlight-colors-set" true
 dconf write "$P/highlight-background-color" "'#3C3A36'"
 dconf write "$P/highlight-foreground-color" "'#D6C9B6'"
-dconf write "$P/palette" "['#2A2826', '#E08374', '#A7B56E', '#DCC07D', '#88B0B4', '#C9A0C0', '#88C0AE', '#D6C9B6', '#6E6961', '#EC9A8C', '#B9C684', '#E8CE92', '#9DC2C5', '#D7B4CF', '#9CCEBC', '#EDE3D2']"
+dconf write "$P/palette" "['#2A2826', '#E08374', '#A7B56E', '#DCC07D', '#88B0B4', '#C9A0C0', '#88C0AE', '#D6C9B6', '#77726A', '#EC9A8C', '#B9C684', '#E8CE92', '#9DC2C5', '#D7B4CF', '#9CCEBC', '#EDE3D2']"
 echo "profile \"$NAME\" is ready ($UUID)"
 echo "To remove it later: bash install.sh --remove"

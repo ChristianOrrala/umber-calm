@@ -25,7 +25,7 @@ Remove the include line and the file.
 
 ## Verification
 
-Current digest: `sha256:af11f9c1c9a379255bd7712a92babd2a6c29e95eec308b1aa08bc42f6e958783`
+Current digest: `sha256:c646e3ef71c8487206c3a856eb36bd21ddec86b2869302ec5317dc0cfa9f3ff5`
 
 Print it yourself with `python3 tools/build.py digest kitty`. It covers these files:
 

@@ -15,7 +15,7 @@
       "toolbar_text": "#D6C9B6",
       "toolbar_field": "#201F1D",
       "toolbar_field_text": "#D6C9B6",
-      "toolbar_field_border": "#6E6961",
+      "toolbar_field_border": "#77726A",
       "toolbar_field_focus": "#201F1D",
       "toolbar_field_border_focus": "#EDA97C",
       "popup": "#2A2826",
@@ -26,7 +26,7 @@
       "sidebar": "#2A2826",
       "sidebar_text": "#D6C9B6",
       "sidebar_border": "#3C3A36",
-      "icons": "#938A7B",
+      "icons": "#988F7F",
       "ntp_background": "#201F1D",
       "ntp_text": "#D6C9B6"
     }

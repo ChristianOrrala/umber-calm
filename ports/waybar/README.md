@@ -23,7 +23,7 @@ Remove the import and the file.
 
 ## Verification
 
-Current digest: `sha256:52fb3b90c649cf46a2ffedaa3679aeddd0662d951a6741b313b38d5f462a67a7`
+Current digest: `sha256:f055dac24595c609553c69b656bdbe9f52cf2cd3aa3764882cc5de688fd5eb82`
 
 Print it yourself with `python3 tools/build.py digest waybar`. It covers these files:
 

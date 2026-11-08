@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations.
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 0.9.1 · Format documentation: https://herdr.dev/tui/docs/configuration/
 
@@ -27,7 +27,7 @@ Remove the pasted [theme] and [theme.custom] tables and reload the config.
 
 ## Verification
 
-Current digest: `sha256:b10fed21b5e9730fda3037d0210abe411e7ea05bcac08efb511f6618baee3bdc`
+Current digest: `sha256:c32f22d9ce1d3b489eb8b4d18aee70bd2bde31091f33ae6ef7f7e529eec2b7d0`
 
 Print it yourself with `python3 tools/build.py digest herdr`. It covers these files:
 

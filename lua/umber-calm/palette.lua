@@ -3,7 +3,7 @@
 return {
   colors = {
     bg = "#201F1D", bg_dim = "#1A1917", surface = "#2A2826", overlay = "#3C3A36",
-    inactive = "#5A554E", dim_text = "#6E6961", muted = "#938A7B", subtle = "#C2A98C",
+    inactive = "#5A554E", dim_text = "#77726A", muted = "#988F7F", subtle = "#C2A98C",
     text = "#D6C9B6", text_bright = "#EDE3D2", red = "#E08374", orange = "#EDA97C",
     yellow = "#DCC07D", green = "#A7B56E", cyan = "#88C0AE", blue = "#88B0B4", purple = "#C9A0C0",
   },

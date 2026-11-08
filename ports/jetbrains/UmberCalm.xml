@@ -7,7 +7,7 @@
     <option name="CARET_COLOR" value="EDA97C"/>
     <option name="CARET_ROW_COLOR" value="2A2826"/>
     <option name="GUTTER_BACKGROUND" value="201F1D"/>
-    <option name="LINE_NUMBERS_COLOR" value="938A7B"/>
+    <option name="LINE_NUMBERS_COLOR" value="988F7F"/>
     <option name="LINE_NUMBER_ON_CARET_ROW_COLOR" value="D6C9B6"/>
     <option name="SELECTION_BACKGROUND" value="3C3A36"/>
     <option name="SELECTION_FOREGROUND" value="D6C9B6"/>
@@ -17,17 +17,17 @@
   <attributes>
     <option name="TEXT"><value><option name="FOREGROUND" value="D6C9B6"/><option name="BACKGROUND" value="201F1D"/></value></option>
     <option name="DEFAULT_ATTRIBUTE"><value><option name="FOREGROUND" value="88C0AE"/></value></option>
-    <option name="DEFAULT_BLOCK_COMMENT"><value><option name="FOREGROUND" value="938A7B"/><option name="FONT_TYPE" value="2"/></value></option>
+    <option name="DEFAULT_BLOCK_COMMENT"><value><option name="FOREGROUND" value="988F7F"/><option name="FONT_TYPE" value="2"/></value></option>
     <option name="DEFAULT_BRACES"><value><option name="FOREGROUND" value="C2A98C"/></value></option>
     <option name="DEFAULT_BRACKETS"><value><option name="FOREGROUND" value="C2A98C"/></value></option>
     <option name="DEFAULT_CLASS_NAME"><value><option name="FOREGROUND" value="88C0AE"/></value></option>
     <option name="DEFAULT_CLASS_REFERENCE"><value><option name="FOREGROUND" value="88C0AE"/></value></option>
     <option name="DEFAULT_COMMA"><value><option name="FOREGROUND" value="C2A98C"/></value></option>
     <option name="DEFAULT_CONSTANT"><value><option name="FOREGROUND" value="C9A0C0"/></value></option>
-    <option name="DEFAULT_DOC_COMMENT"><value><option name="FOREGROUND" value="938A7B"/><option name="FONT_TYPE" value="2"/></value></option>
-    <option name="DEFAULT_DOC_COMMENT_TAG"><value><option name="FOREGROUND" value="938A7B"/><option name="FONT_TYPE" value="1"/></value></option>
+    <option name="DEFAULT_DOC_COMMENT"><value><option name="FOREGROUND" value="988F7F"/><option name="FONT_TYPE" value="2"/></value></option>
+    <option name="DEFAULT_DOC_COMMENT_TAG"><value><option name="FOREGROUND" value="988F7F"/><option name="FONT_TYPE" value="1"/></value></option>
     <option name="DEFAULT_DOC_COMMENT_TAG_VALUE"><value><option name="FOREGROUND" value="D6C9B6"/><option name="FONT_TYPE" value="2"/></value></option>
-    <option name="DEFAULT_DOC_MARKUP"><value><option name="FOREGROUND" value="938A7B"/></value></option>
+    <option name="DEFAULT_DOC_MARKUP"><value><option name="FOREGROUND" value="988F7F"/></value></option>
     <option name="DEFAULT_DOT"><value><option name="FOREGROUND" value="C2A98C"/></value></option>
     <option name="DEFAULT_ENTITY"><value><option name="FOREGROUND" value="C9A0C0"/></value></option>
     <option name="DEFAULT_FUNCTION_CALL"><value><option name="FOREGROUND" value="88B0B4"/></value></option>
@@ -41,7 +41,7 @@
     <option name="DEFAULT_INVALID_STRING_ESCAPE"><value><option name="FOREGROUND" value="C9A0C0"/><option name="EFFECT_COLOR" value="E08374"/><option name="EFFECT_TYPE" value="2"/></value></option>
     <option name="DEFAULT_KEYWORD"><value><option name="FOREGROUND" value="DCC07D"/></value></option>
     <option name="DEFAULT_LABEL"><value><option name="FOREGROUND" value="DCC07D"/></value></option>
-    <option name="DEFAULT_LINE_COMMENT"><value><option name="FOREGROUND" value="938A7B"/><option name="FONT_TYPE" value="2"/></value></option>
+    <option name="DEFAULT_LINE_COMMENT"><value><option name="FOREGROUND" value="988F7F"/><option name="FONT_TYPE" value="2"/></value></option>
     <option name="DEFAULT_LOCAL_VARIABLE"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>
     <option name="DEFAULT_METADATA"><value><option name="FOREGROUND" value="DCC07D"/></value></option>
     <option name="DEFAULT_NUMBER"><value><option name="FOREGROUND" value="C9A0C0"/></value></option>
@@ -61,12 +61,12 @@
     <option name="DOC_CODE_BLOCK"><value><option name="FOREGROUND" value="A7B56E"/></value></option>
     <option name="DOC_CODE_INLINE"><value><option name="FOREGROUND" value="A7B56E"/></value></option>
     <option name="DOC_TIPS_SHORTCUT"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>
-    <option name="INLAY_DEFAULT"><value><option name="FOREGROUND" value="938A7B"/><option name="BACKGROUND" value="2A2826"/></value></option>
-    <option name="INLAY_TEXT_WITHOUT_BACKGROUND"><value><option name="FOREGROUND" value="938A7B"/></value></option>
-    <option name="INLINE_PARAMETER_HINT"><value><option name="FOREGROUND" value="938A7B"/><option name="BACKGROUND" value="2A2826"/></value></option>
+    <option name="INLAY_DEFAULT"><value><option name="FOREGROUND" value="988F7F"/><option name="BACKGROUND" value="2A2826"/></value></option>
+    <option name="INLAY_TEXT_WITHOUT_BACKGROUND"><value><option name="FOREGROUND" value="988F7F"/></value></option>
+    <option name="INLINE_PARAMETER_HINT"><value><option name="FOREGROUND" value="988F7F"/><option name="BACKGROUND" value="2A2826"/></value></option>
     <option name="INLINE_PARAMETER_HINT_CURRENT"><value><option name="FOREGROUND" value="D6C9B6"/><option name="BACKGROUND" value="3C3A36"/></value></option>
     <option name="INLINE_PARAMETER_HINT_HIGHLIGHTED"><value><option name="FOREGROUND" value="D6C9B6"/><option name="BACKGROUND" value="2A2826"/></value></option>
-    <option name="INLINE_SUGGESTION"><value><option name="FOREGROUND" value="938A7B"/><option name="FONT_TYPE" value="2"/></value></option>
+    <option name="INLINE_SUGGESTION"><value><option name="FOREGROUND" value="988F7F"/><option name="FONT_TYPE" value="2"/></value></option>
     <option name="ERRORS_ATTRIBUTES"><value><option name="EFFECT_COLOR" value="E08374"/><option name="EFFECT_TYPE" value="2"/></value></option>
     <option name="WARNING_ATTRIBUTES"><value><option name="EFFECT_COLOR" value="DCC07D"/><option name="EFFECT_TYPE" value="2"/></value></option>
     <option name="SEARCH_RESULT_ATTRIBUTES"><value><option name="BACKGROUND" value="423C2E"/></value></option>
@@ -74,7 +74,7 @@
     <option name="ANNOTATION_ATTRIBUTE_NAME_ATTRIBUTES"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>
     <option name="ANNOTATION_NAME_ATTRIBUTES"><value><option name="FOREGROUND" value="DCC07D"/></value></option>
     <option name="IMPLICIT_ANONYMOUS_CLASS_PARAMETER_ATTRIBUTES"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>
-    <option name="KOTLIN_COROUTINE_DEBUGGER_VALUE"><value><option name="FOREGROUND" value="938A7B"/></value></option>
+    <option name="KOTLIN_COROUTINE_DEBUGGER_VALUE"><value><option name="FOREGROUND" value="988F7F"/></value></option>
     <option name="KOTLIN_LABEL"><value><option name="FOREGROUND" value="DCC07D"/></value></option>
     <option name="KOTLIN_NAMED_ARGUMENT"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>
     <option name="KOTLIN_PROPERTY_WITH_BACKING_FIELD"><value><option name="FOREGROUND" value="D6C9B6"/></value></option>

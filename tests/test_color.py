@@ -14,8 +14,8 @@ class ColorTest(unittest.TestCase):
 
     def test_contrast_matches_spec(self):
         self.assertEqual(round(color.contrast("#D6C9B6", "#201F1D"), 2), 10.11)
-        self.assertEqual(round(color.contrast("#938A7B", "#201F1D"), 2), 4.83)
-        self.assertEqual(round(color.contrast("#6E6961", "#201F1D"), 2), 3.02)
+        self.assertEqual(round(color.contrast("#988F7F", "#201F1D"), 2), 5.15)
+        self.assertEqual(round(color.contrast("#77726A", "#201F1D"), 2), 3.45)
         self.assertEqual(color.contrast("#201F1D", "#D6C9B6"), color.contrast("#D6C9B6", "#201F1D"))
 
     def test_blend_known_values(self):
@@ -39,7 +39,7 @@ class ColorTest(unittest.TestCase):
             color.alpha_fraction("4")
 
     def test_delta_e_ok(self):
-        self.assertEqual(round(color.delta_e_ok("#6E6961", "#938A7B"), 1), 11.5)
+        self.assertEqual(round(color.delta_e_ok("#77726A", "#988F7F"), 1), 10.0)
         self.assertEqual(round(color.delta_e_ok("#EDA97C", "#DCC07D"), 1), 6.2)
 
     def test_ansi256(self):

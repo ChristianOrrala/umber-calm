@@ -2,7 +2,7 @@
 # Merge these keys into ~/.aider.conf.yml. aider has no custom syntax palette; code-theme picks the closest Pygments style.
 dark-mode: true
 user-input-color: "#88B0B4"
-tool-output-color: "#938A7B"
+tool-output-color: "#988F7F"
 tool-error-color: "#E08374"
 tool-warning-color: "#DCC07D"
 assistant-output-color: "#D6C9B6"

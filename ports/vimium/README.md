@@ -24,7 +24,7 @@ Clear the custom CSS.
 
 ## Verification
 
-Current digest: `sha256:02b715566580a1dcd879db13cd6851d78735c99ba84a5d9e7331d748d92c36ba`
+Current digest: `sha256:8f4ba2ce10970c9f72d54b14fa1c6660167562fdbf8d581c268759678663cd91`
 
 Print it yourself with `python3 tools/build.py digest vimium`. It covers these files:
 

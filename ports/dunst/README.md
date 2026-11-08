@@ -22,7 +22,7 @@ Remove the merged keys and reload.
 
 ## Verification
 
-Current digest: `sha256:609fb82b5980c6925baaf7adaa84107720fc0c20a5a5f07f45b10b35ecdad20f`
+Current digest: `sha256:f4fa23a8cbe95c8d131726ed6edca20e9f43699ffc0ad48083aea0e24d69ac5c`
 
 Print it yourself with `python3 tools/build.py digest dunst`. It covers these files:
 

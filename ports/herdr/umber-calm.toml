@@ -16,8 +16,8 @@ selection_bg  = "#5A554E"
 # Text, brightest to dimmest (herdr paints subtext0 and overlay0/1 as text).
 text          = "#D6C9B6"
 subtext0      = "#C2A98C"
-overlay1      = "#938A7B"
-overlay0      = "#938A7B"
+overlay1      = "#988F7F"
+overlay0      = "#988F7F"
 # Focus: focused pane border, active popup and selected item (docs/style-guide.md).
 accent        = "#EDA97C"
 # Agent states: working yellow, done green, blocked or needs attention red, unseen blue and cyan.

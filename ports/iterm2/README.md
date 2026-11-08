@@ -24,7 +24,7 @@ Choose another preset; delete Umber Calm from Color Presets → Delete Preset.
 
 ## Verification
 
-Current digest: `sha256:31d0cc69bd19f7b87bf3c5a1f3bd4a9d545543b6d823b211bbf8a3102763901e`
+Current digest: `sha256:6889e9ce81d560838f217440224cee082df2242b01b6b1769ee839ecd953f2e4`
 
 Print it yourself with `python3 tools/build.py digest iterm2`. It covers these files:
 

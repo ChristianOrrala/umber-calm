@@ -15,32 +15,32 @@ perms:
   user_write: { foreground: "#DCC07D" }
   user_execute_file: { foreground: "#A7B56E" }
   user_execute_other: { foreground: "#A7B56E" }
-  group_read: { foreground: "#938A7B" }
-  group_write: { foreground: "#938A7B" }
-  group_execute: { foreground: "#938A7B" }
-  other_read: { foreground: "#938A7B" }
-  other_write: { foreground: "#938A7B" }
-  other_execute: { foreground: "#938A7B" }
+  group_read: { foreground: "#988F7F" }
+  group_write: { foreground: "#988F7F" }
+  group_execute: { foreground: "#988F7F" }
+  other_read: { foreground: "#988F7F" }
+  other_write: { foreground: "#988F7F" }
+  other_execute: { foreground: "#988F7F" }
   special_user_file: { foreground: "#C9A0C0" }
   special_other: { foreground: "#C9A0C0" }
-  attribute: { foreground: "#938A7B" }
+  attribute: { foreground: "#988F7F" }
 size:
   number_byte: { foreground: "#D6C9B6" }
   number_kilo: { foreground: "#D6C9B6" }
   number_mega: { foreground: "#D6C9B6" }
   number_giga: { foreground: "#DCC07D" }
   number_huge: { foreground: "#DCC07D" }
-  unit_byte: { foreground: "#938A7B" }
-  unit_kilo: { foreground: "#938A7B" }
-  unit_mega: { foreground: "#938A7B" }
-  unit_giga: { foreground: "#938A7B" }
-  unit_huge: { foreground: "#938A7B" }
+  unit_byte: { foreground: "#988F7F" }
+  unit_kilo: { foreground: "#988F7F" }
+  unit_mega: { foreground: "#988F7F" }
+  unit_giga: { foreground: "#988F7F" }
+  unit_huge: { foreground: "#988F7F" }
 users:
   user_you: { foreground: "#D6C9B6" }
   user_root: { foreground: "#DCC07D" }
-  user_other: { foreground: "#938A7B" }
-  group_yours: { foreground: "#938A7B" }
-  group_other: { foreground: "#6E6961" }
+  user_other: { foreground: "#988F7F" }
+  group_yours: { foreground: "#988F7F" }
+  group_other: { foreground: "#77726A" }
   group_root: { foreground: "#DCC07D" }
 links:
   normal: { foreground: "#D6C9B6" }
@@ -51,12 +51,12 @@ git:
   deleted: { foreground: "#E08374" }
   renamed: { foreground: "#88C0AE" }
   typechange: { foreground: "#C9A0C0" }
-  ignored: { foreground: "#6E6961" }
+  ignored: { foreground: "#77726A" }
   conflicted: { foreground: "#DCC07D" }
-punctuation: { foreground: "#6E6961" }
-date: { foreground: "#938A7B" }
-inode: { foreground: "#938A7B" }
-blocks: { foreground: "#938A7B" }
+punctuation: { foreground: "#77726A" }
+date: { foreground: "#988F7F" }
+inode: { foreground: "#988F7F" }
+blocks: { foreground: "#988F7F" }
 header: { foreground: "#D6C9B6", is_underline: true }
 symlink_path: { foreground: "#88C0AE" }
 broken_symlink: { foreground: "#E08374" }

@@ -24,7 +24,7 @@ Remove the source line.
 
 ## Verification
 
-Current digest: `sha256:ae8fbdd6748721ffd1a2f6f171410a8577064c3acc5d8d9022169579ebd9809f`
+Current digest: `sha256:11b49cf1088fe45fbd6097d85379fb8912e933d588d5669573a9e4dbe6d0e848`
 
 Print it yourself with `python3 tools/build.py digest fzf`. It covers these files:
 

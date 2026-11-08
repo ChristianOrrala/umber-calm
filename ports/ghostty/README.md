@@ -23,7 +23,7 @@ Remove the theme line and the file.
 
 ## Verification
 
-Current digest: `sha256:3a140bb745a066f57d2f417febeb39eb616c7548d8f112f525aeaf38a2d398db`
+Current digest: `sha256:3596266d921c9b6d62ed4d2dd5370c7114ec680cd2fd40c9142e77cad669ca81`
 
 Print it yourself with `python3 tools/build.py digest ghostty`. It covers these files:
 

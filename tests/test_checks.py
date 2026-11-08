@@ -18,7 +18,7 @@ class ReadabilityTest(unittest.TestCase):
 
     def test_darker_comment_fails(self):
         with tempdir() as d:
-            path = write_temp_palette(d, {'muted       = "#938A7B"': 'muted       = "#6A6357"'})
+            path = write_temp_palette(d, {'muted       = "#988F7F"': 'muted       = "#6A6357"'})
             found = readability.problems(palette.load(path))
             self.assertTrue(any("muted" in p for p in found), found)
 

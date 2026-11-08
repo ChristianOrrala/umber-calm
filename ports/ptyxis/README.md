@@ -25,7 +25,7 @@ Pick another palette and delete the file.
 
 ## Verification
 
-Current digest: `sha256:3c3ad48e75aefe071ab1f3321dca4ef3f35e2d28b65b68eed3705b86a7857990`
+Current digest: `sha256:4aa24eb96b4db7a2672d7b5a802df4b6ef6112a98a5bc4f53e204651ee180eff`
 
 Print it yourself with `python3 tools/build.py digest ptyxis`. It covers these files:
 

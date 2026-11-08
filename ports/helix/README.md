@@ -24,7 +24,7 @@ Change the theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:fe1cda73f82676dc5bf7b1e2cccb98bf5f525ab350576d2cba664f802597c018`
+Current digest: `sha256:e5766993ea57824f4f94d8153ece459e6c620ec6d6aef76cd2bb1d1f9a418cdb`
 
 Print it yourself with `python3 tools/build.py digest helix`. It covers these files:
 

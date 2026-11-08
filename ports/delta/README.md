@@ -24,7 +24,7 @@ Remove the include and the features line.
 
 ## Verification
 
-Current digest: `sha256:3308e3be3a2464ab37da3d7366f8a999596e1f12eb764fad35459473328372ba`
+Current digest: `sha256:f58577a5c18da70c3e03ba45351eccfdc60321219078a73221f501097bfab71c`
 
 Print it yourself with `python3 tools/build.py digest delta`. It covers these files:
 

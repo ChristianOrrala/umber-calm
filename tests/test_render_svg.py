@@ -99,10 +99,10 @@ class SessionsTest(unittest.TestCase):
             for fg, bg in marks:  # non-text marks that carry meaning (WCAG 1.4.11)
                 self.assertGreaterEqual(color.contrast(P.resolve(fg), P.resolve(bg)), 3.0, f"{name}: {fg} on {bg}")
 
-    def test_pair_minimums_follow_the_documented_exception(self):
+    def test_pair_minimums_are_4_5_everywhere(self):
         self.assertEqual(sessions.minimum("ui.text", "ui.surface"), 4.5)
         self.assertEqual(sessions.minimum("ui.text_secondary", "ui.bg"), 4.5)
-        self.assertEqual(sessions.minimum("ui.text_secondary", "ui.surface"), 4.0)
+        self.assertEqual(sessions.minimum("ui.text_secondary", "ui.surface"), 4.5)
 
     def test_sessions_are_deterministic_and_self_contained(self):
         for name in sessions.NAMES:

@@ -27,7 +27,7 @@ Switch color_scheme back and run `spicetify apply` (or `spicetify restore`).
 
 ## Verification
 
-Current digest: `sha256:9d1d4e2ce7c94f79d9214f4aa81fb158db03ef529d46f0f715702bf4fef662b8`
+Current digest: `sha256:67075d6e7a6be41d487b01790ff49ba3a85cd6d7bc59fb7014a4dde5e8f805be`
 
 Print it yourself with `python3 tools/build.py digest spotify`. It covers these files:
 

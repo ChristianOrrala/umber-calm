@@ -23,7 +23,7 @@ Unset BAT_THEME, delete the file, run `bat cache --build`.
 
 ## Verification
 
-Current digest: `sha256:2489c43a570197e50cccaaa444517f7a64adba2dfb13129c90e2b9ec0dab62ad`
+Current digest: `sha256:8e644b5a51062864e1e5db3c59d753b0dd762a4b002c08214baff3089d18d65a`
 
 Print it yourself with `python3 tools/build.py digest bat`. It covers these files:
 

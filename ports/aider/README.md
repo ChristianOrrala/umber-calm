@@ -23,7 +23,7 @@ Remove the keys.
 
 ## Verification
 
-Current digest: `sha256:b0c448ca3ff0ff5234fec43cfc8fff2b3c86c52ed26616e7f8bf2d5b1c41b96c`
+Current digest: `sha256:3880d77fb0cfc19f3a73a7ef6f07b55b339fab73e9011a070b6f46e8eec50c79`
 
 Print it yourself with `python3 tools/build.py digest aider`. It covers these files:
 

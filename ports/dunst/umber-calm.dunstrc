@@ -6,7 +6,7 @@
 
 [urgency_low]
     background = "#2A2826"
-    foreground = "#938A7B"
+    foreground = "#988F7F"
     frame_color = "#3C3A36"
 
 [urgency_normal]

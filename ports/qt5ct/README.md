@@ -25,7 +25,7 @@ Pick another scheme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:4ff58683ce80b95131016cc0c2b6385c4c8ed803fde9c82e92290fa6cf496183`
+Current digest: `sha256:2608019f3897e981d3be89f9c53e99460639bbda4099904a184ade82b9386e16`
 
 Print it yourself with `python3 tools/build.py digest qt5ct`. It covers these files:
 

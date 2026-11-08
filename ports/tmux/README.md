@@ -1,6 +1,6 @@
 # tmux — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 3.4 · Format documentation: https://github.com/tmux/tmux/wiki
 
@@ -24,7 +24,7 @@ Remove the source-file line and the file.
 
 ## Verification
 
-Current digest: `sha256:dfae7360e1c4899e140bf05f9d827646fefcc73f54f0b273a86dfc1811d234c3`
+Current digest: `sha256:76af5270d629857061b1fb33c7c8b363ca4c9c5ebedea9422e5e5254962ea981`
 
 Print it yourself with `python3 tools/build.py digest tmux`. It covers these files:
 

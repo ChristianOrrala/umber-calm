@@ -105,7 +105,7 @@ class LaunchTerminalPorts(unittest.TestCase):
             self.assertGreaterEqual(color.contrast(custom[fg], custom["active_row_bg"]), 3.0, f"{fg} mark on active_row_bg")
         for fg in ("overlay0", "overlay1"):
             for bg in ("panel_bg", "sidebar_bg"):
-                self.assertGreaterEqual(color.contrast(custom[fg], custom[bg]), 4.0, f"{fg} on {bg} (E1)")
+                self.assertGreaterEqual(color.contrast(custom[fg], custom[bg]), 4.5, f"{fg} on {bg}")
             self.assertGreaterEqual(color.contrast(custom[fg], custom["surface0"]), 3.0, f"{fg} on surface0 (dim tier)")
         self.assertNotEqual(custom["active_row_bg"], custom["selection_bg"], "navigate cursor distinct from the active row")
         self.assertEqual(port("herdr").target_version, "0.9.1")
@@ -134,9 +134,9 @@ class ClaudeCodePort(unittest.TestCase):
         self.assertRegex(port("claude-code").target_version, r"^\d+\.\d+\.\d+$")
 
 # Backgrounds VS Code draws behind code or UI text (composited over the editor background), with the minimum contrast for
-# `muted` on each (spec §4.4: E1 panels 4.0, E3 highlights 3.0). `text` must reach 4.5 on all of them.
+# `muted` on each (spec §4.4: panels 4.5, E3 highlights 3.0). `text` must reach 4.5 on all of them.
 VSCODE_TEXT_BACKGROUNDS = {
-    "editor.lineHighlightBackground": 4.0, "editor.selectionBackground": 3.0,
+    "editor.lineHighlightBackground": 4.5, "editor.selectionBackground": 3.0,
     "editor.inactiveSelectionBackground": 3.0, "editor.selectionHighlightBackground": 3.0,
     "editor.findMatchHighlightBackground": 3.0, "editor.wordHighlightBackground": 3.0,
     "editor.wordHighlightStrongBackground": 3.0, "editor.hoverHighlightBackground": 3.0,
@@ -148,9 +148,9 @@ VSCODE_TEXT_BACKGROUNDS = {
     "merge.currentHeaderBackground": 3.0, "merge.incomingHeaderBackground": 3.0,
     "merge.currentContentBackground": 3.0, "merge.incomingContentBackground": 3.0,
     "mergeEditor.conflictingLines.background": 3.0, "testing.coveredBackground": 3.0, "testing.uncoveredBackground": 3.0,
-    "editorInlayHint.background": 4.0, "peekViewEditor.background": 4.0, "editorHoverWidget.background": 4.0,
-    "editorSuggestWidget.background": 4.0, "menu.background": 4.0, "quickInput.background": 4.0,
-    "keybindingLabel.background": 4.0, "debugToolBar.background": 4.0, "textCodeBlock.background": 4.0,
+    "editorInlayHint.background": 4.5, "peekViewEditor.background": 4.5, "editorHoverWidget.background": 4.5,
+    "editorSuggestWidget.background": 4.5, "menu.background": 4.5, "quickInput.background": 4.5,
+    "keybindingLabel.background": 4.5, "debugToolBar.background": 4.5, "textCodeBlock.background": 4.5,
     "menu.selectionBackground": 3.0, "quickInputList.focusBackground": 3.0, "inputOption.activeBackground": 3.0,
     "toolbar.hoverBackground": 3.0, "inputValidation.errorBackground": 3.0, "inputValidation.warningBackground": 3.0,
     "inputValidation.infoBackground": 3.0, "debugExceptionWidget.background": 3.0, "debugView.exceptionLabelBackground": 3.0,
@@ -221,7 +221,7 @@ class VSCodePort(unittest.TestCase):
             self.assertGreaterEqual(color.contrast(self.c["statusBar.foreground"], composite(self.c[key], status)), 3.0, key)
         for fg in ("descriptionForeground", "disabledForeground", "gitDecoration.ignoredResourceForeground",
                    "editorGhostText.foreground", "editor.placeholder.foreground", "list.deemphasizedForeground"):
-            self.assertGreaterEqual(color.contrast(self.c[fg], side), 4.0, f"{fg} is readable on panels (E1)")
+            self.assertGreaterEqual(color.contrast(self.c[fg], side), 4.5, f"{fg} is readable on panels")
 
     def test_controls_and_focus_reach_3_to_1(self):
         """WCAG 1.4.11: focus indicators, control borders and icons reach 3:1 on bg and on panels."""
@@ -335,7 +335,7 @@ class KiroCrewPort(unittest.TestCase):
             self.assertGreaterEqual(color.contrast(self.v["--text"], self.v[fill]), 4.5, fill)
             self.assertGreaterEqual(color.contrast(self.v["--accent"], self.v[fill]), 4.5, f"accent text on {fill}")
             for fg in ("--muted", "--muted-strong"):
-                self.assertGreaterEqual(color.contrast(self.v[fg], self.v[fill]), 4.0, f"{fg} on {fill} (E1)")
+                self.assertGreaterEqual(color.contrast(self.v[fg], self.v[fill]), 4.5, f"{fg} on {fill}")
         for over in ("bg", "surface"):
             for fill in ("--bg-hover", "--card-hl"):
                 self.assertGreaterEqual(color.contrast(self.v["--text"], self.drawn(fill, over)), 4.5, f"{fill}/{over}")
@@ -556,7 +556,7 @@ CODE_BGS = ("editor.bg", "editor.current_line_bg", "editor.selection_bg", "edito
 CODE_FGS = ("editor.fg", "syntax.keyword", "syntax.string", "syntax.function", "syntax.type", "syntax.variable",
             "syntax.variable_builtin", "syntax.constant", "syntax.operator", "syntax.punctuation_bracket",
             "syntax.punctuation_delimiter", *(f"editor.bracket_rainbow_{i}" for i in range(1, 7)))
-COMMENT_FLOORS = {"editor.bg": 4.5, "editor.current_line_bg": 4.0, "ui.semantic_highlight_bg": 4.0}  # E1 on panels; 3.0 (E3) on every other code background
+COMMENT_FLOORS = {"editor.bg": 4.5, "editor.current_line_bg": 4.5, "ui.semantic_highlight_bg": 4.5}  # 3.0 (E3) on every other code background
 TEXT_PAIRS = (  # >= 4.5
     ("ui.tab_active_fg", "ui.tab_active_bg"), ("ui.tab_close_hover_fg", "ui.tab_active_bg"), ("ui.tab_close_hover_fg", "ui.tab_inactive_bg"),
     ("ui.menu_fg", "ui.menu_bg"), ("ui.menu_active_fg", "ui.menu_active_bg"), ("ui.menu_dropdown_fg", "ui.menu_dropdown_bg"),
@@ -579,13 +579,13 @@ TEXT_PAIRS = (  # >= 4.5
     *((f"diagnostic.{s}_fg", "editor.bg") for s in ("error", "warning", "info", "hint")),
     ("editor.diff_add_collision_fg", "editor.diff_add_bg"), ("editor.diff_remove_collision_fg", "editor.diff_remove_bg"),
     ("editor.diff_modify_collision_fg", "editor.diff_modify_bg"))
-SECONDARY_PAIRS = (  # (fg, bg, floor): 4.5 on bg-level backgrounds, 4.0 on panels (E1)
-    ("editor.line_number_fg", "editor.line_number_bg", 4.5), ("editor.line_number_fg", "editor.current_line_bg", 4.0),
+SECONDARY_PAIRS = (  # (fg, bg, floor): 4.5 on bg-level backgrounds and on panels
+    ("editor.line_number_fg", "editor.line_number_bg", 4.5), ("editor.line_number_fg", "editor.current_line_bg", 4.5),
     ("ui.tab_inactive_fg", "ui.tab_inactive_bg", 4.5),
     ("editor.line_number_fg", "editor.selection_bg", 3.0),  # cut files on a selected explorer row (E3)
-    ("ui.tab_inactive_fg", "ui.tab_hover_bg", 4.0), ("ui.status_bar_fg", "ui.status_bar_bg", 4.0),
-    ("ui.status_palette_fg", "ui.status_palette_bg", 4.0), ("ui.menu_disabled_fg", "ui.menu_disabled_bg", 4.0),
-    ("ui.help_indicator_fg", "ui.help_indicator_bg", 4.0), ("ui.blame_header_fg", "ui.blame_header_bg", 4.0))
+    ("ui.tab_inactive_fg", "ui.tab_hover_bg", 4.5), ("ui.status_bar_fg", "ui.status_bar_bg", 4.5),
+    ("ui.status_palette_fg", "ui.status_palette_bg", 4.5), ("ui.menu_disabled_fg", "ui.menu_disabled_bg", 4.5),
+    ("ui.help_indicator_fg", "ui.help_indicator_bg", 4.5), ("ui.blame_header_fg", "ui.blame_header_bg", 4.5))
 INDICATORS = ("editor.cursor", "editor.bracket_match_fg")  # >= 3.0 on editor.bg and editor.current_line_bg
 DECORATION = {"editor.indentation_guide_fg", *(f"editor.indent_rainbow_{i}" for i in range(1, 7)), "editor.whitespace_indicator_fg",
               "editor.whitespace_indicator_selected_fg", "editor.after_eof_bg", "ui.tab_separator_bg", "ui.menu_border_fg",
@@ -596,8 +596,8 @@ DECORATION = {"editor.indentation_guide_fg", *(f"editor.indent_rainbow_{i}" for 
 # and theme_fg(..., "a") ... theme_bg(..., "b") chain under crates/. Each is text at 4.5 unless declared below, or its
 # foreground is decoration.
 DRAWN_PAIR_FLOORS = {
-    ("editor.line_number_fg", "ui.popup_bg"): 4.0,                # E1: muted on a panel
-    ("ui.status_bar_fg", "ui.status_bar_bg"): 4.0,                # E1
+    ("editor.line_number_fg", "ui.popup_bg"): 4.5,                # muted on a panel
+    ("ui.status_bar_fg", "ui.status_bar_bg"): 4.5,
     ("editor.line_number_fg", "ui.suggestion_selected_bg"): 3.0,  # E3: muted on the selection band
 }
 
@@ -783,7 +783,7 @@ class OpenCodePort(unittest.TestCase):
         """The prompt, its status text and some bands are theme.decrease(background.raised.base), so neutral 600. On
         overlay it read as a permanent selection and held its secondary text at 3.33:1 (checked in the running app)."""
         self.assertEqual(self.hues["neutral"]["600"], P.colors["surface"])
-        self.assertGreaterEqual(color.contrast(self.page["text.muted"], self.hues["neutral"]["600"]), 4.0)
+        self.assertGreaterEqual(color.contrast(self.page["text.muted"], self.hues["neutral"]["600"]), 4.5)
         self.assertEqual(self.page["background.raised.high"], P.colors["overlay"], "the slash menu and the active tab")
 
     def test_paste_chip_stays_readable(self):
@@ -845,7 +845,7 @@ class OpenCodePort(unittest.TestCase):
             self.color(view, fg), self.color(view, bg)
 
     def test_every_pair_the_tui_draws_reaches_its_floor(self):
-        floors = {P.colors["bg"]: 4.5, P.colors["surface"]: 4.0, P.colors["overlay"]: 3.0}
+        floors = {P.colors["bg"]: 4.5, P.colors["surface"]: 4.5, P.colors["overlay"]: 3.0}
         for view, fg, bg, cls, source in opencode_pairs():
             ink, ground = self.color(view, fg), self.color(view, bg)
             if cls in {"disabled", "decoration"}:
@@ -867,12 +867,12 @@ class OpenCodePort(unittest.TestCase):
                 ink, ground = self.page[fg], self.page[bg]
                 floor = 4.5
                 if fg in quiet:
-                    floor = 3.0 if ground in tints else 4.0 if ground == P.colors["surface"] else 4.5
+                    floor = 3.0 if ground in tints else 4.5
                 self.assertGreaterEqual(color.contrast(ink, ground), floor, f"{fg} on {bg}")
 
     def test_diff_gutter_and_borrowed_error_color(self):
         number = self.page["diff.lineNumber.text"]
-        self.assertGreaterEqual(color.contrast(number, self.page["diff.background.context"]), 4.0)
+        self.assertGreaterEqual(color.contrast(number, self.page["diff.background.context"]), 4.5)
         for kind in ("added", "removed"):
             ground = self.page[f"diff.lineNumber.background.{kind}"]
             self.assertGreaterEqual(color.contrast(number, ground), 3.0, kind)
@@ -974,14 +974,13 @@ HERDR_APP_ROLES = {  # colors -> palette role (the spec's map); highlight roles 
     "working": "diag.warning", "blocked": "ansi.bright_red", "done": "diag.ok",
     "idle": "ui.text_secondary", "unknown": "ui.text_secondary"}
 HERDR_APP_HIGHLIGHTS = ("hover", "selected")
-HERDR_APP_PANELS = {"chrome", "canvas", "popover", "raised"}  # E1; background and surface are bg-level
 HERDR_APP_SECONDARY = {"muted", "dim", "idle", "unknown"}  # the port's secondary tier (all ui.text_secondary)
 
 
 def herdr_app_floor(ink: str, fg_class: str, stack, theme: dict[str, str]) -> float | None:
     """decoration and disabled None; indicator 3.0; text 4.5 unless the ink is in HERDR_APP_SECONDARY. Secondary ink:
     find the topmost opaque layer (the base, or a later layer with no @XX whose theme value is #RRGGBB); 3.0 (E3) if any
-    layer above it is translucent, else 4.0 (E1) if it is in HERDR_APP_PANELS, else 4.5."""
+    layer above it is translucent, else 4.5."""
     if fg_class in {"decoration", "disabled"}:
         return None
     if fg_class == "indicator":
@@ -992,7 +991,7 @@ def herdr_app_floor(ink: str, fg_class: str, stack, theme: dict[str, str]) -> fl
                  if i == 0 or (alpha is None and len(theme[name]) == 7))
     if opaque < len(stack) - 1:
         return 3.0
-    return 4.0 if stack[opaque][0] in HERDR_APP_PANELS else 4.5
+    return 4.5
 
 
 def herdr_app_drawn(stack, theme: dict[str, str]) -> str:

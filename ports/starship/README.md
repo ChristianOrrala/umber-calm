@@ -1,6 +1,6 @@
 # Starship — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 1.20 · Format documentation: https://starship.rs/advanced-config/
 
@@ -22,7 +22,7 @@ Remove the palette line and the table.
 
 ## Verification
 
-Current digest: `sha256:5a93696bbb6f860202bbc7433b36e465054bf0e50f6fc7837a9b8174511f497a`
+Current digest: `sha256:8dcecad55f8e92fcfd6a068f862fea808af61c42978297d39843ff0360afb8dc`
 
 Print it yourself with `python3 tools/build.py digest starship`. It covers these files:
 

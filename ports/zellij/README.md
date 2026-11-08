@@ -1,6 +1,6 @@
 # Zellij — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 0.45.1 · Format documentation: https://zellij.dev/documentation/themes.html
 
@@ -24,7 +24,7 @@ Remove the theme line and the file.
 
 ## Verification
 
-Current digest: `sha256:8ad27fb2e46e87fc18c5d70fa7ad80559b87c9ab2889408eb1637cb7b6b1c16b`
+Current digest: `sha256:b6864ab7f4b73586afa181024c90bd4d7218d285a7ff471eaa56ef7748ac53e2`
 
 Print it yourself with `python3 tools/build.py digest zellij`. It covers these files:
 

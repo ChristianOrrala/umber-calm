@@ -12,7 +12,7 @@
     "#C9A0C0",
     "#88C0AE",
     "#D6C9B6",
-    "#6E6961",
+    "#77726A",
     "#EC9A8C",
     "#B9C684",
     "#E8CE92",
@@ -33,8 +33,8 @@
     "border": "#3C3A36",
     "input": "#3C3A36",
     "ring": "#5A554E",
-    "muted": "#938A7B",
-    "dim": "#938A7B",
+    "muted": "#988F7F",
+    "dim": "#988F7F",
     "accent": "#EDA97C",
     "accent_foreground": "#201F1D",
     "solid": "#D6C9B6",
@@ -42,7 +42,7 @@
     "working": "#DCC07D",
     "blocked": "#EC9A8C",
     "done": "#A7B56E",
-    "idle": "#938A7B",
-    "unknown": "#938A7B"
+    "idle": "#988F7F",
+    "unknown": "#988F7F"
   }
 }

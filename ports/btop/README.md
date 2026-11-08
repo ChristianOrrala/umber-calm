@@ -23,7 +23,7 @@ Pick another theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:3c5732c9c1c6f3544155a44fd7b849d86b3f8c4a57c81039c9c9ce91ac2cdf90`
+Current digest: `sha256:c618cda5c4c0e77e4d7eaeb5958b4e4fea18b2696f4e7f43e4fec480122d6a1a`
 
 Print it yourself with `python3 tools/build.py digest btop`. It covers these files:
 

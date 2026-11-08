@@ -7,14 +7,14 @@
     "*": {
       "background": "#2A2826",
       "foreground": "#D6C9B6",
-      "infoForeground": "#938A7B",
+      "infoForeground": "#988F7F",
       "selectionBackground": "#3C3A36",
       "selectionForeground": "#D6C9B6",
       "selectionInactiveBackground": "#3C3A36",
       "borderColor": "#3C3A36",
       "separatorColor": "#3C3A36",
       "focusColor": "#EDA97C",
-      "disabledForeground": "#6E6961"
+      "disabledForeground": "#77726A"
     },
     "EditorTabs": { "underlinedTabBackground": "#201F1D", "underlineColor": "#EDA97C", "background": "#1A1917" },
     "ToolWindow": { "background": "#2A2826" },

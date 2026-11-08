@@ -25,7 +25,7 @@ Remove the flavor line and the folder.
 
 ## Verification
 
-Current digest: `sha256:ace28270c6bddf9752beba08d86153a44ca649fe6dd1b446960f14e55aef57a3`
+Current digest: `sha256:b2a69ec86e80ade095a9a51050bb2ea75567f3a496d4f1dfb9d44c4eb07f2cae`
 
 Print it yourself with `python3 tools/build.py digest yazi`. It covers these files:
 

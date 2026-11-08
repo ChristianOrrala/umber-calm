@@ -23,7 +23,7 @@ Choose another preset and delete the file.
 
 ## Verification
 
-Current digest: `sha256:3a860d9ef4a6856f61461a7aa68d849d937d954bc14f31106fd7ef8e4ad39e3a`
+Current digest: `sha256:56ad80eb74bd5d1ec794ab44a8ff6ef0a64e4e1e617207dbc70e2ccd049fbc9b`
 
 Print it yourself with `python3 tools/build.py digest xfce4-terminal`. It covers these files:
 

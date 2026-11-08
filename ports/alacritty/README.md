@@ -25,7 +25,7 @@ Remove the import and the file.
 
 ## Verification
 
-Current digest: `sha256:a80cd10efbe69a0a4bcfa9a942d4599a6c191e58e8615df3091007ba87a7d9f0`
+Current digest: `sha256:9903dc86387ee529c31f422e36ac42b814779559a6474062a6edb09caa6c6ee1`
 
 Print it yourself with `python3 tools/build.py digest alacritty`. It covers these files:
 

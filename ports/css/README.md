@@ -21,7 +21,7 @@ Remove the stylesheet.
 
 ## Verification
 
-Current digest: `sha256:9ab8a88c7c9bcc221fdc19aa99a9d7589c244b6d832d051a6aacf4834d55b0a9`
+Current digest: `sha256:c71d8fe007100dca0130fa46f1e5314c14c3c15c3003a1531ac2afadec1f4163`
 
 Print it yourself with `python3 tools/build.py digest css`. It covers these files:
 

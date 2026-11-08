@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Comments and secondary text are slightly lighter (`muted` `#988F7F`, was `#938A7B`): 5.2:1 on the background and 4.6:1 on panels, so they now reach 4.5:1 everywhere and the "comments on panels" exception is gone. The least important text and ANSI bright black are lighter too (`dim_text` `#77726A`, was `#6E6961`): 3.45:1, still a clear step below comments.
+
 ## 0.4.0 (2026-11-06)
 
 - OpenCode: the port is rebuilt for OpenCode 2 and verified in the app on 2.2.5 and macOS 26.6.2. It is a v2 theme document, so every color it draws comes from the palette instead of scales OpenCode would generate. Orange marks the active row, focused form fields and the selected file; the prompt sits quietly on the panel color, and the embedded terminal gets the ANSI table. OpenCode 1 cannot read this file. Some colors stay OpenCode's choice: its builtins, types and tags use the error color, so `string` and `null` are red in code (the port's README lists them).

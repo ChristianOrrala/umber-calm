@@ -15,7 +15,7 @@ class PaletteTest(unittest.TestCase):
         self.assertEqual(p.resolve("ui.focus"), "#EDA97C")
         self.assertEqual(p.resolve("diag.error"), "#E08374")
         self.assertEqual(p.resolve("term.cursor_text"), "#201F1D")
-        self.assertEqual(p.resolve("ansi.bright_black"), "#6E6961")
+        self.assertEqual(p.resolve("ansi.bright_black"), "#77726A")
         self.assertEqual(p.resolve("ansi.bright_red"), "#EC9A8C")
         self.assertEqual(p.resolve("meta.slug"), "umber-calm")
         self.assertRegex(file_release(), r"\A[0-9]+\.[0-9]+\.[0-9]+\Z")

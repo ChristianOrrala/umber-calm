@@ -22,7 +22,7 @@ Remove the lines and reload.
 
 ## Verification
 
-Current digest: `sha256:993976e10b907536ea7723e2d5529ac7b57835d0507b982161dd526adb11941f`
+Current digest: `sha256:0a15928b0b459cff4fd1c7f90cd10d5c9aba0b981d3f1233c1ca2f94a563fe48`
 
 Print it yourself with `python3 tools/build.py digest i3`. It covers these files:
 

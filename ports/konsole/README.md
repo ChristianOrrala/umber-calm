@@ -22,7 +22,7 @@ Choose another color scheme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:6c43aa80731fa9a886284fb8db44b8ded1cf5eaf3fb86ee27ba5a7ce0d258508`
+Current digest: `sha256:563d60e1e6f0fad6ade9c8e4b304dcbff79601dae77a22cea5236b1b5752ea83`
 
 Print it yourself with `python3 tools/build.py digest konsole`. It covers these files:
 

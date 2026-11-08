@@ -22,7 +22,7 @@ Remove the include and reload.
 
 ## Verification
 
-Current digest: `sha256:6e205117113696d0ee51ee4d83f63580bbd6cb008bebae2ed235b64a6e9e0567`
+Current digest: `sha256:a3ba30c7e6c9fdcbc7aac1bda8336915b8f0ce96919900636255f5e2e23a8fe1`
 
 Print it yourself with `python3 tools/build.py digest sway`. It covers these files:
 

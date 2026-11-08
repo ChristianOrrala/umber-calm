@@ -23,7 +23,7 @@ Run `fish_config theme save "fish default"` and delete the file.
 
 ## Verification
 
-Current digest: `sha256:c42a72950b4f8c637243b160756c434fa7a4a0916cb39b3f17d3c3702f14efb8`
+Current digest: `sha256:e4966f821b52ca2285ce239d031a6dab96a0f442ea8ebb91d44f6e930215c22d`
 
 Print it yourself with `python3 tools/build.py digest fish`. It covers these files:
 

@@ -1,6 +1,6 @@
 # Neovim — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 0.10 · Format documentation: https://neovim.io/doc/user/syntax.html#highlight-groups
 
@@ -26,7 +26,7 @@ Remove the plugin spec and choose another colorscheme.
 
 ## Verification
 
-Current digest: `sha256:8b91eb053607927fd4499a62189e314e596f92979cd2dadf0c0c69323aeb6751`
+Current digest: `sha256:ed774b57c799960fe4a3ec069158e1b1c27330fc218ba68d3ab5b2b437b8bc9b`
 
 Print it yourself with `python3 tools/build.py digest neovim`. It covers these files:
 

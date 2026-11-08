@@ -23,7 +23,7 @@ Select another color scheme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:f5191beac8c720742c6ee2a5687f230187f1f6a12a85df164d144c5728b4417c`
+Current digest: `sha256:debb79435c496c986450c2b2d8f973c84d7a17f44f0fbb4e46a59bfbe38ff7da`
 
 Print it yourself with `python3 tools/build.py digest sublime`. It covers these files:
 
