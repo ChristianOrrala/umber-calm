@@ -29,6 +29,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "2.1.319",
+      "date": "2026-11-08",
+      "digest": "sha256:e6ebcfbc77a9487dbb175d5743a66e7fd3a77a3cc01432aae1f33d02084ce289",
+      "evidence": "",
+      "note": "Owner checked every checklist item in Orca. Screenshots: prompt chip #DCC07D, accept edits #EDA97C, prompt border #77726A, /diff rows unbanded, markers #B9C684/#EC9A8C.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "fresh": [
