@@ -1,0 +1,38 @@
+name: marketplace
+# Publishes the released VS Code extension to the Visual Studio Marketplace with Trusted Publishing (OIDC):
+# no stored token. The Marketplace policy for publisher ChristianOrrala names this repository and this file.
+# It runs after a successful release, or by hand for a tag that is already released.
+on:
+  workflow_run:
+    workflows: [release]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish, for example v0.5.0
+        required: true
+permissions:
+  contents: read
+jobs:
+  vscode:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with: { node-version: "22" }
+      - name: download the released VS Code extension and check it against SHA256SUMS
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.event.workflow_run.head_branch }}
+        run: |
+          case "$TAG" in v[0-9]*.[0-9]*.[0-9]*) ;; *) echo "not a release tag: $TAG"; exit 1 ;; esac
+          version="${TAG#v}"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir rel \
+            --pattern "umber-calm-${version}.vsix" --pattern SHA256SUMS
+          (cd rel && grep "  umber-calm-${version}.vsix\$" SHA256SUMS | sha256sum -c -)
+          echo "VSIX=rel/umber-calm-${version}.vsix" >> "$GITHUB_ENV"
+      - name: publish to the VS Code Marketplace
+        run: npx --yes @vscode/vsce@4.1.0 publish --oidc --packagePath "$VSIX"
