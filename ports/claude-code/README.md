@@ -1,6 +1,6 @@
 # Claude Code — Umber Calm
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 2.1.284 · Format documentation: https://code.claude.com/docs/en/terminal-config
 
@@ -20,10 +20,11 @@ Pick another theme with /theme and delete the file.
 - [ ] composerSidebarBackground visibly applied: the diff side panel is the surface color, not gray
 - [ ] diff +/− counts readable (green/red)
 - [ ] no gray bands on added rows
+- [ ] fullscreen mouse selection on the selection color (not blue), selected text readable
 
 ## Verification
 
-Current digest: `sha256:69ea78169c346b9c0ea58b79358954cd50001cf6464026348d39193ad9e31263`
+Current digest: `sha256:8da92b50d58cfa5cf0906acaadf881be5787f97eefe8a43408f1b1124993ab61`
 
 Print it yourself with `python3 tools/build.py digest claude-code`. It covers these files:
 

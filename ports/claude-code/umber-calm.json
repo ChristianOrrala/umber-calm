@@ -6,6 +6,7 @@
     "userMessageBackgroundHover": "#2A2826",
     "bashMessageBackgroundColor": "#201F1D",
     "memoryBackgroundColor": "#201F1D",
-    "composerSidebarBackground": "#2A2826"
+    "composerSidebarBackground": "#2A2826",
+    "selectionBg": "#3C3A36"
   }
 }

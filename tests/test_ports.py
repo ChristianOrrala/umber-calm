@@ -125,8 +125,9 @@ class ClaudeCodePort(unittest.TestCase):
         self.assertEqual(data["base"], "dark-ansi")
         o = data["overrides"]
         self.assertEqual(o["composerSidebarBackground"], P.colors["surface"])
+        self.assertEqual(o["selectionBg"], P.resolve("ui.selection_bg"), "dark-ansi selects in solid ANSI blue")
         self.assertEqual(set(o), {"userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
-                                  "memoryBackgroundColor", "composerSidebarBackground"})
+                                  "memoryBackgroundColor", "composerSidebarBackground", "selectionBg"})
         for value in o.values():
             self.assertRegex(value, f"^{HEX}$")
 
