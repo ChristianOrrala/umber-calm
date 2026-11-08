@@ -132,10 +132,56 @@ class ClaudeCodePort(unittest.TestCase):
                     "memoryBackgroundColor"):
             self.assertEqual(o[key], band, f"{key}: everything the owner types sits on the purple band")
         self.assertIn(band, readability.measured_blends(P))
-        self.assertEqual(set(o), {"userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
-                                  "memoryBackgroundColor", "composerSidebarBackground", "selectionBg"})
         for value in o.values():
             self.assertRegex(value, f"^{HEX}$")
+
+    # Claude Code's diff view rounds every theme color to the xterm 256-color set, on a truecolor terminal too
+    # (2.1.319: #303127 and #372B27 drew as #303030, #B9C684 as #AFD787, #EC9A8C as #FF8787). Left unset, dark-ansi
+    # names terminal colors, which the Umber Calm terminal paints exactly, and draws no row band.
+    DIFF_KEYS = {"diffAdded", "diffRemoved", "diffAddedDimmed", "diffRemovedDimmed", "diffAddedWord", "diffRemovedWord"}
+
+    def test_every_theme_color_is_set(self):
+        """dark-ansi names terminal colors; set all but the diff colors, so the rest does not depend on the terminal."""
+        o = json.loads(out("ports/claude-code/umber-calm.json"))["overrides"]
+        known = pf.keys_in((REPO / "tests/fixtures/claude-code-2.1.319-theme-keys.txt").read_text(encoding="utf-8"))
+        self.assertTrue(self.DIFF_KEYS <= known)
+        self.assertEqual(set(o), known - self.DIFF_KEYS)
+        allowed = set(P.colors.values()) | set(P.ansi.values()) | readability.measured_blends(P)
+        self.assertFalse({k: v for k, v in o.items() if v not in allowed}, "a color outside the palette")
+
+    def test_color_means_something(self):
+        """The owner's picks (2026-11-08): every color has a meaning or helps reading; red marks errors and deletions,
+        orange the active mode, plus two picks by the owner (the mascot and agents he colors orange)."""
+        o = json.loads(out("ports/claude-code/umber-calm.json"))["overrides"]
+        c, a = P.colors, P.ansi
+        reds = {k for k, v in o.items() if v in (c["red"], a["bright_red"])}
+        self.assertEqual(reds, {"error", "red_FOR_SUBAGENTS_ONLY"})
+        oranges = {k for k, v in o.items() if v == c["orange"]}
+        self.assertEqual(oranges, {"autoAccept", "clawd_body", "orange_FOR_SUBAGENTS_ONLY"})
+        self.assertEqual(o["permission"], c["yellow"], "permission prompts: gold, not pale blue (inline code ignores custom themes)")
+        self.assertEqual(o["claude"], c["subtle"])
+        self.assertEqual(o["inactive"], P.resolve("ui.text_secondary"))
+        self.assertEqual(o["subtle"], P.resolve("ui.border"))
+        self.assertNotEqual(o["purple_FOR_SUBAGENTS_ONLY"], o["pink_FOR_SUBAGENTS_ONLY"])
+        rainbow = {o[f"rainbow_{h}"] for h in ("red", "orange", "yellow", "green", "blue", "indigo", "violet")}
+        self.assertEqual(rainbow, {o["effortUltra"]}, "the ultrathink rainbow is one color, the Ultracode one")
+        for key in [k for k in o if "Shimmer" in k or k.endswith("_shimmer")]:
+            base = key.replace("Shimmer", "").replace("_shimmer", "")
+            self.assertNotEqual(o[key], o[base], f"{key}: the sweep must differ from {base} to show")
+
+    def test_text_colors_are_readable(self):
+        o = json.loads(out("ports/claude-code/umber-calm.json"))["overrides"]
+        backgrounds = {"userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
+                       "memoryBackgroundColor", "composerSidebarBackground", "selectionBg", "clawd_background",
+                       "inverseText"}
+        structure = {"subtle": 2.2, "promptBorder": 3.0, "rate_limit_empty": 3.0}  # borders and tracks, not text
+        for key, value in o.items():
+            if key in backgrounds:
+                continue
+            floor = structure.get(key, 4.5)
+            self.assertGreaterEqual(color.contrast(value, P.colors["bg"]), floor, key)
+        for key in backgrounds - {"inverseText"}:
+            self.assertGreaterEqual(color.contrast(P.colors["text"], o[key]), 4.5, key)
 
     def test_target_version_is_an_exact_build(self):
         self.assertRegex(port("claude-code").target_version, r"^\d+\.\d+\.\d+$")
