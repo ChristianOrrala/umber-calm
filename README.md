@@ -134,16 +134,25 @@ Umber Calm is in early development. Every port is generated from the app's docum
 
 <!-- ports:begin -->
 <details open>
-<summary><b>✅ supported (1)</b>: tested in the real app, on the exact files</summary>
+<summary><b>✅ supported (10)</b>: tested in the real app, on the exact files</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
+| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.12 | 0.1.13 · macOS 26.6.2 | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. Find in terminal (0.1.13) paints matches and the current match with the accent at a fixed strength under the text, so text on the current match reads about 2.9:1, and the find field draws its selection in the field's own color. |
+| WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
+| tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.8 · macOS 26.6.2 |  |
+| Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
+| Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.27.0 · macOS 26.6.2 |  |
+| Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.7 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. It also paints some colors in code that no theme reaches: the git gutter and its scrollbar marks (green, orange and red), the gutter marks of `fresh --diff`, and the embedded terminal's 16 colors, which come from VS Code's defaults. |
+| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.86 · macOS 26.6.2 |  |
+| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.144.1 · macOS 26.6.2 |  |
 | Claude Code | ai | [ports/claude-code/](ports/claude-code/) | 2.1.284 | 2.1.284 · macOS 26.6.2 |  |
+| OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
 
 </details>
 
 <details>
-<summary><b>🧪 experimental (55)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (46)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -151,21 +160,16 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | foot | terminal | [ports/foot/](ports/foot/) | 1.26.0 | — |  |
 | Ghostty | terminal | [ports/ghostty/](ports/ghostty/) | 1.1 | — |  |
 | GNOME Terminal | terminal | [ports/gnome-terminal/](ports/gnome-terminal/) | 3.54 | — |  |
-| Herdr | terminal | [ports/herdr-app/](ports/herdr-app/) | 0.1.12 | 0.1.12 · macOS 26.6.2 | ⚠️ Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. |
 | iTerm2 | terminal | [ports/iterm2/](ports/iterm2/) | 3.5 | — |  |
 | Kitty | terminal | [ports/kitty/](ports/kitty/) | 0.39 | — |  |
 | Konsole | terminal | [ports/konsole/](ports/konsole/) | 24.08 | — |  |
 | Moshi | terminal | [ports/moshi/](ports/moshi/) | 3.2.2 | 3.2.2 · iOS 27.3 |  |
 | Termux | terminal | [ports/termux/](ports/termux/) | 0.118 | — |  |
-| WezTerm | terminal | [ports/wezterm/](ports/wezterm/) | 20240203 | 20260901 · macOS 26.6.2 |  |
 | Windows Terminal | terminal | [ports/windows-terminal/](ports/windows-terminal/) | 1.21 | — |  |
 | Xfce Terminal | terminal | [ports/xfce4-terminal/](ports/xfce4-terminal/) | 1.1 | — |  |
 | Xresources (xterm, urxvt; st with the xresources patch) | terminal | [ports/xresources/](ports/xresources/) | X11 | — |  |
 | Herdr TUI | multiplexer | [ports/herdr/](ports/herdr/) | 0.9.1 | 0.9.1 · macOS 26.6.2 | ⚠️ Herdr TUI has one red token: it marks blocked agents and needs-attention notices as well as delete confirmations. |
-| tmux | multiplexer | [ports/tmux/](ports/tmux/) | 3.4 | 3.7 · macOS 26.6.2 |  |
-| Zellij | multiplexer | [ports/zellij/](ports/zellij/) | 0.45.1 | 0.45.1 · macOS 26.6.2 |  |
 | fish | shell | [ports/fish/](ports/fish/) | 3.7 | — |  |
-| Starship | shell | [ports/starship/](ports/starship/) | 1.20 | 1.26.0 · macOS 26.6.2 |  |
 | bat | cli | [ports/bat/](ports/bat/) | 0.24 | — |  |
 | btop | cli | [ports/btop/](ports/btop/) | 1.4 | — |  |
 | delta | cli | [ports/delta/](ports/delta/) | 0.18 | — |  |
@@ -174,14 +178,11 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | fzf | cli | [ports/fzf/](ports/fzf/) | 0.56 | — |  |
 | lazygit | cli | [ports/lazygit/](ports/lazygit/) | 0.44 | — |  |
 | yazi | cli | [ports/yazi/](ports/yazi/) | 25.5.28 | — |  |
-| Fresh | editor | [ports/fresh/](ports/fresh/) | 0.5.4 | 0.5.4 · macOS 26.6.2 | ⚠️ Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. |
 | Helix | editor | [ports/helix/](ports/helix/) | 25.01 | — |  |
 | JetBrains IDEs | editor | [ports/jetbrains/](ports/jetbrains/) | 2024.3 (min 2024.3) | — |  |
-| Kiro IDE | editor | [ports/kiro/](ports/kiro/) | 1.4.26 | 1.4.86 · macOS 26.6.2 |  |
 | Neovim | editor | [ports/neovim/](ports/neovim/README.md) | 0.10 | 0.12.5 · macOS 26.6.2 |  |
 | Sublime Text | editor | [ports/sublime/](ports/sublime/) | 4192 | — |  |
 | Vim | editor | [ports/vim/](ports/vim/README.md) | 9.1 | — |  |
-| VS Code | editor | [ports/vscode/](ports/vscode/) | 1.95 (min 1.95.0) | 1.144.1 · macOS 26.6.2 |  |
 | Zed | editor | [ports/zed/](ports/zed/) | 0.170 | — |  |
 | dunst | desktop | [ports/dunst/](ports/dunst/) | 1.11 | — |  |
 | fuzzel | desktop | [ports/fuzzel/](ports/fuzzel/) | 1.11 | — |  |
@@ -199,7 +200,6 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
 | Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
-| OpenCode | ai | [ports/opencode/](ports/opencode/) | 2.2.5 | 2.2.5 · macOS 26.6.2 | ⚠️ OpenCode draws the main prompt's cursor in the text color and its bar in the agent's color, so neither is orange; dialogs, forms and the selected file are. It paints code builtins, built-in types and tags with its error color, so `string`, `null` and `<div>` are red in code, and it draws the markdown rule in a fixed gray. The file is a v2 theme document, which OpenCode reads but does not document yet; OpenCode 1 cannot read it. |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -244,14 +244,14 @@ A tier is supported only while its last real-app test covers the exact files you
 | Firefox | 🧪 experimental | — |  |  | `2e8c76d059c0` |  |
 | fish | 🧪 experimental | — |  |  | `e4966f821b52` |  |
 | foot | 🧪 experimental | — |  |  | `42fcd76b7cfe` |  |
-| Fresh | 🧪 experimental | 2026-10-25 (earlier revision) | 0.5.4 | macOS 26.6.2 | `19a6ab041f94` |  |
+| Fresh | ✅ supported | 2026-11-07 | 0.5.7 | macOS 26.6.2 | `19a6ab041f94` |  |
 | fuzzel | 🧪 experimental | — |  |  | `a2009fc2e58f` |  |
 | fzf | 🧪 experimental | — |  |  | `11b49cf1088f` |  |
 | Ghostty | 🧪 experimental | — |  |  | `3596266d921c` |  |
 | GNOME Terminal | 🧪 experimental | — |  |  | `c9885374659f` |  |
 | GTK 3/4 + libadwaita | 🧪 experimental | — |  |  | `75042c4bc795` |  |
 | Helix | 🧪 experimental | — |  |  | `e5766993ea57` |  |
-| Herdr | 🧪 experimental | 2026-11-02 (earlier revision) | 0.1.12 | macOS 26.6.2 | `1882b0639fd6` |  |
+| Herdr | ✅ supported | 2026-11-07 | 0.1.13 | macOS 26.6.2 | `1882b0639fd6` |  |
 | Herdr TUI | 🧪 experimental | 2026-09-29 (earlier revision) | 0.9.1 | macOS 26.6.2 | `c32f22d9ce1d` |  |
 | i3 | 🧪 experimental | — |  |  | `0a15928b0b45` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `6889e9ce81d5` |  |
@@ -259,39 +259,39 @@ A tier is supported only while its last real-app test covers the exact files you
 | JSON palette | 🧪 experimental | — |  |  | `47f590e40f19` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `dd488b671004` |  |
 | Kiro Crew | 🧪 experimental | 2026-10-25 (earlier revision) | 0.9.0 | Linux 24.04 | `b837cb537027` |  |
-| Kiro IDE | 🧪 experimental | 2026-11-05 (earlier revision) | 1.4.86 | macOS 26.6.2 | `d488a58bad20` |  |
+| Kiro IDE | ✅ supported | 2026-11-07 | 1.4.86 | macOS 26.6.2 | `d488a58bad20` |  |
 | Kitty | 🧪 experimental | — |  |  | `c646e3ef71c8` |  |
 | Konsole | 🧪 experimental | — |  |  | `563d60e1e6f0` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
 | Moshi | 🧪 experimental | 2026-11-02 (earlier revision) | 3.2.2 | iOS 27.3 | `ca6dce14efbc` |  |
 | Neovim | 🧪 experimental | 2026-09-28 (earlier revision) | 0.12.5 | macOS 26.6.2 | `ed774b57c799` |  |
 | Obsidian | 🧪 experimental | — |  |  | `13f51a218f71` |  |
-| OpenCode | 🧪 experimental | 2026-11-05 (earlier revision) | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
+| OpenCode | ✅ supported | 2026-11-07 | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `4aa24eb96b4d` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `2608019f3897` |  |
 | rofi | 🧪 experimental | — |  |  | `f19ccbb7af97` |  |
 | Slack | 🧪 experimental | — |  |  | `aeb155227e30` |  |
 | Spotify (Spicetify) | 🟡 candidate | — |  |  | `67075d6e7a6b` |  |
-| Starship | 🧪 experimental | 2026-09-28 (earlier revision) | 1.26.0 | macOS 26.6.2 | `8dcecad55f8e` |  |
+| Starship | ✅ supported | 2026-11-07 | 1.27.0 | macOS 26.6.2 | `8dcecad55f8e` |  |
 | Sublime Text | 🧪 experimental | — |  |  | `debb79435c49` |  |
 | sway | 🧪 experimental | — |  |  | `a3ba30c7e6c9` |  |
 | Tailwind CSS v4 | 🧪 experimental | — |  |  | `6f39be60ced9` |  |
 | Termux | 🧪 experimental | — |  |  | `ebe456bde2fc` |  |
 | Tinted Theming (base24) | 🧪 experimental | — |  |  | `f92da2865b25` |  |
-| tmux | 🧪 experimental | 2026-09-28 (earlier revision) | 3.7 | macOS 26.6.2 | `76af5270d629` |  |
+| tmux | ✅ supported | 2026-11-07 | 3.8 | macOS 26.6.2 | `76af5270d629` |  |
 | Vim | 🧪 experimental | — |  |  | `57437cc42539` |  |
 | Vimium | 🟡 candidate | — |  |  | `8f4ba2ce1097` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | 🧪 experimental | 2026-11-05 (earlier revision) | 1.144.1 | macOS 26.6.2 | `fa5f201e3eaa` |  |
+| VS Code | ✅ supported | 2026-11-07 | 1.144.1 | macOS 26.6.2 | `fa5f201e3eaa` |  |
 | Waybar | 🧪 experimental | — |  |  | `f055dac24595` |  |
-| WezTerm | 🧪 experimental | 2026-09-28 (earlier revision) | 20260901 | macOS 26.6.2 | `a8fbc485f7f2` |  |
+| WezTerm | ✅ supported | 2026-11-07 | 20260901 | macOS 26.6.2 | `a8fbc485f7f2` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `82d37fd73d36` |  |
 | Xfce Terminal | 🧪 experimental | — |  |  | `56ad80eb74bd` |  |
 | Xresources (xterm, urxvt; st with the xresources patch) | 🧪 experimental | — |  |  | `7f9c13453c88` |  |
 | yazi | 🧪 experimental | — |  |  | `b2a69ec86e80` |  |
 | zathura | 🧪 experimental | — |  |  | `a687ceefae88` |  |
 | Zed | 🧪 experimental | — |  |  | `a3f0fe877dcd` |  |
-| Zellij | 🧪 experimental | 2026-09-28 (earlier revision) | 0.45.1 | macOS 26.6.2 | `b6864ab7f4b7` |  |
+| Zellij | ✅ supported | 2026-11-07 | 0.45.1 | macOS 26.6.2 | `b6864ab7f4b7` |  |
 <!-- verification:end -->
 
 </details>

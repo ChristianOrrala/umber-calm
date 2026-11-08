@@ -1,10 +1,10 @@
 # tmux — Umber Calm
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 3.4 · Format documentation: https://github.com/tmux/tmux/wiki
 
-Verified on: 3.7 · macOS 26.6.2 (2026-09-28)
+Verified on: 3.8 · macOS 26.6.2 (2026-11-07)
 
 ## Install
 
@@ -32,6 +32,7 @@ Print it yourself with `python3 tools/build.py digest tmux`. It covers these fil
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 3.8 | macOS | 26.6.2 | tmux 3.8 after the grey change: status, windows, borders, messages, copy-mode selection and search read from the cells. |  | `76af5270d629` |
 | 2026-09-28 | ✅ verified | 3.7 | macOS | 26.6.2 | tmux 3.7c. Status, current/activity windows, pane borders, message, copy-mode selection and search pixel-checked after the lowercase-hex fix. |  | `dfae7360e1c4` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

@@ -1,12 +1,12 @@
 # Fresh — Umber Calm
 
-> ⚠️ **Warning:** Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says.
+> ⚠️ **Warning:** Fresh leaves the cursor color to the terminal: the cursor is orange when the terminal runs Umber Calm (or sets an orange cursor), whatever the theme says. It also paints some colors in code that no theme reaches: the git gutter and its scrollbar marks (green, orange and red), the gutter marks of `fresh --diff`, and the embedded terminal's 16 colors, which come from VS Code's defaults.
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 0.5.4 · Format documentation: https://github.com/sinelaw/fresh/blob/v0.5.4/docs/features/themes.md
 
-Verified on: 0.5.4 · macOS 26.6.2 (2026-10-25)
+Verified on: 0.5.7 · macOS 26.6.2 (2026-11-07)
 
 ## Install
 
@@ -40,6 +40,7 @@ Print it yourself with `python3 tools/build.py digest fresh`. It covers these fi
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 0.5.7 | macOS | 26.6.2 | Editor, splits, syntax, brackets, selection, search, menus, settings, explorer, diff. 0.5.7 keys and pairs unchanged. |  | `19a6ab041f94` |
 | 2026-10-25 | ✅ verified | 0.5.4 | macOS | 26.6.2 |  |  | `ffafe30b365d` |
 | 2026-10-25 | ✅ verified | 0.5.4 | macOS | 26.6.2 |  |  | `97e2ef9cc126` |
 

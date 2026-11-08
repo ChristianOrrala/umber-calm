@@ -31,6 +31,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "0.5.7",
+      "date": "2026-11-07",
+      "digest": "sha256:19a6ab041f9466f993458a140798fd0bb71091c40d064d7ec2fbfd2ef3037760",
+      "evidence": "",
+      "note": "Editor, splits, syntax, brackets, selection, search, menus, settings, explorer, diff. 0.5.7 keys and pairs unchanged.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "herdr": [
@@ -52,6 +62,16 @@
       "digest": "sha256:0f770544524e6ceb545f060a35b181b6547bf6ab56bfde7f3517c4f5bd6f1071",
       "evidence": "",
       "note": "",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "0.1.13",
+      "date": "2026-11-07",
+      "digest": "sha256:1882b0639fd62481f168ca1efe2951bd6acb483874a62461da45b056dc07d2ec",
+      "evidence": "",
+      "note": "Panes, agent states, sidebar, palette, settings, Changes panel. 0.1.13 keys unchanged; find highlight listed as a limit.",
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
@@ -107,6 +127,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "1.4.86",
+      "date": "2026-11-07",
+      "digest": "sha256:d488a58bad206e4e70de9ceacc9837bff513dee70815463f143df5a325f3a25e",
+      "evidence": "",
+      "note": "Clean profile: 484/489 colors resolve over CDP (5 VS Code-only chat keys), no old greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "kiro-crew": [
@@ -155,6 +185,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "2.2.5",
+      "date": "2026-11-07",
+      "digest": "sha256:fa6fce334e3ffc5dd1db6e5b2fc7b1e0396eea950330c0e9acb0a0cf69c26d8d",
+      "evidence": "",
+      "note": "Same 15-screen run against a local mock from an empty folder; pairs match the 2026-11-05 run with the new greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "starship": [
@@ -167,6 +207,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "1.27.0",
+      "date": "2026-11-07",
+      "digest": "sha256:8dcecad55f8e92fcfd6a068f862fea808af61c42978297d39843ff0360afb8dc",
+      "evidence": "",
+      "note": "Every palette name renders in its value, both new greys included; error prompt red.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "tmux": [
@@ -176,6 +226,16 @@
       "digest": "sha256:dfae7360e1c4899e140bf05f9d827646fefcc73f54f0b273a86dfc1811d234c3",
       "evidence": "",
       "note": "tmux 3.7c. Status, current/activity windows, pane borders, message, copy-mode selection and search pixel-checked after the lowercase-hex fix.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "3.8",
+      "date": "2026-11-07",
+      "digest": "sha256:76af5270d629857061b1fb33c7c8b363ca4c9c5ebedea9422e5e5254962ea981",
+      "evidence": "",
+      "note": "tmux 3.8 after the grey change: status, windows, borders, messages, copy-mode selection and search read from the cells.",
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
@@ -241,6 +301,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "1.144.1",
+      "date": "2026-11-07",
+      "digest": "sha256:fa5f201e3eaa0f0023b8af249c11a625a196459b4440ba766d37297d6fbe75c8",
+      "evidence": "",
+      "note": "Clean profile, vsix from the tree: 489/489 colors over CDP, 460 exact, 29 alpha rounding, no old greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "wezterm": [
@@ -253,6 +323,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "20260901",
+      "date": "2026-11-07",
+      "digest": "sha256:a8fbc485f7f2c9342cef578cbd02b2acafcc9e3d814eb5728a2591050979a101",
+      "evidence": "",
+      "note": "Nightly 20260901-002820-4fbd6b8e: resolved palette equals the port; checked by the maintainer in his own WezTerm.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "zellij": [
@@ -262,6 +342,16 @@
       "digest": "sha256:8ad27fb2e46e87fc18c5d70fa7ad80559b87c9ab2889408eb1637cb7b6b1c16b",
       "evidence": "",
       "note": "Focus frame #EDA97C in normal/resize/locked/search. Note: search sub-state labels are gold text (Zellij status-bar behavior).",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "0.45.1",
+      "date": "2026-11-07",
+      "digest": "sha256:b6864ab7f4b73586afa181024c90bd4d7218d285a7ff471eaa56ef7748ac53e2",
+      "evidence": "",
+      "note": "Tabs, modes, focused and other frames, session manager, search after the grey change.",
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"

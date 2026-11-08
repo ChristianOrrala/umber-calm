@@ -1,10 +1,10 @@
 # Zellij — Umber Calm
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 0.45.1 · Format documentation: https://zellij.dev/documentation/themes.html
 
-Verified on: 0.45.1 · macOS 26.6.2 (2026-09-28)
+Verified on: 0.45.1 · macOS 26.6.2 (2026-11-07)
 
 ## Install
 
@@ -32,6 +32,7 @@ Print it yourself with `python3 tools/build.py digest zellij`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 0.45.1 | macOS | 26.6.2 | Tabs, modes, focused and other frames, session manager, search after the grey change. |  | `b6864ab7f4b7` |
 | 2026-09-28 | ✅ verified | 0.45.1 | macOS | 26.6.2 | Focus frame #EDA97C in normal/resize/locked/search. Note: search sub-state labels are gold text (Zellij status-bar behavior). |  | `8ad27fb2e46e` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.

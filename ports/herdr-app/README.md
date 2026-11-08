@@ -1,12 +1,12 @@
 # Herdr — Umber Calm
 
-> ⚠️ **Warning:** Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors.
+> ⚠️ **Warning:** Herdr paints some colors in code that no theme reaches: blocked agents and modified files in red, the commits-behind count in red, space chips in fixed colors (one of them orange) with white letters, the file preview's syntax colors from ANSI slots (keywords purple, numbers red), and disabled controls and a dragged space faded in code. It also draws its one accent, orange here, beyond focus: switches, primary buttons, chosen options and their check marks, palette and help matches, notices, new-update dots and drop markers. Program icons and color-font glyphs keep their own colors. Find in terminal (0.1.13) paints matches and the current match with the accent at a fixed strength under the text, so text on the current match reads about 2.9:1, and the find field draws its selection in the field's own color.
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 0.1.12 · Format documentation: https://github.com/herdrdev/herdr-app/blob/v0.1.12/defaults/AGENTS.md
 
-Verified on: 0.1.12 · macOS 26.6.2 (2026-11-02)
+Verified on: 0.1.13 · macOS 26.6.2 (2026-11-07)
 
 ## Install
 
@@ -37,6 +37,7 @@ Print it yourself with `python3 tools/build.py digest herdr-app`. It covers thes
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 0.1.13 | macOS | 26.6.2 | Panes, agent states, sidebar, palette, settings, Changes panel. 0.1.13 keys unchanged; find highlight listed as a limit. |  | `1882b0639fd6` |
 | 2026-11-02 | ✅ verified | 0.1.12 | macOS | 26.6.2 |  |  | `0f770544524e` |
 
 Generated from ports.toml and verifications.json — do not edit. MIT License — see the repository LICENSE.
