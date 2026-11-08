@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stablyai/orca/main/docs/schemas/plugins/orca-plugin.v2.schema.json",
+  "manifestVersion": 2,
+  "id": "{{ meta.slug }}",
+  "name": "{{ meta.name }}",
+  "version": "{{ meta.release }}",
+  "description": "A warm, low-glare dark theme with measured contrast, and matching terminal colors.",
+  "author": {
+    "name": "{{ meta.author }}",
+    "url": "{{ meta.homepage }}"
+  },
+  "repository": "{{ meta.homepage }}",
+  "homepage": "{{ meta.homepage }}",
+  "license": "{{ meta.license }}",
+  "engines": {
+    "orca": ">=1.4.246"
+  },
+  "execution": "data",
+  "contributes": {
+    "themes": [
+      {
+        "id": "{{ meta.slug }}",
+        "title": "{{ meta.name }}",
+        "path": "themes/{{ meta.slug }}.json"
+      }
+    ],
+    "terminalThemes": [
+      {
+        "id": "{{ meta.slug }}",
+        "title": "{{ meta.name }}",
+        "path": "terminal/{{ meta.slug }}.json"
+      }
+    ]
+  }
+}

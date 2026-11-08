@@ -1343,5 +1343,204 @@ class AppPorts(unittest.TestCase):
             else:
                 self.assertTrue(p.target_version.startswith("unpinned"), pid)
 
+
+# Orca, pinned to stablyai/orca main at fca1d7b (see structure.ORCA_FIXTURE for the files read).
+ORCA_TOKENS = REPO / f"tests/fixtures/{structure.ORCA_FIXTURE}-theme-tokens.txt"
+ORCA_TERMINAL_KEYS = REPO / f"tests/fixtures/{structure.ORCA_FIXTURE}-terminal-keys.txt"
+ORCA_ROLES = {  # opaque token -> palette role (or palette color, for chart series and emphasis)
+    "--background": "ui.bg", "--editor-surface": "ui.bg", "--foreground": "ui.text",
+    "--card": "ui.surface", "--card-foreground": "ui.text", "--popover": "ui.surface", "--popover-foreground": "ui.text",
+    "--primary": "ui.text", "--primary-foreground": "ui.bg", "--secondary": "ui.selection_bg",
+    "--secondary-foreground": "ui.text", "--muted": "ui.surface", "--muted-foreground": "ui.text_secondary",
+    "--accent": "ui.selection_bg", "--accent-foreground": "ui.selection_fg", "--border": "ui.border_strong",
+    "--input": "ui.border", "--ring": "ui.focus",
+    "--chart-1": "blue", "--chart-2": "green", "--chart-3": "yellow", "--chart-4": "purple", "--chart-5": "cyan",
+    "--sidebar": "ui.chrome", "--sidebar-foreground": "ui.text", "--sidebar-primary": "ui.text",
+    "--sidebar-primary-foreground": "ui.bg", "--sidebar-accent": "ui.selection_bg",
+    "--sidebar-accent-foreground": "ui.selection_fg", "--sidebar-border": "ui.border_strong", "--sidebar-ring": "ui.focus",
+    "--worktree-sidebar": "ui.chrome", "--worktree-sidebar-foreground": "ui.text",
+    "--worktree-sidebar-accent": "ui.surface", "--worktree-sidebar-accent-foreground": "ui.text",
+    "--worktree-sidebar-border": "ui.border_strong", "--worktree-sidebar-ring": "ui.focus",
+    "--worktree-sidebar-active": "ui.selection_bg", "--worktree-sidebar-active-border": "ui.border_strong",
+    "--host-badge-foreground": "ui.text",
+    "--tab-bar": "ui.chrome", "--tab-active": "ui.bg", "--tab-active-foreground": "ui.text",
+    "--tab-active-indicator": "ui.focus", "--tab-inactive": "ui.chrome", "--tab-inactive-foreground": "ui.text_secondary",
+    "--split-divider": "ui.border", "--split-divider-hover": "ui.text_secondary",
+    "--chat-bold-foreground": "text_bright", "--chat-muted-foreground": "ui.text_secondary",
+    "--chat-inline-code": "ui.bg", "--chat-inline-code-foreground": "syntax.code", "--chat-code-block": "ui.bg",
+    "--chat-selection": "ui.selection_bg", "--chat-selection-foreground": "ui.selection_fg",
+    "--text-link": "syntax.link", "--diff-added": "diag.diff_add", "--diff-removed": "diag.diff_delete",
+    "--git-decoration-added": "diag.diff_add", "--git-decoration-modified": "diag.diff_change",
+    "--git-decoration-deleted": "diag.diff_delete", "--git-decoration-renamed": "diag.ok",
+    "--git-decoration-untracked": "diag.ok", "--git-decoration-copied": "diag.ok",
+    "--git-decoration-ignored": "ui.text_secondary"}
+ORCA_TINTS = {  # translucent token -> (palette role, alpha); Orca paints these over the layer its checks name
+    "--host-badge": ("ui.text", "17"), "--chat-user-message": ("ui.text", "12"),
+    # 12 % lines plus 12 % changed words stack to the 22 % diff tint, as in VS Code; the gutter takes the 22 % itself.
+    "--diff-added-background": ("diag.diff_add", "1E"), "--diff-added-emphasis": ("diag.diff_add", "1D"),
+    "--diff-added-gutter": ("diag.diff_add", "38"), "--diff-removed-background": ("diag.diff_delete", "1E"),
+    "--diff-removed-emphasis": ("diag.diff_delete", "1D"), "--diff-removed-gutter": ("diag.diff_delete", "38")}
+ORCA_FOCUS = {"--ring", "--sidebar-ring", "--worktree-sidebar-ring", "--tab-active-indicator"}
+ORCA_TERMINAL_ROLES = {"background": "term.background", "foreground": "term.foreground", "cursor": "term.cursor",
+                       "cursorAccent": "term.cursor_text", "selectionBackground": "term.selection_bg",
+                       "selectionForeground": "term.selection_fg", "bold": "term.foreground"}
+ORCA_ANSI = {"black": "black", "red": "red", "green": "green", "yellow": "yellow", "blue": "blue", "magenta": "magenta",
+             "cyan": "cyan", "white": "white", "brightBlack": "bright_black", "brightRed": "bright_red",
+             "brightGreen": "bright_green", "brightYellow": "bright_yellow", "brightBlue": "bright_blue",
+             "brightMagenta": "bright_magenta", "brightCyan": "bright_cyan", "brightWhite": "bright_white"}
+# Orca's derived chat colors (src/shared/plugins/artifacts/plugin-theme-css-fallbacks.ts, dark base): name ->
+# (percent of --foreground, the color it is mixed into).
+ORCA_CHAT_DERIVED = (("--chat-canvas", 5, "--background"), ("--chat-foreground", 78, "--chat-canvas"),
+                     ("--chat-foreground-strong", 90, "--chat-canvas"), ("--chat-code-foreground", 85, "--chat-canvas"),
+                     ("--chat-link", 30, "--text-link"), ("--chat-diff-added", 30, "--diff-added"),
+                     ("--chat-diff-removed", 30, "--diff-removed"))
+
+
+def orca_role(name: str) -> str:
+    return P.resolve(name) if "." in name else P.colors[name]
+
+
+def orca_effective() -> dict[str, str]:
+    """The theme's tokens plus the chat colors Orca derives from them, as its contrast checks see them."""
+    effective = dict(json.loads(out("ports/orca/themes/umber-calm.json"))["tokens"])
+    for name, percent, into in ORCA_CHAT_DERIVED:
+        effective[name] = color.blend(effective["--foreground"], effective[into], Fraction(percent, 100))
+    return effective
+
+
+def orca_painted(token: str, over: tuple[str, ...], e: dict[str, str]) -> str:
+    """`token` composited over the `over` layers (topmost first, the last one opaque)."""
+    if not over:
+        return e[token]
+    base = e[over[-1]]
+    for layer in reversed(over[:-1]):
+        base = composite(e[layer], base)
+    return composite(e[token], base)
+
+
+def orca_contrast_rules() -> list[tuple[str, str, tuple[str, ...], float]]:
+    """(surface, text, layers beneath the surface, floor): src/renderer/src/lib/plugin-theme-contrast-rules.ts at
+    fca1d7b. The code-block/muted pair also passes there when no worse than on the chat; it clears 4.5 here anyway."""
+    def pair(surface, text, over=()):
+        return (surface, text, tuple(over), 4.5)
+
+    def chat(surface, text, under=()):
+        return pair(surface, text, (*under, "--chat-canvas"))
+    rules = [pair(s, t) for s, t in (
+        ("--background", "--foreground"), ("--background", "--muted-foreground"), ("--editor-surface", "--foreground"),
+        ("--editor-surface", "--muted-foreground"), ("--card", "--card-foreground"), ("--popover", "--popover-foreground"),
+        ("--primary", "--primary-foreground"), ("--secondary", "--secondary-foreground"),
+        ("--muted", "--muted-foreground"), ("--accent", "--accent-foreground"), ("--sidebar", "--sidebar-foreground"),
+        ("--sidebar-primary", "--sidebar-primary-foreground"), ("--sidebar-accent", "--sidebar-accent-foreground"),
+        ("--worktree-sidebar", "--worktree-sidebar-foreground"),
+        ("--worktree-sidebar-accent", "--worktree-sidebar-accent-foreground"),
+        ("--tab-active", "--tab-active-foreground"), ("--tab-inactive", "--tab-inactive-foreground"),
+        ("--tab-inactive", "--tab-active-foreground"), ("--editor-surface", "--text-link"),
+        ("--chat-canvas", "--chat-bold-foreground"), ("--chat-canvas", "--chat-muted-foreground"))]
+    rules += [pair("--worktree-sidebar-active", "--worktree-sidebar-foreground", ["--worktree-sidebar"]),
+              pair("--host-badge", "--host-badge-foreground", ["--worktree-sidebar"]),
+              chat("--chat-user-message", "--chat-foreground-strong"), chat("--chat-user-message", "--chat-bold-foreground"),
+              chat("--chat-user-message", "--chat-link"), chat("--chat-code-block", "--chat-code-foreground"),
+              chat("--chat-code-block", "--chat-foreground"), chat("--chat-code-block", "--chat-muted-foreground")]
+    for side in ("added", "removed"):
+        rules += [pair(f"--diff-{side}-background", "--foreground", ["--editor-surface"]),
+                  pair(f"--diff-{side}-emphasis", "--foreground", ["--editor-surface"]),
+                  pair(f"--diff-{side}-background", f"--chat-diff-{side}", ["--chat-canvas"]),
+                  chat(f"--diff-{side}-background", f"--chat-diff-{side}", ["--chat-code-block"])]
+    for under in ((), ("--chat-user-message",)):
+        rules += [chat("--chat-inline-code", "--chat-inline-code-foreground", under),
+                  chat("--chat-inline-code", "--chat-link", under)]
+    for under in ((), ("--chat-user-message",), ("--chat-code-block",), ("--chat-inline-code",),
+                  ("--chat-inline-code", "--chat-user-message")):
+        rules.append(chat("--chat-selection", "--chat-selection-foreground", under))
+    rules += [("--sidebar", f"--git-decoration-{status}", (), 3.0)
+              for status in ("added", "modified", "deleted", "renamed", "untracked", "copied", "ignored")]
+    return rules
+
+
+class OrcaPort(unittest.TestCase):
+    def setUp(self):
+        self.theme = json.loads(out("ports/orca/themes/umber-calm.json"))
+        self.t = self.theme["tokens"]
+        self.term = json.loads(out("ports/orca/terminal/umber-calm.json"))["terminal"]
+        self.e = orca_effective()
+
+    def test_pinned_to_main_at_the_fixture_commit(self):
+        p = port("orca")
+        self.assertEqual(p.target_version, "main (fca1d7b)")
+        self.assertEqual(structure.ORCA_FIXTURE, "orca-main-fca1d7b")
+        self.assertIn("/stablyai/orca/blob/main/", p.docs)
+
+    def test_sets_every_token_and_terminal_key(self):
+        known = set(ORCA_TOKENS.read_text(encoding="utf-8").split())
+        self.assertEqual(set(ORCA_ROLES) | set(ORCA_TINTS), known)
+        self.assertFalse(set(ORCA_ROLES) & set(ORCA_TINTS))
+        self.assertEqual(set(self.t), known)
+        self.assertEqual(set(ORCA_TINTS) | {"--worktree-sidebar-active", "--chat-inline-code", "--chat-code-block",
+                                            "--chat-selection"}, structure.ORCA_TRANSLUCENT)
+        self.assertEqual(set(self.term), set(ORCA_TERMINAL_KEYS.read_text(encoding="utf-8").split()))
+
+    def test_follows_the_roles(self):
+        for name, role in ORCA_ROLES.items():
+            self.assertEqual(self.t[name], orca_role(role), name)
+        for name, (role, alpha) in ORCA_TINTS.items():
+            self.assertEqual(self.t[name], orca_role(role) + alpha, name)
+        for name, role in ORCA_TERMINAL_ROLES.items():
+            self.assertEqual(self.term[name], P.resolve(role), name)
+        for name, slot in ORCA_ANSI.items():
+            self.assertEqual(self.term[name], P.ansi[slot], name)
+
+    def test_orange_marks_only_focus(self):
+        orange = P.resolve("ui.focus")
+        self.assertEqual({k for k, v in self.t.items() if v[:7] == orange}, ORCA_FOCUS)
+        self.assertEqual({k for k, v in self.term.items() if v == orange}, {"cursor"})
+
+    def test_red_marks_only_deletions(self):
+        reds = {P.ansi["red"], P.ansi["bright_red"]}
+        self.assertEqual({k for k, v in self.t.items() if v[:7] in reds},
+                         {"--diff-removed", "--diff-removed-background", "--diff-removed-emphasis",
+                          "--diff-removed-gutter", "--git-decoration-deleted"})
+        self.assertEqual({k for k, v in self.term.items() if v in reds}, {"red", "brightRed"})
+
+    def test_every_check_orca_runs_passes(self):
+        """A pair under its floor makes Orca drop the theme's colors for it and paint its own."""
+        for surface, text, over, floor in orca_contrast_rules():
+            drawn = orca_painted(surface, over, self.e)
+            self.assertEqual(len(drawn), 7, f"{surface} must end opaque over {over}")
+            self.assertEqual(len(self.e[text]), 7, f"{text} must be opaque")
+            self.assertGreaterEqual(color.contrast(self.e[text], drawn), floor, f"{text} on {surface} over {over}")
+        for ring, surface in (("--ring", "--background"), ("--sidebar-ring", "--sidebar"),
+                              ("--worktree-sidebar-ring", "--worktree-sidebar"), ("--tab-active-indicator", "--tab-active")):
+            self.assertGreaterEqual(color.contrast(self.t[ring], self.t[surface]), 2.0, ring)
+        for border in ("--border", "--input", "--sidebar-border", "--worktree-sidebar-border",
+                       "--worktree-sidebar-active-border", "--split-divider", "--split-divider-hover"):
+            self.assertRegex(self.t[border], f"^{HEX}$", border)
+
+    def test_rows_and_chat_surfaces_stay_distinct(self):
+        rows = [self.t["--worktree-sidebar"], self.t["--worktree-sidebar-accent"], self.t["--worktree-sidebar-active"]]
+        steps = [color.contrast(row, rows[0]) for row in rows]
+        self.assertEqual(steps, sorted(set(steps)), "sidebar, hovered row and current workspace rise in that order")
+        for row in rows:
+            self.assertNotEqual(composite(self.t["--host-badge"], row), row)
+            self.assertGreaterEqual(color.contrast(self.t["--host-badge-foreground"],
+                                                   composite(self.t["--host-badge"], row)), 4.5)
+        bubble = orca_painted("--chat-user-message", ("--chat-canvas",), self.e)
+        self.assertEqual(len({self.e["--chat-canvas"], bubble, self.t["--chat-selection"], self.t["--chat-code-block"]}), 4)
+
+    def test_code_colors_clear_orcas_floor(self):
+        for rule in self.theme["tokenColors"]:
+            fg = rule["settings"].get("foreground")
+            if fg:
+                self.assertGreaterEqual(color.contrast(fg, self.t["--editor-surface"]), 4.5, rule["scope"])
+
+    def test_manifest(self):
+        data = json.loads(out("ports/orca/orca-plugin.json"))
+        self.assertEqual((data["id"], data["name"], data["version"]), (P.meta["slug"], P.meta["name"], P.meta["release"]))
+        self.assertEqual(data["engines"]["orca"], f">={port('orca').min_version}")
+        self.assertNotIn("publisher", data)
+        self.assertEqual([e["id"] for e in data["contributes"]["themes"] + data["contributes"]["terminalThemes"]],
+                         [P.meta["slug"]] * 2)
+
+
 if __name__ == "__main__":
     unittest.main()

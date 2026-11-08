@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New port: Orca, pinned to its `main` branch at `fca1d7b`. A content-only Orca plugin: an app theme that sets all 73 public tokens from palette roles and colors code from the syntax roles, plus a matching terminal theme. Sidebars and the tab strip sit a step darker than the editor, with hovered and current rows a step lighter each. Orange marks focus rings, the active tab line and the terminal cursor. Every color pair Orca checks clears its floor, so Orca keeps all of them. Orca 1.4.253 and older skip the seven chat tokens and keep their own chat colors.
+
 ## 0.5.0 (2026-11-08)
 
 - Comments and secondary text are slightly lighter (`muted` `#988F7F`, was `#938A7B`): 5.2:1 on the background and 4.6:1 on panels, so they now reach 4.5:1 everywhere and the "comments on panels" exception is gone. The least important text and ANSI bright black are lighter too (`dim_text` `#77726A`, was `#6E6961`): 3.45:1, still a clear step below comments.

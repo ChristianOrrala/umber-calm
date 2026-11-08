@@ -728,6 +728,140 @@ def _claude_code(root: Path, text: str) -> list[str]:
     return problems
 
 
+# Orca, pinned to stablyai/orca main at fca1d7b: docs/reference/plugin-themes.md, plugin-theme-tokens.md and
+# plugin-manifest.md; src/shared/terminal-themes/terminal-custom-themes.ts (TERMINAL_COLOR_KEYS) and
+# src/renderer/src/lib/plugin-theme-contrast-rules.ts (which surfaces may be translucent: those checked over a layer).
+ORCA_FIXTURE = "orca-main-fca1d7b"
+ORCA_FILE_LIMIT = 16 * 1024  # each theme file is at most 16 KiB
+ORCA_THEME_TOP = ("schemaVersion", "base", "tokens", "tokenColors")
+ORCA_TERMINAL_TOP = ("schemaVersion", "mode", "terminal")
+ORCA_TRANSLUCENT = {"--worktree-sidebar-active", "--host-badge", "--chat-user-message", "--chat-inline-code",
+                    "--chat-code-block", "--chat-selection", *(f"--diff-{side}-{kind}" for side in ("added", "removed")
+                                                               for kind in ("background", "emphasis", "gutter"))}
+ORCA_FONT_STYLE = re.compile(r"(?:italic|bold|underline|strikethrough)(?: (?:italic|bold|underline|strikethrough))*|")
+ORCA_MANIFEST_TOP = ("$schema", "manifestVersion", "id", "name", "version", "description", "author", "repository",
+                     "homepage", "license", "engines", "execution", "contributes")
+
+
+def _orca_object(text: str, top: tuple[str, ...], what: str) -> tuple[dict | None, list[str]]:
+    data, duplicates = _json_with_duplicates(text)
+    problems = [f"duplicate key {k!r}" for k in duplicates]
+    if len(text.encode("utf-8")) > ORCA_FILE_LIMIT:
+        problems.append(f"the {what} is larger than 16 KiB (Orca refuses it)")
+    if not isinstance(data, dict):
+        return None, problems + [f"the {what} must be a JSON object"]
+    problems += [f"unexpected top-level key {k!r} (validate:plugin refuses it)" for k in sorted(set(data) - set(top))]
+    problems += [f"missing top-level key {k!r}" for k in top if k not in data]
+    return data, problems
+
+
+def _orca_theme(root: Path, text: str) -> list[str]:
+    """An Orca app theme: base dark, every public token set, tokenColors in the shape Orca reads."""
+    data, problems = _orca_object(text, ORCA_THEME_TOP, "theme")
+    if data is None:
+        return problems
+    if data.get("schemaVersion", 1) != 1:
+        problems.append("schemaVersion must be 1")
+    if "base" in data and data["base"] != "dark":
+        problems.append(f'base is {data["base"]!r}, not "dark"')
+    tokens = data.get("tokens")
+    if not isinstance(tokens, dict):
+        problems.append("tokens must be a JSON object")
+        tokens = {}
+    known = _fixture(root, f"{ORCA_FIXTURE}-theme-tokens.txt")
+    problems += [f"unknown Orca token {k!r}" for k in sorted(set(tokens) - known)]
+    problems += [f"token {k!r} is not set (Orca would derive it)" for k in sorted(known - set(tokens))]
+    for k, v in sorted(tokens.items()):
+        pattern, label = ((r"#[0-9A-F]{6}(?:[0-9A-F]{2})?", "#RRGGBB or #RRGGBBAA") if k in ORCA_TRANSLUCENT
+                          else (HEX, "#RRGGBB"))
+        if not (isinstance(v, str) and re.fullmatch(pattern, v)):
+            problems.append(f"tokens.{k} is not {label}")
+    rules = data.get("tokenColors")
+    if not isinstance(rules, list) or not rules:
+        return problems + ["tokenColors must be a non-empty list"]
+    for i, rule in enumerate(rules):
+        if not isinstance(rule, dict):
+            problems.append(f"tokenColors[{i}] must be a JSON object")
+            continue
+        problems += [f"tokenColors[{i}] has unexpected key {k!r}" for k in sorted(set(rule) - {"name", "scope", "settings"})]
+        scope = rule.get("scope")
+        scopes = [scope] if isinstance(scope, str) else scope
+        if not (isinstance(scopes, list) and scopes and all(isinstance(s, str) and s for s in scopes)):
+            problems.append(f"tokenColors[{i}] needs a scope or a list of scopes")
+        elif any(re.search(r"\s", s) for s in scopes):
+            problems.append(f"tokenColors[{i}] has a descendant scope (Orca does not read selectors with spaces)")
+        settings = rule.get("settings")
+        if not isinstance(settings, dict) or not settings:
+            problems.append(f"tokenColors[{i}].settings must be a non-empty object")
+            continue
+        problems += [f"tokenColors[{i}].settings has unexpected key {k!r}"
+                     for k in sorted(set(settings) - {"foreground", "fontStyle"})]
+        if "foreground" in settings and not (isinstance(settings["foreground"], str)
+                                             and re.fullmatch(HEX, settings["foreground"])):
+            problems.append(f"tokenColors[{i}].settings.foreground is not #RRGGBB")
+        if "fontStyle" in settings and not (isinstance(settings["fontStyle"], str)
+                                            and ORCA_FONT_STYLE.fullmatch(settings["fontStyle"])):
+            problems.append(f"tokenColors[{i}].settings.fontStyle is not italic, bold, underline or strikethrough")
+    return problems
+
+
+def _orca_terminal(root: Path, text: str) -> list[str]:
+    """An Orca terminal theme: mode dark and every terminal color key set as #RRGGBB."""
+    data, problems = _orca_object(text, ORCA_TERMINAL_TOP, "terminal theme")
+    if data is None:
+        return problems
+    if data.get("schemaVersion") != 1:
+        problems.append("schemaVersion must be 1")
+    if "mode" in data and data["mode"] != "dark":
+        problems.append(f'mode is {data["mode"]!r}, not "dark"')
+    terminal = data.get("terminal")
+    if not isinstance(terminal, dict):
+        return problems + ["terminal must be a JSON object"]
+    known = _fixture(root, f"{ORCA_FIXTURE}-terminal-keys.txt")
+    problems += [f"unknown Orca terminal key {k!r}" for k in sorted(set(terminal) - known)]
+    problems += [f"terminal key {k!r} is not set" for k in sorted(known - set(terminal))]
+    problems += [f"terminal.{k} is not #RRGGBB" for k, v in sorted(terminal.items())
+                 if not (isinstance(v, str) and re.fullmatch(HEX, v))]
+    return problems
+
+
+def _orca_manifest(root: Path, text: str) -> list[str]:
+    """orca-plugin.json, manifest format 2: content only, no deprecated publisher, contributions that exist."""
+    data, problems = _orca_object(text, ORCA_MANIFEST_TOP, "manifest")
+    if data is None:
+        return problems
+    if data.get("manifestVersion") != 2:
+        problems.append("manifestVersion must be 2")
+    if "execution" in data and data["execution"] != "data":
+        problems.append('execution must be "data" (themes run no code)')
+    if "id" in data and not (isinstance(data["id"], str) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", data["id"])):
+        problems.append("id must be kebab-case")
+    engines = data.get("engines")
+    if not (isinstance(engines, dict) and isinstance(engines.get("orca"), str)
+            and re.fullmatch(r">=\d+\.\d+\.\d+", engines["orca"])):
+        problems.append("engines.orca must be >=x.y.z")
+    contributes = data.get("contributes")
+    if not isinstance(contributes, dict):
+        return problems + ["contributes must be a JSON object"]
+    problems += [f"unexpected contribution {k!r} (a theme plugin adds themes and terminalThemes only)"
+                 for k in sorted(set(contributes) - {"themes", "terminalThemes"})]
+    for point, folder in (("themes", "themes"), ("terminalThemes", "terminal")):
+        entries = contributes.get(point)
+        if not isinstance(entries, list) or not entries:
+            problems.append(f"contributes.{point} must be a non-empty list")
+            continue
+        for i, entry in enumerate(entries):
+            if not (isinstance(entry, dict) and set(entry) == {"id", "title", "path"}):
+                problems.append(f"contributes.{point}[{i}] must have exactly id, title and path")
+                continue
+            path = entry["path"]
+            if not (isinstance(path, str) and re.fullmatch(rf"{folder}/[a-z0-9-]+\.json", path)):
+                problems.append(f"contributes.{point}[{i}].path must be {folder}/<name>.json")
+            elif not (Path(root) / "ports/orca" / path).is_file():
+                problems.append(f"contributes.{point}[{i}].path names a file the port does not ship")
+    return problems
+
+
 # tmux hex is lowercase: its format expansion reads #D and #F as aliases (templates/tmux/umber-calm.tmux.tmpl).
 TMUX_HEX = "#[0-9a-f]{6}"
 TMUX_STYLE = rf"(fg|bg)={TMUX_HEX}(,(fg|bg)={TMUX_HEX})?(,bold)?"
@@ -772,6 +906,9 @@ RULES: list[tuple[str, tuple[Validator, ...]]] = [
     ("ports/vscode/package.json", (_vscode_package,)),
     ("ports/kiro/package.json", (_vscode_package,)),
     ("ports/claude-code/umber-calm.json", (_claude_code,)),
+    ("ports/orca/orca-plugin.json", (_orca_manifest,)),
+    ("ports/orca/themes/*.json", (_orca_theme,)),
+    ("ports/orca/terminal/*.json", (_orca_terminal,)),
     ("ports/kitty/*.conf", (lines(rf"[a-z0-9_]+ {HEX}"),)),
     ("ports/ghostty/umber-calm", (lines(rf"[a-z-]+ = {HEX}|palette = (?:1[0-5]|[0-9])={HEX}"),
                                   *(_count(rf"palette = {i}={HEX}", 1) for i in range(16)))),

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stablyai/orca/main/docs/schemas/plugins/orca-plugin.v2.schema.json",
+  "manifestVersion": 2,
+  "id": "umber-calm",
+  "name": "Umber Calm",
+  "version": "0.5.0",
+  "description": "A warm, low-glare dark theme with measured contrast, and matching terminal colors.",
+  "author": {
+    "name": "The Umber Calm contributors",
+    "url": "https://github.com/ChristianOrrala/umber-calm"
+  },
+  "repository": "https://github.com/ChristianOrrala/umber-calm",
+  "homepage": "https://github.com/ChristianOrrala/umber-calm",
+  "license": "MIT",
+  "engines": {
+    "orca": ">=1.4.246"
+  },
+  "execution": "data",
+  "contributes": {
+    "themes": [
+      {
+        "id": "umber-calm",
+        "title": "Umber Calm",
+        "path": "themes/umber-calm.json"
+      }
+    ],
+    "terminalThemes": [
+      {
+        "id": "umber-calm",
+        "title": "Umber Calm",
+        "path": "terminal/umber-calm.json"
+      }
+    ]
+  }
+}

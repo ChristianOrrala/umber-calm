@@ -82,6 +82,21 @@ risk = "Herdr paints some colors in code that no theme reaches: blocked agents a
 checklist = ["terminals on bg with warm text, sidebars a step darker, menus and popovers a step lighter", "focused pane border and focused inputs orange; Herdr's other accent marks (switches, primary buttons, chosen options, matches, notices, update dots, drop markers) orange too (known limit); nothing else", "hover and selected rows warm and distinct in the sidebar, menus and the picker", "agent states: working yellow spinner, blocked bright red Needs you, done green dot, idle ring", "secondary labels readable, on selected rows too", "settings, welcome, help, picker and palette readable", "Changes panel: diff rows and file statuses", "file preview"]
 
 [[port]]
+id = "orca"
+name = "Orca"
+category = "ai"
+phase = 2
+output_root = "ports/orca"
+docs = "https://github.com/stablyai/orca/blob/main/docs/reference/plugin-themes.md"
+format_confirmed = true
+target_version = "main (fca1d7b)"
+min_version = "1.4.246"
+install = "The folder is an Orca plugin. Keep a copy of it (or unzip umber-calm-orca-<version>.zip into a new folder), then in Orca open Settings → Plugins, turn on plugins, choose Development folders… and add that folder (or run `orca plugin dev load <folder>`). Pick Umber Calm as the Dark theme in Settings → Appearance and as the terminal theme in Settings → Terminal. Umber Calm is dark only, so it shows while Orca is in dark mode."
+uninstall = "Pick other themes in Appearance and Terminal, then remove the folder under Settings → Plugins → Development folders… (or run `orca plugin dev unload <folder>`)."
+checklist = ["window, editor and terminals on bg with warm text; both sidebars and the tab strip a step darker; cards, menus and popovers a step lighter", "focus rings, the active tab line and the terminal cursor are orange; nothing else is", "workspace sidebar: hovered rows a step lighter, the current workspace on the selection color, host badges readable on every row", "secondary text readable: inactive tabs, descriptions, settings help", "inputs, switches and checkboxes have visible borders; primary buttons light with dark text", "editor: keywords gold, functions teal-slate, types sea-green, strings olive, constants mauve, operators tan, comments muted italic", "diffs: changed lines on the light tint, changed words and the gutter stronger; Source Control file statuses (added and untracked green, modified blue, deleted red, ignored muted)", "agent chat: your messages on a soft band, code on the background, bold text brighter, links blue, selection readable", "terminal: 16 ANSI colors, selection"]
+syntax_check = { file = "themes/umber-calm.json", format = "vscode" }
+
+[[port]]
 id = "starship"
 name = "Starship"
 category = "shell"

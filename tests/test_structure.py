@@ -5,6 +5,12 @@ from tests.helpers import REPO, tempdir
 from umber import checks, outputs, structure
 
 BAD = {
+    "ports/orca/orca-plugin.json": '{"manifestVersion": 1, "publisher": "x", "execution": "trusted-worker", '
+                                   '"contributes": {"panels": []}}',
+    "ports/orca/themes/umber-calm.json": '{"base": "light", "tokens": {"--background": "#201F1D80", "--bogus": "#000000"}, '
+                                         '"tokenColors": [{"scope": "source.ts comment", "settings": {"background": "#000000"}}]}',
+    "ports/orca/terminal/umber-calm.json": '{"schemaVersion": 1, "mode": "light", "terminal": {"background": "#201F1DAA", '
+                                           '"selectionInactiveBackground": "#3C3A36"}}',
     "ports/herdr-app/umber-calm.json": '{"background": "#201F1D", "background": "#201F1D", "foreground": "#D6C9B6AA", '
                                        '"selection": "#3C3A36", "ansi": ["#2A2826"], "extends": "graphite", '
                                        '"colors": {"hover": "#D6C9B6", "muted": "#938A7B0D", "bogus": "#000000"}}',
@@ -174,6 +180,92 @@ class StructureTest(unittest.TestCase):
             with self.subTest(expected=expected):
                 found = structure.problems(REPO, paste, text)
                 self.assertTrue(any(expected in p for p in found), (expected, found))
+
+    def test_orca_validators_name_each_defect(self):
+        tokens = (REPO / f"tests/fixtures/{structure.ORCA_FIXTURE}-theme-tokens.txt").read_text(encoding="utf-8").split()
+        keys = (REPO / f"tests/fixtures/{structure.ORCA_FIXTURE}-terminal-keys.txt").read_text(encoding="utf-8").split()
+        theme = {"schemaVersion": 1, "base": "dark",
+                 "tokens": {k: "#201F1D17" if k in structure.ORCA_TRANSLUCENT else "#201F1D" for k in tokens},
+                 "tokenColors": [{"scope": ["comment"], "settings": {"foreground": "#988F7F", "fontStyle": "italic"}},
+                                 {"scope": "markup.bold", "settings": {"fontStyle": "bold"}}]}
+        terminal = {"schemaVersion": 1, "mode": "dark", "terminal": {k: "#201F1D" for k in keys}}
+        manifest = json.loads((REPO / "ports/orca/orca-plugin.json").read_text(encoding="utf-8"))
+        cases = {
+            "ports/orca/themes/umber-calm.json": (theme, [
+                ("[]", "the theme must be a JSON object"),
+                (json.dumps(theme).replace('"base":', '"base": "dark", "base":', 1), "duplicate key 'base'"),
+                (json.dumps({**theme, "name": "Umber Calm"}), "unexpected top-level key 'name'"),
+                (json.dumps({k: v for k, v in theme.items() if k != "tokenColors"}), "missing top-level key 'tokenColors'"),
+                (json.dumps({**theme, "schemaVersion": 2}), "schemaVersion must be 1"),
+                (json.dumps({**theme, "base": "light"}), "base is 'light'"),
+                (json.dumps({**theme, "tokens": []}), "tokens must be a JSON object"),
+                (json.dumps({**theme, "tokens": {**theme["tokens"], "--destructive": "#E08374"}}),
+                 "unknown Orca token '--destructive'"),
+                (json.dumps({**theme, "tokens": {k: v for k, v in theme["tokens"].items() if k != "--ring"}}),
+                 "token '--ring' is not set"),
+                (json.dumps({**theme, "tokens": {**theme["tokens"], "--card": "#201F1D80"}}), "tokens.--card is not #RRGGBB"),
+                (json.dumps({**theme, "tokens": {**theme["tokens"], "--host-badge": "#201F1D1"}}),
+                 "tokens.--host-badge is not #RRGGBB or #RRGGBBAA"),
+                (json.dumps({**theme, "tokens": {**theme["tokens"], "--card": "var(--background)"}}),
+                 "tokens.--card is not #RRGGBB"),
+                (json.dumps({**theme, "tokenColors": []}), "tokenColors must be a non-empty list"),
+                (json.dumps({**theme, "tokenColors": [42]}), "tokenColors[0] must be a JSON object"),
+                (json.dumps({**theme, "tokenColors": [{"settings": {"foreground": "#988F7F"}}]}),
+                 "tokenColors[0] needs a scope"),
+                (json.dumps({**theme, "tokenColors": [{"scope": "source.ts comment", "settings": {"fontStyle": ""}}]}),
+                 "tokenColors[0] has a descendant scope"),
+                (json.dumps({**theme, "tokenColors": [{"scope": "comment", "settings": {"background": "#201F1D"}}]}),
+                 "tokenColors[0].settings has unexpected key 'background'"),
+                (json.dumps({**theme, "tokenColors": [{"scope": "comment", "settings": {"foreground": "#988F7F80"}}]}),
+                 "tokenColors[0].settings.foreground is not #RRGGBB"),
+                (json.dumps({**theme, "tokenColors": [{"scope": "comment", "settings": {"fontStyle": "oblique"}}]}),
+                 "tokenColors[0].settings.fontStyle is not"),
+                (json.dumps({**theme, "tokenColors": [{"scope": "comment", "settings": {}, "semantic": True}]}),
+                 "tokenColors[0] has unexpected key 'semantic'"),
+                (json.dumps({**theme, "pad": " " * structure.ORCA_FILE_LIMIT}), "larger than 16 KiB"),
+            ]),
+            "ports/orca/terminal/umber-calm.json": (terminal, [
+                ("null", "the terminal theme must be a JSON object"),
+                (json.dumps({**terminal, "schemaVersion": 2}), "schemaVersion must be 1"),
+                (json.dumps({**terminal, "mode": "unknown"}), "mode is 'unknown'"),
+                (json.dumps({**terminal, "terminal": []}), "terminal must be a JSON object"),
+                (json.dumps({**terminal, "terminal": {**terminal["terminal"], "selectionInactiveBackground": "#3C3A36"}}),
+                 "unknown Orca terminal key 'selectionInactiveBackground'"),
+                (json.dumps({**terminal, "terminal": {k: v for k, v in terminal["terminal"].items() if k != "bold"}}),
+                 "terminal key 'bold' is not set"),
+                (json.dumps({**terminal, "terminal": {**terminal["terminal"], "cursor": "#EDA97C80"}}),
+                 "terminal.cursor is not #RRGGBB"),
+            ]),
+            "ports/orca/orca-plugin.json": (manifest, [
+                ("[]", "the manifest must be a JSON object"),
+                (json.dumps({**manifest, "publisher": "ChristianOrrala"}), "unexpected top-level key 'publisher'"),
+                (json.dumps({k: v for k, v in manifest.items() if k != "engines"}), "missing top-level key 'engines'"),
+                (json.dumps({**manifest, "manifestVersion": 1}), "manifestVersion must be 2"),
+                (json.dumps({**manifest, "execution": "sandboxed-ui"}), 'execution must be "data"'),
+                (json.dumps({**manifest, "id": "Umber Calm"}), "id must be kebab-case"),
+                (json.dumps({**manifest, "engines": {"orca": "1.4.246"}}), "engines.orca must be >=x.y.z"),
+                (json.dumps({**manifest, "contributes": []}), "contributes must be a JSON object"),
+                (json.dumps({**manifest, "contributes": {**manifest["contributes"], "fonts": []}}),
+                 "unexpected contribution 'fonts'"),
+                (json.dumps({**manifest, "contributes": {"themes": manifest["contributes"]["themes"]}}),
+                 "contributes.terminalThemes must be a non-empty list"),
+                (json.dumps({**manifest, "contributes": {**manifest["contributes"],
+                                                         "themes": [{"id": "x", "path": "themes/x.json"}]}}),
+                 "contributes.themes[0] must have exactly id, title and path"),
+                (json.dumps({**manifest, "contributes": {**manifest["contributes"],
+                                                         "themes": [{"id": "x", "title": "X", "path": "../x.json"}]}}),
+                 "contributes.themes[0].path must be themes/<name>.json"),
+                (json.dumps({**manifest, "contributes": {**manifest["contributes"],
+                                                         "themes": [{"id": "x", "title": "X", "path": "themes/x.json"}]}}),
+                 "contributes.themes[0].path names a file the port does not ship"),
+            ]),
+        }
+        for rel, (good, bad) in cases.items():
+            self.assertEqual(structure.problems(REPO, rel, json.dumps(good)), [], rel)
+            for text, expected in bad:
+                with self.subTest(rel=rel, expected=expected):
+                    found = structure.problems(REPO, rel, text)
+                    self.assertTrue(any(expected in p for p in found), (expected, found))
 
     def test_fresh_wrong_containers_are_reported_not_raised(self):
         for text in ("[]", "null", '{"name": "Umber Calm", "editor": 42}', '{"name": "Umber Calm", "ui": []}'):

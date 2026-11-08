@@ -117,6 +117,10 @@ obsidian	ports/obsidian/manifest.json
 obsidian	ports/obsidian/theme.css
 readme:opencode	ports/opencode/README.md
 opencode	ports/opencode/umber-calm.json
+readme:orca	ports/orca/README.md
+orca	ports/orca/orca-plugin.json
+orca	ports/orca/terminal/umber-calm.json
+orca	ports/orca/themes/umber-calm.json
 readme:ptyxis	ports/ptyxis/README.md
 ptyxis	ports/ptyxis/umber-calm.palette
 readme:qt5ct	ports/qt5ct/README.md

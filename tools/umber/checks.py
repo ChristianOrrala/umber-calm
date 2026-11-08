@@ -100,9 +100,13 @@ def _obsidian_floor(data: bytes) -> str:
     return json.loads(data)["minAppVersion"]
 
 
+def _orca_floor(data: bytes) -> str:
+    return re.sub(r"^>=", "", json.loads(data)["engines"]["orca"])
+
+
 # Port id -> (manifest file under output_root, reader of the floor it declares). spec §7.1 / §8.1 item 4.
 MANIFEST_FLOORS = {"vscode": ("package.json", _vscode_floor), "jetbrains": ("META-INF/plugin.xml", _jetbrains_floor),
-                   "obsidian": ("manifest.json", _obsidian_floor)}
+                   "obsidian": ("manifest.json", _obsidian_floor), "orca": ("orca-plugin.json", _orca_floor)}
 
 
 def manifest_floor_problems(root: Path, ports: list[registry.Port]) -> list[str]:

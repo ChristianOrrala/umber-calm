@@ -153,7 +153,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 </details>
 
 <details>
-<summary><b>🧪 experimental (45)</b>: format confirmed, not yet tested in the app</summary>
+<summary><b>🧪 experimental (46)</b>: format confirmed, not yet tested in the app</summary>
 
 | App | Category | Download | Target version | Verified on | Notes |
 |---|---|---|---|---|---|
@@ -200,6 +200,7 @@ Umber Calm is in early development. Every port is generated from the app's docum
 | Tailwind CSS v4 | web | [ports/tailwind/](ports/tailwind/) | 4.0 | — |  |
 | aider | ai | [ports/aider/](ports/aider/) | 0.70 | — |  |
 | Kiro Crew | ai | [ports/kiro-crew/](ports/kiro-crew/) | 0.9.0 | 0.9.0 · Linux 24.04 | ⚠️ Kiro Crew paints code blocks (highlight.js, One Dark) and code and diff views (Shiki, pierre-dark) with fixed syntax colors that no theme pack can change; only comments, JSON tool details and the git panel diff follow the palette. The settings navigation icons sit on fixed colored tiles (`--tile-*`, orange and red among them) that a level-0 pack cannot set. The accent (blue) also draws its global keyboard-focus outline and terminal cursor; only text fields take the orange focus ring. The terminal derives black (the background) and the bright colors itself. |
+| Orca | ai | [ports/orca/](ports/orca/) | main (fca1d7b) (min 1.4.246) | — |  |
 | Tinted Theming (base24) | scheme | [ports/base24/](ports/base24/) | base24 0.2 | — |  |
 | JSON palette | data | [ports/json/](ports/json/) | schema 1 | — |  |
 
@@ -267,6 +268,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Neovim | ✅ supported | 2026-11-07 | 0.12.6 | macOS 26.6.2 | `ed774b57c799` |  |
 | Obsidian | 🧪 experimental | — |  |  | `5713f2513941` |  |
 | OpenCode | ✅ supported | 2026-11-07 | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
+| Orca | 🧪 experimental | — |  |  | `784b295cba54` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `4aa24eb96b4d` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `2608019f3897` |  |
 | rofi | 🧪 experimental | — |  |  | `f19ccbb7af97` |  |
