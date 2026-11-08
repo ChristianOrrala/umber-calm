@@ -3,7 +3,8 @@
 <g clip-path="url(#card)">
 <rect x="0.0" y="0.0" width="760.0" height="552.0" fill="#201F1D"/>
 <rect x="360.0" y="0.0" width="400.0" height="444.0" fill="#2A2826"/>
-<text y="32.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan><tspan x="31.6" fill="#D6C9B6">read the steep time from settings</tspan></text>
+<rect x="0.0" y="17.0" width="360.0" height="22.0" fill="#453B41"/>
+<text y="32.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan><tspan x="31.6" fill="#EDE3D2">read the steep time from settings</tspan></text>
 <text y="64.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6">● I'll read it from the settings file</tspan></text>
 <text y="82.0" xml:space="preserve"><tspan x="31.6" fill="#D6C9B6">and keep 4 minutes as the default.</tspan></text>
 <text y="114.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">● </tspan><tspan x="31.6" fill="#D6C9B6" font-weight="600">Update</tspan><tspan x="78.4" fill="#988F7F">(</tspan><tspan x="86.2" fill="#88B0B4">brew.py</tspan><tspan x="140.8" fill="#988F7F">)</tspan></text>

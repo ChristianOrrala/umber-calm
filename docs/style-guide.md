@@ -135,6 +135,7 @@ Contrast is the WCAG 2.x ratio. Translucent backgrounds are composited in sRGB c
 | Diff added / deleted / changed line | 22 % → `#3E402F` · `#4A3530` · `#373F3E` | 6.5 · 7.0 · 6.6 | 3.3 · 3.6 · 3.4 |
 | Diff line, light (12 %) | `#303127` · `#372B27` · `#2C302F` | 8.1 · 8.4 · 8.2 | 4.1 · 4.3 · 4.2 |
 | Cursor | `orange`, text `bg` | 8.3 | — |
+| Your messages (what you type into an AI agent) | `purple` 22 % → `#453B41` | 6.6 (`text_bright` 8.5) | 3.4 |
 | Diagnostic virtual text, and the wash under code | severity color at 12 % | error 5.0 · warning 7.2 · info 5.7 · hint 6.4 (severity color on its tint) | 4.3 · 4.0 · 4.2 · 4.1 |
 
 A port may only blend to a background listed here; `tools/check.py` rejects any other blend.

@@ -25,6 +25,9 @@ PAIRS: list[tuple[str, str, str, float]] = [
     ("muted on search match (E3)", "muted", "blend:diag.search:bg:tint.search", 3.0),
     ("bg on current search match", "bg", "diag.search", 4.5),
     ("cursor text on cursor", "term.cursor_text", "term.cursor", 4.5),
+    ("text on your messages", "text", "blend:purple:bg:tint.diff", 4.5),
+    ("text_bright on your messages", "text_bright", "blend:purple:bg:tint.diff", 4.5),
+    ("muted on your messages (E3)", "muted", "blend:purple:bg:tint.diff", 3.0),
     *[(f"text on diff {k}", "text", f"blend:diag.diff_{k}:bg:tint.diff", 4.5) for k in DIFF_KINDS],
     *[(f"muted on diff {k} (E3)", "muted", f"blend:diag.diff_{k}:bg:tint.diff", 3.0) for k in DIFF_KINDS],
     *[(f"text on light diff {k}", "text", f"blend:diag.diff_{k}:bg:tint.diag", 4.5) for k in DIFF_KINDS],
@@ -36,7 +39,8 @@ PAIRS: list[tuple[str, str, str, float]] = [
 ]
 
 
-def _background(pal: Palette, spec: str) -> str:
+def background(pal: Palette, spec: str) -> str:
+    """A palette reference, or a measured blend written `blend:<fg>:<base>:<tint>`, as #RRGGBB."""
     if spec.startswith("blend:"):
         _, fg, base, amount = spec.split(":")
         return color.blend(pal.resolve(fg), pal.resolve(base), pal.tint(amount))
@@ -45,13 +49,13 @@ def _background(pal: Palette, spec: str) -> str:
 
 def measured_blends(pal: Palette) -> set[str]:
     """Every blended background that §4.4 measures. Templates may only blend to one of these (the closed set)."""
-    return {_background(pal, bg) for _, _, bg, _ in PAIRS if bg.startswith("blend:")}
+    return {background(pal, bg) for _, _, bg, _ in PAIRS if bg.startswith("blend:")}
 
 
 def problems(pal: Palette) -> list[str]:
     found = []
     for label, fg, bg, minimum in PAIRS:
-        ratio = color.contrast(pal.resolve(fg), _background(pal, bg))
+        ratio = color.contrast(pal.resolve(fg), background(pal, bg))
         if ratio < minimum:
             found.append(f"readability: {label} is {ratio:.2f}:1, below {minimum}:1")
     return found

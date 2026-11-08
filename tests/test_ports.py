@@ -5,7 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 from tests import portformats as pf
 from tests.helpers import REPO, load_real_palette
-from umber import buildcmd, color, moshi, outputs, qr, registry, structure
+from umber import buildcmd, color, moshi, outputs, qr, readability, registry, structure
 from umber.palette import ANSI_SLOTS
 
 P = load_real_palette()
@@ -126,6 +126,12 @@ class ClaudeCodePort(unittest.TestCase):
         o = data["overrides"]
         self.assertEqual(o["composerSidebarBackground"], P.colors["surface"])
         self.assertEqual(o["selectionBg"], P.resolve("ui.selection_bg"), "dark-ansi selects in solid ANSI blue")
+        band = color.blend(P.colors["purple"], P.colors["bg"], P.tint("tint.diff"))
+        self.assertEqual(band, "#453B41")
+        for key in ("userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
+                    "memoryBackgroundColor"):
+            self.assertEqual(o[key], band, f"{key}: everything the owner types sits on the purple band")
+        self.assertIn(band, readability.measured_blends(P))
         self.assertEqual(set(o), {"userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
                                   "memoryBackgroundColor", "composerSidebarBackground", "selectionBg"})
         for value in o.values():

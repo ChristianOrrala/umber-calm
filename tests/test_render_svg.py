@@ -1,7 +1,7 @@
 import json, re, unittest
 import xml.etree.ElementTree as ET
 from tests.helpers import REPO, load_real_palette
-from umber import buildcmd, color, cvd, docsgen, outputs, registry, render_svg, sessions
+from umber import buildcmd, color, cvd, docsgen, outputs, readability, registry, render_svg, sessions
 
 P = load_real_palette()
 FIXTURE = json.loads((REPO / docsgen.FIXTURE).read_text(encoding="utf-8"))
@@ -67,7 +67,7 @@ class SessionsTest(unittest.TestCase):
         return "".join(el.itertext()) if el.tag in (f"{SVG}text", f"{SVG}tspan") else el.tag.rsplit("}", 1)[1]
 
     def test_every_color_is_a_palette_color(self):
-        allowed = set(P.colors.values()) | set(P.ansi.values())
+        allowed = set(P.colors.values()) | set(P.ansi.values()) | readability.measured_blends(P)  # style guide states
         for name, root in self.svgs.items():
             for el, fill in self.fills(root):
                 self.assertIn(fill, allowed, f"{name}: {self.label(el)}")
@@ -94,7 +94,7 @@ class SessionsTest(unittest.TestCase):
             texts, marks = sessions.drawn_pairs(name, P)
             self.assertTrue(texts, name)
             for fg, bg in texts:
-                ratio = color.contrast(P.resolve(fg), P.resolve(bg))
+                ratio = color.contrast(P.resolve(fg), readability.background(P, bg))
                 self.assertGreaterEqual(ratio, sessions.minimum(fg, bg), f"{name}: {fg} on {bg} is {ratio:.2f}:1")
             for fg, bg in marks:  # non-text marks that carry meaning (WCAG 1.4.11)
                 self.assertGreaterEqual(color.contrast(P.resolve(fg), P.resolve(bg)), 3.0, f"{name}: {fg} on {bg}")

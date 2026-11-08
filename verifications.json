@@ -9,6 +9,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "2.1.319",
+      "date": "2026-11-08",
+      "digest": "sha256:585c50d34a69ad66bfac69745e0bee9a01b697b3aba3e57c19a25b1e675767a9",
+      "evidence": "",
+      "note": "Owner screenshots in Orca: messages #453B41, diff panel #2A2826, no row bands, +/- #B9C684/#EC9A8C, selection #3C3A36. ! and # share the value, not on screen.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "fresh": [

@@ -2,10 +2,10 @@
   "name": "Umber Calm",
   "base": "dark-ansi",
   "overrides": {
-    "userMessageBackground": "{{ ui.bg }}",
-    "userMessageBackgroundHover": "{{ ui.surface }}",
-    "bashMessageBackgroundColor": "{{ ui.bg }}",
-    "memoryBackgroundColor": "{{ ui.bg }}",
+    "userMessageBackground": "{{ purple | blend(bg, tint.diff) }}",
+    "userMessageBackgroundHover": "{{ purple | blend(bg, tint.diff) }}",
+    "bashMessageBackgroundColor": "{{ purple | blend(bg, tint.diff) }}",
+    "memoryBackgroundColor": "{{ purple | blend(bg, tint.diff) }}",
     "composerSidebarBackground": "{{ ui.surface }}",
     "selectionBg": "{{ ui.selection_bg }}"
   }

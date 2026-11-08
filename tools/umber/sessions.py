@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from xml.sax.saxutils import escape
 
+from . import readability
+
 MONO = "ui-monospace, Menlo, Consolas, monospace"
 ADVANCE = 0.6  # monospace advance per em: character columns line up at any font size
 CORNER = 12
@@ -28,7 +30,7 @@ class _Canvas:
                     '<g clip-path="url(#card)">']
 
     def c(self, ref: str) -> str:
-        return self.pal.resolve(ref)
+        return readability.background(self.pal, ref)  # a role, or a blend the style guide measures
 
     def rect(self, x, y, w, h, ref: str, rx: float = 0, stroke: str = "") -> None:
         extra = (f' rx="{rx}"' if rx else "") + (f' stroke="{self.c(stroke)}"' if stroke else "")
@@ -84,8 +86,8 @@ def _brew_code() -> list[list[tuple]]:
 
 
 def _claude(pal) -> _Canvas:
-    """Transcript on the background (the port's userMessageBackground), the diff panel on the surface
-    (composerSidebarBackground), counts and markers in ANSI bright green and red as the app draws them."""
+    """Transcript on the background, your request on the purple band (the port's userMessageBackground), the diff
+    panel on the surface (composerSidebarBackground), counts and markers in ANSI bright green and red as the app draws them."""
     w, h, split, size = 760, 552, 360, 13  # the full render's proportions; the extra height stays empty on purpose
     cv = _Canvas(pal, w, h, size)
     cw = size * ADVANCE
@@ -94,7 +96,9 @@ def _claude(pal) -> _Canvas:
     cv.rect(0, 0, w, h, bg)
     cv.rect(split, 0, w - split, panel_h, panel)
     x = 16
-    cv.text(x, 32, [("diag.ok", "❯ "), ("ui.text", "read the steep time from settings")], bg)
+    request = "blend:purple:bg:tint.diff"
+    cv.rect(0, 17, split, 22, request)
+    cv.text(x, 32, [("diag.ok", "❯ "), ("text_bright", "read the steep time from settings")], request)
     cv.text(x, 64, [("ui.text", "● I'll read it from the settings file")], bg)
     cv.text(x + cw * 2, 82, [("ui.text", "and keep 4 minutes as the default.")], bg)
     cv.text(x, 114, [("diag.ok", "● "), ("ui.text", "Update", "bold"), ("ui.text_secondary", "("),
