@@ -30,7 +30,7 @@ Uninstall the Umber Calm extension from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:fa5f201e3eaa0f0023b8af249c11a625a196459b4440ba766d37297d6fbe75c8`
+Current digest: `sha256:ae0a050733a17da289bb3e3abade5bc12c767dd8a4c44f37a65cc14995db0215`
 
 Print it yourself with `python3 tools/build.py digest vscode`. It covers these files:
 
@@ -40,6 +40,7 @@ Print it yourself with `python3 tools/build.py digest vscode`. It covers these f
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 1.144.1 | macOS | 26.6.2 | Clean profile, 0.5.0 vsix: 489/489 colors over CDP, 460 exact, 29 alpha rounding, no old greys. |  | `ae0a050733a1` |
 | 2026-11-07 | ✅ verified | 1.144.1 | macOS | 26.6.2 | Clean profile, vsix from the tree: 489/489 colors over CDP, 460 exact, 29 alpha rounding, no old greys. |  | `fa5f201e3eaa` |
 | 2026-11-05 | ✅ verified | 1.144.1 | macOS | 26.6.2 | VS Code 1.144.1, clean profile, 0.4.0 vsix: 489/489 theme colors resolve exactly over CDP; theme file unchanged since 0.3.0, only the version |  | `d3d6206f584e` |
 | 2026-11-02 | ✅ verified | 1.143.1 | macOS | 26.6.2 | VS Code 1.143.1, clean profile, 0.3.0 vsix: 489/489 theme colors resolve exactly over CDP; theme file unchanged since 0.2.1, only the version |  | `a170ea34703f` |

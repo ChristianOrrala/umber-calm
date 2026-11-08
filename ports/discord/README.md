@@ -27,7 +27,7 @@ Disable the theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:ad676881d12c94baa5892387316d949b4a6ff977438eb645f241bb74a38520d5`
+Current digest: `sha256:205ed35872db993016aca148755a8b430fad83d7cce5e1f8bdcaef8b041c4217`
 
 Print it yourself with `python3 tools/build.py digest discord`. It covers these files:
 

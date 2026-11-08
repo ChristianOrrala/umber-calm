@@ -1,9 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 (2026-11-08)
 
 - Comments and secondary text are slightly lighter (`muted` `#988F7F`, was `#938A7B`): 5.2:1 on the background and 4.6:1 on panels, so they now reach 4.5:1 everywhere and the "comments on panels" exception is gone. The least important text and ANSI bright black are lighter too (`dim_text` `#77726A`, was `#6E6961`): 3.45:1, still a clear step below comments.
 - The README recommends fonts: three to try, Regular weight, sized by lowercase height.
+- Verified again with the new greys: tmux 3.8, Starship 1.27.0, Zellij 0.45.1, WezTerm, Neovim 0.12.6, VS Code, Kiro, Fresh 0.5.7, Herdr 0.1.13 and OpenCode 2.2.5. Herdr TUI, Moshi and Kiro Crew are experimental until they are checked again.
+- Herdr and Fresh: their READMEs now list colors each app paints in its own code (Herdr 0.1.13's find-in-terminal highlight; Fresh's git gutter, `--diff` gutter and embedded terminal).
 
 ## 0.4.0 (2026-11-06)
 

@@ -137,6 +137,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "1.4.86",
+      "date": "2026-11-07",
+      "digest": "sha256:20567f60da13fce57ef8c3b2e9c521c5f689315b7cad6e0a4ae522521d9cc4e7",
+      "evidence": "",
+      "note": "Clean profile, 0.5.0 vsix: 484/489 colors over CDP (5 VS Code-only chat keys), no old greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "kiro-crew": [
@@ -318,6 +328,16 @@
       "digest": "sha256:fa5f201e3eaa0f0023b8af249c11a625a196459b4440ba766d37297d6fbe75c8",
       "evidence": "",
       "note": "Clean profile, vsix from the tree: 489/489 colors over CDP, 460 exact, 29 alpha rounding, no old greys.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
+    },
+    {
+      "app_version": "1.144.1",
+      "date": "2026-11-07",
+      "digest": "sha256:ae0a050733a17da289bb3e3abade5bc12c767dd8a4c44f37a65cc14995db0215",
+      "evidence": "",
+      "note": "Clean profile, 0.5.0 vsix: 489/489 colors over CDP, 460 exact, 29 alpha rounding, no old greys.",
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"

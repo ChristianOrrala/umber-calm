@@ -27,7 +27,7 @@ Uninstall Umber Calm for Kiro from the Extensions view.
 
 ## Verification
 
-Current digest: `sha256:d488a58bad206e4e70de9ceacc9837bff513dee70815463f143df5a325f3a25e`
+Current digest: `sha256:20567f60da13fce57ef8c3b2e9c521c5f689315b7cad6e0a4ae522521d9cc4e7`
 
 Print it yourself with `python3 tools/build.py digest kiro`. It covers these files:
 
@@ -37,6 +37,7 @@ Print it yourself with `python3 tools/build.py digest kiro`. It covers these fil
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-07 | ✅ verified | 1.4.86 | macOS | 26.6.2 | Clean profile, 0.5.0 vsix: 484/489 colors over CDP (5 VS Code-only chat keys), no old greys. |  | `20567f60da13` |
 | 2026-11-07 | ✅ verified | 1.4.86 | macOS | 26.6.2 | Clean profile: 484/489 colors resolve over CDP (5 VS Code-only chat keys), no old greys. |  | `d488a58bad20` |
 | 2026-11-05 | ✅ verified | 1.4.86 | macOS | 26.6.2 | Kiro 1.4.86, clean profile, 0.4.0 vsix: 484/489 colors resolve exactly over CDP (5 VS Code-only chat keys unregistered); theme unchanged since 0.3.0 |  | `ce445867b36e` |
 | 2026-11-02 | ✅ verified | 1.4.26 | macOS | 26.6.2 | Kiro 1.4.26, clean profile, 0.3.0 vsix: 484/489 colors resolve exactly over CDP (5 VS Code-only chat keys unregistered); theme unchanged since 0.2.1 |  | `0acd3c6271db` |

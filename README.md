@@ -238,10 +238,10 @@ A tier is supported only while its last real-app test covers the exact files you
 | CSS variables | 🧪 experimental | — |  |  | `c71d8fe00710` |  |
 | delta | 🧪 experimental | — |  |  | `f58577a5c18d` |  |
 | dircolors (ls) | 🧪 experimental | — |  |  | `83b2b3860ea3` |  |
-| Discord | 🟡 candidate | — |  |  | `ad676881d12c` |  |
+| Discord | 🟡 candidate | — |  |  | `205ed35872db` |  |
 | dunst | 🧪 experimental | — |  |  | `f4fa23a8cbe9` |  |
 | eza | 🧪 experimental | — |  |  | `fa152632b3dc` |  |
-| Firefox | 🧪 experimental | — |  |  | `2e8c76d059c0` |  |
+| Firefox | 🧪 experimental | — |  |  | `db034fd9b642` |  |
 | fish | 🧪 experimental | — |  |  | `e4966f821b52` |  |
 | foot | 🧪 experimental | — |  |  | `42fcd76b7cfe` |  |
 | Fresh | ✅ supported | 2026-11-07 | 0.5.7 | macOS 26.6.2 | `19a6ab041f94` |  |
@@ -255,17 +255,17 @@ A tier is supported only while its last real-app test covers the exact files you
 | Herdr TUI | 🧪 experimental | 2026-09-29 (earlier revision) | 0.9.1 | macOS 26.6.2 | `c32f22d9ce1d` |  |
 | i3 | 🧪 experimental | — |  |  | `0a15928b0b45` |  |
 | iTerm2 | 🧪 experimental | — |  |  | `6889e9ce81d5` |  |
-| JetBrains IDEs | 🧪 experimental | — |  |  | `30f61afd962a` |  |
-| JSON palette | 🧪 experimental | — |  |  | `47f590e40f19` |  |
+| JetBrains IDEs | 🧪 experimental | — |  |  | `e670a288a475` |  |
+| JSON palette | 🧪 experimental | — |  |  | `1a2d7d3a01e1` |  |
 | KDE Plasma | 🧪 experimental | — |  |  | `dd488b671004` |  |
 | Kiro Crew | 🧪 experimental | 2026-10-25 (earlier revision) | 0.9.0 | Linux 24.04 | `b837cb537027` |  |
-| Kiro IDE | ✅ supported | 2026-11-07 | 1.4.86 | macOS 26.6.2 | `d488a58bad20` |  |
+| Kiro IDE | ✅ supported | 2026-11-07 | 1.4.86 | macOS 26.6.2 | `20567f60da13` |  |
 | Kitty | 🧪 experimental | — |  |  | `c646e3ef71c8` |  |
 | Konsole | 🧪 experimental | — |  |  | `563d60e1e6f0` |  |
 | lazygit | 🧪 experimental | — |  |  | `c915507922a2` |  |
 | Moshi | 🧪 experimental | 2026-11-02 (earlier revision) | 3.2.2 | iOS 27.3 | `ca6dce14efbc` |  |
 | Neovim | ✅ supported | 2026-11-07 | 0.12.6 | macOS 26.6.2 | `ed774b57c799` |  |
-| Obsidian | 🧪 experimental | — |  |  | `13f51a218f71` |  |
+| Obsidian | 🧪 experimental | — |  |  | `5713f2513941` |  |
 | OpenCode | ✅ supported | 2026-11-07 | 2.2.5 | macOS 26.6.2 | `fa6fce334e3f` |  |
 | Ptyxis | 🟡 candidate | — |  |  | `4aa24eb96b4d` |  |
 | qt5ct / qt6ct | 🟡 candidate | — |  |  | `2608019f3897` |  |
@@ -282,7 +282,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Vim | 🧪 experimental | — |  |  | `57437cc42539` |  |
 | Vimium | 🟡 candidate | — |  |  | `8f4ba2ce1097` |  |
 | Vivaldi | 🟡 candidate | — |  |  | `d798edf8ec2e` |  |
-| VS Code | ✅ supported | 2026-11-07 | 1.144.1 | macOS 26.6.2 | `fa5f201e3eaa` |  |
+| VS Code | ✅ supported | 2026-11-07 | 1.144.1 | macOS 26.6.2 | `ae0a050733a1` |  |
 | Waybar | 🧪 experimental | — |  |  | `f055dac24595` |  |
 | WezTerm | ✅ supported | 2026-11-07 | 20260901 | macOS 26.6.2 | `a8fbc485f7f2` |  |
 | Windows Terminal | 🧪 experimental | — |  |  | `82d37fd73d36` |  |
@@ -290,7 +290,7 @@ A tier is supported only while its last real-app test covers the exact files you
 | Xresources (xterm, urxvt; st with the xresources patch) | 🧪 experimental | — |  |  | `7f9c13453c88` |  |
 | yazi | 🧪 experimental | — |  |  | `b2a69ec86e80` |  |
 | zathura | 🧪 experimental | — |  |  | `a687ceefae88` |  |
-| Zed | 🧪 experimental | — |  |  | `a3f0fe877dcd` |  |
+| Zed | 🧪 experimental | — |  |  | `eebc1ce805a6` |  |
 | Zellij | ✅ supported | 2026-11-07 | 0.45.1 | macOS 26.6.2 | `b6864ab7f4b7` |  |
 <!-- verification:end -->
 

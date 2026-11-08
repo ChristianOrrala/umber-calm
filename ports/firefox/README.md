@@ -23,7 +23,7 @@ Remove it in about:addons (or restart for the temporary add-on).
 
 ## Verification
 
-Current digest: `sha256:2e8c76d059c0d53dbc8a50602794ecb43aaa7e8de7161574f0d67924610e78d2`
+Current digest: `sha256:db034fd9b642a867f0f7268e19560bc998cebef29ccf43482ec652e37261273f`
 
 Print it yourself with `python3 tools/build.py digest firefox`. It covers these files:
 

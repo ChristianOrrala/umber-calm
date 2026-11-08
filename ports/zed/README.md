@@ -24,7 +24,7 @@ Pick another theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:a3f0fe877dcd071579987705c673153fe8e4ecaaf3b5475b31a7196a62cdf35d`
+Current digest: `sha256:eebc1ce805a647445ff9e28e70d6e83b4b316c3614742a6c1ab900848fb3ca6c`
 
 Print it yourself with `python3 tools/build.py digest zed`. It covers these files:
 
