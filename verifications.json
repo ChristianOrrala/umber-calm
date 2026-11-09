@@ -39,6 +39,16 @@
       "os": "macOS",
       "os_version": "26.6.2",
       "status": "verified"
+    },
+    {
+      "app_version": "2.1.319",
+      "date": "2026-11-08",
+      "digest": "sha256:218fc2635f32214aca207e5425efb8221dc7c2d7f9a910f0598e0aaa220d28d7",
+      "evidence": "",
+      "note": "Owner checked in the app: messages and ! commands on #1A1917, a step below the transcript. # notes share the value. The rest is unchanged since the full check.",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "status": "verified"
     }
   ],
   "fresh": [

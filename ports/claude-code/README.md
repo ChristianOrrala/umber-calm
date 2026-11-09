@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** Claude Code paints some colors outside the theme's reach. Inline code in replies takes its color from the base theme by name, so it stays the terminal's bright blue (#9DC2C5) whatever the theme sets (https://github.com/anthropics/claude-code/issues/98920). Its diff view rounds theme colors to the terminal's 256-color set, which turns tinted rows into the same grey and shifts green and red, so the theme leaves the six diff colors to the terminal, which paints them in Umber Calm's green and red (https://github.com/anthropics/claude-code/issues/85660). The mascot and agents you color orange are orange outside focus.
 
-Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
+Tier: ✅ supported
 
 Target version: 2.1.319 · Format documentation: https://code.claude.com/docs/en/terminal-config
 
@@ -36,6 +36,7 @@ Print it yourself with `python3 tools/build.py digest claude-code`. It covers th
 
 | Date | Result | App version | OS | OS version | Note | Evidence | Digest |
 |---|---|---|---|---|---|---|---|
+| 2026-11-08 | ✅ verified | 2.1.319 | macOS | 26.6.2 | Owner checked in the app: messages and ! commands on #1A1917, a step below the transcript. # notes share the value. The rest is unchanged since the full check. |  | `218fc2635f32` |
 | 2026-11-08 | ✅ verified | 2.1.319 | macOS | 26.6.2 | Owner checked every checklist item in Orca. Screenshots: prompt chip #DCC07D, accept edits #EDA97C, prompt border #77726A, /diff rows unbanded, markers #B9C684/#EC9A8C. |  | `e6ebcfbc77a9` |
 | 2026-11-08 | ✅ verified | 2.1.319 | macOS | 26.6.2 | Owner screenshots in Orca: prompt chip #DCC07D, accept edits #EDA97C, prompt border #77726A, /diff rows unbanded, markers #B9C684/#EC9A8C. Plan mode, spinner, mascot not captured. |  | `e6ebcfbc77a9` |
 | 2026-11-08 | ✅ verified | 2.1.319 | macOS | 26.6.2 | Owner screenshots in Orca: messages #453B41, diff panel #2A2826, no row bands, +/- #B9C684/#EC9A8C, selection #3C3A36. ! and # share the value, not on screen. |  | `585c50d34a69` |
