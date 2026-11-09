@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning:** Claude Code paints some colors outside the theme's reach. Inline code in replies takes its color from the base theme by name, so it stays the terminal's bright blue (#9DC2C5) whatever the theme sets (https://github.com/anthropics/claude-code/issues/98920). Its diff view rounds theme colors to the terminal's 256-color set, which turns tinted rows into the same grey and shifts green and red, so the theme leaves the six diff colors to the terminal, which paints them in Umber Calm's green and red (https://github.com/anthropics/claude-code/issues/85660). The mascot and agents you color orange are orange outside focus.
 
-Tier: ✅ supported
+Tier: 🧪 experimental (the last verification was for an earlier revision of these files)
 
 Target version: 2.1.319 · Format documentation: https://code.claude.com/docs/en/terminal-config
 
@@ -18,7 +18,7 @@ Pick another theme with /theme and delete the file.
 
 ## Verification checklist
 
-- [ ] your messages, ! commands and # notes on the purple band (#453B41), set apart from replies, the same when hovered
+- [ ] your messages, ! commands and # notes a step darker than the transcript (#1A1917), set apart from replies, the same when hovered
 - [ ] composerSidebarBackground visibly applied: the diff side panel is the surface color, not gray
 - [ ] diff +/− counts readable (green/red)
 - [ ] diff rows without grey bands; changed words on Umber Calm's bright green and red (#B9C684, #EC9A8C), not #AFD787 or #FF8787
@@ -28,7 +28,7 @@ Pick another theme with /theme and delete the file.
 
 ## Verification
 
-Current digest: `sha256:e6ebcfbc77a9487dbb175d5743a66e7fd3a77a3cc01432aae1f33d02084ce289`
+Current digest: `sha256:218fc2635f32214aca207e5425efb8221dc7c2d7f9a910f0598e0aaa220d28d7`
 
 Print it yourself with `python3 tools/build.py digest claude-code`. It covers these files:
 

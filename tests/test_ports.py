@@ -126,12 +126,11 @@ class ClaudeCodePort(unittest.TestCase):
         o = data["overrides"]
         self.assertEqual(o["composerSidebarBackground"], P.colors["surface"])
         self.assertEqual(o["selectionBg"], P.resolve("ui.selection_bg"), "dark-ansi selects in solid ANSI blue")
-        band = color.blend(P.colors["purple"], P.colors["bg"], P.tint("tint.diff"))
-        self.assertEqual(band, "#453B41")
+        band = P.colors["bg_dim"]
+        self.assertEqual(band, "#1A1917")
         for key in ("userMessageBackground", "userMessageBackgroundHover", "bashMessageBackgroundColor",
                     "memoryBackgroundColor"):
-            self.assertEqual(o[key], band, f"{key}: everything the owner types sits on the purple band")
-        self.assertIn(band, readability.measured_blends(P))
+            self.assertEqual(o[key], band, f"{key}: everything the owner types sits a step darker than the transcript")
         for value in o.values():
             self.assertRegex(value, f"^{HEX}$")
 

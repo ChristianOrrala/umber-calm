@@ -3,7 +3,7 @@
 <g clip-path="url(#card)">
 <rect x="0.0" y="0.0" width="760.0" height="552.0" fill="#201F1D"/>
 <rect x="360.0" y="0.0" width="400.0" height="444.0" fill="#2A2826"/>
-<rect x="0.0" y="17.0" width="360.0" height="22.0" fill="#453B41"/>
+<rect x="0.0" y="17.0" width="360.0" height="22.0" fill="#1A1917"/>
 <text y="32.0" xml:space="preserve"><tspan x="16.0" fill="#A7B56E">❯ </tspan><tspan x="31.6" fill="#EDE3D2">read the steep time from settings</tspan></text>
 <text y="64.0" xml:space="preserve"><tspan x="16.0" fill="#D6C9B6">● I'll read it from the settings file</tspan></text>
 <text y="82.0" xml:space="preserve"><tspan x="31.6" fill="#D6C9B6">and keep 4 minutes as the default.</tspan></text>

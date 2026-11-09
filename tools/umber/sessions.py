@@ -86,7 +86,7 @@ def _brew_code() -> list[list[tuple]]:
 
 
 def _claude(pal) -> _Canvas:
-    """Transcript on the background, your request on the purple band (the port's userMessageBackground), the diff
+    """Transcript on the background, your request a step darker on bg_dim (the port's userMessageBackground), the diff
     panel on the surface (composerSidebarBackground), counts and markers in ANSI bright green and red as the app draws them."""
     w, h, split, size = 760, 552, 360, 13  # the full render's proportions; the extra height stays empty on purpose
     cv = _Canvas(pal, w, h, size)
@@ -96,7 +96,7 @@ def _claude(pal) -> _Canvas:
     cv.rect(0, 0, w, h, bg)
     cv.rect(split, 0, w - split, panel_h, panel)
     x = 16
-    request = "blend:purple:bg:tint.diff"
+    request = "bg_dim"
     cv.rect(0, 17, split, 22, request)
     cv.text(x, 32, [("diag.ok", "❯ "), ("text_bright", "read the steep time from settings")], request)
     cv.text(x, 64, [("ui.text", "● I'll read it from the settings file")], bg)
